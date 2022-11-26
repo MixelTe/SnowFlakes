@@ -5,7 +5,7 @@
 
 Снежинки падают поверх всего, ничему не мешая.
 
-### [Скачать ❄](https://github.com/MixelTe/SnowFlakes/releases/download/v1.0/SnowFlakes.exe)
+### [Скачать ❄ (Для Windows)](https://github.com/MixelTe/SnowFlakes/releases/download/v1.0/SnowFlakes.exe)
 
 ![](./docs/screenshot.png)
 
