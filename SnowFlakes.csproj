@@ -6,7 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>snowflake.ico</ApplicationIcon>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageIcon>snowflake.png</PackageIcon>
+    <RepositoryUrl>https://github.com/MixelTe/SnowFlakes</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="snowflake.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -21,6 +29,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="snowflake.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

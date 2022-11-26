@@ -32,6 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -39,9 +40,10 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.закрытьToolStripMenuItem});
+            this.закрытьToolStripMenuItem,
+            this.настройкиToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
 			// 
 			// закрытьToolStripMenuItem
 			// 
@@ -50,6 +52,14 @@
 			this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.закрытьToolStripMenuItem.Text = "Закрыть";
 			this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.Close_Click);
+			// 
+			// настройкиToolStripMenuItem
+			// 
+			this.настройкиToolStripMenuItem.Image = global::SnowFlakes.Properties.Resources.settings;
+			this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.настройкиToolStripMenuItem.Text = "Настройки";
+			this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.Settings_Click);
 			// 
 			// notifyIcon1
 			// 
@@ -79,5 +89,6 @@
 		private ContextMenuStrip contextMenuStrip1;
 		private ToolStripMenuItem закрытьToolStripMenuItem;
 		private NotifyIcon notifyIcon1;
+		private ToolStripMenuItem настройкиToolStripMenuItem;
 	}
 }
