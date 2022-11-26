@@ -10,6 +10,7 @@
     <PackageProjectUrl></PackageProjectUrl>
     <PackageIcon>snowflake.png</PackageIcon>
     <RepositoryUrl>https://github.com/MixelTe/SnowFlakes</RepositoryUrl>
+    <Authors>Mixel Te</Authors>
   </PropertyGroup>
 
   <ItemGroup>
