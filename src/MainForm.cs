@@ -92,8 +92,7 @@ namespace SnowFlakes
 
 			if (_selectZoneForm == null || _selectZoneForm.IsDisposed)
 				_selectZoneForm = new();
-			_selectZoneForm.Show();
-			_selectZoneForm.Focus();
+			_selectZoneForm.ShowDialog(this);
 		}
 
 		private void Icon_DbClick(object sender, EventArgs e)

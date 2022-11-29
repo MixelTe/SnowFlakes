@@ -39,6 +39,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "SelectZoneForm";
 			this.Text = "SelectZoneForm";
+			this.TopMost = true;
 			this.ResumeLayout(false);
 
 		}
