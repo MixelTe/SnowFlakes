@@ -1,11 +1,15 @@
 # Снежинки ❄
-Снежинки, падающие поверх экрана. 
+### [Скачать ❄ (Для Windows)](https://github.com/MixelTe/SnowFlakes/releases/download/v1.1/SnowFlakes.exe)
+
+Снежинки, падающие поверх экрана.
 
 Двигая мышку, можно сдувать снежинки.
 
 Снежинки падают поверх всего, ничему не мешая.
 
-### [Скачать ❄ (Для Windows)](https://github.com/MixelTe/SnowFlakes/releases/download/v1.1/SnowFlakes.exe)
+Можно выделить область, где не будет видно снежинок.
+* ЛКМ по иконке -> Выделение области
+* Двойной ЛКМ по иконке -> Очистить область
 
 ![](./docs/screenshot.png)
 
