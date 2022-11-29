@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>snowflake.ico</ApplicationIcon>
+    <ApplicationIcon>imgs\snowflake.ico</ApplicationIcon>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageIcon>snowflake.png</PackageIcon>
     <RepositoryUrl>https://github.com/MixelTe/SnowFlakes</RepositoryUrl>
@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="snowflake.ico" />
+    <Content Include="imgs\snowflake.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="snowflake.png">
+    <None Update="imgs\snowflake.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
