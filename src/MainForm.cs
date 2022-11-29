@@ -90,6 +90,14 @@ namespace SnowFlakes
 			if (!_iconClicked) return;
 			_iconClicked = false;
 
+			SelectClearZone();
+		}
+		private void SelectClearZone_Click(object sender, EventArgs e)
+		{
+			SelectClearZone();
+		}
+		private void SelectClearZone()
+		{
 			if (_selectZoneForm == null || _selectZoneForm.IsDisposed)
 				_selectZoneForm = new();
 			_selectZoneForm.ShowDialog(this);
@@ -100,6 +108,12 @@ namespace SnowFlakes
 			if (((MouseEventArgs)e).Button != MouseButtons.Left) return;
 			_iconClicked = false;
 			Program.Settings.ClearZone = new(0, 0, 0, 0);
+			Settings.Save();
+		}
+		private void RemoveClearZone_Click(object sender, EventArgs e)
+		{
+			Program.Settings.ClearZone = new(0, 0, 0, 0);
+			Settings.Save();
 		}
 
 		public void Reload()
