@@ -77,7 +77,7 @@ namespace SnowFlakes
 		{
 			if (_settingsForm == null || _settingsForm.IsDisposed) 
 				_settingsForm = new SettingsForm();
-			_settingsForm.Show(this);
+			_settingsForm.Show();
 			_settingsForm.Focus();
 		}
 

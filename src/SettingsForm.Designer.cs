@@ -54,6 +54,12 @@
 			this.BtnReset = new System.Windows.Forms.Button();
 			this.BtnOk = new System.Windows.Forms.Button();
 			this.BtnGithub = new System.Windows.Forms.Button();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.RBPreset0 = new System.Windows.Forms.RadioButton();
+			this.RBPreset1 = new System.Windows.Forms.RadioButton();
+			this.RBPreset2 = new System.Windows.Forms.RadioButton();
+			this.RBPreset3 = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -65,6 +71,8 @@
 			this.groupBox3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.InpD)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpForce)).BeginInit();
+			this.groupBox4.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -195,11 +203,6 @@
             0,
             0,
             0});
-			this.InpSpeedX.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
 			this.InpSpeedX.Name = "InpSpeedX";
 			this.InpSpeedX.Size = new System.Drawing.Size(65, 29);
 			this.InpSpeedX.TabIndex = 5;
@@ -221,7 +224,7 @@
             65536});
 			this.InpSpeedXMax.Location = new System.Drawing.Point(176, 28);
 			this.InpSpeedXMax.Maximum = new decimal(new int[] {
-            15,
+            60,
             0,
             0,
             0});
@@ -267,10 +270,10 @@
 			this.groupBox2.Controls.Add(this.label6);
 			this.groupBox2.Controls.Add(this.label7);
 			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.groupBox2.Location = new System.Drawing.Point(265, 7);
+			this.groupBox2.Location = new System.Drawing.Point(265, 112);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(247, 99);
-			this.groupBox2.TabIndex = 5;
+			this.groupBox2.Size = new System.Drawing.Size(247, 104);
+			this.groupBox2.TabIndex = 6;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Падение снежинок";
 			// 
@@ -344,10 +347,10 @@
 			this.groupBox3.Controls.Add(this.label8);
 			this.groupBox3.Controls.Add(this.label9);
 			this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.groupBox3.Location = new System.Drawing.Point(265, 112);
+			this.groupBox3.Location = new System.Drawing.Point(265, 7);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Size = new System.Drawing.Size(247, 104);
-			this.groupBox3.TabIndex = 6;
+			this.groupBox3.TabIndex = 5;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Сдувание курсором";
 			// 
@@ -421,45 +424,123 @@
 			// 
 			// BtnReset
 			// 
+			this.BtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.BtnReset.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.BtnReset.Location = new System.Drawing.Point(12, 222);
+			this.BtnReset.Location = new System.Drawing.Point(12, 293);
 			this.BtnReset.Name = "BtnReset";
 			this.BtnReset.Size = new System.Drawing.Size(168, 32);
-			this.BtnReset.TabIndex = 8;
+			this.BtnReset.TabIndex = 9;
 			this.BtnReset.Text = "Сбросить настройки";
 			this.BtnReset.UseVisualStyleBackColor = true;
 			this.BtnReset.Click += new System.EventHandler(this.ResetBtn_Click);
 			// 
 			// BtnOk
 			// 
+			this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.BtnOk.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.BtnOk.Location = new System.Drawing.Point(412, 222);
+			this.BtnOk.Location = new System.Drawing.Point(412, 293);
 			this.BtnOk.Name = "BtnOk";
 			this.BtnOk.Size = new System.Drawing.Size(100, 32);
-			this.BtnOk.TabIndex = 7;
+			this.BtnOk.TabIndex = 8;
 			this.BtnOk.Text = "Сохранить";
 			this.BtnOk.UseVisualStyleBackColor = true;
 			this.BtnOk.Click += new System.EventHandler(this.OkBtn_Click);
 			// 
 			// BtnGithub
 			// 
+			this.BtnGithub.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.BtnGithub.BackColor = System.Drawing.Color.Transparent;
 			this.BtnGithub.BackgroundImage = global::SnowFlakes.Properties.Resources.github;
 			this.BtnGithub.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.BtnGithub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.BtnGithub.ForeColor = System.Drawing.Color.Transparent;
-			this.BtnGithub.Location = new System.Drawing.Point(246, 224);
+			this.BtnGithub.Location = new System.Drawing.Point(246, 295);
 			this.BtnGithub.Name = "BtnGithub";
 			this.BtnGithub.Size = new System.Drawing.Size(32, 32);
-			this.BtnGithub.TabIndex = 9;
+			this.BtnGithub.TabIndex = 10;
 			this.BtnGithub.UseVisualStyleBackColor = false;
 			this.BtnGithub.Click += new System.EventHandler(this.GitHub_Click);
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox4.Controls.Add(this.flowLayoutPanel1);
+			this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.groupBox4.Location = new System.Drawing.Point(12, 222);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(500, 65);
+			this.groupBox4.TabIndex = 7;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Готовые варианты";
+			// 
+			// flowLayoutPanel1
+			// 
+			this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.flowLayoutPanel1.Controls.Add(this.RBPreset0);
+			this.flowLayoutPanel1.Controls.Add(this.RBPreset1);
+			this.flowLayoutPanel1.Controls.Add(this.RBPreset2);
+			this.flowLayoutPanel1.Controls.Add(this.RBPreset3);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 28);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(488, 31);
+			this.flowLayoutPanel1.TabIndex = 1;
+			// 
+			// RBPreset0
+			// 
+			this.RBPreset0.AutoSize = true;
+			this.RBPreset0.Location = new System.Drawing.Point(3, 3);
+			this.RBPreset0.Name = "RBPreset0";
+			this.RBPreset0.Size = new System.Drawing.Size(63, 25);
+			this.RBPreset0.TabIndex = 0;
+			this.RBPreset0.TabStop = true;
+			this.RBPreset0.Text = "Своё";
+			this.RBPreset0.UseVisualStyleBackColor = true;
+			this.RBPreset0.CheckedChanged += new System.EventHandler(this.Preset0_Change);
+			// 
+			// RBPreset1
+			// 
+			this.RBPreset1.AutoSize = true;
+			this.RBPreset1.Location = new System.Drawing.Point(72, 3);
+			this.RBPreset1.Name = "RBPreset1";
+			this.RBPreset1.Size = new System.Drawing.Size(161, 25);
+			this.RBPreset1.TabIndex = 1;
+			this.RBPreset1.TabStop = true;
+			this.RBPreset1.Text = "Спокойная погода";
+			this.RBPreset1.UseVisualStyleBackColor = true;
+			this.RBPreset1.CheckedChanged += new System.EventHandler(this.Preset1_Change);
+			// 
+			// RBPreset2
+			// 
+			this.RBPreset2.AutoSize = true;
+			this.RBPreset2.Location = new System.Drawing.Point(239, 3);
+			this.RBPreset2.Name = "RBPreset2";
+			this.RBPreset2.Size = new System.Drawing.Size(96, 25);
+			this.RBPreset2.TabIndex = 2;
+			this.RBPreset2.TabStop = true;
+			this.RBPreset2.Text = "Снегопад";
+			this.RBPreset2.UseVisualStyleBackColor = true;
+			this.RBPreset2.CheckedChanged += new System.EventHandler(this.Preset2_Change);
+			// 
+			// RBPreset3
+			// 
+			this.RBPreset3.AutoSize = true;
+			this.RBPreset3.Location = new System.Drawing.Point(341, 3);
+			this.RBPreset3.Name = "RBPreset3";
+			this.RBPreset3.Size = new System.Drawing.Size(81, 25);
+			this.RBPreset3.TabIndex = 3;
+			this.RBPreset3.TabStop = true;
+			this.RBPreset3.Text = "Метель";
+			this.RBPreset3.UseVisualStyleBackColor = true;
+			this.RBPreset3.CheckedChanged += new System.EventHandler(this.Preset3_Change);
 			// 
 			// SettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(524, 266);
+			this.ClientSize = new System.Drawing.Size(524, 337);
+			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.BtnGithub);
 			this.Controls.Add(this.BtnOk);
 			this.Controls.Add(this.BtnReset);
@@ -492,6 +573,9 @@
 			this.groupBox3.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.InpD)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpForce)).EndInit();
+			this.groupBox4.ResumeLayout(false);
+			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -523,5 +607,11 @@
 		private Button BtnReset;
 		private Button BtnOk;
 		private Button BtnGithub;
+		private GroupBox groupBox4;
+		private FlowLayoutPanel flowLayoutPanel1;
+		private RadioButton RBPreset0;
+		private RadioButton RBPreset1;
+		private RadioButton RBPreset2;
+		private RadioButton RBPreset3;
 	}
 }

@@ -17,7 +17,7 @@
 			if (isNewCreated)
 			{
 				ApplicationConfiguration.Initialize();
-				RegSerializer.Load(KeyName, Settings);
+				Settings.Load();
 				Application.Run(new MainForm());
 			}
 			else
