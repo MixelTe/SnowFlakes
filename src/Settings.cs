@@ -17,5 +17,12 @@ namespace SnowFlakes
 		public int SpeedYMax = 12;
 		public float ForceD = 200;
 		public float ForcePower = 15;
+
+		public Rectangle ClearZone = new(0, 0, 0, 0);
+
+		public static void Save()
+		{
+			RegSerializer.Save(Program.KeyName, Program.Settings);
+		}
 	}
 }

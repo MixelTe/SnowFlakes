@@ -34,6 +34,11 @@ namespace SnowFlakes
 					var c = (Size)v;
 					s = FormattableString.Invariant($"{c.Width};{c.Height}");
 				}
+				else if (ft == typeof(Rectangle))
+				{
+					var c = (Rectangle)v;
+					s = FormattableString.Invariant($"{c.X};{c.Y};{c.Width};{c.Height}");
+				}
 				else if (v is IFormattable f)
 				{
 					s = f.ToString(null, CultureInfo.InvariantCulture);
@@ -94,6 +99,16 @@ namespace SnowFlakes
 						var width = int.Parse(parts[0], CultureInfo.InvariantCulture);
 						var height = int.Parse(parts[1], CultureInfo.InvariantCulture);
 						v = new Size(width, height);
+					}
+					else if (ft == typeof(Rectangle))
+					{
+						var parts = s.Split(';');
+						if (parts.Length != 4) throw new Exception($"Field is invalid! Type: {n}");
+						var x = int.Parse(parts[0], CultureInfo.InvariantCulture);
+						var y = int.Parse(parts[1], CultureInfo.InvariantCulture);
+						var width = int.Parse(parts[2], CultureInfo.InvariantCulture);
+						var height = int.Parse(parts[3], CultureInfo.InvariantCulture);
+						v = new Rectangle(x, y, width, height);
 					}
 					else
 					{

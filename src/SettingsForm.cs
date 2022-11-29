@@ -41,7 +41,7 @@ namespace SnowFlakes
 		}
 		private void OkBtn_Click(object sender, EventArgs e)
 		{
-			RegSerializer.Save(Program.KeyName, Program.Settings);
+			Settings.Save();
 			Close();
 		}
 		private void GitHub_Click(object sender, EventArgs e)

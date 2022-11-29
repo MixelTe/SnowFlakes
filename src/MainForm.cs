@@ -7,7 +7,9 @@ namespace SnowFlakes
 		private Particle[] _points;
 		private Point _pastPos;
 		private SettingsForm? _settingsForm;
+		private SelectZoneForm? _selectZoneForm;
 		private Brush _brush;
+		private bool _iconClicked;
 
 		public MainForm()
 		{
@@ -75,8 +77,30 @@ namespace SnowFlakes
 		{
 			if (_settingsForm == null || _settingsForm.IsDisposed) 
 				_settingsForm = new SettingsForm();
-			_settingsForm.Show();
+			_settingsForm.Show(this);
 			_settingsForm.Focus();
+		}
+
+		private async void Icon_Click(object sender, EventArgs e)
+		{
+			if (((MouseEventArgs)e).Button != MouseButtons.Left) return;
+			if (_iconClicked) return;
+			_iconClicked = true;
+			await Task.Delay(SystemInformation.DoubleClickTime);
+			if (!_iconClicked) return;
+			_iconClicked = false;
+
+			if (_selectZoneForm == null || _selectZoneForm.IsDisposed)
+				_selectZoneForm = new();
+			_selectZoneForm.Show();
+			_selectZoneForm.Focus();
+		}
+
+		private void Icon_DbClick(object sender, EventArgs e)
+		{
+			if (((MouseEventArgs)e).Button != MouseButtons.Left) return;
+			_iconClicked = false;
+			Program.Settings.ClearZone = new(0, 0, 0, 0);
 		}
 
 		public void Reload()

@@ -43,13 +43,13 @@
             this.закрытьToolStripMenuItem,
             this.настройкиToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(135, 48);
 			// 
 			// закрытьToolStripMenuItem
 			// 
 			this.закрытьToolStripMenuItem.Image = global::SnowFlakes.Properties.Resources.close;
 			this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-			this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.закрытьToolStripMenuItem.Text = "Закрыть";
 			this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.Close_Click);
 			// 
@@ -57,7 +57,7 @@
 			// 
 			this.настройкиToolStripMenuItem.Image = global::SnowFlakes.Properties.Resources.settings;
 			this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.настройкиToolStripMenuItem.Text = "Настройки";
 			this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.Settings_Click);
 			// 
@@ -67,6 +67,8 @@
 			this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
 			this.notifyIcon1.Text = "Snowflakes";
 			this.notifyIcon1.Visible = true;
+			this.notifyIcon1.Click += new System.EventHandler(this.Icon_Click);
+			this.notifyIcon1.DoubleClick += new System.EventHandler(this.Icon_DbClick);
 			// 
 			// MainForm
 			// 

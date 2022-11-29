@@ -30,7 +30,11 @@
 
 		public void Draw(Graphics g, Brush brush)
 		{
-			g.FillEllipse(brush, new RectangleF(X, Y, Program.Settings.ParticleSize.Width, Program.Settings.ParticleSize.Height));
+			var rect = new RectangleF(X, Y, Program.Settings.ParticleSize.Width, Program.Settings.ParticleSize.Height);
+			if (!rect.IntersectsWith(Program.Settings.ClearZone))
+			{
+				g.FillEllipse(brush, rect);
+			}
 		}
 
 		public void Move(int Width, int Height, Point? cursorForce)
