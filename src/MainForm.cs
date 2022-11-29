@@ -2,9 +2,9 @@ namespace SnowFlakes
 {
 	public partial class MainForm : Form
 	{
-		public static MainForm? Ins;
+		internal static MainForm? Ins;
 
-		private RectangleF[] _points;
+		private Particle[] _points;
 		private Point _pastPos;
 		private SettingsForm? _settingsForm;
 		private Brush _brush;
@@ -18,7 +18,7 @@ namespace SnowFlakes
 
 			BackColor = Color.Green;
 			TransparencyKey = Color.Green;
-			_points = Array.Empty<RectangleF>();
+			_points = Array.Empty<Particle>();
 			Reload();
 		}
 		protected override CreateParams CreateParams
@@ -46,37 +46,13 @@ namespace SnowFlakes
 
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			var move = _pastPos != Cursor.Position;
+			Point? cursorForce = _pastPos != Cursor.Position ? Cursor.Position : null;
 			_pastPos = Cursor.Position;
 			for (int i = 0; i < _points.Length; i++)
 			{
 				//e.Graphics.DrawEllipse(Pens.LightBlue, new Rectangle((int)_points[i].X, (int)_points[i].Y, 10, 10));
-				e.Graphics.FillEllipse(_brush, new RectangleF(_points[i].Location, Program.Settings.ParticleSize));
-				_points[i].Y += _points[i].Height;
-				_points[i].X += _points[i].Width > 0 ?
-					Program.Settings.SpeedXMax - _points[i].Width :
-					//0:
-					_points[i].Width;
-				_points[i].X = (_points[i].X + Width) % Width;
-				_points[i].Width = (_points[i].Width + Program.Settings.SpeedXMax + Program.Settings.SpeedX) % (Program.Settings.SpeedXMax * 2) - Program.Settings.SpeedXMax;
-				if (move)
-				{
-					var d = (_points[i].X - _pastPos.X) * (_points[i].X - _pastPos.X) +
-							(_points[i].Y - _pastPos.Y) * (_points[i].Y - _pastPos.Y);
-					var md = Program.Settings.ForceD;
-					var p = Program.Settings.ForcePower;
-					if (d < md * md)
-					{
-						_points[i].X += (md * md - d) / (md * md) * p * Math.Sign(_points[i].X - _pastPos.X);
-						_points[i].X = (_points[i].X + Width) % Width;
-						_points[i].Y += (md * md - d) / (md * md) * p * Math.Sign(_points[i].Y - _pastPos.Y);
-					}
-				}
-				if (_points[i].Y > Height)
-				{
-					_points[i].Y = 0;
-					_points[i].X = Random.Shared.NextSingle() * Width;
-				}
+				_points[i].Draw(e.Graphics, _brush);
+				_points[i].Move(Width, Height, cursorForce);
 			}
 			//e.Graphics.DrawEllipse(Pens.LightGreen, new Rectangle(Cursor.Position, new Size(10, 10)));
 			//base.OnPaint(e);
@@ -106,14 +82,10 @@ namespace SnowFlakes
 		public void Reload()
 		{
 			_brush = new SolidBrush(Program.Settings.ParticleColor);
-			_points = new RectangleF[Program.Settings.Particles];
+			_points = new Particle[Program.Settings.Particles];
 			for (int i = 0; i < _points.Length; i++)
 			{
-				_points[i] = new RectangleF(
-					Random.Shared.NextSingle() * Width,
-					Random.Shared.NextSingle() * Height,
-					(Random.Shared.NextSingle() * 2f - 1f) * Program.Settings.SpeedXMax,
-					Random.Shared.Next(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax));
+				_points[i] = new Particle(Width, Height);
 			}
 		}
 		public void UpdateColor()
@@ -124,11 +96,7 @@ namespace SnowFlakes
 		{
 			for (int i = 0; i < _points.Length; i++)
 			{
-				_points[i] = new RectangleF(
-					_points[i].X,
-					_points[i].Y,
-					(Random.Shared.NextSingle() * 2f - 1f) * Program.Settings.SpeedXMax,
-					Random.Shared.Next(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax));
+				_points[i].RandSpeed();
 			}
 		}
 	}
