@@ -11,6 +11,7 @@ namespace SnowFlakes
 		public int Particles = 200;
 		public int ParticleRad = 5;
 		public Color ParticleColor = Color.LightBlue;
+		public int FPS = 25;
 		public float SpeedXMax = 4f;
 		public float SpeedX = 0.05f;
 		public int SpeedYMin = 2;
@@ -18,9 +19,10 @@ namespace SnowFlakes
 		public float ForceD = 200;
 		public float ForcePower = 15;
 
-		public Rectangle ClearZone = new(0, 0, 0, 0);
+		public Rectangle ClearZone = Rectangle.Empty;
 
 		public int Preset = 1;
+
 
 		public static void Save()
 		{

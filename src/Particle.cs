@@ -37,15 +37,16 @@
 			}
 		}
 
-		public void Move(int Width, int Height, Point? cursorForce)
+		public void Move(int Width, int Height, Point? cursorForce, long deltaTime)
 		{
-			Y += SpeedY;
-			X += SpeedX > 0 ?
+			var dt = deltaTime / 40f;
+			Y += SpeedY * dt;
+			X += (SpeedX > 0 ?
 				Program.Settings.SpeedXMax - SpeedX :
 				//0:
-				SpeedX;
+				SpeedX) * dt;
 			X = (X + Width) % Width;
-			SpeedX = (SpeedX + Program.Settings.SpeedXMax + Program.Settings.SpeedX) % (Program.Settings.SpeedXMax * 2) - Program.Settings.SpeedXMax;
+			SpeedX = (SpeedX + Program.Settings.SpeedXMax + Program.Settings.SpeedX * dt) % (Program.Settings.SpeedXMax * 2) - Program.Settings.SpeedXMax;
 			if (cursorForce != null)
 			{
 				var cursor = (Point)cursorForce;

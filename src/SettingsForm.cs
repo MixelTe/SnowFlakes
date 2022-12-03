@@ -162,5 +162,11 @@ namespace SnowFlakes
 			SetFields();
 			SnowWindow.Ins?.Rerandomize();
 		}
+		private void FPS_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.FPS = (int)InpFPS.Value;
+			SnowWindow.Ins?.SetFPS(Program.Settings.FPS);
+		}
 	}
 }

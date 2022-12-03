@@ -34,7 +34,7 @@ namespace SnowFlakes
 				Y = 0,
 				Width = Screen.PrimaryScreen.Bounds.Width,
 				Height = Screen.PrimaryScreen.Bounds.Height,
-				FPS = 25,
+				FPS = Program.Settings.FPS,
 				IsTopmost = true,
 				IsVisible = true,
 			};
@@ -108,7 +108,7 @@ namespace SnowFlakes
 			{
 				
 				_particles[i].Draw(gfx, _brush);
-				_particles[i].Move(w, h, cursorForce);
+				_particles[i].Move(w, h, cursorForce, e.DeltaTime);
 			}
 
 			//gfx.FillCircle(_brush, _pastPos.X, _pastPos.Y, 10);
@@ -133,6 +133,10 @@ namespace SnowFlakes
 			{
 				_particles[i].RandSpeed();
 			}
+		}
+		public void SetFPS(int fps)
+		{
+			_window.FPS = fps;
 		}
 
 		private bool disposedValue;
