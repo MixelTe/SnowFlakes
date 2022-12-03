@@ -47,7 +47,7 @@ namespace SnowFlakes
 		{
 			Program.Settings = new Settings();
 			SetFields();
-			MainForm.Ins?.Reload();
+			SnowWindow.Ins?.Reload();
 		}
 		private void OkBtn_Click(object sender, EventArgs e)
 		{
@@ -78,7 +78,7 @@ namespace SnowFlakes
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.Particles = (int)InpCount.Value;
-			MainForm.Ins?.Reload();
+			SnowWindow.Ins?.Reload();
 		}
 		private void Size_Change(object sender, EventArgs e)
 		{
@@ -93,7 +93,7 @@ namespace SnowFlakes
 			{
 				Program.Settings.ParticleColor = colorDialog.Color;
 				BtnColor.BackColor = Program.Settings.ParticleColor;
-				MainForm.Ins?.UpdateColor();
+				SnowWindow.Ins?.UpdateColor();
 			}
 		}
 		private void SpeedXMax_Change(object sender, EventArgs e) 
@@ -101,7 +101,7 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Program.Settings.SpeedXMax = (float)InpSpeedXMax.Value;
 			SetPreset0();
-			MainForm.Ins?.Rerandomize();
+			SnowWindow.Ins?.Rerandomize();
 		}
 		private void SpeedX_Change(object sender, EventArgs e) 
 		{
@@ -115,7 +115,7 @@ namespace SnowFlakes
 			Program.Settings.SpeedYMin = (int)(InpSpeedY.Value - InpSpeedYRange.Value);
 			Program.Settings.SpeedYMax = (int)(InpSpeedY.Value + InpSpeedYRange.Value);
 			SetPreset0();
-			MainForm.Ins?.Rerandomize();
+			SnowWindow.Ins?.Rerandomize();
 		}
 		private void Force_Change(object sender, EventArgs e) 
 		{
@@ -139,28 +139,28 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset0();
 			SetFields();
-			MainForm.Ins?.Rerandomize();
+			SnowWindow.Ins?.Rerandomize();
 		}
 		private void Preset1_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset1();
 			SetFields();
-			MainForm.Ins?.Rerandomize();
+			SnowWindow.Ins?.Rerandomize();
 		}
 		private void Preset2_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset2();
 			SetFields();
-			MainForm.Ins?.Rerandomize();
+			SnowWindow.Ins?.Rerandomize();
 		}
 		private void Preset3_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset3();
 			SetFields();
-			MainForm.Ins?.Rerandomize();
+			SnowWindow.Ins?.Rerandomize();
 		}
 	}
 }

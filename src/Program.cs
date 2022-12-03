@@ -4,6 +4,7 @@
 	{
 		public static readonly string KeyName = @"HKEY_CURRENT_USER\Software\MixelTe\Snowflakes";
 		public static Settings Settings = new();
+		public static SnowWindow? SnowWindow;
 		public static Mutex? mutex;
 
 		/// <summary>
@@ -17,8 +18,13 @@
 			if (isNewCreated)
 			{
 				ApplicationConfiguration.Initialize();
+				GameOverlay.TimerService.EnableHighPrecisionTimers();
 				Settings.Load();
-				Application.Run(new MainForm());
+				SnowWindow = new SnowWindow();
+
+				Application.Run(new App());
+				
+				SnowWindow.Dispose();
 			}
 			else
 			{
