@@ -9,7 +9,7 @@ namespace SnowFlakes
 	public class Settings
 	{
 		public int Particles = 200;
-		public int ParticleRad = 5;
+		public int ParticleRad = 4;
 		public Color ParticleColor = Color.LightBlue;
 		public int FPS = 25;
 		public float SpeedXMax = 4f;
