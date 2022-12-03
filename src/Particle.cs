@@ -28,12 +28,12 @@
 			SpeedY = Random.Shared.Next(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax);
 		}
 
-		public void Draw(Graphics g, Brush brush)
+		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
 		{
-			var rect = new RectangleF(X, Y, Program.Settings.ParticleSize.Width, Program.Settings.ParticleSize.Height);
+			var rect = new RectangleF(X, Y, Program.Settings.ParticleRad, Program.Settings.ParticleRad);
 			if (!rect.IntersectsWith(Program.Settings.ClearZone))
 			{
-				g.FillEllipse(brush, rect);
+				gfx.FillCircle(brush, rect.X, rect.Y, Program.Settings.ParticleRad);
 			}
 		}
 
@@ -71,6 +71,5 @@
 				X = Random.Shared.NextSingle() * Width;
 			}
 		}
-
 	}
 }

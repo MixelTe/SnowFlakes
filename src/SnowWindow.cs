@@ -12,7 +12,7 @@ namespace SnowFlakes
 		internal static SnowWindow? Ins;
 		private readonly GraphicsWindow _window;
 
-		private Particle[] _points;
+		private Particle[] _particles;
 		private System.Drawing.Point _pastPos;
 		private GameOverlay.Drawing.SolidBrush? _brush;
 		private GameOverlay.Drawing.Font? _font;
@@ -20,7 +20,6 @@ namespace SnowFlakes
 		public SnowWindow()
 		{
 			Ins = this;
-			_points = Array.Empty<Particle>();
 
 			var gfx = new GameOverlay.Drawing.Graphics()
 			{
@@ -35,10 +34,11 @@ namespace SnowFlakes
 				Y = 0,
 				Width = Screen.PrimaryScreen.Bounds.Width,
 				Height = Screen.PrimaryScreen.Bounds.Height,
-				FPS = 60,
-				//IsTopmost = true,
+				FPS = 25,
+				IsTopmost = true,
 				IsVisible = true,
 			};
+			_particles = CreateParticles();
 
 			_window.SetupGraphics += SetupGraphics;
 			_window.DrawGraphics += DrawGraphics;
@@ -52,6 +52,16 @@ namespace SnowFlakes
 		{
 			_window.Create();
 			//_window.Join();
+		}
+
+		private Particle[] CreateParticles()
+		{
+			var particles = new Particle[Program.Settings.Particles];
+			for (int i = 0; i < particles.Length; i++)
+			{
+				particles[i] = new Particle(_window.Width, _window.Height);
+			}
+			return particles;
 		}
 
 		private void SetupGraphics(object? sender, SetupGraphicsEventArgs e)
@@ -92,37 +102,37 @@ namespace SnowFlakes
 			System.Drawing.Point? cursorForce = _pastPos != Cursor.Position ? Cursor.Position : null;
 			_pastPos = Cursor.Position;
 
-			//for (int i = 0; i < _points.Length; i++)
-			//{
-			//	//e.Graphics.DrawEllipse(Pens.LightBlue, new Rectangle((int)_points[i].X, (int)_points[i].Y, 10, 10));
-			//	_points[i].Draw(e.Graphics, _brush);
-			//	_points[i].Move(Width, Height, cursorForce);
-			//}
+			var w = gfx.Width;
+			var h = gfx.Height;
+			for (int i = 0; i < _particles.Length; i++)
+			{
+				
+				_particles[i].Draw(gfx, _brush);
+				_particles[i].Move(w, h, cursorForce);
+			}
 
-			//e.Graphics.DrawEllipse(Pens.LightGreen, new Rectangle(Cursor.Position, new Size(10, 10)));
-			//base.OnPaint(e);
+			//gfx.FillCircle(_brush, _pastPos.X, _pastPos.Y, 10);
 		}
 
 
 		public void Reload()
 		{
-			//_brush = new SolidBrush(Program.Settings.ParticleColor);
-			//_points = new Particle[Program.Settings.Particles];
-			//for (int i = 0; i < _points.Length; i++)
-			//{
-			//	_points[i] = new Particle(Width, Height);
-			//}
+			UpdateColor();
+ 			_particles = CreateParticles();
 		}
 		public void UpdateColor()
 		{
-			//_brush = new SolidBrush(Program.Settings.ParticleColor);
+			if (_brush != null)
+				_brush.Color = new GameOverlay.Drawing.Color(Program.Settings.ParticleColor.R,
+															 Program.Settings.ParticleColor.G,
+															 Program.Settings.ParticleColor.B);
 		}
 		public void Rerandomize()
 		{
-			//for (int i = 0; i < _points.Length; i++)
-			//{
-			//	_points[i].RandSpeed();
-			//}
+			for (int i = 0; i < _particles.Length; i++)
+			{
+				_particles[i].RandSpeed();
+			}
 		}
 
 		private bool disposedValue;

@@ -23,7 +23,7 @@ namespace SnowFlakes
 		{
 			ignoreChangeEvent = true;
 			InpCount.Value = Program.Settings.Particles;
-			InpSize.Value = Program.Settings.ParticleSize.Width;
+			InpSize.Value = Program.Settings.ParticleRad;
 			BtnColor.BackColor = Program.Settings.ParticleColor;
 			InpSpeedXMax.Value = (decimal)Program.Settings.SpeedXMax;
 			InpSpeedX.Value = (decimal)Program.Settings.SpeedX * 10;
@@ -83,7 +83,7 @@ namespace SnowFlakes
 		private void Size_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
-			Program.Settings.ParticleSize = new Size((int)InpSize.Value, (int)InpSize.Value);
+			Program.Settings.ParticleRad = (int)InpSize.Value;
 		}
 		private void Color_Change(object sender, EventArgs e) 
 		{
