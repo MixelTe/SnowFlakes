@@ -108,7 +108,9 @@ namespace SnowFlakes
 			{
 				
 				_particles[i].Draw(gfx, _brush);
-				_particles[i].Move(w, h, cursorForce, e.DeltaTime);
+				if (i >= _particles.Length || _particles[i] == null) break;
+				if (e.DeltaTime < 1000)
+					_particles[i].Move(w, h, cursorForce, e.DeltaTime);
 			}
 
 			//gfx.FillCircle(_brush, _pastPos.X, _pastPos.Y, 10);
