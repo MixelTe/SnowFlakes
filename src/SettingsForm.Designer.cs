@@ -62,6 +62,7 @@
 			this.RBPreset3 = new System.Windows.Forms.RadioButton();
 			this.InpFPS = new System.Windows.Forms.NumericUpDown();
 			this.label10 = new System.Windows.Forms.Label();
+			this.RBPreset4 = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -532,10 +533,10 @@
 			this.RBPreset3.AutoSize = true;
 			this.RBPreset3.Location = new System.Drawing.Point(341, 3);
 			this.RBPreset3.Name = "RBPreset3";
-			this.RBPreset3.Size = new System.Drawing.Size(81, 25);
+			this.RBPreset3.Size = new System.Drawing.Size(62, 25);
 			this.RBPreset3.TabIndex = 3;
 			this.RBPreset3.TabStop = true;
-			this.RBPreset3.Text = "Метель";
+			this.RBPreset3.Text = "Буря";
 			this.RBPreset3.UseVisualStyleBackColor = true;
 			this.RBPreset3.CheckedChanged += new System.EventHandler(this.Preset3_Change);
 			// 
@@ -577,6 +578,18 @@
 			this.label10.Size = new System.Drawing.Size(36, 21);
 			this.label10.TabIndex = 12;
 			this.label10.Text = "FPS";
+			// 
+			// RBPreset4
+			// 
+			this.RBPreset4.AutoSize = true;
+			this.RBPreset4.Location = new System.Drawing.Point(409, 3);
+			this.RBPreset4.Name = "RBPreset4";
+			this.RBPreset4.Size = new System.Drawing.Size(81, 25);
+			this.RBPreset4.TabIndex = 4;
+			this.RBPreset4.TabStop = true;
+			this.RBPreset4.Text = "Метель";
+			this.RBPreset4.UseVisualStyleBackColor = true;
+			this.RBPreset4.CheckedChanged += new System.EventHandler(this.Preset4_Change);
 			// 
 			// SettingsForm
 			// 
@@ -661,5 +674,6 @@
 		private RadioButton RBPreset3;
 		private NumericUpDown InpFPS;
 		private Label label10;
+		private RadioButton RBPreset4;
 	}
 }

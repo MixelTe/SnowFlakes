@@ -72,5 +72,13 @@ namespace SnowFlakes
 			Program.Settings.SpeedYMax = 30;
 			Program.Settings.Preset = 3;
 		}
+		public static void SetPreset4() // Wind
+		{
+			Program.Settings.SpeedXMax = 40f;
+			Program.Settings.SpeedX = 1.0f;
+			Program.Settings.SpeedYMin = 5;
+			Program.Settings.SpeedYMax = 10;
+			Program.Settings.Preset = 4;
+		}
 	}
 }

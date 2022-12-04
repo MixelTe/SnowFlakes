@@ -38,6 +38,7 @@ namespace SnowFlakes
 				case 1: RBPreset1.Checked = true; break;
 				case 2: RBPreset2.Checked = true; break;
 				case 3: RBPreset3.Checked = true; break;
+				case 4: RBPreset4.Checked = true; break;
 				default: RBPreset0.Checked = true; break;
 			}
 			ignoreChangeEvent = false;
@@ -159,6 +160,13 @@ namespace SnowFlakes
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset3();
+			SetFields();
+			SnowWindow.Ins?.Rerandomize();
+		}
+		private void Preset4_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Settings.SetPreset4();
 			SetFields();
 			SnowWindow.Ins?.Rerandomize();
 		}
