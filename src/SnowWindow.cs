@@ -87,17 +87,17 @@ namespace SnowFlakes
 		{
 			var gfx = e.Graphics;
 
-			var padding = 16;
-			var infoText = new StringBuilder()
-				.Append("FPS: ").Append(gfx.FPS.ToString().PadRight(padding))
-				.Append("FrameTime: ").Append(e.FrameTime.ToString().PadRight(padding))
-				.Append("FrameCount: ").Append(e.FrameCount.ToString().PadRight(padding))
-				.Append("DeltaTime: ").Append(e.DeltaTime.ToString().PadRight(padding))
-				.ToString();
+			//var padding = 16;
+			//var infoText = new StringBuilder()
+			//	.Append("FPS: ").Append(gfx.FPS.ToString().PadRight(padding))
+			//	.Append("FrameTime: ").Append(e.FrameTime.ToString().PadRight(padding))
+			//	.Append("FrameCount: ").Append(e.FrameCount.ToString().PadRight(padding))
+			//	.Append("DeltaTime: ").Append(e.DeltaTime.ToString().PadRight(padding))
+			//	.ToString();
 
 			gfx.ClearScene();
 
-			gfx.DrawText(_font, _brush, 58, 20, infoText);
+			//gfx.DrawText(_font, _brush, 58, 20, infoText);
 
 			System.Drawing.Point? cursorForce = _pastPos != Cursor.Position ? Cursor.Position : null;
 			_pastPos = Cursor.Position;

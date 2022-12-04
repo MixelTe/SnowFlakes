@@ -98,7 +98,7 @@
             0});
 			this.InpCount.Location = new System.Drawing.Point(194, 7);
 			this.InpCount.Maximum = new decimal(new int[] {
-            1000,
+            50000,
             0,
             0,
             0});
@@ -553,7 +553,7 @@
             0,
             0});
 			this.InpFPS.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
