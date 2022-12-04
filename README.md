@@ -1,5 +1,5 @@
 # Снежинки ❄
-### [Скачать ❄ (Для Windows)](https://github.com/MixelTe/SnowFlakes/releases/download/v1.2/SnowFlakes.exe)
+### [Скачать ❄ (Для Windows) v2.0](https://github.com/MixelTe/SnowFlakes/releases/download/v2.0/SnowFlakes.exe)
 
 Снежинки, падающие поверх экрана.
 
