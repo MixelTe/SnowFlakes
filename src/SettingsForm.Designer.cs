@@ -60,6 +60,8 @@
 			this.RBPreset1 = new System.Windows.Forms.RadioButton();
 			this.RBPreset2 = new System.Windows.Forms.RadioButton();
 			this.RBPreset3 = new System.Windows.Forms.RadioButton();
+			this.InpFPS = new System.Windows.Forms.NumericUpDown();
+			this.label10 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -73,6 +75,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.InpForce)).BeginInit();
 			this.groupBox4.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.InpFPS)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -95,7 +98,7 @@
             0});
 			this.InpCount.Location = new System.Drawing.Point(194, 7);
 			this.InpCount.Maximum = new decimal(new int[] {
-            1000,
+            50000,
             0,
             0,
             0});
@@ -152,7 +155,7 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label3.Location = new System.Drawing.Point(12, 79);
+			this.label3.Location = new System.Drawing.Point(271, 9);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(120, 21);
 			this.label3.TabIndex = 4;
@@ -167,7 +170,7 @@
 			this.BtnColor.BackColor = System.Drawing.Color.LightBlue;
 			this.BtnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.BtnColor.ForeColor = System.Drawing.Color.Gray;
-			this.BtnColor.Location = new System.Drawing.Point(194, 79);
+			this.BtnColor.Location = new System.Drawing.Point(453, 9);
 			this.BtnColor.Name = "BtnColor";
 			this.BtnColor.Size = new System.Drawing.Size(65, 27);
 			this.BtnColor.TabIndex = 3;
@@ -181,9 +184,9 @@
 			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.groupBox1.Location = new System.Drawing.Point(12, 112);
+			this.groupBox1.Location = new System.Drawing.Point(12, 142);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(247, 104);
+			this.groupBox1.Size = new System.Drawing.Size(253, 104);
 			this.groupBox1.TabIndex = 4;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Ветер";
@@ -270,7 +273,7 @@
 			this.groupBox2.Controls.Add(this.label6);
 			this.groupBox2.Controls.Add(this.label7);
 			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.groupBox2.Location = new System.Drawing.Point(265, 112);
+			this.groupBox2.Location = new System.Drawing.Point(271, 142);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(247, 104);
 			this.groupBox2.TabIndex = 6;
@@ -347,9 +350,9 @@
 			this.groupBox3.Controls.Add(this.label8);
 			this.groupBox3.Controls.Add(this.label9);
 			this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.groupBox3.Location = new System.Drawing.Point(265, 7);
+			this.groupBox3.Location = new System.Drawing.Point(12, 73);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(247, 104);
+			this.groupBox3.Size = new System.Drawing.Size(506, 68);
 			this.groupBox3.TabIndex = 5;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Сдувание курсором";
@@ -362,7 +365,7 @@
             0,
             0,
             0});
-			this.InpD.Location = new System.Drawing.Point(176, 63);
+			this.InpD.Location = new System.Drawing.Point(429, 28);
 			this.InpD.Maximum = new decimal(new int[] {
             1500,
             0,
@@ -406,7 +409,7 @@
 			// 
 			this.label8.AutoSize = true;
 			this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label8.Location = new System.Drawing.Point(6, 65);
+			this.label8.Location = new System.Drawing.Point(259, 30);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(85, 21);
 			this.label8.TabIndex = 9;
@@ -426,7 +429,7 @@
 			// 
 			this.BtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.BtnReset.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.BtnReset.Location = new System.Drawing.Point(12, 293);
+			this.BtnReset.Location = new System.Drawing.Point(12, 333);
 			this.BtnReset.Name = "BtnReset";
 			this.BtnReset.Size = new System.Drawing.Size(168, 32);
 			this.BtnReset.TabIndex = 9;
@@ -438,7 +441,7 @@
 			// 
 			this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.BtnOk.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.BtnOk.Location = new System.Drawing.Point(412, 293);
+			this.BtnOk.Location = new System.Drawing.Point(417, 333);
 			this.BtnOk.Name = "BtnOk";
 			this.BtnOk.Size = new System.Drawing.Size(100, 32);
 			this.BtnOk.TabIndex = 8;
@@ -454,7 +457,7 @@
 			this.BtnGithub.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.BtnGithub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.BtnGithub.ForeColor = System.Drawing.Color.Transparent;
-			this.BtnGithub.Location = new System.Drawing.Point(246, 295);
+			this.BtnGithub.Location = new System.Drawing.Point(248, 335);
 			this.BtnGithub.Name = "BtnGithub";
 			this.BtnGithub.Size = new System.Drawing.Size(32, 32);
 			this.BtnGithub.TabIndex = 10;
@@ -467,9 +470,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox4.Controls.Add(this.flowLayoutPanel1);
 			this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.groupBox4.Location = new System.Drawing.Point(12, 222);
+			this.groupBox4.Location = new System.Drawing.Point(12, 252);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(500, 65);
+			this.groupBox4.Size = new System.Drawing.Size(505, 65);
 			this.groupBox4.TabIndex = 7;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Готовые варианты";
@@ -484,7 +487,7 @@
 			this.flowLayoutPanel1.Controls.Add(this.RBPreset3);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 28);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(488, 31);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(493, 31);
 			this.flowLayoutPanel1.TabIndex = 1;
 			// 
 			// RBPreset0
@@ -535,11 +538,52 @@
 			this.RBPreset3.UseVisualStyleBackColor = true;
 			this.RBPreset3.CheckedChanged += new System.EventHandler(this.Preset3_Change);
 			// 
+			// InpFPS
+			// 
+			this.InpFPS.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.InpFPS.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+			this.InpFPS.Location = new System.Drawing.Point(453, 42);
+			this.InpFPS.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+			this.InpFPS.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+			this.InpFPS.Name = "InpFPS";
+			this.InpFPS.Size = new System.Drawing.Size(65, 29);
+			this.InpFPS.TabIndex = 11;
+			this.InpFPS.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+			this.InpFPS.ValueChanged += new System.EventHandler(this.FPS_Change);
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.label10.Location = new System.Drawing.Point(271, 44);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(36, 21);
+			this.label10.TabIndex = 12;
+			this.label10.Text = "FPS";
+			// 
 			// SettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(524, 337);
+			this.ClientSize = new System.Drawing.Size(529, 377);
+			this.Controls.Add(this.InpFPS);
+			this.Controls.Add(this.label10);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.BtnGithub);
 			this.Controls.Add(this.BtnOk);
@@ -576,6 +620,7 @@
 			this.groupBox4.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.flowLayoutPanel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.InpFPS)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -613,5 +658,7 @@
 		private RadioButton RBPreset1;
 		private RadioButton RBPreset2;
 		private RadioButton RBPreset3;
+		private NumericUpDown InpFPS;
+		private Label label10;
 	}
 }

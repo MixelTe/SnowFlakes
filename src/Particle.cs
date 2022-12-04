@@ -28,24 +28,35 @@
 			SpeedY = Random.Shared.Next(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax);
 		}
 
-		public void Draw(Graphics g, Brush brush)
+		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
 		{
-			var rect = new RectangleF(X, Y, Program.Settings.ParticleSize.Width, Program.Settings.ParticleSize.Height);
+			var rect = new RectangleF(X, Y, Program.Settings.ParticleRad, Program.Settings.ParticleRad);
 			if (!rect.IntersectsWith(Program.Settings.ClearZone))
 			{
-				g.FillEllipse(brush, rect);
+				gfx.FillCircle(brush, rect.X, rect.Y, Program.Settings.ParticleRad);
 			}
 		}
 
-		public void Move(int Width, int Height, Point? cursorForce)
+		public void Move(int Width, int Height, Point? cursorForce, long deltaTime)
 		{
-			Y += SpeedY;
-			X += SpeedX > 0 ?
-				Program.Settings.SpeedXMax - SpeedX :
-				//0:
-				SpeedX;
+			var dt = deltaTime / 40f;
+			Y += SpeedY * dt;
+			float speedX;
+			if (SpeedX > 0)
+			{
+				speedX = SpeedX > Program.Settings.SpeedXMax / 2 ?
+					Program.Settings.SpeedXMax - SpeedX :
+					SpeedX;
+			}
+			else
+			{
+				speedX = SpeedX < -Program.Settings.SpeedXMax / 2 ?
+					-Program.Settings.SpeedXMax - SpeedX :
+					SpeedX;
+			}
+			X += speedX * dt;
 			X = (X + Width) % Width;
-			SpeedX = (SpeedX + Program.Settings.SpeedXMax + Program.Settings.SpeedX) % (Program.Settings.SpeedXMax * 2) - Program.Settings.SpeedXMax;
+			SpeedX = (SpeedX + Program.Settings.SpeedXMax + Program.Settings.SpeedX * dt) % (Program.Settings.SpeedXMax * 2) - Program.Settings.SpeedXMax;
 			if (cursorForce != null)
 			{
 				var cursor = (Point)cursorForce;
@@ -71,6 +82,5 @@
 				X = Random.Shared.NextSingle() * Width;
 			}
 		}
-
 	}
 }

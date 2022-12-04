@@ -10,12 +10,7 @@ namespace SnowFlakes
 	{
 		public static Rectangle Inflate(this Rectangle rect, int v)
 		{
-			return new(
-				rect.X - v,
-				rect.Y - v,
-				rect.Width + v * 2,
-				rect.Height + v * 2
-				);
+			return Rectangle.Inflate(rect, v, v);
 		}
 	}
 }
