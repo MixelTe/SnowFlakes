@@ -24,7 +24,7 @@
 		public void RandSpeed()
 		{
 			SpeedX = (Random.Shared.NextSingle() * 2f - 1f) * Program.Settings.SpeedXMax;
-			SpeedY = Program.Settings.SpeedYMin + Random.Shared.NextSingle() * Program.Settings.SpeedYMax;
+			SpeedY = Program.Settings.SpeedYMin + Random.Shared.NextSingle() * (Program.Settings.SpeedYMax - Program.Settings.SpeedYMin);
 		}
 
 		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
@@ -65,14 +65,14 @@
 				var p = Program.Settings.ForcePower;
 				if (d < md * md)
 				{
-					X += (md * md - d) / (md * md) * p * Math.Sign(X - cursor.X);
+					X += Math.Abs(X - cursor.X) / md * p * Math.Sign(X - cursor.X);
 					X = (X + Width) % Width;
-					Y += (md * md - d) / (md * md) * p * Math.Sign(Y - cursor.Y);
+					Y += Math.Abs(Y - cursor.Y) / md * p * Math.Sign(Y - cursor.Y);
 				}
 			}
 			if (Y > Height)
 			{
-				Y = 0;
+				Y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax;
 				X = Random.Shared.NextSingle() * Width;
 			}
 			if (Y < 0)
