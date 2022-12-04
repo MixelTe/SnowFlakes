@@ -12,8 +12,7 @@
 		{
 			X = Random.Shared.NextSingle() * Width;
 			Y = Random.Shared.NextSingle() * Height;
-			SpeedX = (Random.Shared.NextSingle() * 2f - 1f) * Program.Settings.SpeedXMax;
-			SpeedY = Random.Shared.Next(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax);
+			RandSpeed();
 		}
 		public Particle(float x, float y, float speedX, float speedY)
 		{
@@ -25,7 +24,7 @@
 		public void RandSpeed()
 		{
 			SpeedX = (Random.Shared.NextSingle() * 2f - 1f) * Program.Settings.SpeedXMax;
-			SpeedY = Random.Shared.Next(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax);
+			SpeedY = Program.Settings.SpeedYMin + Random.Shared.NextSingle() * Program.Settings.SpeedYMax;
 		}
 
 		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)

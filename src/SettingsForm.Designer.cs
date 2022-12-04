@@ -187,7 +187,7 @@
 			this.groupBox1.Location = new System.Drawing.Point(12, 142);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(253, 104);
-			this.groupBox1.TabIndex = 4;
+			this.groupBox1.TabIndex = 6;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Ветер";
 			// 
@@ -208,7 +208,7 @@
             0});
 			this.InpSpeedX.Name = "InpSpeedX";
 			this.InpSpeedX.Size = new System.Drawing.Size(65, 29);
-			this.InpSpeedX.TabIndex = 5;
+			this.InpSpeedX.TabIndex = 2;
 			this.InpSpeedX.Value = new decimal(new int[] {
             1,
             0,
@@ -238,7 +238,7 @@
             65536});
 			this.InpSpeedXMax.Name = "InpSpeedXMax";
 			this.InpSpeedXMax.Size = new System.Drawing.Size(65, 29);
-			this.InpSpeedXMax.TabIndex = 4;
+			this.InpSpeedXMax.TabIndex = 1;
 			this.InpSpeedXMax.Value = new decimal(new int[] {
             4,
             0,
@@ -276,7 +276,7 @@
 			this.groupBox2.Location = new System.Drawing.Point(271, 142);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(247, 104);
-			this.groupBox2.TabIndex = 6;
+			this.groupBox2.TabIndex = 7;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Падение снежинок";
 			// 
@@ -291,7 +291,7 @@
             0});
 			this.InpSpeedYRange.Name = "InpSpeedYRange";
 			this.InpSpeedYRange.Size = new System.Drawing.Size(65, 29);
-			this.InpSpeedYRange.TabIndex = 7;
+			this.InpSpeedYRange.TabIndex = 2;
 			this.InpSpeedYRange.Value = new decimal(new int[] {
             5,
             0,
@@ -315,7 +315,7 @@
             0});
 			this.InpSpeedY.Name = "InpSpeedY";
 			this.InpSpeedY.Size = new System.Drawing.Size(65, 29);
-			this.InpSpeedY.TabIndex = 6;
+			this.InpSpeedY.TabIndex = 1;
 			this.InpSpeedY.Value = new decimal(new int[] {
             7,
             0,
@@ -373,7 +373,7 @@
             0});
 			this.InpD.Name = "InpD";
 			this.InpD.Size = new System.Drawing.Size(65, 29);
-			this.InpD.TabIndex = 9;
+			this.InpD.TabIndex = 2;
 			this.InpD.Value = new decimal(new int[] {
             200,
             0,
@@ -397,7 +397,7 @@
             0});
 			this.InpForce.Name = "InpForce";
 			this.InpForce.Size = new System.Drawing.Size(65, 29);
-			this.InpForce.TabIndex = 8;
+			this.InpForce.TabIndex = 1;
 			this.InpForce.Value = new decimal(new int[] {
             15,
             0,
@@ -432,7 +432,7 @@
 			this.BtnReset.Location = new System.Drawing.Point(12, 333);
 			this.BtnReset.Name = "BtnReset";
 			this.BtnReset.Size = new System.Drawing.Size(168, 32);
-			this.BtnReset.TabIndex = 9;
+			this.BtnReset.TabIndex = 10;
 			this.BtnReset.Text = "Сбросить настройки";
 			this.BtnReset.UseVisualStyleBackColor = true;
 			this.BtnReset.Click += new System.EventHandler(this.ResetBtn_Click);
@@ -444,7 +444,7 @@
 			this.BtnOk.Location = new System.Drawing.Point(417, 333);
 			this.BtnOk.Name = "BtnOk";
 			this.BtnOk.Size = new System.Drawing.Size(100, 32);
-			this.BtnOk.TabIndex = 8;
+			this.BtnOk.TabIndex = 9;
 			this.BtnOk.Text = "Сохранить";
 			this.BtnOk.UseVisualStyleBackColor = true;
 			this.BtnOk.Click += new System.EventHandler(this.OkBtn_Click);
@@ -460,7 +460,7 @@
 			this.BtnGithub.Location = new System.Drawing.Point(248, 335);
 			this.BtnGithub.Name = "BtnGithub";
 			this.BtnGithub.Size = new System.Drawing.Size(32, 32);
-			this.BtnGithub.TabIndex = 10;
+			this.BtnGithub.TabIndex = 11;
 			this.BtnGithub.UseVisualStyleBackColor = false;
 			this.BtnGithub.Click += new System.EventHandler(this.GitHub_Click);
 			// 
@@ -473,7 +473,7 @@
 			this.groupBox4.Location = new System.Drawing.Point(12, 252);
 			this.groupBox4.Name = "groupBox4";
 			this.groupBox4.Size = new System.Drawing.Size(505, 65);
-			this.groupBox4.TabIndex = 7;
+			this.groupBox4.TabIndex = 8;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Готовые варианты";
 			// 
@@ -485,6 +485,7 @@
 			this.flowLayoutPanel1.Controls.Add(this.RBPreset1);
 			this.flowLayoutPanel1.Controls.Add(this.RBPreset2);
 			this.flowLayoutPanel1.Controls.Add(this.RBPreset3);
+			this.flowLayoutPanel1.Controls.Add(this.RBPreset4);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 28);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(493, 31);
@@ -559,7 +560,7 @@
             0});
 			this.InpFPS.Name = "InpFPS";
 			this.InpFPS.Size = new System.Drawing.Size(65, 29);
-			this.InpFPS.TabIndex = 11;
+			this.InpFPS.TabIndex = 4;
 			this.InpFPS.Value = new decimal(new int[] {
             25,
             0,
