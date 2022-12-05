@@ -19,9 +19,9 @@ namespace SnowFlakes
 					Items = {
 						new ToolStripMenuItem("Закрыть", Resources.close, Exit),
 						new ToolStripMenuItem("Настройки", Resources.settings, Settings),
-						new ToolStripMenuItem("Пустая область", null, new[] {
-							new ToolStripMenuItem("Выделить (ЛКМ по иконке)", Resources.settings, SelectClearZone),
-							new ToolStripMenuItem("Убрать (ДЛКМ по иконке)", Resources.settings, RemoveClearZone),
+						new ToolStripMenuItem("Пустая область", Resources.selection, new[] {
+							new ToolStripMenuItem("Выделить (ЛКМ по иконке)", Resources.select, SelectClearZone),
+							new ToolStripMenuItem("Убрать (ДЛКМ по иконке)", Resources.selection_remove, RemoveClearZone),
 						}),
 					}
 				},
