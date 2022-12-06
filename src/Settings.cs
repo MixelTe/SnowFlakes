@@ -37,6 +37,8 @@ namespace SnowFlakes
 			{
 				case 1: SetPreset1(); break;
 				case 2: SetPreset2(); break;
+				case 3: SetPreset3(); break;
+				case 4: SetPreset4(); break;
 			}
 		}
 
