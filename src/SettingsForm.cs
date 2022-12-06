@@ -59,11 +59,11 @@ namespace SnowFlakes
 		{
 			Program.Settings = new Settings();
 			SetFields();
-			SnowWindow.Ins?.Reload();
+			Program.SnowWindow?.Reload();
 		}
 		private void OkBtn_Click(object sender, EventArgs e)
 		{
-			Settings.Save();
+			Program.Settings.Save();
 			Close();
 		}
 		private void GitHub_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace SnowFlakes
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.Particles = (int)InpCount.Value;
-			SnowWindow.Ins?.Reload();
+			Program.SnowWindow?.Reload();
 		}
 		private void Size_Change(object sender, EventArgs e)
 		{
@@ -105,7 +105,7 @@ namespace SnowFlakes
 			{
 				Program.Settings.ParticleColor = colorDialog.Color;
 				BtnColor.BackColor = Program.Settings.ParticleColor;
-				SnowWindow.Ins?.UpdateColor();
+				Program.SnowWindow?.UpdateColor();
 			}
 		}
 		private void SpeedXMax_Change(object sender, EventArgs e) 
@@ -113,7 +113,7 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Program.Settings.SpeedXMax = (float)InpSpeedXMax.Value;
 			SetPreset0();
-			SnowWindow.Ins?.Rerandomize();
+			Program.SnowWindow?.Rerandomize();
 		}
 		private void SpeedX_Change(object sender, EventArgs e) 
 		{
@@ -127,7 +127,7 @@ namespace SnowFlakes
 			Program.Settings.SpeedYMin = (int)(InpSpeedY.Value - InpSpeedYRange.Value);
 			Program.Settings.SpeedYMax = (int)(InpSpeedY.Value + InpSpeedYRange.Value);
 			SetPreset0();
-			SnowWindow.Ins?.Rerandomize();
+			Program.SnowWindow?.Rerandomize();
 		}
 		private void Force_Change(object sender, EventArgs e) 
 		{
@@ -151,41 +151,41 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset0();
 			SetFields();
-			SnowWindow.Ins?.Rerandomize();
+			Program.SnowWindow?.Rerandomize();
 		}
 		private void Preset1_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset1();
 			SetFields();
-			SnowWindow.Ins?.Rerandomize();
+			Program.SnowWindow?.Rerandomize();
 		}
 		private void Preset2_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset2();
 			SetFields();
-			SnowWindow.Ins?.Rerandomize();
+			Program.SnowWindow?.Rerandomize();
 		}
 		private void Preset3_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset3();
 			SetFields();
-			SnowWindow.Ins?.Rerandomize();
+			Program.SnowWindow?.Rerandomize();
 		}
 		private void Preset4_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset4();
 			SetFields();
-			SnowWindow.Ins?.Rerandomize();
+			Program.SnowWindow?.Rerandomize();
 		}
 		private void FPS_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.FPS = (int)InpFPS.Value;
-			SnowWindow.Ins?.SetFPS(Program.Settings.FPS);
+			Program.SnowWindow?.SetFPS(Program.Settings.FPS);
 		}
 		private void ImgCirc_Change(object sender, EventArgs e)
 		{

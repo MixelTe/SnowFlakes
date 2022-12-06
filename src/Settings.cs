@@ -26,13 +26,13 @@ namespace SnowFlakes
 		public int Preset = 1;
 
 
-		public static void Save()
+		public void Save()
 		{
-			RegSerializer.Save(Program.KeyName, Program.Settings);
+			RegSerializer.Save(Program.KeyName, this);
 		}
-		public static void Load()
+		public void Load()
 		{
-			RegSerializer.Load(Program.KeyName, Program.Settings);
+			RegSerializer.Load(Program.KeyName, this);
 			switch (Program.Settings.Preset)
 			{
 				case 1: SetPreset1(); break;

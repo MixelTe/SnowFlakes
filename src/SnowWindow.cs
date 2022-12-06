@@ -10,7 +10,6 @@ namespace SnowFlakes
 {
 	internal class SnowWindow : IDisposable
 	{
-		internal static SnowWindow? Ins;
 		private readonly GraphicsWindow _window;
 
 		private Particle[] _particles;
@@ -24,8 +23,6 @@ namespace SnowFlakes
 
 		public SnowWindow()
 		{
-			Ins = this;
-
 			var gfx = new GameOverlay.Drawing.Graphics()
 			{
 				MeasureFPS = true,

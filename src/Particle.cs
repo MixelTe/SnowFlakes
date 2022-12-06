@@ -32,17 +32,17 @@
 			var rect = new RectangleF(X - Program.Settings.ParticleRad, Y - Program.Settings.ParticleRad, Program.Settings.ParticleRad * 2, Program.Settings.ParticleRad * 2);
 			if (!rect.IntersectsWith(Program.Settings.ClearZone))
 			{
-				if (Program.Settings.ParticleImg == 1 && SnowWindow.Ins?.Snowflake1 != null)
+				if (Program.Settings.ParticleImg == 1 && Program.SnowWindow?.Snowflake1 != null)
 				{
-					gfx.DrawImage(SnowWindow.Ins.Snowflake1, rect.X, rect.Y, rect.Right, rect.Bottom);
+					gfx.DrawImage(Program.SnowWindow.Snowflake1, rect.X, rect.Y, rect.Right, rect.Bottom);
 				}
-				else if (Program.Settings.ParticleImg == 2 && SnowWindow.Ins?.Snowflake2 != null)
+				else if (Program.Settings.ParticleImg == 2 && Program.SnowWindow?.Snowflake2 != null)
 				{
-					gfx.DrawImage(SnowWindow.Ins.Snowflake2, rect.X, rect.Y, rect.Right, rect.Bottom);
+					gfx.DrawImage(Program.SnowWindow.Snowflake2, rect.X, rect.Y, rect.Right, rect.Bottom);
 				}
-				else if (Program.Settings.ParticleImg == 0 && SnowWindow.Ins?.Snowflake0 != null)
+				else if (Program.Settings.ParticleImg == 0 && Program.SnowWindow?.Snowflake0 != null)
 				{
-					gfx.DrawImage(SnowWindow.Ins.Snowflake0, rect.X, rect.Y, rect.Right, rect.Bottom);
+					gfx.DrawImage(Program.SnowWindow.Snowflake0, rect.X, rect.Y, rect.Right, rect.Bottom);
 				}
 				else
 				{

@@ -93,7 +93,7 @@ namespace SnowFlakes
 			if (rect != null)
 			{
 				Program.Settings.ClearZone = (Rectangle)rect;
-				Settings.Save();
+				Program.Settings.Save();
 			}
 		}
 	}
