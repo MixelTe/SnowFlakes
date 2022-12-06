@@ -85,14 +85,14 @@
 					Y += Math.Abs(Y - cursor.Y) / md * p * Math.Sign(Y - cursor.Y);
 				}
 			}
-			if (Y > Height)
+			if (Y > Height + Program.Settings.ParticleRad)
 			{
-				Y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax;
+				Y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax - Program.Settings.ParticleRad;
 				X = Random.Shared.NextSingle() * Width;
 			}
-			if (Y < 0)
+			if (Y < -Program.Settings.ParticleRad)
 			{
-				Y = Height - 1;
+				Y = Height - 1 + Program.Settings.ParticleRad;
 				X = Random.Shared.NextSingle() * Width;
 			}
 		}

@@ -347,10 +347,10 @@
             0,
             0});
 			this.InpSpeedY.Minimum = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
-            0});
+            -2147483648});
 			this.InpSpeedY.Name = "InpSpeedY";
 			this.InpSpeedY.Size = new System.Drawing.Size(65, 29);
 			this.InpSpeedY.TabIndex = 1;
