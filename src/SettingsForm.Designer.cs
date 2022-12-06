@@ -66,7 +66,20 @@
 			this.tabControl2 = new System.Windows.Forms.TabControl();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
+			this.PanelColor = new System.Windows.Forms.Panel();
+			this.PanelImg = new System.Windows.Forms.Panel();
+			this.BtnImg = new System.Windows.Forms.Button();
+			this.PBImg = new System.Windows.Forms.PictureBox();
+			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.RBimg2 = new System.Windows.Forms.RadioButton();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.RBimg0 = new System.Windows.Forms.RadioButton();
+			this.RBimg1 = new System.Windows.Forms.RadioButton();
+			this.RBimg = new System.Windows.Forms.RadioButton();
+			this.label11 = new System.Windows.Forms.Label();
+			this.RBimgCirc = new System.Windows.Forms.RadioButton();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
+			this.DialogOpenFile = new System.Windows.Forms.OpenFileDialog();
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -84,6 +97,11 @@
 			this.tabControl2.SuspendLayout();
 			this.tabPage4.SuspendLayout();
 			this.tabPage5.SuspendLayout();
+			this.PanelColor.SuspendLayout();
+			this.PanelImg.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PBImg)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tabPage6.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -166,7 +184,7 @@
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label3.Location = new System.Drawing.Point(6, 7);
+			this.label3.Location = new System.Drawing.Point(3, 1);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(120, 21);
 			this.label3.TabIndex = 4;
@@ -182,10 +200,10 @@
 			this.BtnColor.BackColor = System.Drawing.Color.LightBlue;
 			this.BtnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.BtnColor.ForeColor = System.Drawing.Color.Gray;
-			this.BtnColor.Location = new System.Drawing.Point(241, 6);
+			this.BtnColor.Location = new System.Drawing.Point(196, 1);
 			this.BtnColor.Name = "BtnColor";
 			this.BtnColor.Size = new System.Drawing.Size(65, 27);
-			this.BtnColor.TabIndex = 1;
+			this.BtnColor.TabIndex = 2;
 			this.BtnColor.UseVisualStyleBackColor = false;
 			this.BtnColor.Click += new System.EventHandler(this.Color_Change);
 			// 
@@ -649,8 +667,11 @@
 			// 
 			// tabPage5
 			// 
-			this.tabPage5.Controls.Add(this.label3);
-			this.tabPage5.Controls.Add(this.BtnColor);
+			this.tabPage5.Controls.Add(this.PanelColor);
+			this.tabPage5.Controls.Add(this.PanelImg);
+			this.tabPage5.Controls.Add(this.RBimg);
+			this.tabPage5.Controls.Add(this.label11);
+			this.tabPage5.Controls.Add(this.RBimgCirc);
 			this.tabPage5.Location = new System.Drawing.Point(4, 24);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -658,6 +679,149 @@
 			this.tabPage5.TabIndex = 1;
 			this.tabPage5.Text = "Снежинки";
 			this.tabPage5.UseVisualStyleBackColor = true;
+			// 
+			// PanelColor
+			// 
+			this.PanelColor.Controls.Add(this.label3);
+			this.PanelColor.Controls.Add(this.BtnColor);
+			this.PanelColor.Location = new System.Drawing.Point(45, 58);
+			this.PanelColor.Name = "PanelColor";
+			this.PanelColor.Size = new System.Drawing.Size(261, 29);
+			this.PanelColor.TabIndex = 7;
+			// 
+			// PanelImg
+			// 
+			this.PanelImg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PanelImg.Controls.Add(this.BtnImg);
+			this.PanelImg.Controls.Add(this.PBImg);
+			this.PanelImg.Controls.Add(this.pictureBox2);
+			this.PanelImg.Controls.Add(this.RBimg2);
+			this.PanelImg.Controls.Add(this.pictureBox1);
+			this.PanelImg.Controls.Add(this.RBimg0);
+			this.PanelImg.Controls.Add(this.RBimg1);
+			this.PanelImg.Location = new System.Drawing.Point(45, 114);
+			this.PanelImg.Name = "PanelImg";
+			this.PanelImg.Size = new System.Drawing.Size(261, 99);
+			this.PanelImg.TabIndex = 4;
+			// 
+			// BtnImg
+			// 
+			this.BtnImg.BackgroundImage = global::SnowFlakes.Properties.Resources.file_add;
+			this.BtnImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.BtnImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.BtnImg.Location = new System.Drawing.Point(230, 65);
+			this.BtnImg.Name = "BtnImg";
+			this.BtnImg.Size = new System.Drawing.Size(28, 28);
+			this.BtnImg.TabIndex = 4;
+			this.BtnImg.UseVisualStyleBackColor = false;
+			this.BtnImg.Click += new System.EventHandler(this.ChoseImg_Click);
+			// 
+			// PBImg
+			// 
+			this.PBImg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.PBImg.Location = new System.Drawing.Point(196, 65);
+			this.PBImg.Name = "PBImg";
+			this.PBImg.Size = new System.Drawing.Size(28, 28);
+			this.PBImg.TabIndex = 14;
+			this.PBImg.TabStop = false;
+			this.PBImg.Click += new System.EventHandler(this.Img0_Change);
+			// 
+			// pictureBox2
+			// 
+			this.pictureBox2.BackgroundImage = global::SnowFlakes.Properties.Resources.snowflake;
+			this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureBox2.Location = new System.Drawing.Point(196, 34);
+			this.pictureBox2.Name = "pictureBox2";
+			this.pictureBox2.Size = new System.Drawing.Size(28, 28);
+			this.pictureBox2.TabIndex = 13;
+			this.pictureBox2.TabStop = false;
+			this.pictureBox2.Click += new System.EventHandler(this.Img2_Change);
+			// 
+			// RBimg2
+			// 
+			this.RBimg2.AutoSize = true;
+			this.RBimg2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.RBimg2.Location = new System.Drawing.Point(3, 34);
+			this.RBimg2.Name = "RBimg2";
+			this.RBimg2.Size = new System.Drawing.Size(100, 25);
+			this.RBimg2.TabIndex = 2;
+			this.RBimg2.Text = "Вариант 2";
+			this.RBimg2.UseVisualStyleBackColor = true;
+			this.RBimg2.CheckedChanged += new System.EventHandler(this.Img2_Change);
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackgroundImage = global::SnowFlakes.Properties.Resources.snowflake_simple;
+			this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureBox1.Location = new System.Drawing.Point(196, 3);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(28, 28);
+			this.pictureBox1.TabIndex = 11;
+			this.pictureBox1.TabStop = false;
+			this.pictureBox1.Click += new System.EventHandler(this.Img1_Change);
+			// 
+			// RBimg0
+			// 
+			this.RBimg0.AutoSize = true;
+			this.RBimg0.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.RBimg0.Location = new System.Drawing.Point(3, 65);
+			this.RBimg0.Name = "RBimg0";
+			this.RBimg0.Size = new System.Drawing.Size(63, 25);
+			this.RBimg0.TabIndex = 3;
+			this.RBimg0.Text = "Своя";
+			this.RBimg0.UseVisualStyleBackColor = true;
+			this.RBimg0.CheckedChanged += new System.EventHandler(this.Img0_Change);
+			// 
+			// RBimg1
+			// 
+			this.RBimg1.AutoSize = true;
+			this.RBimg1.Checked = true;
+			this.RBimg1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.RBimg1.Location = new System.Drawing.Point(3, 3);
+			this.RBimg1.Name = "RBimg1";
+			this.RBimg1.Size = new System.Drawing.Size(100, 25);
+			this.RBimg1.TabIndex = 1;
+			this.RBimg1.TabStop = true;
+			this.RBimg1.Text = "Вариант 1";
+			this.RBimg1.UseVisualStyleBackColor = true;
+			this.RBimg1.CheckedChanged += new System.EventHandler(this.Img1_Change);
+			// 
+			// RBimg
+			// 
+			this.RBimg.AutoSize = true;
+			this.RBimg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.RBimg.Location = new System.Drawing.Point(6, 83);
+			this.RBimg.Name = "RBimg";
+			this.RBimg.Size = new System.Drawing.Size(95, 25);
+			this.RBimg.TabIndex = 3;
+			this.RBimg.Text = "Картинка";
+			this.RBimg.UseVisualStyleBackColor = true;
+			this.RBimg.CheckedChanged += new System.EventHandler(this.Img_Change);
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.label11.Location = new System.Drawing.Point(3, 3);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(182, 21);
+			this.label11.TabIndex = 6;
+			this.label11.Text = "Как выглядят снежинки:";
+			// 
+			// RBimgCirc
+			// 
+			this.RBimgCirc.AutoSize = true;
+			this.RBimgCirc.Checked = true;
+			this.RBimgCirc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.RBimgCirc.Location = new System.Drawing.Point(6, 27);
+			this.RBimgCirc.Name = "RBimgCirc";
+			this.RBimgCirc.Size = new System.Drawing.Size(101, 25);
+			this.RBimgCirc.TabIndex = 1;
+			this.RBimgCirc.TabStop = true;
+			this.RBimgCirc.Text = "Кружочки";
+			this.RBimgCirc.UseVisualStyleBackColor = true;
+			this.RBimgCirc.CheckedChanged += new System.EventHandler(this.ImgCirc_Change);
 			// 
 			// tabPage6
 			// 
@@ -687,6 +851,7 @@
 			this.MinimizeBox = false;
 			this.Name = "SettingsForm";
 			this.Padding = new System.Windows.Forms.Padding(4);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Снежинки";
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).EndInit();
@@ -711,6 +876,13 @@
 			this.tabPage4.PerformLayout();
 			this.tabPage5.ResumeLayout(false);
 			this.tabPage5.PerformLayout();
+			this.PanelColor.ResumeLayout(false);
+			this.PanelColor.PerformLayout();
+			this.PanelImg.ResumeLayout(false);
+			this.PanelImg.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PBImg)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.tabPage6.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -755,5 +927,18 @@
 		private TabPage tabPage4;
 		private TabPage tabPage5;
 		private TabPage tabPage6;
+		private Panel PanelImg;
+		private PictureBox pictureBox1;
+		private RadioButton RBimg0;
+		private RadioButton RBimg1;
+		private RadioButton RBimg;
+		private Label label11;
+		private RadioButton RBimgCirc;
+		private PictureBox PBImg;
+		private PictureBox pictureBox2;
+		private RadioButton RBimg2;
+		private Button BtnImg;
+		private Panel PanelColor;
+		private OpenFileDialog DialogOpenFile;
 	}
 }

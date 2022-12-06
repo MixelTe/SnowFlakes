@@ -29,10 +29,25 @@
 
 		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
 		{
-			var rect = new RectangleF(X, Y, Program.Settings.ParticleRad, Program.Settings.ParticleRad);
+			var rect = new RectangleF(X - Program.Settings.ParticleRad, Y - Program.Settings.ParticleRad, Program.Settings.ParticleRad * 2, Program.Settings.ParticleRad * 2);
 			if (!rect.IntersectsWith(Program.Settings.ClearZone))
 			{
-				gfx.FillCircle(brush, rect.X, rect.Y, Program.Settings.ParticleRad);
+				if (Program.Settings.ParticleImg == 1 && SnowWindow.Ins?.Snowflake1 != null)
+				{
+					gfx.DrawImage(SnowWindow.Ins.Snowflake1, rect.X, rect.Y, rect.Right, rect.Bottom);
+				}
+				else if (Program.Settings.ParticleImg == 2 && SnowWindow.Ins?.Snowflake2 != null)
+				{
+					gfx.DrawImage(SnowWindow.Ins.Snowflake2, rect.X, rect.Y, rect.Right, rect.Bottom);
+				}
+				else if (Program.Settings.ParticleImg == 0 && SnowWindow.Ins?.Snowflake0 != null)
+				{
+					gfx.DrawImage(SnowWindow.Ins.Snowflake0, rect.X, rect.Y, rect.Right, rect.Bottom);
+				}
+				else
+				{
+					gfx.FillCircle(brush, X, Y, Program.Settings.ParticleRad);
+				}
 			}
 		}
 

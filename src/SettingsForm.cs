@@ -1,9 +1,11 @@
-﻿using System;
+﻿using SnowFlakes.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,7 @@ namespace SnowFlakes
 		private void SetFields()
 		{
 			ignoreChangeEvent = true;
+			
 			InpCount.Value = Program.Settings.Particles;
 			InpSize.Value = Program.Settings.ParticleRad;
 			BtnColor.BackColor = Program.Settings.ParticleColor;
@@ -41,6 +44,23 @@ namespace SnowFlakes
 				case 4: RBPreset4.Checked = true; break;
 				default: RBPreset0.Checked = true; break;
 			}
+			switch (Program.Settings.ParticleImg)
+			{
+				case 0: RBimg0.Checked = true; PanelColor.Enabled = false; break;
+				case 1: RBimg1.Checked = true; PanelColor.Enabled = false; break;
+				case 2: RBimg2.Checked = true; PanelColor.Enabled = false; break;
+				default: RBimgCirc.Checked = true; PanelImg.Enabled = false; break;
+			}
+
+			try
+			{
+				if (Program.Settings.ParticleImgPath != "")
+					PBImg.BackgroundImage = Image.FromFile(Program.Settings.ParticleImgPath);
+			}
+			catch {}
+			
+			SetFilterForFileDialog();
+
 			ignoreChangeEvent = false;
 		}
 
@@ -175,6 +195,68 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Program.Settings.FPS = (int)InpFPS.Value;
 			SnowWindow.Ins?.SetFPS(Program.Settings.FPS);
+		}
+		private void ImgCirc_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ParticleImg = -1;
+			PanelColor.Enabled = true;
+			PanelImg.Enabled = false;
+		}
+		private void Img_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			if (RBimg0.Checked) Program.Settings.ParticleImg = 0;
+			else if (RBimg2.Checked) Program.Settings.ParticleImg = 2;
+			else Program.Settings.ParticleImg = 1;
+			PanelColor.Enabled = false;
+			PanelImg.Enabled = true;
+		}
+		private void Img1_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ParticleImg = 1;
+		}
+		private void Img2_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ParticleImg = 2;
+		}
+		private void Img0_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ParticleImg = 0;
+			if (Program.Settings.ParticleImgPath == "")
+				ChoseImg_Click(sender, e);
+		}
+		private void ChoseImg_Click(object sender, EventArgs e)
+		{
+			var r = DialogOpenFile.ShowDialog(this);
+			if (r == DialogResult.OK)
+			{
+				if (Program.Settings.ParticleImgPath != DialogOpenFile.FileName)
+				{
+					Program.Settings.ParticleImgPath = DialogOpenFile.FileName;
+					Program.Settings.ParticleImg = 0;
+					try
+					{
+						PBImg.BackgroundImage = Image.FromFile(DialogOpenFile.FileName);
+					}
+					catch
+					{
+						PBImg.BackgroundImage = null;
+					}
+					Program.SnowWindow?.UpdateSnowflakeImg();
+					ignoreChangeEvent = true;
+					RBimg0.Checked = true;
+					ignoreChangeEvent = false;
+				}
+			}
+		}
+		private void SetFilterForFileDialog()
+		{
+			ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+			DialogOpenFile.Filter = "Images |" + string.Join(";", codecs.Select(el => el.FilenameExtension));
 		}
 	}
 }

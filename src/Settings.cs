@@ -9,7 +9,7 @@ namespace SnowFlakes
 	public class Settings
 	{
 		public int Particles = 200;
-		public int ParticleRad = 4;
+		public int ParticleRad = 10;
 		public Color ParticleColor = Color.LightBlue;
 		public int FPS = 25;
 		public float SpeedXMax = 4f;
@@ -18,6 +18,8 @@ namespace SnowFlakes
 		public int SpeedYMax = 6;
 		public float ForceD = 200;
 		public float ForcePower = 15;
+		public int ParticleImg = -1; // -1 - No img; 0 - User img
+		public string ParticleImgPath = "";
 
 		public Rectangle ClearZone = Rectangle.Empty;
 

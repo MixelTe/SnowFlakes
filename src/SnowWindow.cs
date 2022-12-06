@@ -4,6 +4,7 @@ using System.Text;
 
 using GameOverlay.Drawing;
 using GameOverlay.Windows;
+using SnowFlakes.Properties;
 
 namespace SnowFlakes
 {
@@ -14,8 +15,12 @@ namespace SnowFlakes
 
 		private Particle[] _particles;
 		private System.Drawing.Point _pastPos;
+		private bool _updateSnowflakeImg = false;
 		private GameOverlay.Drawing.SolidBrush? _brush;
 		private GameOverlay.Drawing.Font? _font;
+		public GameOverlay.Drawing.Image? Snowflake0;
+		public GameOverlay.Drawing.Image? Snowflake1;
+		public GameOverlay.Drawing.Image? Snowflake2;
 
 		public SnowWindow()
 		{
@@ -69,9 +74,25 @@ namespace SnowFlakes
 			var gfx = e.Graphics;
 
 			_brush?.Dispose();
+			Snowflake0?.Dispose();
+			Snowflake1?.Dispose();
+			Snowflake2?.Dispose();
+
 			_brush = gfx.CreateSolidBrush(Program.Settings.ParticleColor.R,
 										  Program.Settings.ParticleColor.G,
 										  Program.Settings.ParticleColor.B);
+
+			if (Program.Settings.ParticleImgPath != "")
+			{
+				Snowflake0 = gfx.CreateImage(Program.Settings.ParticleImgPath);
+			}
+
+			var ic = new ImageConverter();
+			var img1 = (byte[]?)ic.ConvertTo(Resources.snowflake_simple, typeof(byte[]));
+			Snowflake1 = gfx.CreateImage(img1);
+
+			var img2 = (byte[]?)ic.ConvertTo(Resources.snowflake, typeof(byte[]));
+			Snowflake2 = gfx.CreateImage(img2);
 
 			if (e.RecreateResources) return;
 
@@ -86,6 +107,23 @@ namespace SnowFlakes
 		private void DrawGraphics(object? sender, DrawGraphicsEventArgs e)
 		{
 			var gfx = e.Graphics;
+			if (_updateSnowflakeImg)
+			{
+				_updateSnowflakeImg = false;
+				if (Program.Settings.ParticleImgPath != "")
+				{
+					try
+					{
+						Snowflake0?.Dispose();
+						Snowflake0 = gfx.CreateImage(Program.Settings.ParticleImgPath);
+					}
+					catch
+					{
+						Program.Settings.ParticleImgPath = "";
+						Program.Settings.ParticleImg = -1;
+					}
+				}
+			}
 
 			//var padding = 16;
 			//var infoText = new StringBuilder()
@@ -139,6 +177,10 @@ namespace SnowFlakes
 		public void SetFPS(int fps)
 		{
 			_window.FPS = fps;
+		}
+		public void UpdateSnowflakeImg()
+		{
+			_updateSnowflakeImg = true;
 		}
 
 		private bool disposedValue;
