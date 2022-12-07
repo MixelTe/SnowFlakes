@@ -123,6 +123,11 @@ namespace SnowFlakes
 				Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, colorDialog.Color);
 				BtnColor.BackColor = colorDialog.Color;
 				Program.SnowWindow?.UpdateColor();
+				if (CBSameColor.Checked)
+				{
+					Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
+					Program.SnowWindow?.UpdateColorSnowdrifts();
+				}
 			}
 		}
 		private void Alpha_Change(object sender, EventArgs e)
@@ -130,6 +135,11 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, Program.Settings.ParticleColor);
 			Program.SnowWindow?.UpdateColor();
+			if (CBSameColor.Checked)
+			{
+				Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
+				Program.SnowWindow?.UpdateColorSnowdrifts();
+			}
 		}
 		private void SpeedXMax_Change(object sender, EventArgs e) 
 		{
