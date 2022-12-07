@@ -19,7 +19,7 @@
 			{
 				ApplicationConfiguration.Initialize();
 				GameOverlay.TimerService.EnableHighPrecisionTimers();
-				Settings.Load();
+				//Settings.Load();
 				SnowWindow = new SnowWindow();
 
 				Application.Run(new App());

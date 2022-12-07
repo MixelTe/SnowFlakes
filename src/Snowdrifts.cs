@@ -91,6 +91,7 @@ namespace SnowFlakes
 		public void Add(float x)
 		{
 			var i = (int)(x / Program.Settings.SnowdriftsResolution);
+			if (i >= _pieces.Length) return;
 			_pieces[i] += Program.Settings.SnowdriftsSpeed;
 			if (_pieces[i] > Height - Program.Settings.SnowdriftsStart)
 				_pieces[i] = Height - Program.Settings.SnowdriftsStart;
@@ -99,8 +100,30 @@ namespace SnowFlakes
 		public bool Intersects(float x, float y)
 		{
 			var i = (int)(x / Program.Settings.SnowdriftsResolution);
+			if (i >= _pieces.Length) return true;
 			return _pieces[i] < (Height - Program.Settings.SnowdriftsStart) / 2 && 
 				   _pieces[i] + Program.Settings.SnowdriftsStart > Height - y;
+		}
+
+		public void ChangeResolution()
+		{
+			var pieces = new float[Width / Program.Settings.SnowdriftsResolution + 1];
+			var pr = (int)(Width / (_pieces.Length - 1f));
+			for (int i = 0; i < pieces.Length; i++)
+			{
+				var x = i * Program.Settings.SnowdriftsResolution;
+				var pi = x / pr;
+				pieces[i] = _pieces[pi];
+			}
+			_pieces = pieces;
+		}
+
+		public void AddSnow()
+		{
+			for (int i = 0; i < _pieces.Length; i++)
+			{
+				_pieces[i] += Random.Shared.NextSingle() * Height / 50;
+			}
 		}
 	}
 }

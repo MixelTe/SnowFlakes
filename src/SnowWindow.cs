@@ -17,6 +17,7 @@ namespace SnowFlakes
 		private System.Drawing.Point _pastPos;
 		private bool _updateSnowflakeImg = false;
 		private GameOverlay.Drawing.SolidBrush? _brush;
+		private GameOverlay.Drawing.SolidBrush? _brushSnowdrifts;
 		private GameOverlay.Drawing.Font? _font;
 		public GameOverlay.Drawing.Image? Snowflake0;
 		public GameOverlay.Drawing.Image? Snowflake1;
@@ -74,18 +75,22 @@ namespace SnowFlakes
 			var gfx = e.Graphics;
 
 			_brush?.Dispose();
+			_brushSnowdrifts?.Dispose();
 			Snowflake0?.Dispose();
 			Snowflake1?.Dispose();
 			Snowflake2?.Dispose();
 
 			_brush = gfx.CreateSolidBrush(Program.Settings.ParticleColor.R,
 										  Program.Settings.ParticleColor.G,
-										  Program.Settings.ParticleColor.B);
+										  Program.Settings.ParticleColor.B,
+										  Program.Settings.ParticleColor.A);
 
-			if (Program.Settings.ParticleImgPath != "")
-			{
-				Snowflake0 = gfx.CreateImage(Program.Settings.ParticleImgPath);
-			}
+			_brushSnowdrifts = gfx.CreateSolidBrush(Program.Settings.SnowdriftsColor.R,
+													Program.Settings.SnowdriftsColor.G,
+													Program.Settings.SnowdriftsColor.B,
+													Program.Settings.SnowdriftsColor.A);
+
+			TryCreateImg(gfx);
 
 			var ic = new ImageConverter();
 			var img1 = (byte[]?)ic.ConvertTo(Resources.snowflake_simple, typeof(byte[]));
@@ -97,6 +102,22 @@ namespace SnowFlakes
 			if (e.RecreateResources) return;
 
 			_font = gfx.CreateFont("Consolas", 14);
+		}
+		private void TryCreateImg(GameOverlay.Drawing.Graphics gfx)
+		{
+			if (Program.Settings.ParticleImgPath != "")
+			{
+				try
+				{
+					Snowflake0?.Dispose();
+					Snowflake0 = gfx.CreateImage(Program.Settings.ParticleImgPath);
+				}
+				catch
+				{
+					Program.Settings.ParticleImgPath = "";
+					Program.Settings.ParticleImg = -1;
+				}
+			}
 		}
 
 		private void DestroyGraphics(object? sender, DestroyGraphicsEventArgs e)
@@ -110,19 +131,7 @@ namespace SnowFlakes
 			if (_updateSnowflakeImg)
 			{
 				_updateSnowflakeImg = false;
-				if (Program.Settings.ParticleImgPath != "")
-				{
-					try
-					{
-						Snowflake0?.Dispose();
-						Snowflake0 = gfx.CreateImage(Program.Settings.ParticleImgPath);
-					}
-					catch
-					{
-						Program.Settings.ParticleImgPath = "";
-						Program.Settings.ParticleImg = -1;
-					}
-				}
+				TryCreateImg(gfx);
 			}
 
 			//var padding = 16;
@@ -137,7 +146,7 @@ namespace SnowFlakes
 
 			//gfx.DrawText(_font, _brush, 58, 20, infoText);
 			Snowdrifts?.Update(e.DeltaTime);
-			Snowdrifts?.Draw(gfx, _brush);
+			Snowdrifts?.Draw(gfx, _brushSnowdrifts);
 
 			System.Drawing.Point? cursorForce = _pastPos != Cursor.Position ? Cursor.Position : null;
 			_pastPos = Cursor.Position;
@@ -160,7 +169,9 @@ namespace SnowFlakes
 		public void Reload()
 		{
 			UpdateColor();
+			UpdateColorSnowdrifts();
  			_particles = CreateParticles();
+			Snowdrifts?.ChangeResolution();
 		}
 		public void UpdateColor()
 		{
@@ -169,6 +180,14 @@ namespace SnowFlakes
 															 Program.Settings.ParticleColor.G,
 															 Program.Settings.ParticleColor.B,
 															 Program.Settings.ParticleColor.A);
+		}
+		public void UpdateColorSnowdrifts()
+		{
+			if (_brushSnowdrifts != null)
+				_brushSnowdrifts.Color = new GameOverlay.Drawing.Color(Program.Settings.SnowdriftsColor.R,
+																	   Program.Settings.SnowdriftsColor.G,
+																	   Program.Settings.SnowdriftsColor.B,
+																	   Program.Settings.SnowdriftsColor.A);
 		}
 		public void Rerandomize()
 		{

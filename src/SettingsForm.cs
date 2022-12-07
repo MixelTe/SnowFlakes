@@ -7,6 +7,7 @@ namespace SnowFlakes
 	public partial class SettingsForm : Form
 	{
 		private bool ignoreChangeEvent = false;
+		private Snowdrifts? _snowdrifts;
 		public SettingsForm()
 		{
 			InitializeComponent();
@@ -52,6 +53,20 @@ namespace SnowFlakes
 			catch {}
 			
 			SetFilterForFileDialog();
+			
+			CBSnowdrifts.Checked = Program.Settings.Snowdrifts;
+			PanelSnowdrifts.Enabled = Program.Settings.Snowdrifts;
+			CBSmooth.Checked = Program.Settings.SnowdriftsSmooth;
+			BtnColorSD.BackColor = Program.Settings.SnowdriftsColor;
+			InpAlphaSD.Value = Program.Settings.SnowdriftsColor.A;
+			InpSDRes.Value = Program.Settings.SnowdriftsResolution;
+			InpSDSpeed.Value = (decimal)Program.Settings.SnowdriftsSpeed;
+			InpSDDensity.Value = Program.Settings.SnowdriftsDensity;
+			InpSDStart.Value = Program.Settings.SnowdriftsStart;
+			InpSDDelay.Value = (decimal)(1000f / Program.Settings.SnowdriftsUpdateDelay);
+			
+			CBSameColor.Checked = Program.Settings.SnowdriftsColor == Program.Settings.ParticleColor;
+			PanelColorSD.Enabled = !CBSameColor.Checked;
 
 			ignoreChangeEvent = false;
 		}
@@ -104,8 +119,8 @@ namespace SnowFlakes
 			colorDialog.Color = Program.Settings.ParticleColor;
 			if (colorDialog.ShowDialog(this) == DialogResult.OK)
 			{
-				Program.Settings.ParticleColor = colorDialog.Color;
-				BtnColor.BackColor = Program.Settings.ParticleColor;
+				Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, colorDialog.Color);
+				BtnColor.BackColor = colorDialog.Color;
 				Program.SnowWindow?.UpdateColor();
 			}
 		}
@@ -255,6 +270,86 @@ namespace SnowFlakes
 		{
 			ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
 			DialogOpenFile.Filter = "Images |" + string.Join(";", codecs.Select(el => el.FilenameExtension));
+		}
+		private void Snowdrifts_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.Snowdrifts = CBSnowdrifts.Checked;
+			PanelSnowdrifts.Enabled = CBSnowdrifts.Checked;
+			if (Program.SnowWindow != null)
+			{
+				if (Program.Settings.Snowdrifts)
+				{
+					Program.SnowWindow.Snowdrifts = _snowdrifts;
+					_snowdrifts = null;
+				}
+				else
+				{
+					_snowdrifts = Program.SnowWindow.Snowdrifts;
+					Program.SnowWindow.Snowdrifts = null;
+				}
+			}
+		}
+		private void SnowdriftsSameColor_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			PanelColorSD.Enabled = !CBSameColor.Checked;
+			if (CBSameColor.Enabled)
+				Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
+			else
+				Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, BtnColorSD.BackColor);
+			Program.SnowWindow?.UpdateColorSnowdrifts();
+		}
+		private void SnowdriftsSmooth_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.SnowdriftsSmooth = CBSmooth.Checked;
+		}
+		private void SnowdriftsColor_Click(object sender, EventArgs e)
+		{
+			colorDialog.Color = Program.Settings.SnowdriftsColor;
+			if (colorDialog.ShowDialog(this) == DialogResult.OK)
+			{
+				Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, colorDialog.Color);
+				BtnColorSD.BackColor = colorDialog.Color;
+				Program.SnowWindow?.UpdateColorSnowdrifts();
+			}
+		}
+		private void SnowdriftsAlpha_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, Program.Settings.SnowdriftsColor);
+			Program.SnowWindow?.UpdateColorSnowdrifts();
+		}
+		private void SnowdriftsRes_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.SnowdriftsResolution = (int)InpSDRes.Value;
+			Program.SnowWindow?.Snowdrifts?.ChangeResolution();
+		}
+		private void SnowdriftsSpeed_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.SnowdriftsSpeed = (float)InpSDSpeed.Value;
+		}
+		private void SnowdriftsDensity_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.SnowdriftsDensity = (int)InpSDDensity.Value;
+		}
+		private void SnowdriftsStart_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.SnowdriftsStart = (int)InpSDStart.Value;
+		}
+		private void SnowdriftsDelay_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.SnowdriftsUpdateDelay = (int)(1000 / InpSDDelay.Value);
+		}
+		private void SnowdriftsAdd_Click(object sender, EventArgs e)
+		{
+			Program.SnowWindow?.Snowdrifts?.AddSnow();
 		}
 	}
 }

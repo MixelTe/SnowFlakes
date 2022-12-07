@@ -25,6 +25,7 @@ namespace SnowFlakes
 
 		public bool Snowdrifts = true;
 		public bool SnowdriftsSmooth = true;
+		public Color SnowdriftsColor = Color.FromArgb(150, Color.LightBlue);
 		public int SnowdriftsResolution = 50;
 		public float SnowdriftsSpeed = 0.2f;
 		public int SnowdriftsDensity = 20;
