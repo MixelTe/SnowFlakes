@@ -355,7 +355,7 @@ namespace SnowFlakes
 		{
 			CBSmooth.Checked = true;
 			InpSDRes.Value = 80;
-			InpSDSpeed.Value = 0.1M;
+			InpSDSpeed.Value = 0.08M;
 			InpSDDensity.Value = 40;
 			InpSDDelay.Value = 2;
 			Program.SnowWindow?.Snowdrifts?.AddSnow();
@@ -364,7 +364,7 @@ namespace SnowFlakes
 		{
 			CBSmooth.Checked = true;
 			InpSDRes.Value = 40;
-			InpSDSpeed.Value = 0.2M;
+			InpSDSpeed.Value = 0.16M;
 			InpSDDensity.Value = 20;
 			InpSDDelay.Value = 4;
 			Program.SnowWindow?.Snowdrifts?.AddSnow();
@@ -373,9 +373,9 @@ namespace SnowFlakes
 		{
 			CBSmooth.Checked = false;
 			InpSDRes.Value = 1;
-			InpSDSpeed.Value = 0.8M;
+			InpSDSpeed.Value = 4M;
 			InpSDDensity.Value = 1;
-			InpSDDelay.Value = 5;
+			InpSDDelay.Value = 4;
 			Program.SnowWindow?.Snowdrifts?.AddSnow();
 		}
 	}
