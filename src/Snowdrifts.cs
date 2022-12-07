@@ -84,7 +84,14 @@ namespace SnowFlakes
 					if (_pieces[i] >= h - Program.Settings.ForcePower)
 					{
 						var nv = h - Program.Settings.ForcePower * ((m - Math.Abs(i - ic) + 0f) / m);
-						if (nv < _pieces[i]) _pieces[i] = nv;
+						if (nv < _pieces[i])
+						{
+							var v = _pieces[i] - Program.Settings.ForcePower / 2;
+							if (v > nv)
+								_pieces[i] = v;
+							else
+								_pieces[i] = nv;
+						}
 						if (_pieces[i] < 0) _pieces[i] = 0;
 					}
 					i++;
