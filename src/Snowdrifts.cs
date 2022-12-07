@@ -24,11 +24,41 @@ namespace SnowFlakes
 		{
 			for (int i = 0; i < _pieces.Length; i++)
 			{
-				gfx.FillRoundedRectangle(brush,
-					i * Program.Settings.SnowdriftsResolution,
-					Height - _pieces[i] - Program.Settings.SnowdriftsStart,
-					(i + 1) * Program.Settings.SnowdriftsResolution,
-					Height - Program.Settings.SnowdriftsStart, 1);
+				if (Program.Settings.SnowdriftsSmooth)
+				{
+					var vp = _pieces[(i - 1 + _pieces.Length) % _pieces.Length];
+					var v = _pieces[i];
+					var vn = _pieces[(i + 1) % _pieces.Length];
+					gfx.FillRectangle(brush,
+						i * Program.Settings.SnowdriftsResolution,
+						Height - v - Program.Settings.SnowdriftsStart,
+						(i + 1) * Program.Settings.SnowdriftsResolution,
+						Height - Program.Settings.SnowdriftsStart);
+					if (v < vp)
+						gfx.FillTriangle(brush,
+							i * Program.Settings.SnowdriftsResolution,
+							Height - Program.Settings.SnowdriftsStart - vp,
+							i * Program.Settings.SnowdriftsResolution,
+							Height - Program.Settings.SnowdriftsStart - v + 1,
+							(i + 0.5f) * Program.Settings.SnowdriftsResolution,
+							Height - Program.Settings.SnowdriftsStart - v + 1);
+					if (v < vn)
+						gfx.FillTriangle(brush,
+							(i + 1) * Program.Settings.SnowdriftsResolution,
+							Height - Program.Settings.SnowdriftsStart - vn,
+							(i + 1) * Program.Settings.SnowdriftsResolution,
+							Height - Program.Settings.SnowdriftsStart - v + 1,
+							(i + 0.5f) * Program.Settings.SnowdriftsResolution,
+							Height - Program.Settings.SnowdriftsStart - v + 1);
+				}
+				else
+				{
+					gfx.FillRoundedRectangle(brush,
+						i * Program.Settings.SnowdriftsResolution,
+						Height - _pieces[i] - Program.Settings.SnowdriftsStart,
+						(i + 1) * Program.Settings.SnowdriftsResolution,
+						Height - Program.Settings.SnowdriftsStart, 1);
+				}
 			}
 		}
 		
