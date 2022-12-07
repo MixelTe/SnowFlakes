@@ -11,6 +11,7 @@ namespace SnowFlakes
 		private float[] _pieces;
 		private readonly int Width;
 		private readonly int Height;
+		private long DeltaTime = 0;
 
 		public Snowdrifts(int width, int height)
 		{
@@ -64,6 +65,9 @@ namespace SnowFlakes
 		
 		public void Update(long deltaTime)
 		{
+			DeltaTime += deltaTime;
+			if (DeltaTime < Program.Settings.SnowdriftsUpdateDelay) return;
+			DeltaTime = 0;
 			for (int i = 0; i < _pieces.Length; i++)
 			{
 				var pi = (i - 1 + _pieces.Length) % _pieces.Length;
@@ -91,9 +95,10 @@ namespace SnowFlakes
 			if (_pieces[i] > Height - Program.Settings.SnowdriftsStart)
 				_pieces[i] = Height - Program.Settings.SnowdriftsStart;
 		}
+
 		public bool Intersects(float x, float y)
 		{
-			var i = (int)x / Program.Settings.SnowdriftsResolution;
+			var i = (int)(x / Program.Settings.SnowdriftsResolution);
 			return _pieces[i] < (Height - Program.Settings.SnowdriftsStart) / 2 && 
 				   _pieces[i] + Program.Settings.SnowdriftsStart > Height - y;
 		}

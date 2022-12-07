@@ -29,6 +29,7 @@ namespace SnowFlakes
 		public float SnowdriftsSpeed = 0.2f;
 		public int SnowdriftsDensity = 20;
 		public int SnowdriftsStart = 40;
+		public int SnowdriftsUpdateDelay = 250;
 
 		public int Preset = 1;
 
