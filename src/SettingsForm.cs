@@ -37,6 +37,7 @@ namespace SnowFlakes
 				case 4: RBPreset4.Checked = true; break;
 				default: RBPreset0.Checked = true; break;
 			}
+			RBimg.Checked = true;
 			switch (Program.Settings.ParticleImg)
 			{
 				case 0: RBimg0.Checked = true; PanelColor.Enabled = false; break;
