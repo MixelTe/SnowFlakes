@@ -67,6 +67,8 @@
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.PanelColor = new System.Windows.Forms.Panel();
+			this.InpAlpha = new System.Windows.Forms.TrackBar();
+			this.label12 = new System.Windows.Forms.Label();
 			this.PanelImg = new System.Windows.Forms.Panel();
 			this.BtnImg = new System.Windows.Forms.Button();
 			this.PBImg = new System.Windows.Forms.PictureBox();
@@ -98,6 +100,7 @@
 			this.tabPage4.SuspendLayout();
 			this.tabPage5.SuspendLayout();
 			this.PanelColor.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.InpAlpha)).BeginInit();
 			this.PanelImg.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PBImg)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -200,7 +203,7 @@
 			this.BtnColor.BackColor = System.Drawing.Color.LightBlue;
 			this.BtnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.BtnColor.ForeColor = System.Drawing.Color.Gray;
-			this.BtnColor.Location = new System.Drawing.Point(196, 1);
+			this.BtnColor.Location = new System.Drawing.Point(193, 3);
 			this.BtnColor.Name = "BtnColor";
 			this.BtnColor.Size = new System.Drawing.Size(65, 27);
 			this.BtnColor.TabIndex = 2;
@@ -682,12 +685,37 @@
 			// 
 			// PanelColor
 			// 
+			this.PanelColor.Controls.Add(this.InpAlpha);
+			this.PanelColor.Controls.Add(this.label12);
 			this.PanelColor.Controls.Add(this.label3);
 			this.PanelColor.Controls.Add(this.BtnColor);
 			this.PanelColor.Location = new System.Drawing.Point(45, 58);
 			this.PanelColor.Name = "PanelColor";
-			this.PanelColor.Size = new System.Drawing.Size(261, 29);
+			this.PanelColor.Size = new System.Drawing.Size(261, 71);
 			this.PanelColor.TabIndex = 7;
+			// 
+			// InpAlpha
+			// 
+			this.InpAlpha.AutoSize = false;
+			this.InpAlpha.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.InpAlpha.Location = new System.Drawing.Point(121, 36);
+			this.InpAlpha.Maximum = 255;
+			this.InpAlpha.Name = "InpAlpha";
+			this.InpAlpha.Size = new System.Drawing.Size(137, 18);
+			this.InpAlpha.TabIndex = 6;
+			this.InpAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+			this.InpAlpha.Value = 150;
+			this.InpAlpha.Scroll += new System.EventHandler(this.Alpha_Change);
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.label12.Location = new System.Drawing.Point(3, 31);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(112, 21);
+			this.label12.TabIndex = 5;
+			this.label12.Text = "Прозрачность";
 			// 
 			// PanelImg
 			// 
@@ -700,7 +728,7 @@
 			this.PanelImg.Controls.Add(this.pictureBox1);
 			this.PanelImg.Controls.Add(this.RBimg0);
 			this.PanelImg.Controls.Add(this.RBimg1);
-			this.PanelImg.Location = new System.Drawing.Point(45, 114);
+			this.PanelImg.Location = new System.Drawing.Point(45, 166);
 			this.PanelImg.Name = "PanelImg";
 			this.PanelImg.Size = new System.Drawing.Size(261, 99);
 			this.PanelImg.TabIndex = 4;
@@ -791,7 +819,7 @@
 			// 
 			this.RBimg.AutoSize = true;
 			this.RBimg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.RBimg.Location = new System.Drawing.Point(6, 83);
+			this.RBimg.Location = new System.Drawing.Point(6, 135);
 			this.RBimg.Name = "RBimg";
 			this.RBimg.Size = new System.Drawing.Size(95, 25);
 			this.RBimg.TabIndex = 3;
@@ -878,6 +906,7 @@
 			this.tabPage5.PerformLayout();
 			this.PanelColor.ResumeLayout(false);
 			this.PanelColor.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.InpAlpha)).EndInit();
 			this.PanelImg.ResumeLayout(false);
 			this.PanelImg.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PBImg)).EndInit();
@@ -940,5 +969,7 @@
 		private Button BtnImg;
 		private Panel PanelColor;
 		private OpenFileDialog DialogOpenFile;
+		private TrackBar InpAlpha;
+		private Label label12;
 	}
 }

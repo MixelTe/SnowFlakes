@@ -19,6 +19,7 @@ namespace SnowFlakes
 			InpCount.Value = Program.Settings.Particles;
 			InpSize.Value = Program.Settings.ParticleRad;
 			BtnColor.BackColor = Program.Settings.ParticleColor;
+			InpAlpha.Value = Program.Settings.ParticleColor.A;
 			InpSpeedXMax.Value = (decimal)Program.Settings.SpeedXMax;
 			InpSpeedX.Value = (decimal)Program.Settings.SpeedX * 10;
 			var SpeedYMin = Program.Settings.SpeedYMin;
@@ -107,6 +108,12 @@ namespace SnowFlakes
 				BtnColor.BackColor = Program.Settings.ParticleColor;
 				Program.SnowWindow?.UpdateColor();
 			}
+		}
+		private void Alpha_Change(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, Program.Settings.ParticleColor);
+			Program.SnowWindow?.UpdateColor();
 		}
 		private void SpeedXMax_Change(object sender, EventArgs e) 
 		{

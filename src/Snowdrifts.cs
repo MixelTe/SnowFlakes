@@ -40,17 +40,17 @@ namespace SnowFlakes
 							i * Program.Settings.SnowdriftsResolution,
 							Height - Program.Settings.SnowdriftsStart - vp,
 							i * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 1,
+							Height - Program.Settings.SnowdriftsStart - v + 0.5f,
 							(i + 0.5f) * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 1);
+							Height - Program.Settings.SnowdriftsStart - v + 0.5f);
 					if (v < vn)
 						gfx.FillTriangle(brush,
 							(i + 1) * Program.Settings.SnowdriftsResolution,
 							Height - Program.Settings.SnowdriftsStart - vn,
 							(i + 1) * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 1,
+							Height - Program.Settings.SnowdriftsStart - v + 0.5f,
 							(i + 0.5f) * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 1);
+							Height - Program.Settings.SnowdriftsStart - v + 0.5f);
 				}
 				else
 				{

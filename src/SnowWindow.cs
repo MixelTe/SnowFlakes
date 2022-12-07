@@ -167,7 +167,8 @@ namespace SnowFlakes
 			if (_brush != null)
 				_brush.Color = new GameOverlay.Drawing.Color(Program.Settings.ParticleColor.R,
 															 Program.Settings.ParticleColor.G,
-															 Program.Settings.ParticleColor.B);
+															 Program.Settings.ParticleColor.B,
+															 Program.Settings.ParticleColor.A);
 		}
 		public void Rerandomize()
 		{
