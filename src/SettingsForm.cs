@@ -56,12 +56,13 @@ namespace SnowFlakes
 			
 			CBSnowdrifts.Checked = Program.Settings.Snowdrifts;
 			PanelSnowdrifts.Enabled = Program.Settings.Snowdrifts;
+			BtnAddSnow.Enabled = Program.Settings.Snowdrifts;
 			CBSmooth.Checked = Program.Settings.SnowdriftsSmooth;
 			BtnColorSD.BackColor = Program.Settings.SnowdriftsColor;
 			InpAlphaSD.Value = Program.Settings.SnowdriftsColor.A;
 			InpSDRes.Value = Program.Settings.SnowdriftsResolution;
 			InpSDSpeed.Value = (decimal)Program.Settings.SnowdriftsSpeed;
-			InpSDDensity.Value = Program.Settings.SnowdriftsDensity;
+			InpSDDensity.Value = (decimal)Program.Settings.SnowdriftsDensity;
 			InpSDStart.Value = Program.Settings.SnowdriftsStart;
 			InpSDDelay.Value = (decimal)(1000f / Program.Settings.SnowdriftsUpdateDelay);
 			
@@ -276,6 +277,7 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Program.Settings.Snowdrifts = CBSnowdrifts.Checked;
 			PanelSnowdrifts.Enabled = CBSnowdrifts.Checked;
+			BtnAddSnow.Enabled = CBSnowdrifts.Checked;
 			if (Program.SnowWindow != null)
 			{
 				if (Program.Settings.Snowdrifts)
@@ -294,7 +296,7 @@ namespace SnowFlakes
 		{
 			if (ignoreChangeEvent) return;
 			PanelColorSD.Enabled = !CBSameColor.Checked;
-			if (CBSameColor.Enabled)
+			if (CBSameColor.Checked)
 				Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
 			else
 				Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, BtnColorSD.BackColor);
@@ -335,7 +337,7 @@ namespace SnowFlakes
 		private void SnowdriftsDensity_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
-			Program.Settings.SnowdriftsDensity = (int)InpSDDensity.Value;
+			Program.Settings.SnowdriftsDensity = (float)InpSDDensity.Value;
 		}
 		private void SnowdriftsStart_Change(object sender, EventArgs e)
 		{
@@ -358,7 +360,7 @@ namespace SnowFlakes
 			InpSDSpeed.Value = 0.08M;
 			InpSDDensity.Value = 40;
 			InpSDDelay.Value = 2;
-			Program.SnowWindow?.Snowdrifts?.AddSnow();
+			Program.SnowWindow?.Snowdrifts?.CreateSmooth();
 		}
 		private void SnowdriftsSet2_Click(object sender, EventArgs e)
 		{
@@ -367,16 +369,16 @@ namespace SnowFlakes
 			InpSDSpeed.Value = 0.16M;
 			InpSDDensity.Value = 20;
 			InpSDDelay.Value = 4;
-			Program.SnowWindow?.Snowdrifts?.AddSnow();
+			Program.SnowWindow?.Snowdrifts?.CreateSmooth();
 		}
 		private void SnowdriftsSet3_Click(object sender, EventArgs e)
 		{
 			CBSmooth.Checked = false;
 			InpSDRes.Value = 1;
 			InpSDSpeed.Value = 4M;
-			InpSDDensity.Value = 1;
+			InpSDDensity.Value = 0.4M;
 			InpSDDelay.Value = 4;
-			Program.SnowWindow?.Snowdrifts?.AddSnow();
+			Program.SnowWindow?.Snowdrifts?.CreateSmooth();
 		}
 	}
 }

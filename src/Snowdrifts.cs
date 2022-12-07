@@ -125,5 +125,14 @@ namespace SnowFlakes
 				_pieces[i] += Random.Shared.NextSingle() * Height / 50;
 			}
 		}
+		public void CreateSmooth()
+		{
+			var m = Height / 35;
+			for (int i = 0; i < _pieces.Length; i++)
+			{
+				_pieces[i] = (float)(Utils.Noise(i / 100d * Program.Settings.SnowdriftsResolution) * m + m * 4);
+				if (_pieces[i] < 0) _pieces[i] = 0;
+			}
+		}
 	}
 }

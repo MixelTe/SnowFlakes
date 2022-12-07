@@ -84,6 +84,10 @@
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.BtnAddSnow = new System.Windows.Forms.Button();
 			this.PanelSnowdrifts = new System.Windows.Forms.Panel();
+			this.label20 = new System.Windows.Forms.Label();
+			this.BtnSDSet1 = new System.Windows.Forms.Button();
+			this.BtnSDSet2 = new System.Windows.Forms.Button();
+			this.BtnSDSet3 = new System.Windows.Forms.Button();
 			this.CBSmooth = new System.Windows.Forms.CheckBox();
 			this.InpSDDelay = new System.Windows.Forms.NumericUpDown();
 			this.label19 = new System.Windows.Forms.Label();
@@ -103,10 +107,6 @@
 			this.CBSameColor = new System.Windows.Forms.CheckBox();
 			this.CBSnowdrifts = new System.Windows.Forms.CheckBox();
 			this.DialogOpenFile = new System.Windows.Forms.OpenFileDialog();
-			this.BtnSDSet3 = new System.Windows.Forms.Button();
-			this.BtnSDSet2 = new System.Windows.Forms.Button();
-			this.BtnSDSet1 = new System.Windows.Forms.Button();
-			this.label20 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -698,7 +698,7 @@
 			this.tabPage4.Location = new System.Drawing.Point(4, 24);
 			this.tabPage4.Name = "tabPage4";
 			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(312, 349);
+			this.tabPage4.Size = new System.Drawing.Size(312, 372);
 			this.tabPage4.TabIndex = 0;
 			this.tabPage4.Text = "Основное";
 			this.tabPage4.UseVisualStyleBackColor = true;
@@ -713,7 +713,7 @@
 			this.tabPage5.Location = new System.Drawing.Point(4, 24);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage5.Size = new System.Drawing.Size(312, 384);
+			this.tabPage5.Size = new System.Drawing.Size(312, 372);
 			this.tabPage5.TabIndex = 1;
 			this.tabPage5.Text = "Снежинки";
 			this.tabPage5.UseVisualStyleBackColor = true;
@@ -896,7 +896,7 @@
 			this.tabPage6.Location = new System.Drawing.Point(4, 24);
 			this.tabPage6.Name = "tabPage6";
 			this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage6.Size = new System.Drawing.Size(312, 349);
+			this.tabPage6.Size = new System.Drawing.Size(312, 372);
 			this.tabPage6.TabIndex = 2;
 			this.tabPage6.Text = "Полёт снежинок";
 			this.tabPage6.UseVisualStyleBackColor = true;
@@ -950,6 +950,49 @@
 			this.PanelSnowdrifts.Name = "PanelSnowdrifts";
 			this.PanelSnowdrifts.Size = new System.Drawing.Size(312, 341);
 			this.PanelSnowdrifts.TabIndex = 1;
+			// 
+			// label20
+			// 
+			this.label20.AutoSize = true;
+			this.label20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.label20.Location = new System.Drawing.Point(6, 111);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(75, 21);
+			this.label20.TabIndex = 26;
+			this.label20.Text = "Качество";
+			// 
+			// BtnSDSet1
+			// 
+			this.BtnSDSet1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.BtnSDSet1.Location = new System.Drawing.Point(102, 111);
+			this.BtnSDSet1.Name = "BtnSDSet1";
+			this.BtnSDSet1.Size = new System.Drawing.Size(65, 23);
+			this.BtnSDSet1.TabIndex = 25;
+			this.BtnSDSet1.Text = "Низкое";
+			this.BtnSDSet1.UseVisualStyleBackColor = true;
+			this.BtnSDSet1.Click += new System.EventHandler(this.SnowdriftsSet1_Click);
+			// 
+			// BtnSDSet2
+			// 
+			this.BtnSDSet2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.BtnSDSet2.Location = new System.Drawing.Point(173, 111);
+			this.BtnSDSet2.Name = "BtnSDSet2";
+			this.BtnSDSet2.Size = new System.Drawing.Size(65, 23);
+			this.BtnSDSet2.TabIndex = 24;
+			this.BtnSDSet2.Text = "Среднее";
+			this.BtnSDSet2.UseVisualStyleBackColor = true;
+			this.BtnSDSet2.Click += new System.EventHandler(this.SnowdriftsSet2_Click);
+			// 
+			// BtnSDSet3
+			// 
+			this.BtnSDSet3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.BtnSDSet3.Location = new System.Drawing.Point(244, 111);
+			this.BtnSDSet3.Name = "BtnSDSet3";
+			this.BtnSDSet3.Size = new System.Drawing.Size(65, 23);
+			this.BtnSDSet3.TabIndex = 23;
+			this.BtnSDSet3.Text = "Ультра";
+			this.BtnSDSet3.UseVisualStyleBackColor = true;
+			this.BtnSDSet3.Click += new System.EventHandler(this.SnowdriftsSet3_Click);
 			// 
 			// CBSmooth
 			// 
@@ -1031,6 +1074,7 @@
 			// InpSDDensity
 			// 
 			this.InpSDDensity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.InpSDDensity.DecimalPlaces = 1;
 			this.InpSDDensity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.InpSDDensity.Increment = new decimal(new int[] {
             5,
@@ -1042,7 +1086,7 @@
             1,
             0,
             0,
-            0});
+            65536});
 			this.InpSDDensity.Name = "InpSDDensity";
 			this.InpSDDensity.Size = new System.Drawing.Size(65, 29);
 			this.InpSDDensity.TabIndex = 16;
@@ -1221,49 +1265,6 @@
 			this.CBSnowdrifts.Text = "Включить сугробы";
 			this.CBSnowdrifts.UseVisualStyleBackColor = true;
 			this.CBSnowdrifts.CheckedChanged += new System.EventHandler(this.Snowdrifts_Change);
-			// 
-			// BtnSDSet3
-			// 
-			this.BtnSDSet3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BtnSDSet3.Location = new System.Drawing.Point(244, 111);
-			this.BtnSDSet3.Name = "BtnSDSet3";
-			this.BtnSDSet3.Size = new System.Drawing.Size(65, 23);
-			this.BtnSDSet3.TabIndex = 23;
-			this.BtnSDSet3.Text = "Ультра";
-			this.BtnSDSet3.UseVisualStyleBackColor = true;
-			this.BtnSDSet3.Click += new System.EventHandler(this.SnowdriftsSet3_Click);
-			// 
-			// BtnSDSet2
-			// 
-			this.BtnSDSet2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BtnSDSet2.Location = new System.Drawing.Point(173, 111);
-			this.BtnSDSet2.Name = "BtnSDSet2";
-			this.BtnSDSet2.Size = new System.Drawing.Size(65, 23);
-			this.BtnSDSet2.TabIndex = 24;
-			this.BtnSDSet2.Text = "Среднее";
-			this.BtnSDSet2.UseVisualStyleBackColor = true;
-			this.BtnSDSet2.Click += new System.EventHandler(this.SnowdriftsSet2_Click);
-			// 
-			// BtnSDSet1
-			// 
-			this.BtnSDSet1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BtnSDSet1.Location = new System.Drawing.Point(102, 111);
-			this.BtnSDSet1.Name = "BtnSDSet1";
-			this.BtnSDSet1.Size = new System.Drawing.Size(65, 23);
-			this.BtnSDSet1.TabIndex = 25;
-			this.BtnSDSet1.Text = "Низкое";
-			this.BtnSDSet1.UseVisualStyleBackColor = true;
-			this.BtnSDSet1.Click += new System.EventHandler(this.SnowdriftsSet1_Click);
-			// 
-			// label20
-			// 
-			this.label20.AutoSize = true;
-			this.label20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label20.Location = new System.Drawing.Point(6, 111);
-			this.label20.Name = "label20";
-			this.label20.Size = new System.Drawing.Size(75, 21);
-			this.label20.TabIndex = 26;
-			this.label20.Text = "Качество";
 			// 
 			// SettingsForm
 			// 
