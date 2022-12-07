@@ -23,6 +23,12 @@ namespace SnowFlakes
 
 		public Rectangle ClearZone = Rectangle.Empty;
 
+		public bool Snowdrifts = true;
+		public int SnowdriftsResolution = 30;
+		public float SnowdriftsSpeed = 0.5f;
+		public int SnowdriftsDensity = 4;
+		public int SnowdriftsStart = 40;
+
 		public int Preset = 1;
 
 

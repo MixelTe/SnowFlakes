@@ -13,6 +13,7 @@ namespace SnowFlakes
 		private readonly GraphicsWindow _window;
 
 		private Particle[] _particles;
+		public Snowdrifts? Snowdrifts;
 		private System.Drawing.Point _pastPos;
 		private bool _updateSnowflakeImg = false;
 		private GameOverlay.Drawing.SolidBrush? _brush;
@@ -41,6 +42,8 @@ namespace SnowFlakes
 				IsVisible = true,
 			};
 			_particles = CreateParticles();
+			if (Program.Settings.Snowdrifts)
+				Snowdrifts = new Snowdrifts(_window.Width, _window.Height);
 
 			_window.SetupGraphics += SetupGraphics;
 			_window.DrawGraphics += DrawGraphics;
@@ -133,6 +136,8 @@ namespace SnowFlakes
 			gfx.ClearScene();
 
 			//gfx.DrawText(_font, _brush, 58, 20, infoText);
+			Snowdrifts?.Update(e.DeltaTime);
+			Snowdrifts?.Draw(gfx, _brush);
 
 			System.Drawing.Point? cursorForce = _pastPos != Cursor.Position ? Cursor.Position : null;
 			_pastPos = Cursor.Position;
