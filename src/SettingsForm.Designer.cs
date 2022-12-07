@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
 			this.label1 = new System.Windows.Forms.Label();
 			this.InpCount = new System.Windows.Forms.NumericUpDown();
@@ -107,6 +108,7 @@
 			this.CBSameColor = new System.Windows.Forms.CheckBox();
 			this.CBSnowdrifts = new System.Windows.Forms.CheckBox();
 			this.DialogOpenFile = new System.Windows.Forms.OpenFileDialog();
+			this.MyToolTip = new System.Windows.Forms.ToolTip(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -326,6 +328,7 @@
 			this.label5.Size = new System.Drawing.Size(53, 21);
 			this.label5.TabIndex = 9;
 			this.label5.Text = "Вихри";
+			this.MyToolTip.SetToolTip(this.label5, "С какой скоростью меняется направление ветра");
 			// 
 			// label4
 			// 
@@ -336,6 +339,7 @@
 			this.label4.Size = new System.Drawing.Size(45, 21);
 			this.label4.TabIndex = 8;
 			this.label4.Text = "Сила";
+			this.MyToolTip.SetToolTip(this.label4, "Как сильно ветер уносит снежинку в бок\r\n\r\n");
 			// 
 			// groupBox2
 			// 
@@ -407,6 +411,7 @@
 			this.label6.Size = new System.Drawing.Size(140, 21);
 			this.label6.TabIndex = 9;
 			this.label6.Text = "Разброс значений";
+			this.MyToolTip.SetToolTip(this.label6, "На сколько может отличаться скорость от указанной");
 			// 
 			// label7
 			// 
@@ -417,6 +422,7 @@
 			this.label7.Size = new System.Drawing.Size(77, 21);
 			this.label7.TabIndex = 8;
 			this.label7.Text = "Скорость";
+			this.MyToolTip.SetToolTip(this.label7, "Скорость падения снежинки");
 			// 
 			// groupBox3
 			// 
@@ -493,6 +499,7 @@
 			this.label8.Size = new System.Drawing.Size(85, 21);
 			this.label8.TabIndex = 9;
 			this.label8.Text = "Дальность";
+			this.MyToolTip.SetToolTip(this.label8, "Как далеко будут отлетать снежинки от курсора");
 			// 
 			// label9
 			// 
@@ -503,6 +510,7 @@
 			this.label9.Size = new System.Drawing.Size(45, 21);
 			this.label9.TabIndex = 8;
 			this.label9.Text = "Сила";
+			this.MyToolTip.SetToolTip(this.label9, "Чем больше, тем быстрее будут отлетать снежинки");
 			// 
 			// BtnReset
 			// 
@@ -1012,7 +1020,7 @@
 			this.InpSDDelay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.InpSDDelay.Location = new System.Drawing.Point(241, 301);
 			this.InpSDDelay.Maximum = new decimal(new int[] {
-            30,
+            15,
             0,
             0,
             0});
@@ -1035,6 +1043,7 @@
 			this.label19.Size = new System.Drawing.Size(167, 21);
 			this.label19.TabIndex = 21;
 			this.label19.Text = "Скорость обновления";
+			this.MyToolTip.SetToolTip(this.label19, "Как часто будет выравниваться сугроб");
 			// 
 			// InpSDStart
 			// 
@@ -1070,6 +1079,7 @@
 			this.label18.Size = new System.Drawing.Size(157, 21);
 			this.label18.TabIndex = 19;
 			this.label18.Text = "Отступ снизу экрана";
+			this.MyToolTip.SetToolTip(this.label18, "Сугробы будут находиться выше нижнего края экрана");
 			// 
 			// InpSDDensity
 			// 
@@ -1106,6 +1116,8 @@
 			this.label17.Size = new System.Drawing.Size(115, 21);
 			this.label17.TabIndex = 17;
 			this.label17.Text = "Вязкость снега";
+			this.MyToolTip.SetToolTip(this.label17, "При какой разнице высот соседних кусочков сугроба, \r\nснег начнёт осыпаться и выра" +
+        "внивать сугроб");
 			// 
 			// InpSDSpeed
 			// 
@@ -1142,6 +1154,7 @@
 			this.label14.Size = new System.Drawing.Size(121, 21);
 			this.label14.TabIndex = 15;
 			this.label14.Text = "Скорость роста";
+			this.MyToolTip.SetToolTip(this.label14, "На сколько увеличивает сугроб одна снежинка");
 			// 
 			// InpSDRes
 			// 
@@ -1182,6 +1195,7 @@
 			this.label13.Size = new System.Drawing.Size(122, 21);
 			this.label13.TabIndex = 13;
 			this.label13.Text = "Размер сугроба";
+			this.MyToolTip.SetToolTip(this.label13, "Ширина одного кусочка сугроба. Чем меньше,\r\n тем плавнее сугробы\r\n");
 			// 
 			// PanelColorSD
 			// 
@@ -1251,6 +1265,7 @@
 			this.CBSameColor.Size = new System.Drawing.Size(179, 25);
 			this.CBSameColor.TabIndex = 2;
 			this.CBSameColor.Text = "Цвет как у снежинок";
+			this.MyToolTip.SetToolTip(this.CBSameColor, "У сугробов будет тот же цвет, что и у снежинок");
 			this.CBSameColor.UseVisualStyleBackColor = true;
 			this.CBSameColor.Click += new System.EventHandler(this.SnowdriftsSameColor_Change);
 			// 
@@ -1410,5 +1425,6 @@
 		private Button BtnSDSet1;
 		private Button BtnSDSet2;
 		private Button BtnSDSet3;
+		private ToolTip MyToolTip;
 	}
 }
