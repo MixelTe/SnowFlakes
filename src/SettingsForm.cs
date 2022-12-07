@@ -27,8 +27,8 @@ namespace SnowFlakes
 			var SpeedYMax = Program.Settings.SpeedYMax;
 			InpSpeedY.Value = SpeedYMin + (SpeedYMax - SpeedYMin) / 2;
 			InpSpeedYRange.Value = (SpeedYMax - SpeedYMin) / 2;
-			InpD.Value = (decimal)Program.Settings.ForceD;
-			InpForce.Value = (decimal)Program.Settings.ForcePower;
+			InpD.Value = Program.Settings.ForceD;
+			InpForce.Value = Program.Settings.ForcePower;
 			switch (Program.Settings.Preset)
 			{
 				case 1: RBPreset1.Checked = true; break;
@@ -165,12 +165,12 @@ namespace SnowFlakes
 		private void Force_Change(object sender, EventArgs e) 
 		{
 			if (ignoreChangeEvent) return;
-			Program.Settings.ForcePower = (float)InpForce.Value;
+			Program.Settings.ForcePower = (int)InpForce.Value;
 		}
 		private void ForceD_Change(object sender, EventArgs e) 
 		{
 			if (ignoreChangeEvent) return;
-			Program.Settings.ForceD = (float)InpD.Value;
+			Program.Settings.ForceD = (int)InpD.Value;
 		}
 		private void SetPreset0()
 		{

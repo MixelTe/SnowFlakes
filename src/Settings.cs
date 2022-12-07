@@ -16,8 +16,8 @@ namespace SnowFlakes
 		public float SpeedX = 0.05f;
 		public int SpeedYMin = 2;
 		public int SpeedYMax = 6;
-		public float ForceD = 200;
-		public float ForcePower = 15;
+		public int ForceD = 200;
+		public int ForcePower = 15;
 		public int ParticleImg = -1; // -1 - No img; 0 - User img
 		public string ParticleImgPath = "";
 

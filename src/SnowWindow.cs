@@ -145,11 +145,12 @@ namespace SnowFlakes
 			gfx.ClearScene();
 
 			//gfx.DrawText(_font, _brush, 58, 20, infoText);
-			Snowdrifts?.Update(e.DeltaTime);
-			Snowdrifts?.Draw(gfx, _brushSnowdrifts);
 
 			System.Drawing.Point? cursorForce = _pastPos != Cursor.Position ? Cursor.Position : null;
 			_pastPos = Cursor.Position;
+
+			Snowdrifts?.Update(e.DeltaTime, cursorForce);
+			Snowdrifts?.Draw(gfx, _brushSnowdrifts);
 
 			var w = gfx.Width;
 			var h = gfx.Height;

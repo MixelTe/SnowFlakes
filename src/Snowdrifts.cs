@@ -63,9 +63,34 @@ namespace SnowFlakes
 			}
 		}
 		
-		public void Update(long deltaTime)
+		public void Update(long deltaTime, Point? cursorForce)
 		{
 			DeltaTime += deltaTime;
+
+			if (cursorForce != null)
+			{
+				var pos = (Point)cursorForce;
+				var h = Height - Program.Settings.SnowdriftsStart - pos.Y;
+				var i = (pos.X - Program.Settings.ForceD / 3) / Program.Settings.SnowdriftsResolution;
+				var i2 = (pos.X + Program.Settings.ForceD / 3) / Program.Settings.SnowdriftsResolution;
+				var ic = pos.X / Program.Settings.SnowdriftsResolution;
+				if (i < 0) i = 0;
+				if (i2 < 0) i2 = 0;
+				if (i >= _pieces.Length) i = _pieces.Length - 1;
+				if (i2 >= _pieces.Length) i2 = _pieces.Length - 1;
+				var m = Math.Abs(ic - i2);
+				while (i <= i2)
+				{
+					if (_pieces[i] >= h - Program.Settings.ForcePower)
+					{
+						var nv = h - Program.Settings.ForcePower * ((m - Math.Abs(i - ic) + 0f) / m);
+						if (nv < _pieces[i]) _pieces[i] = nv;
+						if (_pieces[i] < 0) _pieces[i] = 0;
+					}
+					i++;
+				}
+			}
+
 			if (DeltaTime < Program.Settings.SnowdriftsUpdateDelay) return;
 			DeltaTime = 0;
 			for (int i = 0; i < _pieces.Length; i++)
