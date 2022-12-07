@@ -103,6 +103,10 @@
 			this.CBSameColor = new System.Windows.Forms.CheckBox();
 			this.CBSnowdrifts = new System.Windows.Forms.CheckBox();
 			this.DialogOpenFile = new System.Windows.Forms.OpenFileDialog();
+			this.BtnSDSet3 = new System.Windows.Forms.Button();
+			this.BtnSDSet2 = new System.Windows.Forms.Button();
+			this.BtnSDSet1 = new System.Windows.Forms.Button();
+			this.label20 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.InpCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.InpSize)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -504,7 +508,7 @@
 			// 
 			this.BtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.BtnReset.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.BtnReset.Location = new System.Drawing.Point(7, 389);
+			this.BtnReset.Location = new System.Drawing.Point(7, 412);
 			this.BtnReset.Name = "BtnReset";
 			this.BtnReset.Size = new System.Drawing.Size(103, 32);
 			this.BtnReset.TabIndex = 3;
@@ -516,7 +520,7 @@
 			// 
 			this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.BtnOk.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.BtnOk.Location = new System.Drawing.Point(227, 389);
+			this.BtnOk.Location = new System.Drawing.Point(227, 412);
 			this.BtnOk.Name = "BtnOk";
 			this.BtnOk.Size = new System.Drawing.Size(100, 32);
 			this.BtnOk.TabIndex = 2;
@@ -532,7 +536,7 @@
 			this.BtnGithub.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.BtnGithub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.BtnGithub.ForeColor = System.Drawing.Color.Transparent;
-			this.BtnGithub.Location = new System.Drawing.Point(151, 391);
+			this.BtnGithub.Location = new System.Drawing.Point(151, 414);
 			this.BtnGithub.Name = "BtnGithub";
 			this.BtnGithub.Size = new System.Drawing.Size(32, 32);
 			this.BtnGithub.TabIndex = 4;
@@ -679,7 +683,7 @@
 			this.tabControl2.Location = new System.Drawing.Point(7, 7);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(320, 377);
+			this.tabControl2.Size = new System.Drawing.Size(320, 400);
 			this.tabControl2.TabIndex = 1;
 			// 
 			// tabPage4
@@ -709,7 +713,7 @@
 			this.tabPage5.Location = new System.Drawing.Point(4, 24);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage5.Size = new System.Drawing.Size(312, 349);
+			this.tabPage5.Size = new System.Drawing.Size(312, 384);
 			this.tabPage5.TabIndex = 1;
 			this.tabPage5.Text = "Снежинки";
 			this.tabPage5.UseVisualStyleBackColor = true;
@@ -905,7 +909,7 @@
 			this.tabPage1.Location = new System.Drawing.Point(4, 24);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(312, 349);
+			this.tabPage1.Size = new System.Drawing.Size(312, 372);
 			this.tabPage1.TabIndex = 3;
 			this.tabPage1.Text = "Сугробы";
 			this.tabPage1.UseVisualStyleBackColor = true;
@@ -922,6 +926,13 @@
 			// 
 			// PanelSnowdrifts
 			// 
+			this.PanelSnowdrifts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PanelSnowdrifts.Controls.Add(this.label20);
+			this.PanelSnowdrifts.Controls.Add(this.BtnSDSet1);
+			this.PanelSnowdrifts.Controls.Add(this.BtnSDSet2);
+			this.PanelSnowdrifts.Controls.Add(this.BtnSDSet3);
 			this.PanelSnowdrifts.Controls.Add(this.CBSmooth);
 			this.PanelSnowdrifts.Controls.Add(this.InpSDDelay);
 			this.PanelSnowdrifts.Controls.Add(this.label19);
@@ -937,14 +948,14 @@
 			this.PanelSnowdrifts.Controls.Add(this.CBSameColor);
 			this.PanelSnowdrifts.Location = new System.Drawing.Point(0, 37);
 			this.PanelSnowdrifts.Name = "PanelSnowdrifts";
-			this.PanelSnowdrifts.Size = new System.Drawing.Size(312, 318);
+			this.PanelSnowdrifts.Size = new System.Drawing.Size(312, 341);
 			this.PanelSnowdrifts.TabIndex = 1;
 			// 
 			// CBSmooth
 			// 
 			this.CBSmooth.AutoSize = true;
 			this.CBSmooth.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.CBSmooth.Location = new System.Drawing.Point(6, 111);
+			this.CBSmooth.Location = new System.Drawing.Point(6, 135);
 			this.CBSmooth.Name = "CBSmooth";
 			this.CBSmooth.Size = new System.Drawing.Size(150, 25);
 			this.CBSmooth.TabIndex = 22;
@@ -956,7 +967,7 @@
 			// 
 			this.InpSDDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.InpSDDelay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.InpSDDelay.Location = new System.Drawing.Point(226, 277);
+			this.InpSDDelay.Location = new System.Drawing.Point(241, 301);
 			this.InpSDDelay.Maximum = new decimal(new int[] {
             30,
             0,
@@ -976,7 +987,7 @@
 			// 
 			this.label19.AutoSize = true;
 			this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label19.Location = new System.Drawing.Point(3, 279);
+			this.label19.Location = new System.Drawing.Point(3, 303);
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(167, 21);
 			this.label19.TabIndex = 21;
@@ -991,7 +1002,7 @@
             0,
             0,
             0});
-			this.InpSDStart.Location = new System.Drawing.Point(226, 242);
+			this.InpSDStart.Location = new System.Drawing.Point(241, 161);
 			this.InpSDStart.Maximum = new decimal(new int[] {
             200,
             0,
@@ -1011,7 +1022,7 @@
 			// 
 			this.label18.AutoSize = true;
 			this.label18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label18.Location = new System.Drawing.Point(3, 244);
+			this.label18.Location = new System.Drawing.Point(3, 163);
 			this.label18.Name = "label18";
 			this.label18.Size = new System.Drawing.Size(157, 21);
 			this.label18.TabIndex = 19;
@@ -1026,7 +1037,7 @@
             0,
             0,
             0});
-			this.InpSDDensity.Location = new System.Drawing.Point(226, 207);
+			this.InpSDDensity.Location = new System.Drawing.Point(241, 266);
 			this.InpSDDensity.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1046,7 +1057,7 @@
 			// 
 			this.label17.AutoSize = true;
 			this.label17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label17.Location = new System.Drawing.Point(3, 209);
+			this.label17.Location = new System.Drawing.Point(3, 268);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(115, 21);
 			this.label17.TabIndex = 17;
@@ -1062,7 +1073,7 @@
             0,
             0,
             131072});
-			this.InpSDSpeed.Location = new System.Drawing.Point(226, 172);
+			this.InpSDSpeed.Location = new System.Drawing.Point(241, 196);
 			this.InpSDSpeed.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1082,7 +1093,7 @@
 			// 
 			this.label14.AutoSize = true;
 			this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label14.Location = new System.Drawing.Point(3, 174);
+			this.label14.Location = new System.Drawing.Point(3, 198);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(121, 21);
 			this.label14.TabIndex = 15;
@@ -1097,7 +1108,7 @@
             0,
             0,
             0});
-			this.InpSDRes.Location = new System.Drawing.Point(226, 137);
+			this.InpSDRes.Location = new System.Drawing.Point(241, 231);
 			this.InpSDRes.Maximum = new decimal(new int[] {
             150,
             0,
@@ -1122,11 +1133,11 @@
 			// 
 			this.label13.AutoSize = true;
 			this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label13.Location = new System.Drawing.Point(3, 139);
+			this.label13.Location = new System.Drawing.Point(3, 233);
 			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(75, 21);
+			this.label13.Size = new System.Drawing.Size(122, 21);
 			this.label13.TabIndex = 13;
-			this.label13.Text = "Качество";
+			this.label13.Text = "Размер сугроба";
 			// 
 			// PanelColorSD
 			// 
@@ -1211,11 +1222,54 @@
 			this.CBSnowdrifts.UseVisualStyleBackColor = true;
 			this.CBSnowdrifts.CheckedChanged += new System.EventHandler(this.Snowdrifts_Change);
 			// 
+			// BtnSDSet3
+			// 
+			this.BtnSDSet3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.BtnSDSet3.Location = new System.Drawing.Point(244, 111);
+			this.BtnSDSet3.Name = "BtnSDSet3";
+			this.BtnSDSet3.Size = new System.Drawing.Size(65, 23);
+			this.BtnSDSet3.TabIndex = 23;
+			this.BtnSDSet3.Text = "Ультра";
+			this.BtnSDSet3.UseVisualStyleBackColor = true;
+			this.BtnSDSet3.Click += new System.EventHandler(this.SnowdriftsSet3_Click);
+			// 
+			// BtnSDSet2
+			// 
+			this.BtnSDSet2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.BtnSDSet2.Location = new System.Drawing.Point(173, 111);
+			this.BtnSDSet2.Name = "BtnSDSet2";
+			this.BtnSDSet2.Size = new System.Drawing.Size(65, 23);
+			this.BtnSDSet2.TabIndex = 24;
+			this.BtnSDSet2.Text = "Среднее";
+			this.BtnSDSet2.UseVisualStyleBackColor = true;
+			this.BtnSDSet2.Click += new System.EventHandler(this.SnowdriftsSet2_Click);
+			// 
+			// BtnSDSet1
+			// 
+			this.BtnSDSet1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.BtnSDSet1.Location = new System.Drawing.Point(102, 111);
+			this.BtnSDSet1.Name = "BtnSDSet1";
+			this.BtnSDSet1.Size = new System.Drawing.Size(65, 23);
+			this.BtnSDSet1.TabIndex = 25;
+			this.BtnSDSet1.Text = "Низкое";
+			this.BtnSDSet1.UseVisualStyleBackColor = true;
+			this.BtnSDSet1.Click += new System.EventHandler(this.SnowdriftsSet1_Click);
+			// 
+			// label20
+			// 
+			this.label20.AutoSize = true;
+			this.label20.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.label20.Location = new System.Drawing.Point(6, 111);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(75, 21);
+			this.label20.TabIndex = 26;
+			this.label20.Text = "Качество";
+			// 
 			// SettingsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(334, 428);
+			this.ClientSize = new System.Drawing.Size(334, 451);
 			this.Controls.Add(this.tabControl2);
 			this.Controls.Add(this.BtnGithub);
 			this.Controls.Add(this.BtnOk);
@@ -1351,5 +1405,9 @@
 		private Label label19;
 		private Button BtnAddSnow;
 		private CheckBox CBSmooth;
+		private Label label20;
+		private Button BtnSDSet1;
+		private Button BtnSDSet2;
+		private Button BtnSDSet3;
 	}
 }

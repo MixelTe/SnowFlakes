@@ -351,5 +351,32 @@ namespace SnowFlakes
 		{
 			Program.SnowWindow?.Snowdrifts?.AddSnow();
 		}
+		private void SnowdriftsSet1_Click(object sender, EventArgs e)
+		{
+			CBSmooth.Checked = true;
+			InpSDRes.Value = 80;
+			InpSDSpeed.Value = 0.1M;
+			InpSDDensity.Value = 40;
+			InpSDDelay.Value = 2;
+			Program.SnowWindow?.Snowdrifts?.AddSnow();
+		}
+		private void SnowdriftsSet2_Click(object sender, EventArgs e)
+		{
+			CBSmooth.Checked = true;
+			InpSDRes.Value = 40;
+			InpSDSpeed.Value = 0.2M;
+			InpSDDensity.Value = 20;
+			InpSDDelay.Value = 4;
+			Program.SnowWindow?.Snowdrifts?.AddSnow();
+		}
+		private void SnowdriftsSet3_Click(object sender, EventArgs e)
+		{
+			CBSmooth.Checked = false;
+			InpSDRes.Value = 1;
+			InpSDSpeed.Value = 0.8M;
+			InpSDDensity.Value = 1;
+			InpSDDelay.Value = 5;
+			Program.SnowWindow?.Snowdrifts?.AddSnow();
+		}
 	}
 }
