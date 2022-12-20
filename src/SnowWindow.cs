@@ -13,7 +13,7 @@ namespace SnowFlakes
 		private readonly GraphicsWindow _window;
 
 		private Particle[] _particles;
-		public Snowdrifts? Snowdrifts;
+		public Snowdrifts Snowdrifts;
 		private System.Drawing.Point _pastPos;
 		private bool _updateSnowflakeImg = false;
 		private GameOverlay.Drawing.SolidBrush? _brush;
@@ -43,8 +43,8 @@ namespace SnowFlakes
 				IsVisible = true,
 			};
 			_particles = CreateParticles();
-			if (Program.Settings.Snowdrifts)
-				Snowdrifts = new Snowdrifts(_window.Width, _window.Height);
+			
+			Snowdrifts = new Snowdrifts(_window.Width, _window.Height);
 
 			_window.SetupGraphics += SetupGraphics;
 			_window.DrawGraphics += DrawGraphics;
@@ -149,8 +149,11 @@ namespace SnowFlakes
 			System.Drawing.Point? cursorForce = _pastPos != Cursor.Position ? Cursor.Position : null;
 			_pastPos = Cursor.Position;
 
-			Snowdrifts?.Update(e.DeltaTime, cursorForce);
-			Snowdrifts?.Draw(gfx, _brushSnowdrifts);
+			if (Program.Settings.Snowdrifts)
+			{
+				Snowdrifts.Update(e.DeltaTime, cursorForce);
+				Snowdrifts.Draw(gfx, _brushSnowdrifts);
+			}
 
 			var w = gfx.Width;
 			var h = gfx.Height;
@@ -172,7 +175,7 @@ namespace SnowFlakes
 			UpdateColor();
 			UpdateColorSnowdrifts();
  			_particles = CreateParticles();
-			Snowdrifts?.ChangeResolution();
+			Snowdrifts.ChangeResolution();
 		}
 		public void UpdateColor()
 		{

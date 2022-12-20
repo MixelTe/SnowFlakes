@@ -289,19 +289,6 @@ namespace SnowFlakes
 			Program.Settings.Snowdrifts = CBSnowdrifts.Checked;
 			PanelSnowdrifts.Enabled = CBSnowdrifts.Checked;
 			BtnAddSnow.Enabled = CBSnowdrifts.Checked;
-			if (Program.SnowWindow != null)
-			{
-				if (Program.Settings.Snowdrifts)
-				{
-					Program.SnowWindow.Snowdrifts = _snowdrifts;
-					_snowdrifts = null;
-				}
-				else
-				{
-					_snowdrifts = Program.SnowWindow.Snowdrifts;
-					Program.SnowWindow.Snowdrifts = null;
-				}
-			}
 		}
 		private void SnowdriftsSameColor_Change(object sender, EventArgs e)
 		{
