@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
 	<meta property="og:description" content="Decorative animation on the screen: falling snowflakes" />
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://mixelte.github.io/SnowFlakes/">
-	<meta property="og:image" content="https://raw.githubusercontent.com/MixelTe/SnowFlakes/master/docs/logo.png" />
+	<meta property="og:image" content="https://mixelte.github.io/SnowFlakes/logo.png" />
 	<meta property="og:image:type" content="image/png">
 	<meta property="og:image:width" content="540">
 	<meta property="og:image:height" content="320">
@@ -15,7 +16,8 @@
 	<meta name="twitter:title" content="SnowFlakes">
 	<meta name="twitter:description" content="Decorative animation on the screen: falling snowflakes">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:image:src" content="https://raw.githubusercontent.com/MixelTe/SnowFlakes/master/docs/logo.png">
+	<meta name="twitter:image:src" content="https://mixelte.github.io/SnowFlakes/logo.png">
+	<link rel="canonical" href="https://mixelte.github.io/SnowFlakes/" />
 	<title>SnowFlakes</title>
 	<link rel="icon" type="image/x-icon" href="./favicon.ico">
 	<script src="./marked.js"></script>
@@ -26,6 +28,7 @@
 			--c-text: black;
 			--c-link: #0969da;
 		}
+
 		@media (prefers-color-scheme: dark) {
 			:root {
 				--c-back: #17353d;
@@ -33,14 +36,17 @@
 				--c-text: #d4d4d4;
 				--c-link: #00ffff;
 			}
+
 			.gh img {
 				filter: invert(1);
 			}
 		}
+
 		* {
-			font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 			box-sizing: border-box;
 		}
+
 		body {
 			background-color: var(--c-back);
 			color: var(--c-text);
@@ -49,38 +55,53 @@
 			align-items: center;
 			margin: 0;
 		}
+
 		.box {
 			width: 100%;
 			max-width: 800px;
 			background-color: var(--c-box);
 			padding: 1em 2em;
 		}
-		.box + .box {
+
+		.box+.box {
 			margin-top: 2em;
 		}
+
 		@media screen and (min-width: 800px) {
 			.box {
 				margin: 3em;
 				border-radius: 1em;
 				padding: 2em 4em;
 			}
-			.box + .box {
+
+			.box+.box {
 				margin-top: 0;
 			}
 		}
+
 		.content {
 			min-height: 100vh;
 		}
+
 		img {
 			max-width: 100%;
 			border-radius: 0.5rem;
 		}
-		p:has(img), .box:has(.lds-spinner) {
+
+		p:has(img),
+		.box:has(.lds-spinner) {
 			text-align: center;
 		}
-		h1, h2, h3, h4, h5, h6 {
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
 			font-weight: 600;
 		}
+
 		h1 {
 			text-align: center;
 			padding-bottom: 0.5em;
@@ -88,27 +109,35 @@
 			border-bottom-color: color-mix(in srgb, var(--c-text) 50%, transparent);
 			font-size: 2rem;
 		}
+
 		h2 {
 			font-size: 1.5rem;
 		}
+
 		h3 {
 			font-size: 1.25rem;
 		}
+
 		h4 {
 			font-size: 1rem;
 		}
+
 		h5 {
 			font-size: 0.875rem;
 		}
+
 		h5 {
 			font-size: 0.75rem;
 		}
+
 		a {
 			color: var(--c-link);
 			text-decoration-skip-ink: none;
 			text-decoration: none;
 		}
-		a:hover, a:focus-visible {
+
+		a:hover,
+		a:focus-visible {
 			text-decoration: underline;
 		}
 
@@ -117,6 +146,7 @@
 			justify-content: space-between;
 			align-items: center;
 		}
+
 		.gh img {
 			width: 2em;
 		}
@@ -166,12 +196,16 @@
 				height: 32px;
 			}
 		}
-
 	</style>
 </head>
+
 <body>
 	<div class="box content" id="description">
-		<div class="lds-spinner"><div></div><div></div><div></div></div>
+		<div class="lds-spinner">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
 	</div>
 	<div class="box footer">
 		<a class="gh" href="https://github.com/MixelTe/SnowFlakes" target="_blank">
@@ -183,7 +217,8 @@
 	</div>
 
 	<script>
-		async function load() {
+		async function load()
+		{
 			const urlbase = "https://raw.githubusercontent.com/MixelTe/SnowFlakes/master/";
 			const data = await fetch(urlbase + "/README.md");
 			const markdown = await data.text();
@@ -191,7 +226,8 @@
 			const description = document.getElementById("description");
 			description.innerHTML = marked.parse(markdown);
 
-			description.querySelectorAll("img").forEach(img => {
+			description.querySelectorAll("img").forEach(img =>
+			{
 				img.src = urlbase + img.getAttribute("src");
 			});
 		}
@@ -199,20 +235,26 @@
 	</script>
 
 	<!-- Yandex.Metrika counter -->
-	<script type="text/javascript" >
-		(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-		m[i].l=1*new Date();
-		for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-		k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-		(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+	<script type="text/javascript">
+		(function (m, e, t, r, i, k, a)
+		{
+			m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+			m[i].l = 1 * new Date();
+			for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+			k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+		})
+			(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
 		ym(95905271, "init", {
-			clickmap:true,
-			trackLinks:true,
-			accurateTrackBounce:true
+			clickmap: true,
+			trackLinks: true,
+			accurateTrackBounce: true
 		});
 	</script>
-	<noscript><div><img src="https://mc.yandex.ru/watch/95905271" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<noscript>
+		<div><img src="https://mc.yandex.ru/watch/95905271" style="position:absolute; left:-9999px;" alt="" /></div>
+	</noscript>
 	<!-- /Yandex.Metrika counter -->
 </body>
+
 </html>
