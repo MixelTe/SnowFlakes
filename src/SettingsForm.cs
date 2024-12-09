@@ -66,7 +66,12 @@ namespace SnowFlakes
 			InpSDDensity.Value = (decimal)Program.Settings.SnowdriftsDensity;
 			InpSDStart.Value = Program.Settings.SnowdriftsStart;
 			InpSDDelay.Value = (decimal)(1000f / Program.Settings.SnowdriftsUpdateDelay);
-			
+
+			PanelSnowdrifts.Width = PanelSnowdrifts.Parent.Width - PanelSnowdrifts.Left - 10;
+			PanelSnowdrifts.Height = PanelSnowdrifts.Parent.Height - PanelSnowdrifts.Top - 10;
+			BtnSDSet1.Left = BtnSDSet2.Left - BtnSDSet1.Width - 8;
+
+
 			CBSameColor.Checked = Program.Settings.SnowdriftsColor == Program.Settings.ParticleColor;
 			PanelColorSD.Enabled = !CBSameColor.Checked;
 
