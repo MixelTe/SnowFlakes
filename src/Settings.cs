@@ -31,6 +31,10 @@ namespace SnowFlakes
 		public float SnowdriftsDensity = 20;
 		public int SnowdriftsStart = 40;
 		public int SnowdriftsUpdateDelay = 250;
+		
+		public bool ChristmasLights = true;
+		public int ChristmasLightsDistance = 60;
+		public int ChristmasLightsRadius = 12;
 
 		public int Preset = 1;
 

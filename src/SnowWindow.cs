@@ -14,10 +14,12 @@ namespace SnowFlakes
 
 		private Particle[] _particles;
 		public Snowdrifts Snowdrifts;
+		private ChristmasLights _christmasLights;
 		private System.Drawing.Point _pastPos;
 		private bool _updateSnowflakeImg = false;
 		private GameOverlay.Drawing.SolidBrush? _brush;
 		private GameOverlay.Drawing.SolidBrush? _brushSnowdrifts;
+		private GameOverlay.Drawing.SolidBrush? _brushLights;
 		private GameOverlay.Drawing.Font? _font;
 		public GameOverlay.Drawing.Image? Snowflake0;
 		public GameOverlay.Drawing.Image? Snowflake1;
@@ -45,6 +47,7 @@ namespace SnowFlakes
 			_particles = CreateParticles();
 			
 			Snowdrifts = new Snowdrifts(_window.Width, _window.Height);
+			_christmasLights = new ChristmasLights(_window.Width, _window.Height);
 
 			_window.SetupGraphics += SetupGraphics;
 			_window.DrawGraphics += DrawGraphics;
@@ -76,6 +79,7 @@ namespace SnowFlakes
 
 			_brush?.Dispose();
 			_brushSnowdrifts?.Dispose();
+			_brushLights?.Dispose();
 			Snowflake0?.Dispose();
 			Snowflake1?.Dispose();
 			Snowflake2?.Dispose();
@@ -89,6 +93,8 @@ namespace SnowFlakes
 													Program.Settings.SnowdriftsColor.G,
 													Program.Settings.SnowdriftsColor.B,
 													Program.Settings.SnowdriftsColor.A);
+
+			_brushLights = gfx.CreateSolidBrush(255, 0, 0);
 
 			TryCreateImg(gfx);
 
@@ -123,6 +129,11 @@ namespace SnowFlakes
 		private void DestroyGraphics(object? sender, DestroyGraphicsEventArgs e)
 		{
 			_brush?.Dispose();
+			_brushSnowdrifts?.Dispose();
+			_brushLights?.Dispose();
+			Snowflake0?.Dispose();
+			Snowflake1?.Dispose();
+			Snowflake2?.Dispose();
 		}
 
 		private void DrawGraphics(object? sender, DrawGraphicsEventArgs e)
@@ -154,6 +165,9 @@ namespace SnowFlakes
 				Snowdrifts.Update(e.DeltaTime, cursorForce);
 				Snowdrifts.Draw(gfx, _brushSnowdrifts);
 			}
+
+			_christmasLights.Update(e.DeltaTime);
+			_christmasLights.Draw(gfx, _brushLights);
 
 			var w = gfx.Width;
 			var h = gfx.Height;
