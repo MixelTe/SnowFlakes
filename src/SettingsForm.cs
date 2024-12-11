@@ -16,7 +16,7 @@ namespace SnowFlakes
 		private void SetFields()
 		{
 			ignoreChangeEvent = true;
-			
+
 			InpCount.Value = Program.Settings.Particles;
 			InpSize.Value = Program.Settings.ParticleRad;
 			BtnColor.BackColor = Program.Settings.ParticleColor;
@@ -51,10 +51,10 @@ namespace SnowFlakes
 				if (Program.Settings.ParticleImgPath != "")
 					PBImg.BackgroundImage = Image.FromFile(Program.Settings.ParticleImgPath);
 			}
-			catch {}
-			
+			catch { }
+
 			SetFilterForFileDialog();
-			
+
 			CBSnowdrifts.Checked = Program.Settings.Snowdrifts;
 			PanelSnowdrifts.Enabled = Program.Settings.Snowdrifts;
 			BtnAddSnow.Enabled = Program.Settings.Snowdrifts;
@@ -74,6 +74,21 @@ namespace SnowFlakes
 
 			CBSameColor.Checked = Program.Settings.SnowdriftsColor == Program.Settings.ParticleColor;
 			PanelColorSD.Enabled = !CBSameColor.Checked;
+
+			CBLights.Checked = Program.Settings.ChristmasLights;
+			PanelLights.Enabled = Program.Settings.ChristmasLights;
+			InpCLInterval.Value = Program.Settings.ChristmasLightsInterval;
+			InpCLSize.Value = Program.Settings.ChristmasLightsRadius;
+			InpCLAnimSpeed.Value = Program.Settings.ChristmasLightsAnimationSpeed;
+			switch (Program.Settings.ChristmasLightsMode)
+			{
+				case 1: RBMode1.Checked = true; break;
+				case 2: RBMode2.Checked = true; break;
+				case 3: RBMode3.Checked = true; break;
+				case 4: RBMode4.Checked = true; break;
+				default: RBMode0.Checked = true; break;
+			}
+
 
 			ignoreChangeEvent = false;
 		}
@@ -120,7 +135,7 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Program.Settings.ParticleRad = (int)InpSize.Value;
 		}
-		private void Color_Change(object sender, EventArgs e) 
+		private void Color_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			colorDialog.Color = Program.Settings.ParticleColor;
@@ -147,20 +162,20 @@ namespace SnowFlakes
 				Program.SnowWindow?.UpdateColorSnowdrifts();
 			}
 		}
-		private void SpeedXMax_Change(object sender, EventArgs e) 
+		private void SpeedXMax_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.SpeedXMax = (float)InpSpeedXMax.Value;
 			SetPreset0();
 			Program.SnowWindow?.Rerandomize();
 		}
-		private void SpeedX_Change(object sender, EventArgs e) 
+		private void SpeedX_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.SpeedX = (float)InpSpeedX.Value / 10f;
 			SetPreset0();
 		}
-		private void SpeedY_Change(object sender, EventArgs e) 
+		private void SpeedY_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.SpeedYMin = (int)(InpSpeedY.Value - InpSpeedYRange.Value);
@@ -168,12 +183,12 @@ namespace SnowFlakes
 			SetPreset0();
 			Program.SnowWindow?.Rerandomize();
 		}
-		private void Force_Change(object sender, EventArgs e) 
+		private void Force_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.ForcePower = (int)InpForce.Value;
 		}
-		private void ForceD_Change(object sender, EventArgs e) 
+		private void ForceD_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.ForceD = (int)InpD.Value;
@@ -382,6 +397,68 @@ namespace SnowFlakes
 			InpSDDensity.Value = 0.4M;
 			InpSDDelay.Value = 4;
 			Program.SnowWindow?.Snowdrifts?.CreateSmooth();
+		}
+
+		private void CBLights_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLights = CBLights.Checked;
+			PanelLights.Enabled = CBLights.Checked;
+		}
+
+		private void InpCLInterval_ValueChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsInterval = (int)InpCLInterval.Value;
+			Program.SnowWindow?.ChristmasLights.UpdateInterval();
+		}
+
+		private void InpCLSize_ValueChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsRadius = (int)InpCLSize.Value;
+		}
+
+		private void RBMode0_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsMode = 0;
+			Program.SnowWindow?.ChristmasLights.UpdateMode();
+		}
+
+		private void RBMode1_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsMode = 1;
+			Program.SnowWindow?.ChristmasLights.UpdateMode();
+		}
+
+		private void RBMode2_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsMode = 2;
+			Program.SnowWindow?.ChristmasLights.UpdateMode();
+		}
+
+		private void RBMode3_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsMode = 3;
+			Program.SnowWindow?.ChristmasLights.UpdateMode();
+		}
+
+		private void RBMode4_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsMode = 4;
+			Program.SnowWindow?.ChristmasLights.UpdateMode();
+		}
+
+		private void InpCLAnimSpeed_Scroll(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ChristmasLightsAnimationSpeed = InpCLAnimSpeed.Value;
+			Program.SnowWindow?.ChristmasLights.UpdateSpeed();
 		}
 	}
 }

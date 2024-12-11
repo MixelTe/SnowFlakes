@@ -14,7 +14,7 @@ namespace SnowFlakes
 
 		private Particle[] _particles;
 		public Snowdrifts Snowdrifts;
-		private ChristmasLights _christmasLights;
+		public ChristmasLights ChristmasLights;
 		private System.Drawing.Point _pastPos;
 		private bool _updateSnowflakeImg = false;
 		private GameOverlay.Drawing.SolidBrush? _brush;
@@ -47,7 +47,7 @@ namespace SnowFlakes
 			_particles = CreateParticles();
 			
 			Snowdrifts = new Snowdrifts(_window.Width, _window.Height);
-			_christmasLights = new ChristmasLights(_window.Width, _window.Height);
+			ChristmasLights = new ChristmasLights(_window.Width, _window.Height);
 
 			_window.SetupGraphics += SetupGraphics;
 			_window.DrawGraphics += DrawGraphics;
@@ -166,8 +166,11 @@ namespace SnowFlakes
 				Snowdrifts.Draw(gfx, _brushSnowdrifts);
 			}
 
-			_christmasLights.Update(e.DeltaTime);
-			_christmasLights.Draw(gfx, _brushLights);
+			if (Program.Settings.ChristmasLights)
+			{
+				ChristmasLights.Update(e.DeltaTime);
+				ChristmasLights.Draw(gfx, _brushLights);
+			}
 
 			var w = gfx.Width;
 			var h = gfx.Height;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace SnowFlakes
 		private readonly int Width;
 		private readonly int Height;
 		private int _distance = 0;
+		private float _speed = 1;
 		private Light[] _lights = { };
 		private LightsMode _mode;
 
@@ -18,10 +20,23 @@ namespace SnowFlakes
 		{
 			Width = width;
 			Height = height;
-			UpdateDistance();
-			_mode = new LightsMode_Waving();
+			UpdateInterval();
+			UpdateSpeed();
+			_mode = GetCurLightsMode();
 		}
-		
+
+		private LightsMode GetCurLightsMode()
+		{
+			return Program.Settings.ChristmasLightsMode switch
+			{
+				1 => new LightsMode_Waving(),
+				2 => new LightsMode_Steping(),
+				3 => new LightsMode_Blinking(),
+				4 => new LightsMode_Running(),
+				_ => new LightsMode_Mix(),
+			};
+		}
+
 		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
 		{
 			if (brush == null) return;
@@ -34,8 +49,9 @@ namespace SnowFlakes
 				else { x = Width; y = d - Height - Width; }
 
 				var radius = Program.Settings.ChristmasLightsRadius;
-				brush.Color = _lights[i].ToColor(radius);
-				for (int j = 0; j < radius; j++)
+				var step = radius > 20 ? 2 : 1;
+				brush.Color = _lights[i].ToColor(radius / step);
+				for (int j = 0; j < radius; j += step)
 				{
 					gfx.FillCircle(brush, x, y, j);
 				}
@@ -44,28 +60,32 @@ namespace SnowFlakes
 
 		public void Update(long deltaTime)
 		{
-			_mode.Update(_lights, (int)deltaTime);
+			_mode.Update(_lights, (int)Math.Round(deltaTime * _speed));
 		}
 
-		public void SetMode(LightsModes mode)
+		public void UpdateInterval()
 		{
-			switch (mode)
+			_distance = Program.Settings.ChristmasLightsInterval;
+			var lights = new Light[(Width + Height * 2) / _distance];
+			for (int i = 0; i < lights.Length; i++)
 			{
-				case LightsModes.Waving: _mode = new LightsMode_Waving(); break;
-				case LightsModes.Steping: _mode = new LightsMode_Steping(); break;
-				case LightsModes.Blinking: _mode = new LightsMode_Blinking(); break;
-				case LightsModes.Running: _mode = new LightsMode_Running(); break;
+				lights[i] = new Light(Random.Shared.Next(255), Random.Shared.Next(255), Random.Shared.Next(255));
 			}
+			_lights = lights;
+			_mode = GetCurLightsMode();
+		}
+		public void UpdateMode()
+		{
+			_mode = GetCurLightsMode();
 		}
 
-		public void UpdateDistance()
+		public void UpdateSpeed()
 		{
-			_distance = Program.Settings.ChristmasLightsDistance;
-			_lights = new Light[(Width + Height * 2) / _distance];
-			for (int i = 0; i < _lights.Length; i++)
-			{
-				_lights[i] = new Light(Random.Shared.Next(255), Random.Shared.Next(255), Random.Shared.Next(255));
-			}
+			if (Program.Settings.ChristmasLightsAnimationSpeed >= 100)
+				_speed = Program.Settings.ChristmasLightsAnimationSpeed / 100f;
+			else
+				_speed = 0.5f + Program.Settings.ChristmasLightsAnimationSpeed / 200f;
+			Debug.WriteLine(_speed);
 		}
 
 		private class Light
@@ -126,10 +146,10 @@ namespace SnowFlakes
 					var light = lights[i];
 					switch (i % 4)
 					{
-						case 0: light.Set(255, 0, 0, 255 / 4 * 3, 1); break;
-						case 1: light.Set(0, 255, 0, 255 / 4 * 2, 1); break;
-						case 2: light.Set(0, 0, 255, 255 / 4 * 1, 1); break;
-						case 3: light.Set(255, 255, 0, 255 / 4 * 0, 1); break;
+						case 0: light.Set(255, 0, 0, 0, 1); break;
+						case 1: light.Set(0, 255, 0, 128, 1); break;
+						case 2: light.Set(0, 0, 255, 255, -1); break;
+						case 3: light.Set(255, 255, 0, 128, -1); break;
 					}
 				}
 			}
@@ -185,7 +205,7 @@ namespace SnowFlakes
 				_time += deltaTime;
 				_timeInterval += _timeIntervalD * deltaTime / 50;
 				if (_timeInterval > 1000) _timeIntervalD = -5;
-				if (_timeInterval < 300) _timeIntervalD = 5;
+				if (_timeInterval < 500) _timeIntervalD = 5;
 				if (_time > _timeInterval)
 				{
 					_time = 0;
@@ -271,16 +291,42 @@ namespace SnowFlakes
 
 			private float Fn(int i)
 			{
-				return (float)(Math.Sin(_time / 100f + i) + 1) / 2;
+				return (float)(Math.Sin((_time / 100f + i) * 0.7) + 1) / 2;
 			}
 		}
-	}
 
-	enum LightsModes
-	{
-		Waving,
-		Steping,
-		Blinking,
-		Running,
+		private class LightsMode_Mix : LightsMode
+		{
+			private readonly int _interval = 30000;
+			private int _time = 0;
+			private int _modeI = 0;
+			private LightsMode _mode = new LightsMode_Waving();
+
+			protected override void Start(Light[] lights) { }
+
+			private void RunNextMode()
+			{
+				_modeI = (_modeI + 1) % 4;
+				_mode = _modeI switch
+				{
+					0 => new LightsMode_Waving(),
+					1 => new LightsMode_Steping(),
+					2 => new LightsMode_Blinking(),
+					3 => new LightsMode_Running(),
+					_ => new LightsMode_Waving(),
+				};
+			}
+
+			protected override void UpdateLights(Light[] lights, int deltaTime)
+			{
+				_time += deltaTime;
+				if (_time > _interval)
+				{
+					_time = 0;
+					RunNextMode();
+				}
+				_mode.Update(lights, deltaTime);
+			}
+		}
 	}
 }
