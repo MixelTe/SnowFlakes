@@ -19,6 +19,7 @@ namespace SnowFlakes
 
 			InpCount.Value = Program.Settings.Particles;
 			InpSize.Value = Program.Settings.ParticleRad;
+			InpFPS.Value = Program.Settings.FPS;
 			BtnColor.BackColor = Program.Settings.ParticleColor;
 			InpAlpha.Value = Program.Settings.ParticleColor.A;
 			InpSpeedXMax.Value = (decimal)Program.Settings.SpeedXMax;
@@ -65,7 +66,7 @@ namespace SnowFlakes
 			InpSDSpeed.Value = (decimal)Program.Settings.SnowdriftsSpeed;
 			InpSDDensity.Value = (decimal)Program.Settings.SnowdriftsDensity;
 			InpSDStart.Value = Program.Settings.SnowdriftsStart;
-			InpSDDelay.Value = (decimal)(1000f / Program.Settings.SnowdriftsUpdateDelay);
+			InpSDDelay.Value = (decimal)Math.Clamp(1000f / Program.Settings.SnowdriftsUpdateDelay, 1, 20);
 
 			PanelSnowdrifts.Width = PanelSnowdrifts.Parent.Width - PanelSnowdrifts.Left - 10;
 			PanelSnowdrifts.Height = PanelSnowdrifts.Parent.Height - PanelSnowdrifts.Top - 10;

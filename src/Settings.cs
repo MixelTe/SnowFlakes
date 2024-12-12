@@ -34,8 +34,8 @@ namespace SnowFlakes
 		
 		public bool ChristmasLights = true;
 		public int ChristmasLightsInterval = 60;
-		public int ChristmasLightsRadius = 12;
-		public int ChristmasLightsMode = 1;
+		public int ChristmasLightsRadius = 16;
+		public int ChristmasLightsMode = 0;
 		public int ChristmasLightsAnimationSpeed = 100;
 
 		public int Preset = 1;

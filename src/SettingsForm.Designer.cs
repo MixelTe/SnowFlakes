@@ -206,7 +206,6 @@
 			InpSize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSize.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			InpSize.Location = new Point(296, 41);
-			InpSize.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
 			InpSize.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSize.Name = "InpSize";
 			InpSize.Size = new Size(65, 29);
@@ -263,7 +262,7 @@
 			InpSpeedX.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			InpSpeedX.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
 			InpSpeedX.Location = new Point(281, 63);
-			InpSpeedX.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+			InpSpeedX.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
 			InpSpeedX.Name = "InpSpeedX";
 			InpSpeedX.Size = new Size(65, 29);
 			InpSpeedX.TabIndex = 2;
@@ -327,7 +326,7 @@
 			InpSpeedYRange.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSpeedYRange.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			InpSpeedYRange.Location = new Point(281, 65);
-			InpSpeedYRange.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+			InpSpeedYRange.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpSpeedYRange.Name = "InpSpeedYRange";
 			InpSpeedYRange.Size = new Size(65, 29);
 			InpSpeedYRange.TabIndex = 2;
@@ -339,8 +338,8 @@
 			InpSpeedY.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSpeedY.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			InpSpeedY.Location = new Point(281, 30);
-			InpSpeedY.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
-			InpSpeedY.Minimum = new decimal(new int[] { 10, 0, 0, int.MinValue });
+			InpSpeedY.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+			InpSpeedY.Minimum = new decimal(new int[] { 30, 0, 0, int.MinValue });
 			InpSpeedY.Name = "InpSpeedY";
 			InpSpeedY.Size = new Size(65, 29);
 			InpSpeedY.TabIndex = 1;
@@ -916,7 +915,8 @@
 			InpSDDelay.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSDDelay.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
 			InpSDDelay.Location = new Point(293, 301);
-			InpSDDelay.Maximum = new decimal(new int[] { 15, 0, 0, 0 });
+			InpSDDelay.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
+			InpSDDelay.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSDDelay.Name = "InpSDDelay";
 			InpSDDelay.Size = new Size(65, 29);
 			InpSDDelay.TabIndex = 20;
