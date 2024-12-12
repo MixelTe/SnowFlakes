@@ -7,7 +7,6 @@ namespace SnowFlakes
 	public partial class SettingsForm : Form
 	{
 		private bool ignoreChangeEvent = false;
-		private Snowdrifts? _snowdrifts;
 		public SettingsForm()
 		{
 			InitializeComponent();
