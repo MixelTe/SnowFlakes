@@ -170,7 +170,7 @@
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label1.Font = new Font("Segoe UI", 12F);
 			label1.Location = new Point(6, 8);
 			label1.Name = "label1";
 			label1.Size = new Size(168, 21);
@@ -180,7 +180,7 @@
 			// InpCount
 			// 
 			InpCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpCount.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpCount.Font = new Font("Segoe UI", 12F);
 			InpCount.Increment = new decimal(new int[] { 25, 0, 0, 0 });
 			InpCount.Location = new Point(296, 6);
 			InpCount.Maximum = new decimal(new int[] { 50000, 0, 0, 0 });
@@ -194,7 +194,7 @@
 			// label2
 			// 
 			label2.AutoSize = true;
-			label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label2.Font = new Font("Segoe UI", 12F);
 			label2.Location = new Point(6, 43);
 			label2.Name = "label2";
 			label2.Size = new Size(137, 21);
@@ -204,7 +204,7 @@
 			// InpSize
 			// 
 			InpSize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSize.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSize.Font = new Font("Segoe UI", 12F);
 			InpSize.Location = new Point(296, 41);
 			InpSize.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSize.Name = "InpSize";
@@ -216,7 +216,7 @@
 			// label3
 			// 
 			label3.AutoSize = true;
-			label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label3.Font = new Font("Segoe UI", 12F);
 			label3.Location = new Point(3, 1);
 			label3.Name = "label3";
 			label3.Size = new Size(120, 21);
@@ -247,7 +247,7 @@
 			groupBox1.Controls.Add(InpSpeedXMax);
 			groupBox1.Controls.Add(label5);
 			groupBox1.Controls.Add(label4);
-			groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			groupBox1.Font = new Font("Segoe UI", 12F);
 			groupBox1.Location = new Point(6, 6);
 			groupBox1.Name = "groupBox1";
 			groupBox1.Size = new Size(352, 104);
@@ -259,7 +259,7 @@
 			// 
 			InpSpeedX.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSpeedX.DecimalPlaces = 1;
-			InpSpeedX.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSpeedX.Font = new Font("Segoe UI", 12F);
 			InpSpeedX.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
 			InpSpeedX.Location = new Point(281, 63);
 			InpSpeedX.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
@@ -273,7 +273,7 @@
 			// 
 			InpSpeedXMax.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSpeedXMax.DecimalPlaces = 1;
-			InpSpeedXMax.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSpeedXMax.Font = new Font("Segoe UI", 12F);
 			InpSpeedXMax.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
 			InpSpeedXMax.Location = new Point(281, 28);
 			InpSpeedXMax.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
@@ -287,7 +287,7 @@
 			// label5
 			// 
 			label5.AutoSize = true;
-			label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label5.Font = new Font("Segoe UI", 12F);
 			label5.Location = new Point(6, 65);
 			label5.Name = "label5";
 			label5.Size = new Size(53, 21);
@@ -298,7 +298,7 @@
 			// label4
 			// 
 			label4.AutoSize = true;
-			label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label4.Font = new Font("Segoe UI", 12F);
 			label4.Location = new Point(6, 30);
 			label4.Name = "label4";
 			label4.Size = new Size(45, 21);
@@ -313,7 +313,7 @@
 			groupBox2.Controls.Add(InpSpeedY);
 			groupBox2.Controls.Add(label6);
 			groupBox2.Controls.Add(label7);
-			groupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			groupBox2.Font = new Font("Segoe UI", 12F);
 			groupBox2.Location = new Point(6, 116);
 			groupBox2.Name = "groupBox2";
 			groupBox2.Size = new Size(352, 104);
@@ -324,7 +324,7 @@
 			// InpSpeedYRange
 			// 
 			InpSpeedYRange.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSpeedYRange.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSpeedYRange.Font = new Font("Segoe UI", 12F);
 			InpSpeedYRange.Location = new Point(281, 65);
 			InpSpeedYRange.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpSpeedYRange.Name = "InpSpeedYRange";
@@ -336,7 +336,7 @@
 			// InpSpeedY
 			// 
 			InpSpeedY.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSpeedY.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSpeedY.Font = new Font("Segoe UI", 12F);
 			InpSpeedY.Location = new Point(281, 30);
 			InpSpeedY.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpSpeedY.Minimum = new decimal(new int[] { 30, 0, 0, int.MinValue });
@@ -349,7 +349,7 @@
 			// label6
 			// 
 			label6.AutoSize = true;
-			label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label6.Font = new Font("Segoe UI", 12F);
 			label6.Location = new Point(6, 65);
 			label6.Name = "label6";
 			label6.Size = new Size(140, 21);
@@ -360,7 +360,7 @@
 			// label7
 			// 
 			label7.AutoSize = true;
-			label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label7.Font = new Font("Segoe UI", 12F);
 			label7.Location = new Point(6, 30);
 			label7.Name = "label7";
 			label7.Size = new Size(77, 21);
@@ -375,7 +375,7 @@
 			groupBox3.Controls.Add(InpForce);
 			groupBox3.Controls.Add(label8);
 			groupBox3.Controls.Add(label9);
-			groupBox3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			groupBox3.Font = new Font("Segoe UI", 12F);
 			groupBox3.Location = new Point(6, 112);
 			groupBox3.Name = "groupBox3";
 			groupBox3.Size = new Size(352, 108);
@@ -386,7 +386,7 @@
 			// InpD
 			// 
 			InpD.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpD.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpD.Font = new Font("Segoe UI", 12F);
 			InpD.Increment = new decimal(new int[] { 50, 0, 0, 0 });
 			InpD.Location = new Point(281, 63);
 			InpD.Maximum = new decimal(new int[] { 1500, 0, 0, 0 });
@@ -399,7 +399,7 @@
 			// InpForce
 			// 
 			InpForce.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpForce.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpForce.Font = new Font("Segoe UI", 12F);
 			InpForce.Location = new Point(281, 28);
 			InpForce.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpForce.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -412,7 +412,7 @@
 			// label8
 			// 
 			label8.AutoSize = true;
-			label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label8.Font = new Font("Segoe UI", 12F);
 			label8.Location = new Point(6, 65);
 			label8.Name = "label8";
 			label8.Size = new Size(85, 21);
@@ -423,7 +423,7 @@
 			// label9
 			// 
 			label9.AutoSize = true;
-			label9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label9.Font = new Font("Segoe UI", 12F);
 			label9.Location = new Point(6, 30);
 			label9.Name = "label9";
 			label9.Size = new Size(45, 21);
@@ -434,7 +434,7 @@
 			// BtnReset
 			// 
 			BtnReset.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-			BtnReset.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			BtnReset.Font = new Font("Segoe UI", 12F);
 			BtnReset.Location = new Point(7, 427);
 			BtnReset.Name = "BtnReset";
 			BtnReset.Size = new Size(103, 32);
@@ -446,7 +446,7 @@
 			// BtnOk
 			// 
 			BtnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-			BtnOk.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			BtnOk.Font = new Font("Segoe UI", 12F);
 			BtnOk.Location = new Point(279, 427);
 			BtnOk.Name = "BtnOk";
 			BtnOk.Size = new Size(100, 32);
@@ -474,7 +474,7 @@
 			// 
 			groupBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			groupBox4.Controls.Add(flowLayoutPanel1);
-			groupBox4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			groupBox4.Font = new Font("Segoe UI", 12F);
 			groupBox4.Location = new Point(6, 226);
 			groupBox4.Name = "groupBox4";
 			groupBox4.Size = new Size(352, 100);
@@ -558,7 +558,7 @@
 			// InpFPS
 			// 
 			InpFPS.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpFPS.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpFPS.Font = new Font("Segoe UI", 12F);
 			InpFPS.Increment = new decimal(new int[] { 5, 0, 0, 0 });
 			InpFPS.Location = new Point(296, 77);
 			InpFPS.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
@@ -572,7 +572,7 @@
 			// label10
 			// 
 			label10.AutoSize = true;
-			label10.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label10.Font = new Font("Segoe UI", 12F);
 			label10.Location = new Point(6, 79);
 			label10.Name = "label10";
 			label10.Size = new Size(36, 21);
@@ -654,7 +654,7 @@
 			// label12
 			// 
 			label12.AutoSize = true;
-			label12.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label12.Font = new Font("Segoe UI", 12F);
 			label12.Location = new Point(3, 31);
 			label12.Name = "label12";
 			label12.Size = new Size(112, 21);
@@ -712,7 +712,7 @@
 			// RBimg2
 			// 
 			RBimg2.AutoSize = true;
-			RBimg2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			RBimg2.Font = new Font("Segoe UI", 12F);
 			RBimg2.Location = new Point(3, 34);
 			RBimg2.Name = "RBimg2";
 			RBimg2.Size = new Size(100, 25);
@@ -735,7 +735,7 @@
 			// RBimg0
 			// 
 			RBimg0.AutoSize = true;
-			RBimg0.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			RBimg0.Font = new Font("Segoe UI", 12F);
 			RBimg0.Location = new Point(3, 65);
 			RBimg0.Name = "RBimg0";
 			RBimg0.Size = new Size(63, 25);
@@ -748,7 +748,7 @@
 			// 
 			RBimg1.AutoSize = true;
 			RBimg1.Checked = true;
-			RBimg1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			RBimg1.Font = new Font("Segoe UI", 12F);
 			RBimg1.Location = new Point(3, 3);
 			RBimg1.Name = "RBimg1";
 			RBimg1.Size = new Size(100, 25);
@@ -761,7 +761,7 @@
 			// RBimg
 			// 
 			RBimg.AutoSize = true;
-			RBimg.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			RBimg.Font = new Font("Segoe UI", 12F);
 			RBimg.Location = new Point(6, 135);
 			RBimg.Name = "RBimg";
 			RBimg.Size = new Size(95, 25);
@@ -773,7 +773,7 @@
 			// label11
 			// 
 			label11.AutoSize = true;
-			label11.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label11.Font = new Font("Segoe UI", 12F);
 			label11.Location = new Point(3, 3);
 			label11.Name = "label11";
 			label11.Size = new Size(182, 21);
@@ -784,7 +784,7 @@
 			// 
 			RBimgCirc.AutoSize = true;
 			RBimgCirc.Checked = true;
-			RBimgCirc.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			RBimgCirc.Font = new Font("Segoe UI", 12F);
 			RBimgCirc.Location = new Point(6, 27);
 			RBimgCirc.Name = "RBimgCirc";
 			RBimgCirc.Size = new Size(101, 25);
@@ -858,7 +858,7 @@
 			// label20
 			// 
 			label20.AutoSize = true;
-			label20.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label20.Font = new Font("Segoe UI", 12F);
 			label20.Location = new Point(6, 111);
 			label20.Name = "label20";
 			label20.Size = new Size(75, 21);
@@ -901,7 +901,7 @@
 			// CBSmooth
 			// 
 			CBSmooth.AutoSize = true;
-			CBSmooth.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			CBSmooth.Font = new Font("Segoe UI", 12F);
 			CBSmooth.Location = new Point(6, 135);
 			CBSmooth.Name = "CBSmooth";
 			CBSmooth.Size = new Size(150, 25);
@@ -913,7 +913,7 @@
 			// InpSDDelay
 			// 
 			InpSDDelay.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDDelay.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSDDelay.Font = new Font("Segoe UI", 12F);
 			InpSDDelay.Location = new Point(293, 301);
 			InpSDDelay.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
 			InpSDDelay.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -926,7 +926,7 @@
 			// label19
 			// 
 			label19.AutoSize = true;
-			label19.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label19.Font = new Font("Segoe UI", 12F);
 			label19.Location = new Point(3, 303);
 			label19.Name = "label19";
 			label19.Size = new Size(167, 21);
@@ -937,7 +937,7 @@
 			// InpSDStart
 			// 
 			InpSDStart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDStart.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSDStart.Font = new Font("Segoe UI", 12F);
 			InpSDStart.Increment = new decimal(new int[] { 2, 0, 0, 0 });
 			InpSDStart.Location = new Point(293, 161);
 			InpSDStart.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
@@ -950,7 +950,7 @@
 			// label18
 			// 
 			label18.AutoSize = true;
-			label18.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label18.Font = new Font("Segoe UI", 12F);
 			label18.Location = new Point(3, 163);
 			label18.Name = "label18";
 			label18.Size = new Size(157, 21);
@@ -962,7 +962,7 @@
 			// 
 			InpSDDensity.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSDDensity.DecimalPlaces = 1;
-			InpSDDensity.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSDDensity.Font = new Font("Segoe UI", 12F);
 			InpSDDensity.Increment = new decimal(new int[] { 5, 0, 0, 0 });
 			InpSDDensity.Location = new Point(293, 266);
 			InpSDDensity.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
@@ -975,7 +975,7 @@
 			// label17
 			// 
 			label17.AutoSize = true;
-			label17.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label17.Font = new Font("Segoe UI", 12F);
 			label17.Location = new Point(3, 268);
 			label17.Name = "label17";
 			label17.Size = new Size(115, 21);
@@ -987,7 +987,7 @@
 			// 
 			InpSDSpeed.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSDSpeed.DecimalPlaces = 2;
-			InpSDSpeed.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSDSpeed.Font = new Font("Segoe UI", 12F);
 			InpSDSpeed.Increment = new decimal(new int[] { 5, 0, 0, 131072 });
 			InpSDSpeed.Location = new Point(293, 196);
 			InpSDSpeed.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
@@ -1000,7 +1000,7 @@
 			// label14
 			// 
 			label14.AutoSize = true;
-			label14.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label14.Font = new Font("Segoe UI", 12F);
 			label14.Location = new Point(3, 198);
 			label14.Name = "label14";
 			label14.Size = new Size(121, 21);
@@ -1011,7 +1011,7 @@
 			// InpSDRes
 			// 
 			InpSDRes.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDRes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpSDRes.Font = new Font("Segoe UI", 12F);
 			InpSDRes.Increment = new decimal(new int[] { 2, 0, 0, 0 });
 			InpSDRes.Location = new Point(293, 231);
 			InpSDRes.Maximum = new decimal(new int[] { 150, 0, 0, 0 });
@@ -1025,7 +1025,7 @@
 			// label13
 			// 
 			label13.AutoSize = true;
-			label13.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label13.Font = new Font("Segoe UI", 12F);
 			label13.Location = new Point(3, 233);
 			label13.Name = "label13";
 			label13.Size = new Size(122, 21);
@@ -1062,7 +1062,7 @@
 			// label15
 			// 
 			label15.AutoSize = true;
-			label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label15.Font = new Font("Segoe UI", 12F);
 			label15.Location = new Point(3, 31);
 			label15.Name = "label15";
 			label15.Size = new Size(112, 21);
@@ -1072,7 +1072,7 @@
 			// label16
 			// 
 			label16.AutoSize = true;
-			label16.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label16.Font = new Font("Segoe UI", 12F);
 			label16.Location = new Point(3, 1);
 			label16.Name = "label16";
 			label16.Size = new Size(114, 21);
@@ -1095,7 +1095,7 @@
 			// CBSameColor
 			// 
 			CBSameColor.AutoSize = true;
-			CBSameColor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			CBSameColor.Font = new Font("Segoe UI", 12F);
 			CBSameColor.Location = new Point(6, 3);
 			CBSameColor.Name = "CBSameColor";
 			CBSameColor.Size = new Size(179, 25);
@@ -1108,7 +1108,7 @@
 			// CBSnowdrifts
 			// 
 			CBSnowdrifts.AutoSize = true;
-			CBSnowdrifts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			CBSnowdrifts.Font = new Font("Segoe UI", 12F);
 			CBSnowdrifts.Location = new Point(6, 6);
 			CBSnowdrifts.Name = "CBSnowdrifts";
 			CBSnowdrifts.Size = new Size(163, 25);
@@ -1163,7 +1163,7 @@
 			// label23
 			// 
 			label23.AutoSize = true;
-			label23.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label23.Font = new Font("Segoe UI", 12F);
 			label23.Location = new Point(3, 76);
 			label23.Name = "label23";
 			label23.Size = new Size(154, 21);
@@ -1175,7 +1175,7 @@
 			// 
 			groupBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			groupBox5.Controls.Add(flowLayoutPanel2);
-			groupBox5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			groupBox5.Font = new Font("Segoe UI", 12F);
 			groupBox5.Location = new Point(0, 103);
 			groupBox5.Name = "groupBox5";
 			groupBox5.Size = new Size(352, 100);
@@ -1259,7 +1259,7 @@
 			// InpCLSize
 			// 
 			InpCLSize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpCLSize.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpCLSize.Font = new Font("Segoe UI", 12F);
 			InpCLSize.Increment = new decimal(new int[] { 2, 0, 0, 0 });
 			InpCLSize.Location = new Point(287, 39);
 			InpCLSize.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -1272,7 +1272,7 @@
 			// label22
 			// 
 			label22.AutoSize = true;
-			label22.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label22.Font = new Font("Segoe UI", 12F);
 			label22.Location = new Point(3, 41);
 			label22.Name = "label22";
 			label22.Size = new Size(136, 21);
@@ -1283,7 +1283,7 @@
 			// InpCLInterval
 			// 
 			InpCLInterval.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpCLInterval.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			InpCLInterval.Font = new Font("Segoe UI", 12F);
 			InpCLInterval.Increment = new decimal(new int[] { 2, 0, 0, 0 });
 			InpCLInterval.Location = new Point(287, 4);
 			InpCLInterval.Maximum = new decimal(new int[] { 2000, 0, 0, 0 });
@@ -1297,7 +1297,7 @@
 			// label21
 			// 
 			label21.AutoSize = true;
-			label21.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			label21.Font = new Font("Segoe UI", 12F);
 			label21.Location = new Point(3, 6);
 			label21.Name = "label21";
 			label21.Size = new Size(153, 21);
@@ -1308,7 +1308,7 @@
 			// CBLights
 			// 
 			CBLights.AutoSize = true;
-			CBLights.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+			CBLights.Font = new Font("Segoe UI", 12F);
 			CBLights.Location = new Point(6, 6);
 			CBLights.Name = "CBLights";
 			CBLights.Size = new Size(170, 25);
@@ -1319,8 +1319,7 @@
 			// 
 			// SettingsForm
 			// 
-			AutoScaleDimensions = new SizeF(7F, 15F);
-			AutoScaleMode = AutoScaleMode.Font;
+			AutoScaleMode = AutoScaleMode.None;
 			ClientSize = new Size(386, 466);
 			Controls.Add(tabControl2);
 			Controls.Add(BtnGithub);

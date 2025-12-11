@@ -38,8 +38,8 @@ namespace SnowFlakes
 			{
 				X = 0,
 				Y = 0,
-				Width = Screen.PrimaryScreen.Bounds.Width,
-				Height = Screen.PrimaryScreen.Bounds.Height,
+				Width = Screen.PrimaryScreen?.Bounds.Width ?? 0,
+				Height = Screen.PrimaryScreen?.Bounds.Height ?? 0,
 				FPS = Program.Settings.FPS,
 				IsTopmost = true,
 				IsVisible = true,

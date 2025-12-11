@@ -40,10 +40,10 @@ namespace SnowFlakes
 			RBimg.Checked = true;
 			switch (Program.Settings.ParticleImg)
 			{
-				case 0: RBimg0.Checked = true; PanelColor.Enabled = false; break;
-				case 1: RBimg1.Checked = true; PanelColor.Enabled = false; break;
-				case 2: RBimg2.Checked = true; PanelColor.Enabled = false; break;
-				default: RBimgCirc.Checked = true; PanelImg.Enabled = false; break;
+				case 0: RBimg0.Checked = true; break;
+				case 1: RBimg1.Checked = true; break;
+				case 2: RBimg2.Checked = true; break;
+				default: RBimgCirc.Checked = true; break;
 			}
 
 			try
@@ -67,8 +67,8 @@ namespace SnowFlakes
 			InpSDStart.Value = Program.Settings.SnowdriftsStart;
 			InpSDDelay.Value = (decimal)Math.Clamp(1000f / Program.Settings.SnowdriftsUpdateDelay, 1, 20);
 
-			PanelSnowdrifts.Width = PanelSnowdrifts.Parent.Width - PanelSnowdrifts.Left - 10;
-			PanelSnowdrifts.Height = PanelSnowdrifts.Parent.Height - PanelSnowdrifts.Top - 10;
+			PanelSnowdrifts.Width = PanelSnowdrifts.Parent?.Width ?? 0 - PanelSnowdrifts.Left - 10;
+			PanelSnowdrifts.Height = PanelSnowdrifts.Parent?.Height ?? 0 - PanelSnowdrifts.Top - 10;
 			BtnSDSet1.Left = BtnSDSet2.Left - BtnSDSet1.Width - 8;
 
 
@@ -139,16 +139,14 @@ namespace SnowFlakes
 		{
 			if (ignoreChangeEvent) return;
 			colorDialog.Color = Program.Settings.ParticleColor;
-			if (colorDialog.ShowDialog(this) == DialogResult.OK)
+			if (colorDialog.ShowDialog(this) != DialogResult.OK) return;
+			Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, colorDialog.Color);
+			BtnColor.BackColor = colorDialog.Color;
+			Program.SnowWindow?.UpdateColor();
+			if (CBSameColor.Checked)
 			{
-				Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, colorDialog.Color);
-				BtnColor.BackColor = colorDialog.Color;
-				Program.SnowWindow?.UpdateColor();
-				if (CBSameColor.Checked)
-				{
-					Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
-					Program.SnowWindow?.UpdateColorSnowdrifts();
-				}
+				Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
+				Program.SnowWindow?.UpdateColorSnowdrifts();
 			}
 		}
 		private void Alpha_Change(object sender, EventArgs e)
@@ -243,60 +241,59 @@ namespace SnowFlakes
 		}
 		private void ImgCirc_Change(object sender, EventArgs e)
 		{
-			if (ignoreChangeEvent) return;
+			if (ignoreChangeEvent || !RBimgCirc.Checked) return;
 			Program.Settings.ParticleImg = -1;
-			PanelColor.Enabled = true;
-			PanelImg.Enabled = false;
+			//PanelColor.Enabled = true;
+			//PanelImg.Enabled = false;
 		}
 		private void Img_Change(object sender, EventArgs e)
 		{
-			if (ignoreChangeEvent) return;
+			if (ignoreChangeEvent || !RBimg.Checked) return;
 			if (RBimg0.Checked) Program.Settings.ParticleImg = 0;
 			else if (RBimg2.Checked) Program.Settings.ParticleImg = 2;
 			else Program.Settings.ParticleImg = 1;
-			PanelColor.Enabled = false;
-			PanelImg.Enabled = true;
+			//PanelColor.Enabled = false;
+			//PanelImg.Enabled = true;
 		}
 		private void Img1_Change(object sender, EventArgs e)
 		{
-			if (ignoreChangeEvent) return;
+			if (ignoreChangeEvent || !RBimg1.Checked) return;
 			Program.Settings.ParticleImg = 1;
+			RBimg.Checked = true;
 		}
 		private void Img2_Change(object sender, EventArgs e)
 		{
-			if (ignoreChangeEvent) return;
+			if (ignoreChangeEvent || !RBimg2.Checked) return;
 			Program.Settings.ParticleImg = 2;
+			RBimg.Checked = true;
 		}
 		private void Img0_Change(object sender, EventArgs e)
 		{
-			if (ignoreChangeEvent) return;
+			if (ignoreChangeEvent || !RBimg0.Checked) return;
 			Program.Settings.ParticleImg = 0;
+			RBimg.Checked = true;
 			if (Program.Settings.ParticleImgPath == "")
 				ChoseImg_Click(sender, e);
 		}
 		private void ChoseImg_Click(object sender, EventArgs e)
 		{
 			var r = DialogOpenFile.ShowDialog(this);
-			if (r == DialogResult.OK)
+			if (r != DialogResult.OK) return;
+			if (Program.Settings.ParticleImgPath == DialogOpenFile.FileName) return;
+			Program.Settings.ParticleImgPath = DialogOpenFile.FileName;
+			Program.Settings.ParticleImg = 0;
+			try
 			{
-				if (Program.Settings.ParticleImgPath != DialogOpenFile.FileName)
-				{
-					Program.Settings.ParticleImgPath = DialogOpenFile.FileName;
-					Program.Settings.ParticleImg = 0;
-					try
-					{
-						PBImg.BackgroundImage = Image.FromFile(DialogOpenFile.FileName);
-					}
-					catch
-					{
-						PBImg.BackgroundImage = null;
-					}
-					Program.SnowWindow?.UpdateSnowflakeImg();
-					ignoreChangeEvent = true;
-					RBimg0.Checked = true;
-					ignoreChangeEvent = false;
-				}
+				PBImg.BackgroundImage = Image.FromFile(DialogOpenFile.FileName);
 			}
+			catch
+			{
+				PBImg.BackgroundImage = null;
+			}
+			Program.SnowWindow?.UpdateSnowflakeImg();
+			ignoreChangeEvent = true;
+			RBimg0.Checked = true;
+			ignoreChangeEvent = false;
 		}
 		private void SetFilterForFileDialog()
 		{
