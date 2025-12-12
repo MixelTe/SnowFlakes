@@ -8,6 +8,8 @@ namespace SnowFlakes
 {
 	public class Settings
 	{
+		public int SettingsVersion = 1;
+
 		public int Particles = 200;
 		public int ParticleRad = 4;
 		public Color ParticleColor = Color.FromArgb(150, Color.LightBlue);
@@ -48,6 +50,7 @@ namespace SnowFlakes
 		}
 		public void Load()
 		{
+			SettingsVersion = 0;
 			RegSerializer.Load(Program.KeyName, this);
 			switch (Program.Settings.Preset)
 			{
@@ -55,6 +58,19 @@ namespace SnowFlakes
 				case 2: SetPreset2(); break;
 				case 3: SetPreset3(); break;
 				case 4: SetPreset4(); break;
+			}
+			UpgradeSettings();
+		}
+		private void UpgradeSettings()
+		{
+			switch (SettingsVersion)
+			{
+				case 0:
+					SettingsVersion = 1;
+					SnowdriftsDensity = SnowdriftsDensity / SnowdriftsResolution * 2;
+					SnowdriftsSpeed = SnowdriftsSpeed * SnowdriftsResolution;
+					UpgradeSettings();
+					break;
 			}
 		}
 

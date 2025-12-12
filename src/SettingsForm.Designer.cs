@@ -66,6 +66,7 @@
 			label10 = new Label();
 			tabControl2 = new TabControl();
 			tabPage4 = new TabPage();
+			CBfps = new CheckBox();
 			tabPage5 = new TabPage();
 			PanelColor = new Panel();
 			InpAlpha = new TrackBar();
@@ -125,7 +126,6 @@
 			CBLights = new CheckBox();
 			DialogOpenFile = new OpenFileDialog();
 			MyToolTip = new ToolTip(components);
-			CBfps = new CheckBox();
 			((System.ComponentModel.ISupportInitialize)InpCount).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSize).BeginInit();
 			groupBox1.SuspendLayout();
@@ -612,6 +612,17 @@
 			tabPage4.Text = "Основное";
 			tabPage4.UseVisualStyleBackColor = true;
 			// 
+			// CBfps
+			// 
+			CBfps.AutoSize = true;
+			CBfps.Location = new Point(6, 362);
+			CBfps.Name = "CBfps";
+			CBfps.Size = new Size(109, 19);
+			CBfps.TabIndex = 13;
+			CBfps.Text = "Отобразить fps";
+			CBfps.UseVisualStyleBackColor = true;
+			CBfps.CheckedChanged += CBfps_CheckedChanged;
+			// 
 			// tabPage5
 			// 
 			tabPage5.Controls.Add(PanelColor);
@@ -967,11 +978,12 @@
 			InpSDDensity.Font = new Font("Segoe UI", 12F);
 			InpSDDensity.Increment = new decimal(new int[] { 5, 0, 0, 0 });
 			InpSDDensity.Location = new Point(293, 266);
+			InpSDDensity.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
 			InpSDDensity.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
 			InpSDDensity.Name = "InpSDDensity";
 			InpSDDensity.Size = new Size(65, 29);
 			InpSDDensity.TabIndex = 16;
-			InpSDDensity.Value = new decimal(new int[] { 20, 0, 0, 0 });
+			InpSDDensity.Value = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSDDensity.ValueChanged += SnowdriftsDensity_Change;
 			// 
 			// label17
@@ -988,15 +1000,15 @@
 			// InpSDSpeed
 			// 
 			InpSDSpeed.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDSpeed.DecimalPlaces = 2;
+			InpSDSpeed.DecimalPlaces = 1;
 			InpSDSpeed.Font = new Font("Segoe UI", 12F);
-			InpSDSpeed.Increment = new decimal(new int[] { 5, 0, 0, 131072 });
+			InpSDSpeed.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
 			InpSDSpeed.Location = new Point(293, 196);
-			InpSDSpeed.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+			InpSDSpeed.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpSDSpeed.Name = "InpSDSpeed";
 			InpSDSpeed.Size = new Size(65, 29);
 			InpSDSpeed.TabIndex = 14;
-			InpSDSpeed.Value = new decimal(new int[] { 2, 0, 0, 65536 });
+			InpSDSpeed.Value = new decimal(new int[] { 6, 0, 0, 0 });
 			InpSDSpeed.ValueChanged += SnowdriftsSpeed_Change;
 			// 
 			// label14
@@ -1318,17 +1330,6 @@
 			CBLights.Text = "Включить гирлянду";
 			CBLights.UseVisualStyleBackColor = true;
 			CBLights.CheckedChanged += CBLights_CheckedChanged;
-			// 
-			// CBfps
-			// 
-			CBfps.AutoSize = true;
-			CBfps.Location = new Point(6, 362);
-			CBfps.Name = "CBfps";
-			CBfps.Size = new Size(109, 19);
-			CBfps.TabIndex = 13;
-			CBfps.Text = "Отобразить fps";
-			CBfps.UseVisualStyleBackColor = true;
-			CBfps.CheckedChanged += CBfps_CheckedChanged;
 			// 
 			// SettingsForm
 			// 

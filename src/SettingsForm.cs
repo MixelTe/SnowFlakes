@@ -372,34 +372,34 @@ namespace SnowFlakes
 		}
 		private void SnowdriftsAdd_Click(object sender, EventArgs e)
 		{
-			Program.SnowWindow?.Snowdrifts?.AddSnow();
+			Program.SnowWindow?.Snowdrifts.AddSnow();
 		}
 		private void SnowdriftsSet1_Click(object sender, EventArgs e)
 		{
 			CBSmooth.Checked = true;
 			InpSDRes.Value = 80;
-			InpSDSpeed.Value = 0.08M;
-			InpSDDensity.Value = 40;
+			InpSDSpeed.Value = 5;
+			InpSDDensity.Value = 1;
 			InpSDDelay.Value = 2;
-			Program.SnowWindow?.Snowdrifts?.CreateSmooth();
+			Program.SnowWindow?.Snowdrifts.CreateSmooth();
 		}
 		private void SnowdriftsSet2_Click(object sender, EventArgs e)
 		{
 			CBSmooth.Checked = true;
 			InpSDRes.Value = 40;
-			InpSDSpeed.Value = 0.16M;
-			InpSDDensity.Value = 20;
+			InpSDSpeed.Value = 5;
+			InpSDDensity.Value = 1;
 			InpSDDelay.Value = 4;
-			Program.SnowWindow?.Snowdrifts?.CreateSmooth();
+			Program.SnowWindow?.Snowdrifts.CreateSmooth();
 		}
 		private void SnowdriftsSet3_Click(object sender, EventArgs e)
 		{
 			CBSmooth.Checked = false;
 			InpSDRes.Value = 1;
-			InpSDSpeed.Value = 4M;
-			InpSDDensity.Value = 0.4M;
+			InpSDSpeed.Value = 5;
+			InpSDDensity.Value = 1;
 			InpSDDelay.Value = 4;
-			Program.SnowWindow?.Snowdrifts?.CreateSmooth();
+			Program.SnowWindow?.Snowdrifts.CreateSmooth();
 		}
 
 		private void CBLights_CheckedChanged(object sender, EventArgs e)

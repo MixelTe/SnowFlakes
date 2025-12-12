@@ -135,13 +135,14 @@
 				var pi = (i - 1 + _pieces.Length) % _pieces.Length;
 				var ni = (i + 1) % _pieces.Length;
 				var v = _pieces[i];
-				var d1 = _pieces[pi] - v - Program.Settings.SnowdriftsDensity;
+				var density = Program.Settings.SnowdriftsDensity * Program.Settings.SnowdriftsResolution / 2;
+				var d1 = _pieces[pi] - v - density;
 				if (d1 > 0)
 				{
 					_pieces[pi] -= d1 / 2f;
 					_pieces[i] += d1 / 2f;
 				}
-				var d2 = _pieces[ni] - v - Program.Settings.SnowdriftsDensity;
+				var d2 = _pieces[ni] - v - density;
 				if (d2 > 0)
 				{
 					_pieces[ni] -= d2 / 2f;
@@ -154,7 +155,7 @@
 		{
 			var i = (int)(x / Program.Settings.SnowdriftsResolution);
 			if (i >= _pieces.Length) return;
-			_pieces[i] += Program.Settings.SnowdriftsSpeed;
+			_pieces[i] += Program.Settings.SnowdriftsSpeed / Program.Settings.SnowdriftsResolution;
 			if (_pieces[i] > _height - Program.Settings.SnowdriftsStart)
 				_pieces[i] = _height - Program.Settings.SnowdriftsStart;
 		}
