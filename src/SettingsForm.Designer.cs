@@ -125,6 +125,7 @@
 			CBLights = new CheckBox();
 			DialogOpenFile = new OpenFileDialog();
 			MyToolTip = new ToolTip(components);
+			CBfps = new CheckBox();
 			((System.ComponentModel.ISupportInitialize)InpCount).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSize).BeginInit();
 			groupBox1.SuspendLayout();
@@ -595,6 +596,7 @@
 			// 
 			// tabPage4
 			// 
+			tabPage4.Controls.Add(CBfps);
 			tabPage4.Controls.Add(label1);
 			tabPage4.Controls.Add(InpFPS);
 			tabPage4.Controls.Add(InpCount);
@@ -1317,6 +1319,17 @@
 			CBLights.UseVisualStyleBackColor = true;
 			CBLights.CheckedChanged += CBLights_CheckedChanged;
 			// 
+			// CBfps
+			// 
+			CBfps.AutoSize = true;
+			CBfps.Location = new Point(6, 362);
+			CBfps.Name = "CBfps";
+			CBfps.Size = new Size(109, 19);
+			CBfps.TabIndex = 13;
+			CBfps.Text = "Отобразить fps";
+			CBfps.UseVisualStyleBackColor = true;
+			CBfps.CheckedChanged += CBfps_CheckedChanged;
+			// 
 			// SettingsForm
 			// 
 			AutoScaleMode = AutoScaleMode.None;
@@ -1486,5 +1499,6 @@
 		private RadioButton RBMode4;
 		private TrackBar InpCLAnimSpeed;
 		private Label label23;
+		private CheckBox CBfps;
 	}
 }

@@ -19,6 +19,7 @@ namespace SnowFlakes
 			InpCount.Value = Program.Settings.Particles;
 			InpSize.Value = Program.Settings.ParticleRad;
 			InpFPS.Value = Program.Settings.FPS;
+			CBfps.Checked = Program.Settings.ShowFPS;
 			BtnColor.BackColor = Program.Settings.ParticleColor;
 			InpAlpha.Value = Program.Settings.ParticleColor.A;
 			InpSpeedXMax.Value = (decimal)Program.Settings.SpeedXMax;
@@ -128,7 +129,7 @@ namespace SnowFlakes
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.Particles = (int)InpCount.Value;
-			Program.SnowWindow?.Reload();
+			Program.SnowWindow?.Snowflakes.UpdateParticles();
 		}
 		private void Size_Change(object sender, EventArgs e)
 		{
@@ -142,22 +143,22 @@ namespace SnowFlakes
 			if (colorDialog.ShowDialog(this) != DialogResult.OK) return;
 			Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, colorDialog.Color);
 			BtnColor.BackColor = colorDialog.Color;
-			Program.SnowWindow?.UpdateColor();
+			Program.SnowWindow?.Snowflakes.UpdateColor();
 			if (CBSameColor.Checked)
 			{
 				Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
-				Program.SnowWindow?.UpdateColorSnowdrifts();
+				Program.SnowWindow?.Snowdrifts.UpdateColor();
 			}
 		}
 		private void Alpha_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, Program.Settings.ParticleColor);
-			Program.SnowWindow?.UpdateColor();
+			Program.SnowWindow?.Snowflakes.UpdateColor();
 			if (CBSameColor.Checked)
 			{
 				Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
-				Program.SnowWindow?.UpdateColorSnowdrifts();
+				Program.SnowWindow?.Snowdrifts.UpdateColor();
 			}
 		}
 		private void SpeedXMax_Change(object sender, EventArgs e)
@@ -165,7 +166,7 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Program.Settings.SpeedXMax = (float)InpSpeedXMax.Value;
 			SetPreset0();
-			Program.SnowWindow?.Rerandomize();
+			Program.SnowWindow?.Snowflakes.Rerandomize();
 		}
 		private void SpeedX_Change(object sender, EventArgs e)
 		{
@@ -179,7 +180,7 @@ namespace SnowFlakes
 			Program.Settings.SpeedYMin = (int)(InpSpeedY.Value - InpSpeedYRange.Value);
 			Program.Settings.SpeedYMax = (int)(InpSpeedY.Value + InpSpeedYRange.Value);
 			SetPreset0();
-			Program.SnowWindow?.Rerandomize();
+			Program.SnowWindow?.Snowflakes.Rerandomize();
 		}
 		private void Force_Change(object sender, EventArgs e)
 		{
@@ -203,41 +204,46 @@ namespace SnowFlakes
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset0();
 			SetFields();
-			Program.SnowWindow?.Rerandomize();
+			Program.SnowWindow?.Snowflakes.Rerandomize();
 		}
 		private void Preset1_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset1();
 			SetFields();
-			Program.SnowWindow?.Rerandomize();
+			Program.SnowWindow?.Snowflakes.Rerandomize();
 		}
 		private void Preset2_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset2();
 			SetFields();
-			Program.SnowWindow?.Rerandomize();
+			Program.SnowWindow?.Snowflakes.Rerandomize();
 		}
 		private void Preset3_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset3();
 			SetFields();
-			Program.SnowWindow?.Rerandomize();
+			Program.SnowWindow?.Snowflakes.Rerandomize();
 		}
 		private void Preset4_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Settings.SetPreset4();
 			SetFields();
-			Program.SnowWindow?.Rerandomize();
+			Program.SnowWindow?.Snowflakes.Rerandomize();
 		}
 		private void FPS_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.FPS = (int)InpFPS.Value;
 			Program.SnowWindow?.SetFPS(Program.Settings.FPS);
+		}
+		private void CBfps_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ignoreChangeEvent) return;
+			Program.Settings.ShowFPS = CBfps.Checked;
 		}
 		private void ImgCirc_Change(object sender, EventArgs e)
 		{
@@ -290,7 +296,7 @@ namespace SnowFlakes
 			{
 				PBImg.BackgroundImage = null;
 			}
-			Program.SnowWindow?.UpdateSnowflakeImg();
+			Program.SnowWindow?.Snowflakes.UpdateImg();
 			ignoreChangeEvent = true;
 			RBimg0.Checked = true;
 			ignoreChangeEvent = false;
@@ -315,7 +321,7 @@ namespace SnowFlakes
 				Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
 			else
 				Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, BtnColorSD.BackColor);
-			Program.SnowWindow?.UpdateColorSnowdrifts();
+			Program.SnowWindow?.Snowdrifts.UpdateColor();
 		}
 		private void SnowdriftsSmooth_Change(object sender, EventArgs e)
 		{
@@ -329,14 +335,14 @@ namespace SnowFlakes
 			{
 				Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, colorDialog.Color);
 				BtnColorSD.BackColor = colorDialog.Color;
-				Program.SnowWindow?.UpdateColorSnowdrifts();
+				Program.SnowWindow?.Snowdrifts.UpdateColor();
 			}
 		}
 		private void SnowdriftsAlpha_Change(object sender, EventArgs e)
 		{
 			if (ignoreChangeEvent) return;
 			Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, Program.Settings.SnowdriftsColor);
-			Program.SnowWindow?.UpdateColorSnowdrifts();
+			Program.SnowWindow?.Snowdrifts.UpdateColor();
 		}
 		private void SnowdriftsRes_Change(object sender, EventArgs e)
 		{

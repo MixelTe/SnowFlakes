@@ -4,14 +4,14 @@ namespace SnowFlakes
 {
 	public partial class App : ApplicationContext
 	{
-		private readonly NotifyIcon trayIcon;
+		private readonly NotifyIcon _trayIcon;
 		private SettingsForm? _settingsForm;
 		private SelectZoneForm? _selectZoneForm;
 		private bool _iconClicked;
 
 		public App()
 		{
-			trayIcon = new NotifyIcon()
+			_trayIcon = new NotifyIcon()
 			{
 				Icon = Resources.icon,
 				ContextMenuStrip = new ContextMenuStrip()
@@ -32,15 +32,15 @@ namespace SnowFlakes
 				},
 				Visible = true
 			};
-			trayIcon.Click += Icon_Click;
-			trayIcon.DoubleClick += Icon_DbClick;
+			_trayIcon.Click += Icon_Click;
+			_trayIcon.DoubleClick += Icon_DbClick;
 
 			Program.SnowWindow?.Run();
 		}
 
 		void Exit(object? sender, EventArgs e)
 		{
-			trayIcon.Visible = false;
+			_trayIcon.Visible = false;
 
 			Application.Exit();
 		}
@@ -96,6 +96,7 @@ namespace SnowFlakes
 		private void Restart(object? sender, EventArgs e)
 		{
 			Program.SnowWindow?.Dispose();
+			Program.Settings = new Settings();
 			Program.Settings.Load();
 			Program.SnowWindow = new SnowWindow();
 			Program.SnowWindow.Run();
@@ -105,8 +106,6 @@ namespace SnowFlakes
 			Program.Settings = new Settings();
 			Program.Settings.Load();
 			Program.SnowWindow?.Reload();
-			Program.SnowWindow?.SetFPS(Program.Settings.FPS);
-			Program.SnowWindow?.UpdateSnowflakeImg();
 		}
 	}
 }

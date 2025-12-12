@@ -1,28 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SnowFlakes
+﻿namespace SnowFlakes
 {
-	internal class ChristmasLights
+	internal class ChristmasLights : ISprite
 	{
-		private readonly int Width;
-		private readonly int Height;
-		private int _distance = 0;
+		private readonly int _width;
+		private readonly int _height;
+		private int _interval = 0;
 		private float _speed = 1;
-		private Light[] _lights = { };
+		private Light[] _lights = [];
 		private LightsMode _mode;
+		private GameOverlay.Drawing.SolidBrush? _brush;
 
 		public ChristmasLights(int width, int height)
 		{
-			Width = width;
-			Height = height;
+			_width = width;
+			_height = height;
 			UpdateInterval();
 			UpdateSpeed();
 			_mode = GetCurLightsMode();
+		}
+
+		public void SetupGraphics(GameOverlay.Drawing.Graphics gfx)
+		{
+			_brush?.Dispose();
+			_brush = gfx.CreateSolidBrush(255, 0, 0);
+		}
+
+		public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
+		{
+			if (!Program.Settings.ChristmasLights) return;
+			_mode.Update(_lights, (int)Math.Round(deltaTime * _speed));
+
+			if (_brush == null) return;
+			for (int i = 0; i < _lights.Length; i++)
+			{
+				var d = i * _interval;
+				var x = 0; var y = 0;
+				if (d < _height) y = _height - d;
+				else if (d < _height + _width) x = d - _height;
+				else { x = _width; y = d - _height - _width; }
+
+				var radius = Program.Settings.ChristmasLightsRadius;
+				var step = radius > 20 ? 2 : 1;
+				_brush.Color = _lights[i].ToColor(radius / step);
+				for (int j = 0; j < radius; j += step)
+					gfx.FillCircle(_brush, x, y, j);
+			}
+		}
+
+		public void DestroyGraphics()
+		{
+			_brush?.Dispose(); _brush = null;
+		}
+
+		public void Reload()
+		{
+			UpdateInterval();
+			UpdateMode();
+			UpdateSpeed();
 		}
 
 		private LightsMode GetCurLightsMode()
@@ -37,36 +71,10 @@ namespace SnowFlakes
 			};
 		}
 
-		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
-		{
-			if (brush == null) return;
-			for (int i = 0; i < _lights.Length; i++)
-			{
-				var d = i * _distance;
-				var x = 0; var y = 0;
-				if (d < Height) y = Height - d;
-				else if (d < Height + Width) x = d - Height;
-				else { x = Width; y = d - Height - Width; }
-
-				var radius = Program.Settings.ChristmasLightsRadius;
-				var step = radius > 20 ? 2 : 1;
-				brush.Color = _lights[i].ToColor(radius / step);
-				for (int j = 0; j < radius; j += step)
-				{
-					gfx.FillCircle(brush, x, y, j);
-				}
-			}
-		}
-
-		public void Update(long deltaTime)
-		{
-			_mode.Update(_lights, (int)Math.Round(deltaTime * _speed));
-		}
-
 		public void UpdateInterval()
 		{
-			_distance = Program.Settings.ChristmasLightsInterval;
-			var lights = new Light[(Width + Height * 2) / _distance];
+			_interval = Program.Settings.ChristmasLightsInterval;
+			var lights = new Light[(_width + _height * 2) / _interval];
 			for (int i = 0; i < lights.Length; i++)
 			{
 				lights[i] = new Light(Random.Shared.Next(255), Random.Shared.Next(255), Random.Shared.Next(255));
@@ -78,32 +86,20 @@ namespace SnowFlakes
 		{
 			_mode = GetCurLightsMode();
 		}
-
 		public void UpdateSpeed()
 		{
-			if (Program.Settings.ChristmasLightsAnimationSpeed >= 100)
-				_speed = Program.Settings.ChristmasLightsAnimationSpeed / 100f;
-			else
-				_speed = 0.5f + Program.Settings.ChristmasLightsAnimationSpeed / 200f;
-			Debug.WriteLine(_speed);
+			var speed = Program.Settings.ChristmasLightsAnimationSpeed;
+			_speed = speed >= 100 ? speed / 100f : 0.5f + speed / 200f;
 		}
 
-		private class Light
+		private class Light(int r, int g, int b, int a = 255)
 		{
-			public int R;
-			public int G;
-			public int B;
-			public int A;
+			public int R = r;
+			public int G = g;
+			public int B = b;
+			public int A = a;
 			public int V1;
 
-			public Light(int r, int g, int b, int a = 255)
-			{
-				R = r;
-				G = g;
-				B = b;
-				A = a;
-			}
-			
 			public void Set(int r, int g, int b, int a = 255, int v1 = 0)
 			{
 				R = r;

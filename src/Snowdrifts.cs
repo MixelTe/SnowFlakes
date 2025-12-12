@@ -1,27 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SnowFlakes
+﻿namespace SnowFlakes
 {
-	internal class Snowdrifts
+	internal class Snowdrifts : ISprite
 	{
 		private float[] _pieces;
-		private readonly int Width;
-		private readonly int Height;
-		private long DeltaTime = 0;
+		private readonly int _width;
+		private readonly int _height;
+		private long _time = 0;
+		private Point _pastCursorPos;
+		private GameOverlay.Drawing.SolidBrush? _brush;
 
 		public Snowdrifts(int width, int height)
 		{
-			Width = width;
-			Height = height;
+			_width = width;
+			_height = height;
 
-			_pieces = new float[Width / Program.Settings.SnowdriftsResolution + 1];
+			_pieces = new float[_width / Program.Settings.SnowdriftsResolution + 1];
 		}
 
-		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
+		public void SetupGraphics(GameOverlay.Drawing.Graphics gfx)
+		{
+			_brush?.Dispose();
+			_brush = gfx.CreateSolidBrush(Program.Settings.SnowdriftsColor.ToGameOverlayColor());
+		}
+
+		public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
+		{
+			Point? cursorForce = _pastCursorPos != Cursor.Position ? Cursor.Position : null;
+			_pastCursorPos = Cursor.Position;
+
+			if (!Program.Settings.Snowdrifts) return;
+
+			Update(deltaTime, cursorForce);
+			Draw(gfx);
+		}
+
+		public void DestroyGraphics()
+		{
+			_brush?.Dispose(); _brush = null;
+		}
+
+		public void Reload()
+		{
+			UpdateColor();
+			ChangeResolution();
+		}
+
+		public void UpdateColor()
+		{
+			if (_brush != null)
+				_brush.Color = Program.Settings.SnowdriftsColor.ToGameOverlayColor();
+		}
+
+		public void Draw(GameOverlay.Drawing.Graphics gfx)
 		{
 			for (int i = 0; i < _pieces.Length; i++)
 			{
@@ -30,47 +60,47 @@ namespace SnowFlakes
 					var vp = _pieces[(i - 1 + _pieces.Length) % _pieces.Length];
 					var v = _pieces[i];
 					var vn = _pieces[(i + 1) % _pieces.Length];
-					gfx.FillRectangle(brush,
+					gfx.FillRectangle(_brush,
 						i * Program.Settings.SnowdriftsResolution,
-						Height - v - Program.Settings.SnowdriftsStart,
+						_height - v - Program.Settings.SnowdriftsStart,
 						(i + 1) * Program.Settings.SnowdriftsResolution,
-						Height - Program.Settings.SnowdriftsStart);
+						_height - Program.Settings.SnowdriftsStart);
 					if (v < vp)
-						gfx.FillTriangle(brush,
+						gfx.FillTriangle(_brush,
 							i * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - vp,
+							_height - Program.Settings.SnowdriftsStart - vp,
 							i * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 0.5f,
+							_height - Program.Settings.SnowdriftsStart - v + 0.5f,
 							(i + 0.5f) * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 0.5f);
+							_height - Program.Settings.SnowdriftsStart - v + 0.5f);
 					if (v < vn)
-						gfx.FillTriangle(brush,
+						gfx.FillTriangle(_brush,
 							(i + 1) * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - vn,
+							_height - Program.Settings.SnowdriftsStart - vn,
 							(i + 1) * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 0.5f,
+							_height - Program.Settings.SnowdriftsStart - v + 0.5f,
 							(i + 0.5f) * Program.Settings.SnowdriftsResolution,
-							Height - Program.Settings.SnowdriftsStart - v + 0.5f);
+							_height - Program.Settings.SnowdriftsStart - v + 0.5f);
 				}
 				else
 				{
-					gfx.FillRoundedRectangle(brush,
+					gfx.FillRoundedRectangle(_brush,
 						i * Program.Settings.SnowdriftsResolution,
-						Height - _pieces[i] - Program.Settings.SnowdriftsStart,
+						_height - _pieces[i] - Program.Settings.SnowdriftsStart,
 						(i + 1) * Program.Settings.SnowdriftsResolution,
-						Height - Program.Settings.SnowdriftsStart, 1);
+						_height - Program.Settings.SnowdriftsStart, 1);
 				}
 			}
 		}
 		
 		public void Update(long deltaTime, Point? cursorForce)
 		{
-			DeltaTime += deltaTime;
+			_time += deltaTime;
 
 			if (cursorForce != null)
 			{
 				var pos = (Point)cursorForce;
-				var h = Height - Program.Settings.SnowdriftsStart - pos.Y;
+				var h = _height - Program.Settings.SnowdriftsStart - pos.Y;
 				var i = (pos.X - Program.Settings.ForceD / 3) / Program.Settings.SnowdriftsResolution;
 				var i2 = (pos.X + Program.Settings.ForceD / 3) / Program.Settings.SnowdriftsResolution;
 				var ic = pos.X / Program.Settings.SnowdriftsResolution;
@@ -98,8 +128,8 @@ namespace SnowFlakes
 				}
 			}
 
-			if (DeltaTime < Program.Settings.SnowdriftsUpdateDelay) return;
-			DeltaTime = 0;
+			if (_time < Program.Settings.SnowdriftsUpdateDelay) return;
+			_time = 0;
 			for (int i = 0; i < _pieces.Length; i++)
 			{
 				var pi = (i - 1 + _pieces.Length) % _pieces.Length;
@@ -125,22 +155,22 @@ namespace SnowFlakes
 			var i = (int)(x / Program.Settings.SnowdriftsResolution);
 			if (i >= _pieces.Length) return;
 			_pieces[i] += Program.Settings.SnowdriftsSpeed;
-			if (_pieces[i] > Height - Program.Settings.SnowdriftsStart)
-				_pieces[i] = Height - Program.Settings.SnowdriftsStart;
+			if (_pieces[i] > _height - Program.Settings.SnowdriftsStart)
+				_pieces[i] = _height - Program.Settings.SnowdriftsStart;
 		}
 
 		public bool Intersects(float x, float y)
 		{
 			var i = (int)(x / Program.Settings.SnowdriftsResolution);
 			if (i >= _pieces.Length) return true;
-			return _pieces[i] < (Height - Program.Settings.SnowdriftsStart) / 2 && 
-				   _pieces[i] + Program.Settings.SnowdriftsStart > Height - y;
+			return _pieces[i] < (_height - Program.Settings.SnowdriftsStart) / 2 && 
+				   _pieces[i] + Program.Settings.SnowdriftsStart > _height - y;
 		}
 
 		public void ChangeResolution()
 		{
-			var pieces = new float[Width / Program.Settings.SnowdriftsResolution + 1];
-			var pr = (int)(Width / (_pieces.Length - 1f));
+			var pieces = new float[_width / Program.Settings.SnowdriftsResolution + 1];
+			var pr = (int)(_width / (_pieces.Length - 1f));
 			for (int i = 0; i < pieces.Length; i++)
 			{
 				var x = i * Program.Settings.SnowdriftsResolution;
@@ -154,12 +184,12 @@ namespace SnowFlakes
 		{
 			for (int i = 0; i < _pieces.Length; i++)
 			{
-				_pieces[i] += Random.Shared.NextSingle() * Height / 50;
+				_pieces[i] += Random.Shared.NextSingle() * _height / 50;
 			}
 		}
 		public void CreateSmooth()
 		{
-			var m = Height / 35;
+			var m = _height / 35;
 			for (int i = 0; i < _pieces.Length; i++)
 			{
 				_pieces[i] = (float)(Utils.Noise(i / 100d * Program.Settings.SnowdriftsResolution) * m + m * 4);

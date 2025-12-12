@@ -12,6 +12,7 @@ namespace SnowFlakes
 		public int ParticleRad = 4;
 		public Color ParticleColor = Color.FromArgb(150, Color.LightBlue);
 		public int FPS = 25;
+		public bool ShowFPS = false;
 		public float SpeedXMax = 4f;
 		public float SpeedX = 0.05f;
 		public int SpeedYMin = 2;

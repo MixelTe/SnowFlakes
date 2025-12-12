@@ -2,100 +2,80 @@
 {
 	class Particle
 	{
-		public float X;
-		public float Y;
-		public float SpeedX;
-		public float SpeedY;
-
+		private float _x;
+		private float _y;
+		private float _speedX;
+		private float _speedY;
 
 		public Particle(int Width, int Height)
 		{
-			X = Random.Shared.NextSingle() * Width;
-			Y = Random.Shared.NextSingle() * Height;
-			RandSpeed();
+			_x = Random.Shared.NextSingle() * Width;
+			_y = Random.Shared.NextSingle() * Height;
+			SetRandSpeed();
 		}
-		public Particle(float x, float y, float speedX, float speedY)
+		public void SetRandSpeed()
 		{
-			X = x;
-			Y = y;
-			SpeedX = speedX;
-			SpeedY = speedY;
-		}
-		public void RandSpeed()
-		{
-			SpeedX = (Random.Shared.NextSingle() * 2f - 1f) * Program.Settings.SpeedXMax;
-			SpeedY = Program.Settings.SpeedYMin + Random.Shared.NextSingle() * (Program.Settings.SpeedYMax - Program.Settings.SpeedYMin);
+			_speedX = Random.Shared.NextSingle(-Program.Settings.SpeedXMax, Program.Settings.SpeedXMax);
+			_speedY = Random.Shared.NextSingle(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax);
 		}
 
-		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush)
+		public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush, GameOverlay.Drawing.Image? img)
 		{
-			var rect = new RectangleF(X - Program.Settings.ParticleRad, Y - Program.Settings.ParticleRad, Program.Settings.ParticleRad * 2, Program.Settings.ParticleRad * 2);
-			if (!rect.IntersectsWith(Program.Settings.ClearZone))
+			var R = Program.Settings.ParticleRad;
+			var rect = new RectangleF(_x - R, _y - R, R * 2, R * 2);
+			if (rect.IntersectsWith(Program.Settings.ClearZone)) return;
+
+			if (img == null)
 			{
-				if (Program.Settings.ParticleImg == 1 && Program.SnowWindow?.Snowflake1 != null)
-				{
-					gfx.DrawImage(Program.SnowWindow.Snowflake1, rect.X, rect.Y, rect.Right, rect.Bottom);
-				}
-				else if (Program.Settings.ParticleImg == 2 && Program.SnowWindow?.Snowflake2 != null)
-				{
-					gfx.DrawImage(Program.SnowWindow.Snowflake2, rect.X, rect.Y, rect.Right, rect.Bottom);
-				}
-				else if (Program.Settings.ParticleImg == 0 && Program.SnowWindow?.Snowflake0 != null)
-				{
-					gfx.DrawImage(Program.SnowWindow.Snowflake0, rect.X, rect.Y, rect.Right, rect.Bottom);
-				}
-				else
-				{
-					gfx.FillCircle(brush, X, Y, Program.Settings.ParticleRad);
-				}
+				gfx.FillCircle(brush, _x, _y, R);
+			}
+			else
+			{
+				var h = rect.Width * img.Height / img.Width;
+				gfx.DrawImage(img, rect.X, rect.Y, rect.Right, rect.Y + h);
 			}
 		}
 
 		public void Move(int Width, int Height, Point? cursorForce, long deltaTime)
 		{
+			if (deltaTime > 1000) return;
 			var dt = deltaTime / 40f;
-			Y += SpeedY * dt;
-			float speedX;
-			if (SpeedX > 0)
+			var MaxSpeedX = Program.Settings.SpeedXMax;
+
+			var speedX = _speedX;
+			if (Math.Abs(_speedX) > MaxSpeedX / 2f)
+				speedX = Math.Sign(_speedX) * (MaxSpeedX - Math.Abs(_speedX));
+			
+			_y += _speedY * dt;
+			_x += speedX * dt;
+			_speedX = (_speedX + Program.Settings.SpeedX * dt).Wrap(-MaxSpeedX, MaxSpeedX);
+
+			if (cursorForce is Point cursor)
 			{
-				speedX = SpeedX > Program.Settings.SpeedXMax / 2 ?
-					Program.Settings.SpeedXMax - SpeedX :
-					SpeedX;
-			}
-			else
-			{
-				speedX = SpeedX < -Program.Settings.SpeedXMax / 2 ?
-					-Program.Settings.SpeedXMax - SpeedX :
-					SpeedX;
-			}
-			X += speedX * dt;
-			X = (X + Width) % Width;
-			SpeedX = (SpeedX + Program.Settings.SpeedXMax + Program.Settings.SpeedX * dt) % (Program.Settings.SpeedXMax * 2) - Program.Settings.SpeedXMax;
-			if (cursorForce != null)
-			{
-				var cursor = (Point)cursorForce;
-				var d = (X - cursor.X) * (X - cursor.X) +
-						(Y - cursor.Y) * (Y - cursor.Y);
-				var md = Program.Settings.ForceD;
-				var p = Program.Settings.ForcePower;
-				if (d < md * md)
+				var dx = _x - cursor.X;
+				var dy = _y - cursor.Y;
+				var d = dx * dx + dy * dy;
+				var mds = Program.Settings.ForceD * Program.Settings.ForceD;
+				if (d < mds)
 				{
-					X += Math.Abs(X - cursor.X) / md * p * Math.Sign(X - cursor.X);
-					X = (X + Width) % Width;
-					Y += Math.Abs(Y - cursor.Y) / md * p * Math.Sign(Y - cursor.Y);
+					var p = Program.Settings.ForcePower * (mds - d) / mds / 100;
+					_x += dx * p;
+					_y += dy * p;
 				}
 			}
-			if (Y > Height + Program.Settings.ParticleRad ||
-					Program.Settings.Snowdrifts && Program.SnowWindow?.Snowdrifts.Intersects(X, Y) == true)
+			_x = _x.Wrap(0, Width);
+
+			if (_y > Height + Program.Settings.ParticleRad ||
+					Program.Settings.Snowdrifts && Program.SnowWindow?.Snowdrifts.Intersects(_x, _y) == true)
 			{
-				Program.SnowWindow?.Snowdrifts.Add(X);
-				Y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax - Program.Settings.ParticleRad;
-				X = Random.Shared.NextSingle() * Width;
+				Program.SnowWindow?.Snowdrifts.Add(_x);
+				_y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax - Program.Settings.ParticleRad;
+				_x = Random.Shared.NextSingle() * Width;
 			}
-			if (Y < -Program.Settings.ParticleRad)
+			if (_y < -Program.Settings.ParticleRad)
 			{
-				Y = Height - 1 + Program.Settings.ParticleRad;
-				X = Random.Shared.NextSingle() * Width;
+				_y = Height - 1 + Program.Settings.ParticleRad;
+				_x = Random.Shared.NextSingle() * Width;
 			}
 		}
 	}
