@@ -18,6 +18,11 @@ class Particle
 		_speedX = Random.Shared.NextSingle(-Program.Settings.SpeedXMax, Program.Settings.SpeedXMax);
 		_speedY = Random.Shared.NextSingle(Program.Settings.SpeedYMin, Program.Settings.SpeedYMax);
 	}
+	public void SetPos(float x, float y)
+	{
+		_x = x;
+		_y = y;
+	}
 
 	public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush, GameOverlay.Drawing.Image? img)
 	{
@@ -66,9 +71,8 @@ class Particle
 		_x = _x.Wrap(0, Width);
 
 		if (_y > Height + Program.Settings.ParticleRad ||
-				Program.Settings.Snowdrifts && Program.SnowWindow?.Snowdrifts.Intersects(_x, _y) == true)
+			Program.SnowWindow?.Snowdrifts.AbsorbSnowflake(_x, _y) == true)
 		{
-			Program.SnowWindow?.Snowdrifts.Add(_x);
 			_y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax - Program.Settings.ParticleRad;
 			_x = Random.Shared.NextSingle() * Width;
 		}

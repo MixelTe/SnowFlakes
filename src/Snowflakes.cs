@@ -120,4 +120,9 @@ class Snowflakes : ISprite
 		for (int i = 0; i < _particles.Length; i++)
 			_particles[i].SetRandSpeed();
 	}
+
+	public void AddTo(float x, float y)
+	{
+		_particles[Random.Shared.Next(_particles.Length)].SetPos(x, y);
+	}
 }

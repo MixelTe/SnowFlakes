@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace SnowFlakes;
 
@@ -7,6 +8,11 @@ internal static class Utils
 	public static Rectangle Inflate(this Rectangle rect, int v)
 	{
 		return Rectangle.Inflate(rect, v, v);
+	}
+	public static bool IntersectsWith(this Rectangle rect, float x, float y)
+	{
+		return rect.X + rect.Width >= x && x >= rect.X && 
+			   rect.Y + rect.Height >= y && y >= rect.Y;
 	}
 
 	public static double Noise(double x)
@@ -32,5 +38,23 @@ internal static class Utils
 		float wrapped = (v - min) % range;
 		if (wrapped < 0) wrapped += range;
 		return wrapped + min;
+	}
+}
+public class BitArray2D(int width, int height, bool defaultValue = false)
+{
+	private readonly BitArray _arr = new(width * height, defaultValue);
+
+	public bool this[int x, int y]
+	{
+		get => _arr.Get(x + y * width);
+		set => _arr.Set(x + y * width, value);
+	}
+
+	public void SetAll(bool value) => _arr.SetAll(value);
+
+	public bool GetSafe(int x, int y)
+	{
+		if (x < 0 || x > width || y < 0 || y > height) return false;
+		return this[x, y];
 	}
 }

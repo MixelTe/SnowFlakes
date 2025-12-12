@@ -20,15 +20,17 @@ public class Settings
 
 	public Rectangle ClearZone = Rectangle.Empty;
 
+	public int SnowdriftsType = 1;  // 1 - 1D, 2 - 2D
 	public bool Snowdrifts = true;
 	public bool SnowdriftsSmooth = true;
 	public Color SnowdriftsColor = Color.FromArgb(150, Color.LightBlue);
-	public int SnowdriftsResolution = 50;
-	public float SnowdriftsSpeed = 0.2f;
-	public float SnowdriftsDensity = 20;
+
+	public int SnowdriftsResolution = 40;
+	public float SnowdriftsSpeed = 5;
+	public float SnowdriftsDensity = 1;
 	public int SnowdriftsStart = 40;
 	public int SnowdriftsUpdateDelay = 250;
-	
+
 	public bool ChristmasLights = true;
 	public int ChristmasLightsInterval = 60;
 	public int ChristmasLightsRadius = 16;

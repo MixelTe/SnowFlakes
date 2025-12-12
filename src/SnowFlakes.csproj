@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/MixelTe/SnowFlakes</RepositoryUrl>
     <Authors>Mixel Te</Authors>
     <Version>2.2.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
