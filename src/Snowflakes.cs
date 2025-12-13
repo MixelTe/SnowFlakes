@@ -78,10 +78,10 @@ class Snowflakes : ISprite
 		else if (Program.Settings.ParticleImg == 2) img = _snowflake2;
 		else if (Program.Settings.ParticleImg == 0) img = _snowflake0;
 
-		for (int i = 0; i < _particles.Length; i++)
+		foreach (var particle in _particles)
 		{
-			_particles[i].Move(gfx.Width, gfx.Height, cursorForce, deltaTime);
-			_particles[i].Draw(gfx, _brush, img);
+			particle.Move(gfx.Width, gfx.Height, cursorForce, deltaTime);
+			particle.Draw(gfx, _brush, img);
 		}
 	}
 

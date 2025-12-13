@@ -68,11 +68,6 @@ public partial class SettingsForm : Form
 		InpSDStart.Value = Program.Settings.SnowdriftsStart;
 		InpSDDelay.Value = (decimal)Math.Clamp(1000f / Program.Settings.SnowdriftsUpdateDelay, 1, 20);
 
-		PanelSnowdrifts.Width = PanelSnowdrifts.Parent?.Width ?? 0 - PanelSnowdrifts.Left - 10;
-		PanelSnowdrifts.Height = PanelSnowdrifts.Parent?.Height ?? 0 - PanelSnowdrifts.Top - 10;
-		BtnSDSet1.Left = BtnSDSet2.Left - BtnSDSet1.Width - 8;
-
-
 		CBSameColor.Checked = Program.Settings.SnowdriftsColor == Program.Settings.ParticleColor;
 		PanelColorSD.Enabled = !CBSameColor.Checked;
 

@@ -45,14 +45,14 @@ class Snowdrifts2D : ISnowdrifts
 	public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
 	{
 		_timeElapsedFromGround += deltaTime;
-		if (_timeElapsedFromGround > 200)
+		if (_timeElapsedFromGround > 100)
 		{
 			_timeElapsedFromGround = 0;
 			UpdateGround();
 		}
 
 		_timeElapsedFromUpdate += deltaTime;
-		if (_timeElapsedFromUpdate > 100)
+		if (_timeElapsedFromUpdate > 50)
 		{
 			_timeElapsedFromUpdate = 0;
 			Update();
@@ -65,7 +65,7 @@ class Snowdrifts2D : ISnowdrifts
 				gfx.FillRectangle(_brush, x * _size, y * _size, (x + 1) * _size, (y + 1) * _size);
 			}
 
-		var drawGroundBounds = false;
+		var drawGroundBounds = true;
 		if (drawGroundBounds)
 			for (var y = 0; y < _height; y++)
 				for (var x = 0; x < _width; x++)
@@ -92,7 +92,7 @@ class Snowdrifts2D : ISnowdrifts
 		_ground.SetAll(false);
 		foreach (var rect in rects)
 		{
-			if (rect.Bottom < 24) continue;
+			if (rect.Top < 32) continue;
 			var right = Math.Min(rect.Right, _screenWidth);
 			for (var x = Math.Max(rect.Left, 0); x < right; x++)
 			{
@@ -166,7 +166,7 @@ class Snowdrifts2D : ISnowdrifts
 				if (y + 1 >= _height) _grid[x, y] = false;
 				else if (!_grid[x, y + 1])
 				{
-					var r = Program.Settings.ParticleRad * 2 / _size;
+					var r = Program.Settings.ParticleRad / _size;
 					var rs = r * r;
 					for (var dy = -r; dy <= r; dy++)
 						for (var dx = -r; dx <= r; dx++)
@@ -174,7 +174,7 @@ class Snowdrifts2D : ISnowdrifts
 							var nx = x + dx;
 							var ny = y + dy;
 							if (nx >= 0 && nx < _width && ny >= 0 && ny < _height &&
-								dx * dx + dy * dy < rs)
+								dx * dx + dy * dy <= rs)
 							{
 							 	_grid[nx, ny] = false;
 							}

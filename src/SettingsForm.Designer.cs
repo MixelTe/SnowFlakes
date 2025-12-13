@@ -845,7 +845,6 @@
 			// 
 			// PanelSnowdrifts
 			// 
-			PanelSnowdrifts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			PanelSnowdrifts.Controls.Add(label20);
 			PanelSnowdrifts.Controls.Add(BtnSDSet1);
 			PanelSnowdrifts.Controls.Add(BtnSDSet2);
@@ -863,9 +862,10 @@
 			PanelSnowdrifts.Controls.Add(label13);
 			PanelSnowdrifts.Controls.Add(PanelColorSD);
 			PanelSnowdrifts.Controls.Add(CBSameColor);
-			PanelSnowdrifts.Location = new Point(0, 37);
+			PanelSnowdrifts.Dock = DockStyle.Bottom;
+			PanelSnowdrifts.Location = new Point(3, 37);
 			PanelSnowdrifts.Name = "PanelSnowdrifts";
-			PanelSnowdrifts.Size = new Size(364, 356);
+			PanelSnowdrifts.Size = new Size(358, 347);
 			PanelSnowdrifts.TabIndex = 1;
 			// 
 			// label20
@@ -881,7 +881,7 @@
 			// BtnSDSet1
 			// 
 			BtnSDSet1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			BtnSDSet1.Location = new Point(154, 111);
+			BtnSDSet1.Location = new Point(148, 111);
 			BtnSDSet1.Name = "BtnSDSet1";
 			BtnSDSet1.Size = new Size(65, 23);
 			BtnSDSet1.TabIndex = 25;
@@ -892,7 +892,7 @@
 			// BtnSDSet2
 			// 
 			BtnSDSet2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			BtnSDSet2.Location = new Point(225, 111);
+			BtnSDSet2.Location = new Point(219, 111);
 			BtnSDSet2.Name = "BtnSDSet2";
 			BtnSDSet2.Size = new Size(65, 23);
 			BtnSDSet2.TabIndex = 24;
@@ -903,7 +903,7 @@
 			// BtnSDSet3
 			// 
 			BtnSDSet3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			BtnSDSet3.Location = new Point(296, 111);
+			BtnSDSet3.Location = new Point(290, 111);
 			BtnSDSet3.Name = "BtnSDSet3";
 			BtnSDSet3.Size = new Size(65, 23);
 			BtnSDSet3.TabIndex = 23;
@@ -927,7 +927,7 @@
 			// 
 			InpSDDelay.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSDDelay.Font = new Font("Segoe UI", 12F);
-			InpSDDelay.Location = new Point(293, 301);
+			InpSDDelay.Location = new Point(287, 301);
 			InpSDDelay.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
 			InpSDDelay.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSDDelay.Name = "InpSDDelay";
@@ -952,7 +952,7 @@
 			InpSDStart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSDStart.Font = new Font("Segoe UI", 12F);
 			InpSDStart.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-			InpSDStart.Location = new Point(293, 161);
+			InpSDStart.Location = new Point(287, 161);
 			InpSDStart.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
 			InpSDStart.Name = "InpSDStart";
 			InpSDStart.Size = new Size(65, 29);
@@ -977,7 +977,7 @@
 			InpSDDensity.DecimalPlaces = 1;
 			InpSDDensity.Font = new Font("Segoe UI", 12F);
 			InpSDDensity.Increment = new decimal(new int[] { 5, 0, 0, 0 });
-			InpSDDensity.Location = new Point(293, 266);
+			InpSDDensity.Location = new Point(287, 266);
 			InpSDDensity.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
 			InpSDDensity.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
 			InpSDDensity.Name = "InpSDDensity";
@@ -1003,7 +1003,7 @@
 			InpSDSpeed.DecimalPlaces = 1;
 			InpSDSpeed.Font = new Font("Segoe UI", 12F);
 			InpSDSpeed.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
-			InpSDSpeed.Location = new Point(293, 196);
+			InpSDSpeed.Location = new Point(287, 196);
 			InpSDSpeed.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpSDSpeed.Name = "InpSDSpeed";
 			InpSDSpeed.Size = new Size(65, 29);
@@ -1027,7 +1027,7 @@
 			InpSDRes.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpSDRes.Font = new Font("Segoe UI", 12F);
 			InpSDRes.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-			InpSDRes.Location = new Point(293, 231);
+			InpSDRes.Location = new Point(287, 231);
 			InpSDRes.Maximum = new decimal(new int[] { 150, 0, 0, 0 });
 			InpSDRes.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSDRes.Name = "InpSDRes";
@@ -1333,7 +1333,8 @@
 			// 
 			// SettingsForm
 			// 
-			AutoScaleMode = AutoScaleMode.None;
+			AutoScaleDimensions = new SizeF(96F, 96F);
+			AutoScaleMode = AutoScaleMode.Dpi;
 			ClientSize = new Size(386, 466);
 			Controls.Add(tabControl2);
 			Controls.Add(BtnGithub);
