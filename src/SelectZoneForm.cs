@@ -14,21 +14,21 @@ namespace SnowFlakes
 	{
 		private Point? _mousePos;
 		private Point? _startPos;
-		private Pen _pen = Pens.DarkOrange;
+		private readonly Pen _pen = Pens.DarkOrange;
 
 		public SelectZoneForm()
 		{
-			var size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+			var size = new Size(Screen.PrimaryScreen?.Bounds.Width ?? 0, Screen.PrimaryScreen?.Bounds.Height ?? 0);
 			var screenshoot = new Bitmap(size.Width, size.Height);
 			using var g = Graphics.FromImage(screenshoot);
 			g.CopyFromScreen(0, 0, 0, 0, size);
 			var font = new Font(SystemFonts.DefaultFont.FontFamily, 20f);
 			g.DrawString("Выделение зоны, в которой не видно снежинок", 
 				font , Brushes.Lime, 
-				new PointF(Screen.PrimaryScreen.Bounds.Width / 2 - 200, Screen.PrimaryScreen.Bounds.Height - 40));
+				new PointF(size.Width / 2 - 200, size.Height - 40));
 
 			InitializeComponent();
-			Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+			Size = size;
 			BackgroundImage = screenshoot;
 		}
 

@@ -138,14 +138,13 @@ namespace SnowFlakes
 			manager = null;
 			cmanager = null;
 		}
-		private CVirtualDesktopManager cmanager = null;
-		private IVirtualDesktopManager manager;
+		private CVirtualDesktopManager? cmanager = null;
+		private IVirtualDesktopManager? manager;
 
 		public bool IsWindowOnCurrentVirtualDesktop(IntPtr TopLevelWindow)
 		{
-			int result;
 			int hr;
-			if ((hr = manager.IsWindowOnCurrentVirtualDesktop(TopLevelWindow, out result)) != 0)
+			if ((hr = manager!.IsWindowOnCurrentVirtualDesktop(TopLevelWindow, out int result)) != 0)
 			{
 				Marshal.ThrowExceptionForHR(hr);
 			}
@@ -154,9 +153,8 @@ namespace SnowFlakes
 
 		public Guid GetWindowDesktopId(IntPtr TopLevelWindow)
 		{
-			Guid result;
 			int hr;
-			if ((hr = manager.GetWindowDesktopId(TopLevelWindow, out result)) != 0)
+			if ((hr = manager!.GetWindowDesktopId(TopLevelWindow, out Guid result)) != 0)
 			{
 				Marshal.ThrowExceptionForHR(hr);
 			}
@@ -166,7 +164,7 @@ namespace SnowFlakes
 		public void MoveWindowToDesktop(IntPtr TopLevelWindow, Guid CurrentDesktop)
 		{
 			int hr;
-			if ((hr = manager.MoveWindowToDesktop(TopLevelWindow, CurrentDesktop)) != 0)
+			if ((hr = manager!.MoveWindowToDesktop(TopLevelWindow, CurrentDesktop)) != 0)
 			{
 				Marshal.ThrowExceptionForHR(hr);
 			}

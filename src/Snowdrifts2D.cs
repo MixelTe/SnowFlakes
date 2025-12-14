@@ -81,12 +81,17 @@ class Snowdrifts2D : ISnowdrifts
 
 	private void UpdateGround()
 	{
+		if (Control.ModifierKeys.ToString() == "Alt" || Control.ModifierKeys == (Keys.Control | Keys.Alt))
+			return;
+
 		var wrects = new List<Rectangle>();
 		var rects = new List<Rectangle>();
 		foreach (var window in OpenWindowGetter.GetOpenWindows())
 		{
 			if (!_vdm.IsWindowOnCurrentVirtualDesktop(window.Key)) continue;
 			if (window.Value.Item1.Contains("ShareX")) continue;
+			if (window.Value.Item1.Contains("Переключение задач")) continue;
+			if (window.Value.Item1.Contains("Task Switcher")) continue;
 			AddRect(window.Value.Item2);
 		}
 		_ground.SetAll(false);
