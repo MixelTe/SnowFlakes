@@ -27,8 +27,11 @@ class Particle
 	public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush, GameOverlay.Drawing.Image? img)
 	{
 		var R = Program.Settings.ParticleRad;
-		var rect = new RectangleF(_x - R, _y - R, R * 2, R * 2);
-		if (rect.IntersectsWith(Program.Settings.ClearZone)) return;
+		var X = _x - R;
+		var Y = _y - R;
+		var Size = R * 2;
+		var rect = Program.Settings.ClearZone;
+		if ((rect.X < X + Size) && (X < rect.X + rect.Width) && (rect.Y < Y + Size) && (Y < rect.Y + rect.Height)) return;
 
 		if (img == null)
 		{
@@ -36,8 +39,8 @@ class Particle
 		}
 		else
 		{
-			var h = rect.Width * img.Height / img.Width;
-			gfx.DrawImage(img, rect.X, rect.Y, rect.Right, rect.Y + h);
+			var h = Size * img.Height / img.Width;
+			gfx.DrawImage(img, X, Y, X + Size, Y + h);
 		}
 	}
 
@@ -70,8 +73,7 @@ class Particle
 		}
 		_x = _x.Wrap(0, Width);
 
-		if (_y > Height + Program.Settings.ParticleRad ||
-			Program.SnowWindow?.Snowdrifts.AbsorbSnowflake(_x, _y) == true)
+		if (_y > Height + Program.Settings.ParticleRad || Snowdrifts.AbsorbSnowflake(_x, _y))
 		{
 			_y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax - Program.Settings.ParticleRad;
 			_x = Random.Shared.NextSingle() * Width;

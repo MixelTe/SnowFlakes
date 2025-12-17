@@ -30,6 +30,14 @@ internal static class Utils
 	{
 		return rnd.NextSingle() * (max - min) + min;
 	}
+	public static T RandomItem<T>(this IList<T> values)
+	{
+		return values[Random.Shared.Next(values.Count)];
+	}
+	public static T RandomItem<T>(this T[] values)
+	{
+		return values[Random.Shared.Next(values.Length)];
+	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static float Wrap(this float v, float min, float max)
@@ -40,6 +48,7 @@ internal static class Utils
 		return wrapped + min;
 	}
 }
+
 public class BitArray2D(int width, int height, bool defaultValue = false)
 {
 	private readonly BitArray _arr = new(width * height, defaultValue);

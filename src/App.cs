@@ -17,15 +17,15 @@ public partial class App : ApplicationContext
 			ContextMenuStrip = new ContextMenuStrip()
 			{
 				Items = {
-					new ToolStripMenuItem("Пустая область", Resources.selection, new[] {
+					new ToolStripMenuItem("Пустая область", Resources.selection, [
 						new ToolStripMenuItem("Выделить (ЛКМ по иконке)", Resources.select, SelectClearZone),
 						new ToolStripMenuItem("Убрать (ДЛКМ по иконке)", Resources.selection_remove, RemoveClearZone),
-					}),
-					new ToolStripMenuItem("Управление", Resources.stop_start, new[] {
+					]),
+					new ToolStripMenuItem("Управление", Resources.stop_start, [
 						new ToolStripMenuItem("Остановить", Resources.stop, Stop),
 						new ToolStripMenuItem("Перезапустить", Resources.restart, Restart),
 						new ToolStripMenuItem("Перезагрузить настройки", Resources.reload_settings, ReloadSettings),
-					}),
+					]),
 					new ToolStripMenuItem("Закрыть", Resources.close, Exit),
 					new ToolStripMenuItem("Настройки", Resources.settings, Settings),
 				}
@@ -34,8 +34,6 @@ public partial class App : ApplicationContext
 		};
 		_trayIcon.Click += Icon_Click;
 		_trayIcon.DoubleClick += Icon_DbClick;
-
-		Program.SnowWindow?.Run();
 	}
 
 	void Exit(object? sender, EventArgs e)
@@ -90,21 +88,20 @@ public partial class App : ApplicationContext
 
 	private void Stop(object? sender, EventArgs e)
 	{
-		Program.SnowWindow?.Dispose();
-		Program.SnowWindow = null;
+		SnowWindow.DisposeAll();
 	}
 	private void Restart(object? sender, EventArgs e)
 	{
-		Program.SnowWindow?.Dispose();
+		SnowWindow.DisposeAll();
 		Program.Settings = new Settings();
 		Program.Settings.Load();
-		Program.SnowWindow = new SnowWindow();
-		Program.SnowWindow.Run();
+		Program.CreateSnowWindows();
+		SnowWindow.RunAll();
 	}
 	private void ReloadSettings(object? sender, EventArgs e)
 	{
 		Program.Settings = new Settings();
 		Program.Settings.Load();
-		Program.SnowWindow?.Reload();
+		SnowWindow.ReloadAll();
 	}
 }

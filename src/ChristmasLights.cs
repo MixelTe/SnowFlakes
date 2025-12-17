@@ -2,6 +2,7 @@
 
 internal class ChristmasLights : ISprite
 {
+	private static ChristmasLights? _instance;
 	private readonly int _width;
 	private readonly int _height;
 	private int _interval = 0;
@@ -12,11 +13,16 @@ internal class ChristmasLights : ISprite
 
 	public ChristmasLights(int width, int height)
 	{
+		_instance = this;
 		_width = width;
 		_height = height;
 		UpdateInterval();
 		UpdateSpeed();
 		_mode = GetCurLightsMode();
+	}
+	~ChristmasLights()
+	{
+		DestroyGraphics();
 	}
 
 	public void SetupGraphics(GameOverlay.Drawing.Graphics gfx)
@@ -71,7 +77,8 @@ internal class ChristmasLights : ISprite
 		};
 	}
 
-	public void UpdateInterval()
+	public static void UpdateInterval() => _instance?.UpdateInterval_();
+	private void UpdateInterval_()
 	{
 		_interval = Program.Settings.ChristmasLightsInterval;
 		var lights = new Light[(_width + _height * 2) / _interval];
@@ -82,11 +89,13 @@ internal class ChristmasLights : ISprite
 		_lights = lights;
 		_mode = GetCurLightsMode();
 	}
-	public void UpdateMode()
+	public static void UpdateMode() => _instance?.UpdateMode_();
+	private void UpdateMode_()
 	{
 		_mode = GetCurLightsMode();
 	}
-	public void UpdateSpeed()
+	public static void UpdateSpeed() => _instance?.UpdateSpeed_();
+	private void UpdateSpeed_()
 	{
 		var speed = Program.Settings.ChristmasLightsAnimationSpeed;
 		_speed = speed >= 100 ? speed / 100f : 0.5f + speed / 200f;

@@ -1,6 +1,6 @@
 ﻿namespace SnowFlakes
 {
-	class SnowFps : ISprite
+	class SnowFps(int dyi = 0) : ISprite
 	{
 		private GameOverlay.Drawing.Font? _font;
 		private GameOverlay.Drawing.SolidBrush? _brush;
@@ -8,7 +8,7 @@
 		public void SetupGraphics(GameOverlay.Drawing.Graphics gfx)
 		{
 			_font?.Dispose();
-			_font = gfx.CreateFont("Consolas", 14);
+			_font = gfx.CreateFont("Consolas", 18);
 			_brush?.Dispose();
 			_brush = gfx.CreateSolidBrush(Color.Tomato.ToGameOverlayColor());
 		}
@@ -22,7 +22,7 @@
 		public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
 		{
 			if (Program.Settings.ShowFPS)
-				gfx.DrawText(_font, _brush, 58, 20, "FPS: " + gfx.FPS);
+				gfx.DrawText(_font, _brush, 58, 20 + dyi * 22, "FPS: " + gfx.FPS);
 		}
 
 		public void Reload() { }

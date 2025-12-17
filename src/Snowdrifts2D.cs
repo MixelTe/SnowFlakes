@@ -62,7 +62,9 @@ class Snowdrifts2D : ISnowdrifts
 			for (var x = 0; x < _width; x++)
 			{
 				if (!_grid[x, y]) continue;
-				gfx.FillRectangle(_brush, x * _size, y * _size, (x + 1) * _size, (y + 1) * _size);
+				var x0 = x;
+				do x++; while (x < _width && _grid[x, y]);
+				gfx.FillRectangle(_brush, x0 * _size, y * _size, x * _size, (y + 1) * _size);
 			}
 
 		var drawGroundBounds = true;
@@ -184,7 +186,7 @@ class Snowdrifts2D : ISnowdrifts
 							 	_grid[nx, ny] = false;
 							}
 						}
-					Program.SnowWindow?.Snowflakes.AddTo(x * _size, y * _size);
+					Snowflakes.AddTo(x * _size, y * _size);
 				}
 				else
 				{

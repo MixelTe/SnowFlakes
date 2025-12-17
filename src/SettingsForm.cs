@@ -93,7 +93,7 @@ public partial class SettingsForm : Form
 	{
 		Program.Settings = new Settings();
 		SetFields();
-		Program.SnowWindow?.Reload();
+		SnowWindow.ReloadAll();
 	}
 	private void OkBtn_Click(object sender, EventArgs e)
 	{
@@ -124,7 +124,7 @@ public partial class SettingsForm : Form
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.Particles = (int)InpCount.Value;
-		Program.SnowWindow?.Snowflakes.UpdateParticles();
+		Snowflakes.UpdateParticles();
 	}
 	private void Size_Change(object sender, EventArgs e)
 	{
@@ -138,22 +138,22 @@ public partial class SettingsForm : Form
 		if (colorDialog.ShowDialog(this) != DialogResult.OK) return;
 		Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, colorDialog.Color);
 		BtnColor.BackColor = colorDialog.Color;
-		Program.SnowWindow?.Snowflakes.UpdateColor();
+		Snowflakes.UpdateColor();
 		if (CBSameColor.Checked)
 		{
 			Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
-			Program.SnowWindow?.Snowdrifts.UpdateColor();
+			Snowdrifts.UpdateColor();
 		}
 	}
 	private void Alpha_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ParticleColor = Color.FromArgb(InpAlpha.Value, Program.Settings.ParticleColor);
-		Program.SnowWindow?.Snowflakes.UpdateColor();
+		Snowflakes.UpdateColor();
 		if (CBSameColor.Checked)
 		{
 			Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
-			Program.SnowWindow?.Snowdrifts.UpdateColor();
+			Snowdrifts.UpdateColor();
 		}
 	}
 	private void SpeedXMax_Change(object sender, EventArgs e)
@@ -161,7 +161,7 @@ public partial class SettingsForm : Form
 		if (ignoreChangeEvent) return;
 		Program.Settings.SpeedXMax = (float)InpSpeedXMax.Value;
 		SetPreset0();
-		Program.SnowWindow?.Snowflakes.Rerandomize();
+		Snowflakes.Rerandomize();
 	}
 	private void SpeedX_Change(object sender, EventArgs e)
 	{
@@ -175,7 +175,7 @@ public partial class SettingsForm : Form
 		Program.Settings.SpeedYMin = (int)(InpSpeedY.Value - InpSpeedYRange.Value);
 		Program.Settings.SpeedYMax = (int)(InpSpeedY.Value + InpSpeedYRange.Value);
 		SetPreset0();
-		Program.SnowWindow?.Snowflakes.Rerandomize();
+		Snowflakes.Rerandomize();
 	}
 	private void Force_Change(object sender, EventArgs e)
 	{
@@ -199,41 +199,41 @@ public partial class SettingsForm : Form
 		if (ignoreChangeEvent) return;
 		Settings.SetPreset0();
 		SetFields();
-		Program.SnowWindow?.Snowflakes.Rerandomize();
+		Snowflakes.Rerandomize();
 	}
 	private void Preset1_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Settings.SetPreset1();
 		SetFields();
-		Program.SnowWindow?.Snowflakes.Rerandomize();
+		Snowflakes.Rerandomize();
 	}
 	private void Preset2_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Settings.SetPreset2();
 		SetFields();
-		Program.SnowWindow?.Snowflakes.Rerandomize();
+		Snowflakes.Rerandomize();
 	}
 	private void Preset3_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Settings.SetPreset3();
 		SetFields();
-		Program.SnowWindow?.Snowflakes.Rerandomize();
+		Snowflakes.Rerandomize();
 	}
 	private void Preset4_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Settings.SetPreset4();
 		SetFields();
-		Program.SnowWindow?.Snowflakes.Rerandomize();
+		Snowflakes.Rerandomize();
 	}
 	private void FPS_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.FPS = (int)InpFPS.Value;
-		Program.SnowWindow?.SetFPS(Program.Settings.FPS);
+		SnowWindow.SetFPSAll(Program.Settings.FPS);
 	}
 	private void CBfps_CheckedChanged(object sender, EventArgs e)
 	{
@@ -291,7 +291,7 @@ public partial class SettingsForm : Form
 		{
 			PBImg.BackgroundImage = null;
 		}
-		Program.SnowWindow?.Snowflakes.UpdateImg();
+		Snowflakes.UpdateImg();
 		ignoreChangeEvent = true;
 		RBimg0.Checked = true;
 		ignoreChangeEvent = false;
@@ -316,7 +316,7 @@ public partial class SettingsForm : Form
 			Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
 		else
 			Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, BtnColorSD.BackColor);
-		Program.SnowWindow?.Snowdrifts.UpdateColor();
+		Snowdrifts.UpdateColor();
 	}
 	private void SnowdriftsSmooth_Change(object sender, EventArgs e)
 	{
@@ -330,20 +330,20 @@ public partial class SettingsForm : Form
 		{
 			Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, colorDialog.Color);
 			BtnColorSD.BackColor = colorDialog.Color;
-			Program.SnowWindow?.Snowdrifts.UpdateColor();
+			Snowdrifts.UpdateColor();
 		}
 	}
 	private void SnowdriftsAlpha_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, Program.Settings.SnowdriftsColor);
-		Program.SnowWindow?.Snowdrifts.UpdateColor();
+		Snowdrifts.UpdateColor();
 	}
 	private void SnowdriftsRes_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.SnowdriftsResolution = (int)InpSDRes.Value;
-		Program.SnowWindow?.Snowdrifts?.ChangeResolution();
+		Snowdrifts.ChangeResolution();
 	}
 	private void SnowdriftsSpeed_Change(object sender, EventArgs e)
 	{
@@ -367,7 +367,7 @@ public partial class SettingsForm : Form
 	}
 	private void SnowdriftsAdd_Click(object sender, EventArgs e)
 	{
-		Program.SnowWindow?.Snowdrifts.AddSnow();
+		Snowdrifts.AddSnow();
 	}
 	private void SnowdriftsSet1_Click(object sender, EventArgs e)
 	{
@@ -376,7 +376,7 @@ public partial class SettingsForm : Form
 		InpSDSpeed.Value = 5;
 		InpSDDensity.Value = 1;
 		InpSDDelay.Value = 2;
-		Program.SnowWindow?.Snowdrifts.CreateSmooth();
+		Snowdrifts.CreateSmooth();
 	}
 	private void SnowdriftsSet2_Click(object sender, EventArgs e)
 	{
@@ -385,7 +385,7 @@ public partial class SettingsForm : Form
 		InpSDSpeed.Value = 5;
 		InpSDDensity.Value = 1;
 		InpSDDelay.Value = 4;
-		Program.SnowWindow?.Snowdrifts.CreateSmooth();
+		Snowdrifts.CreateSmooth();
 	}
 	private void SnowdriftsSet3_Click(object sender, EventArgs e)
 	{
@@ -394,7 +394,7 @@ public partial class SettingsForm : Form
 		InpSDSpeed.Value = 5;
 		InpSDDensity.Value = 1;
 		InpSDDelay.Value = 4;
-		Program.SnowWindow?.Snowdrifts.CreateSmooth();
+		Snowdrifts.CreateSmooth();
 	}
 
 	private void CBLights_CheckedChanged(object sender, EventArgs e)
@@ -408,7 +408,7 @@ public partial class SettingsForm : Form
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsInterval = (int)InpCLInterval.Value;
-		Program.SnowWindow?.ChristmasLights.UpdateInterval();
+		ChristmasLights.UpdateInterval();
 	}
 
 	private void InpCLSize_ValueChanged(object sender, EventArgs e)
@@ -421,41 +421,41 @@ public partial class SettingsForm : Form
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsMode = 0;
-		Program.SnowWindow?.ChristmasLights.UpdateMode();
+		ChristmasLights.UpdateMode();
 	}
 
 	private void RBMode1_CheckedChanged(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsMode = 1;
-		Program.SnowWindow?.ChristmasLights.UpdateMode();
+		ChristmasLights.UpdateMode();
 	}
 
 	private void RBMode2_CheckedChanged(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsMode = 2;
-		Program.SnowWindow?.ChristmasLights.UpdateMode();
+		ChristmasLights.UpdateMode();
 	}
 
 	private void RBMode3_CheckedChanged(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsMode = 3;
-		Program.SnowWindow?.ChristmasLights.UpdateMode();
+		ChristmasLights.UpdateMode();
 	}
 
 	private void RBMode4_CheckedChanged(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsMode = 4;
-		Program.SnowWindow?.ChristmasLights.UpdateMode();
+		ChristmasLights.UpdateMode();
 	}
 
 	private void InpCLAnimSpeed_Scroll(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsAnimationSpeed = InpCLAnimSpeed.Value;
-		Program.SnowWindow?.ChristmasLights.UpdateSpeed();
+		ChristmasLights.UpdateSpeed();
 	}
 }

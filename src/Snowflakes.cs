@@ -4,8 +4,10 @@ namespace SnowFlakes;
 
 class Snowflakes : ISprite
 {
+	private static readonly List<Snowflakes> _instances = [];
 	private readonly int _width;
 	private readonly int _height;
+	private readonly int _windowCount;
 	private Particle[] _particles;
 	private Point _pastCursorPos;
 	private bool _needToUpdateImg = false;
@@ -14,17 +16,23 @@ class Snowflakes : ISprite
 	private GameOverlay.Drawing.Image? _snowflake1;
 	private GameOverlay.Drawing.Image? _snowflake2;
 
-	public Snowflakes(int width, int height)
+	public Snowflakes(int width, int height, int windowCount)
 	{
+		_instances.Add(this);
 		_width = width;
 		_height = height;
-
+		_windowCount = windowCount;
 		_particles = CreateParticles();
+	}
+	~Snowflakes()
+	{
+		_instances.Remove(this);
+		DestroyGraphics();
 	}
 
 	private Particle[] CreateParticles()
 	{
-		var particles = new Particle[Program.Settings.Particles];
+		var particles = new Particle[Program.Settings.Particles / _windowCount];
 		for (int i = 0; i < particles.Length; i++)
 			particles[i] = new Particle(_width, _height);
 		return particles;
@@ -99,30 +107,37 @@ class Snowflakes : ISprite
 		UpdateColor();
 	}
 
-	public void UpdateColor()
+	public static void UpdateColor()
 	{
-		if (_brush != null)
-			_brush.Color = Program.Settings.ParticleColor.ToGameOverlayColor();
+		foreach (var it in _instances)
+		{
+			if (it._brush != null)
+				it._brush.Color = Program.Settings.ParticleColor.ToGameOverlayColor();
+		}
 	}
 
-	public void UpdateImg()
+	public static void UpdateImg()
 	{
-		_needToUpdateImg = true;
+		foreach (var it in _instances)
+			it._needToUpdateImg = true;
 	}
 
-	public void UpdateParticles()
+	public static void UpdateParticles()
 	{
-		_particles = CreateParticles();
+		foreach (var it in _instances)
+			it._particles = it.CreateParticles();
 	}
 
-	public void Rerandomize()
+	public static void Rerandomize()
 	{
-		for (int i = 0; i < _particles.Length; i++)
-			_particles[i].SetRandSpeed();
+		foreach (var it in _instances)
+			for (int i = 0; i < it._particles.Length; i++)
+				it._particles[i].SetRandSpeed();
 	}
 
-	public void AddTo(float x, float y)
+	public static void AddTo(float x, float y)
 	{
-		_particles[Random.Shared.Next(_particles.Length)].SetPos(x, y);
+		if (_instances.Count == 0) return;
+		_instances.RandomItem()._particles.RandomItem().SetPos(x, y);
 	}
 }

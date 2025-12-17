@@ -12,15 +12,16 @@ public interface ISprite
 
 internal class SnowWindow : IDisposable
 {
+	private static readonly List<SnowWindow> _windows = [];
 	private readonly GraphicsWindow _window;
 	private readonly List<ISprite> _sprites = [];
 
-	public Snowflakes Snowflakes;
-	public Snowdrifts Snowdrifts;
-	public ChristmasLights ChristmasLights;
+	public static int Width => _windows.Count == 0 ? 0 : _windows[0]._window.Width;
+	public static int Height => _windows.Count == 0 ? 0 : _windows[0]._window.Height;
 
 	public SnowWindow()
 	{
+		_windows.Add(this);
 		var gfx = new GameOverlay.Drawing.Graphics()
 		{
 			MeasureFPS = true,
@@ -39,26 +40,31 @@ internal class SnowWindow : IDisposable
 			IsVisible = true,
 		};
 
-		_sprites.Add(Snowflakes = new Snowflakes(_window.Width, _window.Height));
-		_sprites.Add(Snowdrifts = new Snowdrifts(_window.Width, _window.Height));
-		_sprites.Add(ChristmasLights = new ChristmasLights(_window.Width, _window.Height));
-		_sprites.Add(new SnowFps());
-
-		_window.SetupGraphics += SetupGraphics;
-		_window.DrawGraphics += DrawGraphics;
-		_window.DestroyGraphics += DestroyGraphics;
+		_window.SetupGraphics += (object? sender, SetupGraphicsEventArgs e) =>
+		{
+			var gfx = e.Graphics;
+			_sprites.ForEach(sprite => sprite.SetupGraphics(gfx));
+		};
+		_window.DrawGraphics += (object? sender, DrawGraphicsEventArgs e) =>
+		{
+			var gfx = e.Graphics;
+			gfx.ClearScene();
+			_sprites.ForEach(sprite => sprite.DrawGraphics(gfx, e.DeltaTime));
+		};
+		_window.DestroyGraphics += (object? sender, DestroyGraphicsEventArgs e) =>
+		{
+			_sprites.ForEach(sprite => sprite.DestroyGraphics());
+		};
 	}
 
-	~SnowWindow()
-	{
-		Dispose(false);
-	}
+	~SnowWindow() { Dispose(false); }
 
 	private bool _isDisposed;
 	protected virtual void Dispose(bool disposing)
 	{
 		if (_isDisposed || !disposing) return;
 		_isDisposed = true;
+		_windows.Remove(this);
 		_window.Dispose();
 	}
 	public void Dispose()
@@ -67,28 +73,32 @@ internal class SnowWindow : IDisposable
 		GC.SuppressFinalize(this);
 	}
 
-	public void Run()
+	public static void DisposeAll()
 	{
-		_window.Create();
-		//_window.Join();
+		foreach (var w in _windows)
+			w.Dispose();
+		_windows.Clear();
+	}
+	public static void RunAll()
+	{
+		foreach (var w in _windows)
+			w.Run();
+	}
+	public static void ReloadAll()
+	{
+		foreach (var w in _windows)
+			w.Reload();
+	}
+	public static void SetFPSAll(int fps)
+	{
+		foreach (var w in _windows)
+			w.SetFPS(fps);
 	}
 
-	private void SetupGraphics(object? sender, SetupGraphicsEventArgs e)
+	public SnowWindow AddSprite(ISprite sprite)
 	{
-		var gfx = e.Graphics;
-		_sprites.ForEach(sprite => sprite.SetupGraphics(gfx));
-	}
-
-	private void DestroyGraphics(object? sender, DestroyGraphicsEventArgs e)
-	{
-		_sprites.ForEach(sprite => sprite.DestroyGraphics());
-	}
-
-	private void DrawGraphics(object? sender, DrawGraphicsEventArgs e)
-	{
-		var gfx = e.Graphics;
-		gfx.ClearScene();
-		_sprites.ForEach(sprite => sprite.DrawGraphics(gfx, e.DeltaTime));
+		_sprites.Add(sprite);
+		return this;
 	}
 
 	public void Reload()
@@ -100,5 +110,11 @@ internal class SnowWindow : IDisposable
 	public void SetFPS(int fps)
 	{
 		_window.FPS = fps;
+	}
+
+	public void Run()
+	{
+		_window.Create();
+		//_window.Join();
 	}
 }
