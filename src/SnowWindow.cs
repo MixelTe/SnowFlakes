@@ -75,9 +75,8 @@ internal class SnowWindow : IDisposable
 
 	public static void DisposeAll()
 	{
-		foreach (var w in _windows)
-			w.Dispose();
-		_windows.Clear();
+		while (_windows.Count > 0)
+			_windows[0].Dispose();
 	}
 	public static void RunAll()
 	{
