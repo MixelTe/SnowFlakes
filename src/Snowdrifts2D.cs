@@ -1,9 +1,8 @@
-﻿using System.Collections;
+﻿namespace SnowFlakes;
 
-namespace SnowFlakes;
-
-class Snowdrifts2D : ISnowdrifts
+class Snowdrifts2D : ISprite
 {
+	private static Snowdrifts2D? _instance;
 	private readonly VirtualDesktopManager _vdm = new();
 	private readonly int _screenWidth;
 	private readonly int _screenHeight;
@@ -20,9 +19,14 @@ class Snowdrifts2D : ISnowdrifts
 
 	public Snowdrifts2D(int width, int height)
 	{
+		_instance = this;
 		_screenWidth = width;
 		_screenHeight = height;
 		ChangeResolution();
+	}
+	~Snowdrifts2D()
+	{
+		DestroyGraphics();
 	}
 
 	public void SetupGraphics(GameOverlay.Drawing.Graphics gfx)
@@ -44,6 +48,7 @@ class Snowdrifts2D : ISnowdrifts
 
 	public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
 	{
+		if (!Program.Settings.Snowdrifts || !Program.Settings.Snowdrifts2D) return;
 		_timeElapsedFromGround += deltaTime;
 		if (_timeElapsedFromGround > 100)
 		{
@@ -204,25 +209,28 @@ class Snowdrifts2D : ISnowdrifts
 
 	public void Reload()
 	{
-		UpdateColor();
-		ChangeResolution();
+		UpdateColor_();
+		ChangeResolution_();
 	}
 
-	public void UpdateColor()
+	public static void UpdateColor() => _instance?.UpdateColor_();
+	private void UpdateColor_()
 	{
 		if (_brush != null)
 			_brush.Color = Program.Settings.SnowdriftsColor.ToGameOverlayColor();
 	}
 
-	public bool AbsorbSnowflake(float x, float y)
+	public static bool AbsorbSnowflake(float x, float y) => _instance?.AbsorbSnowflake_(x, y) ?? false;
+	private bool AbsorbSnowflake_(float x, float y)
 	{
+		if (!Program.Settings.Snowdrifts || !Program.Settings.Snowdrifts2D) return false;
 		if (x < 0 || x >= _screenWidth || y < 0 || y >= _screenHeight) return false;
 		var ix = (int)(x / _size);
 		var iy = (int)(y / _size);
 		if (_grid[ix, iy]) return false;
 		if (!_ground[ix, iy] && !(iy + 1 < _height && _grid[ix, iy + 1])) return false;
 		if (isFullColumn(ix, iy + 1)) return false;
-		var r = Program.Settings.SnowdriftsSpeed / _size / 2;
+		var r = Program.Settings.Snowdrifts2DSpeed / _size / 2;
 		var ir = (int)r;
 		var rs = r * r;
 		for (var dy = -ir; dy <= ir; dy++)
@@ -246,20 +254,23 @@ class Snowdrifts2D : ISnowdrifts
 		}
 	}
 
-	public void ChangeResolution()
+	public static void ChangeResolution() => _instance?.ChangeResolution_();
+	private void ChangeResolution_()
 	{
-		_size = Program.Settings.SnowdriftsResolution;
+		_size = Program.Settings.Snowdrifts2DResolution;
 		_width = _screenWidth / _size;
 		_height = _screenHeight / _size;
 		_grid = new(_width, _height, false);
 		_ground = new(_width, _height, false);
 	}
 
-	public void AddSnow()
+	public static void AddSnow() => _instance?.AddSnow_();
+	private void AddSnow_()
 	{
 	}
 
-	public void CreateSmooth()
+	public static void CreateSmooth() => _instance?.CreateSmooth_();
+	private void CreateSmooth_()
 	{
 	}
 }

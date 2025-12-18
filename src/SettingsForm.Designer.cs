@@ -86,20 +86,22 @@
 			tabPage1 = new TabPage();
 			BtnAddSnow = new Button();
 			PanelSnowdrifts = new Panel();
+			tabControl1 = new TabControl();
+			tabPage3 = new TabPage();
+			tabPage7 = new TabPage();
+			CBSnowdrifts1D = new CheckBox();
 			label20 = new Label();
-			BtnSDSet1 = new Button();
-			BtnSDSet2 = new Button();
-			BtnSDSet3 = new Button();
-			CBSmooth = new CheckBox();
-			InpSDDelay = new NumericUpDown();
-			label19 = new Label();
-			InpSDStart = new NumericUpDown();
+			BtnSD1Set1 = new Button();
+			BtnSD1Set2 = new Button();
+			BtnSD1Set3 = new Button();
+			CBSD1Smooth = new CheckBox();
+			InpSD1Start = new NumericUpDown();
 			label18 = new Label();
-			InpSDDensity = new NumericUpDown();
+			InpSD1Density = new NumericUpDown();
 			label17 = new Label();
-			InpSDSpeed = new NumericUpDown();
+			InpSD1Speed = new NumericUpDown();
 			label14 = new Label();
-			InpSDRes = new NumericUpDown();
+			InpSD1Res = new NumericUpDown();
 			label13 = new Label();
 			PanelColorSD = new Panel();
 			InpAlphaSD = new TrackBar();
@@ -126,6 +128,14 @@
 			CBLights = new CheckBox();
 			DialogOpenFile = new OpenFileDialog();
 			MyToolTip = new ToolTip(components);
+			CBSnowdrifts2D = new CheckBox();
+			CBSD2Smooth = new CheckBox();
+			numericUpDown1 = new NumericUpDown();
+			label19 = new Label();
+			numericUpDown2 = new NumericUpDown();
+			label24 = new Label();
+			numericUpDown3 = new NumericUpDown();
+			label25 = new Label();
 			((System.ComponentModel.ISupportInitialize)InpCount).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSize).BeginInit();
 			groupBox1.SuspendLayout();
@@ -152,11 +162,13 @@
 			tabPage6.SuspendLayout();
 			tabPage1.SuspendLayout();
 			PanelSnowdrifts.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)InpSDDelay).BeginInit();
-			((System.ComponentModel.ISupportInitialize)InpSDStart).BeginInit();
-			((System.ComponentModel.ISupportInitialize)InpSDDensity).BeginInit();
-			((System.ComponentModel.ISupportInitialize)InpSDSpeed).BeginInit();
-			((System.ComponentModel.ISupportInitialize)InpSDRes).BeginInit();
+			tabControl1.SuspendLayout();
+			tabPage3.SuspendLayout();
+			tabPage7.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)InpSD1Start).BeginInit();
+			((System.ComponentModel.ISupportInitialize)InpSD1Density).BeginInit();
+			((System.ComponentModel.ISupportInitialize)InpSD1Speed).BeginInit();
+			((System.ComponentModel.ISupportInitialize)InpSD1Res).BeginInit();
 			PanelColorSD.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)InpAlphaSD).BeginInit();
 			tabPage2.SuspendLayout();
@@ -166,6 +178,9 @@
 			flowLayoutPanel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)InpCLSize).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpCLInterval).BeginInit();
+			((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+			((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
@@ -845,21 +860,7 @@
 			// 
 			// PanelSnowdrifts
 			// 
-			PanelSnowdrifts.Controls.Add(label20);
-			PanelSnowdrifts.Controls.Add(BtnSDSet1);
-			PanelSnowdrifts.Controls.Add(BtnSDSet2);
-			PanelSnowdrifts.Controls.Add(BtnSDSet3);
-			PanelSnowdrifts.Controls.Add(CBSmooth);
-			PanelSnowdrifts.Controls.Add(InpSDDelay);
-			PanelSnowdrifts.Controls.Add(label19);
-			PanelSnowdrifts.Controls.Add(InpSDStart);
-			PanelSnowdrifts.Controls.Add(label18);
-			PanelSnowdrifts.Controls.Add(InpSDDensity);
-			PanelSnowdrifts.Controls.Add(label17);
-			PanelSnowdrifts.Controls.Add(InpSDSpeed);
-			PanelSnowdrifts.Controls.Add(label14);
-			PanelSnowdrifts.Controls.Add(InpSDRes);
-			PanelSnowdrifts.Controls.Add(label13);
+			PanelSnowdrifts.Controls.Add(tabControl1);
 			PanelSnowdrifts.Controls.Add(PanelColorSD);
 			PanelSnowdrifts.Controls.Add(CBSameColor);
 			PanelSnowdrifts.Dock = DockStyle.Bottom;
@@ -868,182 +869,223 @@
 			PanelSnowdrifts.Size = new Size(358, 347);
 			PanelSnowdrifts.TabIndex = 1;
 			// 
+			// tabControl1
+			// 
+			tabControl1.Controls.Add(tabPage3);
+			tabControl1.Controls.Add(tabPage7);
+			tabControl1.Dock = DockStyle.Bottom;
+			tabControl1.Location = new Point(0, 111);
+			tabControl1.Name = "tabControl1";
+			tabControl1.SelectedIndex = 0;
+			tabControl1.Size = new Size(358, 236);
+			tabControl1.TabIndex = 12;
+			// 
+			// tabPage3
+			// 
+			tabPage3.Controls.Add(CBSnowdrifts2D);
+			tabPage3.Controls.Add(CBSD2Smooth);
+			tabPage3.Controls.Add(numericUpDown1);
+			tabPage3.Controls.Add(label19);
+			tabPage3.Controls.Add(numericUpDown2);
+			tabPage3.Controls.Add(label24);
+			tabPage3.Controls.Add(numericUpDown3);
+			tabPage3.Controls.Add(label25);
+			tabPage3.Location = new Point(4, 24);
+			tabPage3.Name = "tabPage3";
+			tabPage3.Padding = new Padding(3);
+			tabPage3.Size = new Size(350, 208);
+			tabPage3.TabIndex = 0;
+			tabPage3.Text = "2D";
+			tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// tabPage7
+			// 
+			tabPage7.Controls.Add(CBSnowdrifts1D);
+			tabPage7.Controls.Add(label20);
+			tabPage7.Controls.Add(BtnSD1Set1);
+			tabPage7.Controls.Add(BtnSD1Set2);
+			tabPage7.Controls.Add(BtnSD1Set3);
+			tabPage7.Controls.Add(CBSD1Smooth);
+			tabPage7.Controls.Add(InpSD1Start);
+			tabPage7.Controls.Add(label18);
+			tabPage7.Controls.Add(InpSD1Density);
+			tabPage7.Controls.Add(label17);
+			tabPage7.Controls.Add(InpSD1Speed);
+			tabPage7.Controls.Add(label14);
+			tabPage7.Controls.Add(InpSD1Res);
+			tabPage7.Controls.Add(label13);
+			tabPage7.Location = new Point(4, 24);
+			tabPage7.Name = "tabPage7";
+			tabPage7.Padding = new Padding(3);
+			tabPage7.Size = new Size(350, 208);
+			tabPage7.TabIndex = 1;
+			tabPage7.Text = "1D";
+			tabPage7.UseVisualStyleBackColor = true;
+			// 
+			// CBSnowdrifts1D
+			// 
+			CBSnowdrifts1D.AutoSize = true;
+			CBSnowdrifts1D.Font = new Font("Segoe UI", 12F);
+			CBSnowdrifts1D.Location = new Point(6, 6);
+			CBSnowdrifts1D.Name = "CBSnowdrifts1D";
+			CBSnowdrifts1D.Size = new Size(100, 25);
+			CBSnowdrifts1D.TabIndex = 53;
+			CBSnowdrifts1D.Text = "Включить";
+			CBSnowdrifts1D.UseVisualStyleBackColor = true;
+			CBSnowdrifts1D.CheckedChanged += CBSnowdrifts1D_CheckedChanged;
+			// 
 			// label20
 			// 
 			label20.AutoSize = true;
 			label20.Font = new Font("Segoe UI", 12F);
-			label20.Location = new Point(6, 111);
+			label20.Location = new Point(3, 179);
 			label20.Name = "label20";
-			label20.Size = new Size(75, 21);
-			label20.TabIndex = 26;
-			label20.Text = "Качество";
+			label20.Size = new Size(123, 21);
+			label20.TabIndex = 52;
+			label20.Text = "Предустановки:";
 			// 
-			// BtnSDSet1
+			// BtnSD1Set1
 			// 
-			BtnSDSet1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			BtnSDSet1.Location = new Point(148, 111);
-			BtnSDSet1.Name = "BtnSDSet1";
-			BtnSDSet1.Size = new Size(65, 23);
-			BtnSDSet1.TabIndex = 25;
-			BtnSDSet1.Text = "Низкое";
-			BtnSDSet1.UseVisualStyleBackColor = true;
-			BtnSDSet1.Click += SnowdriftsSet1_Click;
+			BtnSD1Set1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			BtnSD1Set1.Location = new Point(140, 179);
+			BtnSD1Set1.Name = "BtnSD1Set1";
+			BtnSD1Set1.Size = new Size(65, 23);
+			BtnSD1Set1.TabIndex = 51;
+			BtnSD1Set1.Text = "Низкое";
+			BtnSD1Set1.UseVisualStyleBackColor = true;
+			BtnSD1Set1.Click += BtnSD1Set1_Click;
 			// 
-			// BtnSDSet2
+			// BtnSD1Set2
 			// 
-			BtnSDSet2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			BtnSDSet2.Location = new Point(219, 111);
-			BtnSDSet2.Name = "BtnSDSet2";
-			BtnSDSet2.Size = new Size(65, 23);
-			BtnSDSet2.TabIndex = 24;
-			BtnSDSet2.Text = "Среднее";
-			BtnSDSet2.UseVisualStyleBackColor = true;
-			BtnSDSet2.Click += SnowdriftsSet2_Click;
+			BtnSD1Set2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			BtnSD1Set2.Location = new Point(211, 179);
+			BtnSD1Set2.Name = "BtnSD1Set2";
+			BtnSD1Set2.Size = new Size(65, 23);
+			BtnSD1Set2.TabIndex = 50;
+			BtnSD1Set2.Text = "Среднее";
+			BtnSD1Set2.UseVisualStyleBackColor = true;
+			BtnSD1Set2.Click += BtnSD1Set2_Click;
 			// 
-			// BtnSDSet3
+			// BtnSD1Set3
 			// 
-			BtnSDSet3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			BtnSDSet3.Location = new Point(290, 111);
-			BtnSDSet3.Name = "BtnSDSet3";
-			BtnSDSet3.Size = new Size(65, 23);
-			BtnSDSet3.TabIndex = 23;
-			BtnSDSet3.Text = "Ультра";
-			BtnSDSet3.UseVisualStyleBackColor = true;
-			BtnSDSet3.Click += SnowdriftsSet3_Click;
+			BtnSD1Set3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			BtnSD1Set3.Location = new Point(282, 179);
+			BtnSD1Set3.Name = "BtnSD1Set3";
+			BtnSD1Set3.Size = new Size(65, 23);
+			BtnSD1Set3.TabIndex = 49;
+			BtnSD1Set3.Text = "Ультра";
+			BtnSD1Set3.UseVisualStyleBackColor = true;
+			BtnSD1Set3.Click += BtnSD1Set3_Click;
 			// 
-			// CBSmooth
+			// CBSD1Smooth
 			// 
-			CBSmooth.AutoSize = true;
-			CBSmooth.Font = new Font("Segoe UI", 12F);
-			CBSmooth.Location = new Point(6, 135);
-			CBSmooth.Name = "CBSmooth";
-			CBSmooth.Size = new Size(150, 25);
-			CBSmooth.TabIndex = 22;
-			CBSmooth.Text = "Сглаживать края";
-			CBSmooth.UseVisualStyleBackColor = true;
-			CBSmooth.CheckedChanged += SnowdriftsSmooth_Change;
+			CBSD1Smooth.AutoSize = true;
+			CBSD1Smooth.Font = new Font("Segoe UI", 12F);
+			CBSD1Smooth.Location = new Point(194, 6);
+			CBSD1Smooth.Name = "CBSD1Smooth";
+			CBSD1Smooth.Size = new Size(150, 25);
+			CBSD1Smooth.TabIndex = 48;
+			CBSD1Smooth.Text = "Сглаживать края";
+			CBSD1Smooth.UseVisualStyleBackColor = true;
+			CBSD1Smooth.CheckedChanged += CBSD1Smooth_CheckedChanged;
 			// 
-			// InpSDDelay
+			// InpSD1Start
 			// 
-			InpSDDelay.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDDelay.Font = new Font("Segoe UI", 12F);
-			InpSDDelay.Location = new Point(287, 301);
-			InpSDDelay.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
-			InpSDDelay.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-			InpSDDelay.Name = "InpSDDelay";
-			InpSDDelay.Size = new Size(65, 29);
-			InpSDDelay.TabIndex = 20;
-			InpSDDelay.Value = new decimal(new int[] { 4, 0, 0, 0 });
-			InpSDDelay.ValueChanged += SnowdriftsDelay_Change;
-			// 
-			// label19
-			// 
-			label19.AutoSize = true;
-			label19.Font = new Font("Segoe UI", 12F);
-			label19.Location = new Point(3, 303);
-			label19.Name = "label19";
-			label19.Size = new Size(167, 21);
-			label19.TabIndex = 21;
-			label19.Text = "Скорость обновления";
-			MyToolTip.SetToolTip(label19, "Как часто будет выравниваться сугроб");
-			// 
-			// InpSDStart
-			// 
-			InpSDStart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDStart.Font = new Font("Segoe UI", 12F);
-			InpSDStart.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-			InpSDStart.Location = new Point(287, 161);
-			InpSDStart.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
-			InpSDStart.Name = "InpSDStart";
-			InpSDStart.Size = new Size(65, 29);
-			InpSDStart.TabIndex = 18;
-			InpSDStart.Value = new decimal(new int[] { 40, 0, 0, 0 });
-			InpSDStart.ValueChanged += SnowdriftsStart_Change;
+			InpSD1Start.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD1Start.Font = new Font("Segoe UI", 12F);
+			InpSD1Start.Increment = new decimal(new int[] { 2, 0, 0, 0 });
+			InpSD1Start.Location = new Point(279, 37);
+			InpSD1Start.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+			InpSD1Start.Name = "InpSD1Start";
+			InpSD1Start.Size = new Size(65, 29);
+			InpSD1Start.TabIndex = 46;
+			InpSD1Start.Value = new decimal(new int[] { 40, 0, 0, 0 });
+			InpSD1Start.ValueChanged += InpSD1Start_ValueChanged;
 			// 
 			// label18
 			// 
 			label18.AutoSize = true;
 			label18.Font = new Font("Segoe UI", 12F);
-			label18.Location = new Point(3, 163);
+			label18.Location = new Point(3, 39);
 			label18.Name = "label18";
 			label18.Size = new Size(157, 21);
-			label18.TabIndex = 19;
+			label18.TabIndex = 47;
 			label18.Text = "Отступ снизу экрана";
 			MyToolTip.SetToolTip(label18, "Сугробы будут находиться выше нижнего края экрана");
 			// 
-			// InpSDDensity
+			// InpSD1Density
 			// 
-			InpSDDensity.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDDensity.DecimalPlaces = 1;
-			InpSDDensity.Font = new Font("Segoe UI", 12F);
-			InpSDDensity.Increment = new decimal(new int[] { 5, 0, 0, 0 });
-			InpSDDensity.Location = new Point(287, 266);
-			InpSDDensity.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
-			InpSDDensity.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
-			InpSDDensity.Name = "InpSDDensity";
-			InpSDDensity.Size = new Size(65, 29);
-			InpSDDensity.TabIndex = 16;
-			InpSDDensity.Value = new decimal(new int[] { 1, 0, 0, 0 });
-			InpSDDensity.ValueChanged += SnowdriftsDensity_Change;
+			InpSD1Density.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD1Density.DecimalPlaces = 1;
+			InpSD1Density.Font = new Font("Segoe UI", 12F);
+			InpSD1Density.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+			InpSD1Density.Location = new Point(279, 142);
+			InpSD1Density.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+			InpSD1Density.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
+			InpSD1Density.Name = "InpSD1Density";
+			InpSD1Density.Size = new Size(65, 29);
+			InpSD1Density.TabIndex = 44;
+			InpSD1Density.Value = new decimal(new int[] { 5, 0, 0, 0 });
+			InpSD1Density.ValueChanged += InpSD1Density_ValueChanged;
 			// 
 			// label17
 			// 
 			label17.AutoSize = true;
 			label17.Font = new Font("Segoe UI", 12F);
-			label17.Location = new Point(3, 268);
+			label17.Location = new Point(3, 144);
 			label17.Name = "label17";
 			label17.Size = new Size(115, 21);
-			label17.TabIndex = 17;
+			label17.TabIndex = 45;
 			label17.Text = "Вязкость снега";
 			MyToolTip.SetToolTip(label17, "При какой разнице высот соседних кусочков сугроба, \r\nснег начнёт осыпаться и выравнивать сугроб");
 			// 
-			// InpSDSpeed
+			// InpSD1Speed
 			// 
-			InpSDSpeed.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDSpeed.DecimalPlaces = 1;
-			InpSDSpeed.Font = new Font("Segoe UI", 12F);
-			InpSDSpeed.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
-			InpSDSpeed.Location = new Point(287, 196);
-			InpSDSpeed.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-			InpSDSpeed.Name = "InpSDSpeed";
-			InpSDSpeed.Size = new Size(65, 29);
-			InpSDSpeed.TabIndex = 14;
-			InpSDSpeed.Value = new decimal(new int[] { 6, 0, 0, 0 });
-			InpSDSpeed.ValueChanged += SnowdriftsSpeed_Change;
+			InpSD1Speed.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD1Speed.DecimalPlaces = 1;
+			InpSD1Speed.Font = new Font("Segoe UI", 12F);
+			InpSD1Speed.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+			InpSD1Speed.Location = new Point(279, 72);
+			InpSD1Speed.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+			InpSD1Speed.Name = "InpSD1Speed";
+			InpSD1Speed.Size = new Size(65, 29);
+			InpSD1Speed.TabIndex = 42;
+			InpSD1Speed.Value = new decimal(new int[] { 6, 0, 0, 0 });
+			InpSD1Speed.ValueChanged += InpSD1Speed_ValueChanged;
 			// 
 			// label14
 			// 
 			label14.AutoSize = true;
 			label14.Font = new Font("Segoe UI", 12F);
-			label14.Location = new Point(3, 198);
+			label14.Location = new Point(3, 74);
 			label14.Name = "label14";
 			label14.Size = new Size(121, 21);
-			label14.TabIndex = 15;
+			label14.TabIndex = 43;
 			label14.Text = "Скорость роста";
 			MyToolTip.SetToolTip(label14, "На сколько увеличивает сугроб одна снежинка");
 			// 
-			// InpSDRes
+			// InpSD1Res
 			// 
-			InpSDRes.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			InpSDRes.Font = new Font("Segoe UI", 12F);
-			InpSDRes.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-			InpSDRes.Location = new Point(287, 231);
-			InpSDRes.Maximum = new decimal(new int[] { 150, 0, 0, 0 });
-			InpSDRes.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-			InpSDRes.Name = "InpSDRes";
-			InpSDRes.Size = new Size(65, 29);
-			InpSDRes.TabIndex = 12;
-			InpSDRes.Value = new decimal(new int[] { 60, 0, 0, 0 });
-			InpSDRes.ValueChanged += SnowdriftsRes_Change;
+			InpSD1Res.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD1Res.Font = new Font("Segoe UI", 12F);
+			InpSD1Res.Increment = new decimal(new int[] { 2, 0, 0, 0 });
+			InpSD1Res.Location = new Point(279, 107);
+			InpSD1Res.Maximum = new decimal(new int[] { 150, 0, 0, 0 });
+			InpSD1Res.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+			InpSD1Res.Name = "InpSD1Res";
+			InpSD1Res.Size = new Size(65, 29);
+			InpSD1Res.TabIndex = 40;
+			InpSD1Res.Value = new decimal(new int[] { 60, 0, 0, 0 });
+			InpSD1Res.ValueChanged += InpSD1Res_ValueChanged;
 			// 
 			// label13
 			// 
 			label13.AutoSize = true;
 			label13.Font = new Font("Segoe UI", 12F);
-			label13.Location = new Point(3, 233);
+			label13.Location = new Point(3, 109);
 			label13.Name = "label13";
 			label13.Size = new Size(122, 21);
-			label13.TabIndex = 13;
+			label13.TabIndex = 41;
 			label13.Text = "Размер сугроба";
 			MyToolTip.SetToolTip(label13, "Ширина одного кусочка сугроба. Чем меньше,\r\n тем плавнее сугробы\r\n");
 			// 
@@ -1331,6 +1373,101 @@
 			CBLights.UseVisualStyleBackColor = true;
 			CBLights.CheckedChanged += CBLights_CheckedChanged;
 			// 
+			// CBSnowdrifts2D
+			// 
+			CBSnowdrifts2D.AutoSize = true;
+			CBSnowdrifts2D.Font = new Font("Segoe UI", 12F);
+			CBSnowdrifts2D.Location = new Point(6, 6);
+			CBSnowdrifts2D.Name = "CBSnowdrifts2D";
+			CBSnowdrifts2D.Size = new Size(100, 25);
+			CBSnowdrifts2D.TabIndex = 61;
+			CBSnowdrifts2D.Text = "Включить";
+			CBSnowdrifts2D.UseVisualStyleBackColor = true;
+			CBSnowdrifts2D.CheckedChanged += CBSnowdrifts2D_CheckedChanged;
+			// 
+			// CBSD2Smooth
+			// 
+			CBSD2Smooth.AutoSize = true;
+			CBSD2Smooth.Font = new Font("Segoe UI", 12F);
+			CBSD2Smooth.Location = new Point(194, 6);
+			CBSD2Smooth.Name = "CBSD2Smooth";
+			CBSD2Smooth.Size = new Size(150, 25);
+			CBSD2Smooth.TabIndex = 60;
+			CBSD2Smooth.Text = "Сглаживать края";
+			CBSD2Smooth.UseVisualStyleBackColor = true;
+			CBSD2Smooth.CheckedChanged += CBSD2Smooth_CheckedChanged;
+			// 
+			// numericUpDown1
+			// 
+			numericUpDown1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			numericUpDown1.Font = new Font("Segoe UI", 12F);
+			numericUpDown1.Increment = new decimal(new int[] { 2, 0, 0, 0 });
+			numericUpDown1.Location = new Point(279, 37);
+			numericUpDown1.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+			numericUpDown1.Name = "numericUpDown1";
+			numericUpDown1.Size = new Size(65, 29);
+			numericUpDown1.TabIndex = 58;
+			numericUpDown1.Value = new decimal(new int[] { 40, 0, 0, 0 });
+			// 
+			// label19
+			// 
+			label19.AutoSize = true;
+			label19.Font = new Font("Segoe UI", 12F);
+			label19.Location = new Point(3, 39);
+			label19.Name = "label19";
+			label19.Size = new Size(157, 21);
+			label19.TabIndex = 59;
+			label19.Text = "Отступ снизу экрана";
+			MyToolTip.SetToolTip(label19, "Сугробы будут находиться выше нижнего края экрана");
+			// 
+			// numericUpDown2
+			// 
+			numericUpDown2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			numericUpDown2.DecimalPlaces = 1;
+			numericUpDown2.Font = new Font("Segoe UI", 12F);
+			numericUpDown2.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+			numericUpDown2.Location = new Point(279, 72);
+			numericUpDown2.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+			numericUpDown2.Name = "numericUpDown2";
+			numericUpDown2.Size = new Size(65, 29);
+			numericUpDown2.TabIndex = 56;
+			numericUpDown2.Value = new decimal(new int[] { 6, 0, 0, 0 });
+			// 
+			// label24
+			// 
+			label24.AutoSize = true;
+			label24.Font = new Font("Segoe UI", 12F);
+			label24.Location = new Point(3, 74);
+			label24.Name = "label24";
+			label24.Size = new Size(121, 21);
+			label24.TabIndex = 57;
+			label24.Text = "Скорость роста";
+			MyToolTip.SetToolTip(label24, "На сколько увеличивает сугроб одна снежинка");
+			// 
+			// numericUpDown3
+			// 
+			numericUpDown3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			numericUpDown3.Font = new Font("Segoe UI", 12F);
+			numericUpDown3.Increment = new decimal(new int[] { 2, 0, 0, 0 });
+			numericUpDown3.Location = new Point(279, 107);
+			numericUpDown3.Maximum = new decimal(new int[] { 150, 0, 0, 0 });
+			numericUpDown3.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+			numericUpDown3.Name = "numericUpDown3";
+			numericUpDown3.Size = new Size(65, 29);
+			numericUpDown3.TabIndex = 54;
+			numericUpDown3.Value = new decimal(new int[] { 60, 0, 0, 0 });
+			// 
+			// label25
+			// 
+			label25.AutoSize = true;
+			label25.Font = new Font("Segoe UI", 12F);
+			label25.Location = new Point(3, 109);
+			label25.Name = "label25";
+			label25.Size = new Size(122, 21);
+			label25.TabIndex = 55;
+			label25.Text = "Размер сугроба";
+			MyToolTip.SetToolTip(label25, "Ширина одного кусочка сугроба. Чем меньше,\r\n тем плавнее сугробы\r\n");
+			// 
 			// SettingsForm
 			// 
 			AutoScaleDimensions = new SizeF(96F, 96F);
@@ -1384,11 +1521,15 @@
 			tabPage1.PerformLayout();
 			PanelSnowdrifts.ResumeLayout(false);
 			PanelSnowdrifts.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)InpSDDelay).EndInit();
-			((System.ComponentModel.ISupportInitialize)InpSDStart).EndInit();
-			((System.ComponentModel.ISupportInitialize)InpSDDensity).EndInit();
-			((System.ComponentModel.ISupportInitialize)InpSDSpeed).EndInit();
-			((System.ComponentModel.ISupportInitialize)InpSDRes).EndInit();
+			tabControl1.ResumeLayout(false);
+			tabPage3.ResumeLayout(false);
+			tabPage3.PerformLayout();
+			tabPage7.ResumeLayout(false);
+			tabPage7.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)InpSD1Start).EndInit();
+			((System.ComponentModel.ISupportInitialize)InpSD1Density).EndInit();
+			((System.ComponentModel.ISupportInitialize)InpSD1Speed).EndInit();
+			((System.ComponentModel.ISupportInitialize)InpSD1Res).EndInit();
 			PanelColorSD.ResumeLayout(false);
 			PanelColorSD.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)InpAlphaSD).EndInit();
@@ -1402,6 +1543,9 @@
 			flowLayoutPanel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)InpCLSize).EndInit();
 			((System.ComponentModel.ISupportInitialize)InpCLInterval).EndInit();
+			((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+			((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+			((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
 			ResumeLayout(false);
 		}
 
@@ -1468,22 +1612,7 @@
 		private Label label16;
 		private Button BtnColorSD;
 		private CheckBox CBSameColor;
-		private NumericUpDown InpSDSpeed;
-		private Label label14;
-		private NumericUpDown InpSDRes;
-		private Label label13;
-		private NumericUpDown InpSDDensity;
-		private Label label17;
-		private NumericUpDown InpSDStart;
-		private Label label18;
-		private NumericUpDown InpSDDelay;
-		private Label label19;
 		private Button BtnAddSnow;
-		private CheckBox CBSmooth;
-		private Label label20;
-		private Button BtnSDSet1;
-		private Button BtnSDSet2;
-		private Button BtnSDSet3;
 		private ToolTip MyToolTip;
 		private TabPage tabPage2;
 		private CheckBox CBLights;
@@ -1502,5 +1631,30 @@
 		private TrackBar InpCLAnimSpeed;
 		private Label label23;
 		private CheckBox CBfps;
+		private TabControl tabControl1;
+		private TabPage tabPage3;
+		private TabPage tabPage7;
+		private Label label20;
+		private Button BtnSD1Set1;
+		private Button BtnSD1Set2;
+		private Button BtnSD1Set3;
+		private CheckBox CBSD1Smooth;
+		private NumericUpDown InpSD1Start;
+		private Label label18;
+		private NumericUpDown InpSD1Density;
+		private Label label17;
+		private NumericUpDown InpSD1Speed;
+		private Label label14;
+		private NumericUpDown InpSD1Res;
+		private Label label13;
+		private CheckBox CBSnowdrifts1D;
+		private CheckBox CBSnowdrifts2D;
+		private CheckBox CBSD2Smooth;
+		private NumericUpDown numericUpDown1;
+		private Label label19;
+		private NumericUpDown numericUpDown2;
+		private Label label24;
+		private NumericUpDown numericUpDown3;
+		private Label label25;
 	}
 }

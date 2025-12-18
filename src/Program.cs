@@ -32,10 +32,11 @@ internal static class Program
 	public static void CreateSnowWindows()
 	{
 		new SnowWindow()
-			.AddSprite(new Snowdrifts(SnowWindow.Width, SnowWindow.Height))
+			.AddSprite(new Snowdrifts1D(SnowWindow.Width, SnowWindow.Height))
+			.AddSprite(new Snowdrifts2D(SnowWindow.Width, SnowWindow.Height))
 			.AddSprite(new ChristmasLights(SnowWindow.Width, SnowWindow.Height))
 			.AddSprite(new SnowFps());
-		const int wc = 4;
+		const int wc = 4;  //?Environment.ProcessorCount
 		for (var i = 0; i < wc; i++)
 			new SnowWindow()
 				.AddSprite(new Snowflakes(SnowWindow.Width, SnowWindow.Height, wc))

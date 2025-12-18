@@ -60,9 +60,9 @@ internal class ChristmasLights : ISprite
 
 	public void Reload()
 	{
-		UpdateInterval();
-		UpdateMode();
-		UpdateSpeed();
+		UpdateInterval_();
+		UpdateMode_();
+		UpdateSpeed_();
 	}
 
 	private LightsMode GetCurLightsMode()

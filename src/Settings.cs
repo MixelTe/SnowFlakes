@@ -20,16 +20,20 @@ public class Settings
 
 	public Rectangle ClearZone = Rectangle.Empty;
 
-	public int SnowdriftsType = 1;  // 1 - 1D, 2 - 2D
 	public bool Snowdrifts = true;
-	public bool SnowdriftsSmooth = true;
 	public Color SnowdriftsColor = Color.FromArgb(150, Color.LightBlue);
 
-	public int SnowdriftsResolution = 40;
-	public float SnowdriftsSpeed = 5;
-	public float SnowdriftsDensity = 1;
-	public int SnowdriftsStart = 40;
-	public int SnowdriftsUpdateDelay = 250;
+	public bool Snowdrifts1D = true;
+	public bool Snowdrifts1DSmooth = true;
+	public int Snowdrifts1DResolution = 40;
+	public float Snowdrifts1DSpeed = 5;
+	public float Snowdrifts1DDensity = 1;
+	public int Snowdrifts1DStart = 40;
+
+	public bool Snowdrifts2D = true;
+	public bool Snowdrifts2DSmooth = true;
+	public int Snowdrifts2DResolution = 3;
+	public float Snowdrifts2DSpeed = 5;
 
 	public bool ChristmasLights = true;
 	public int ChristmasLightsInterval = 60;
@@ -39,6 +43,12 @@ public class Settings
 
 	public int Preset = 1;
 
+
+	public bool SnowdriftsSmooth;  // OLD
+	public int SnowdriftsResolution;  // OLD
+	public float SnowdriftsSpeed;  // OLD
+	public float SnowdriftsDensity;  // OLD
+	public int SnowdriftsStart;  // OLD
 
 	public void Save()
 	{
@@ -63,8 +73,11 @@ public class Settings
 		{
 			case 0:
 				SettingsVersion = 1;
-				SnowdriftsDensity = SnowdriftsDensity / SnowdriftsResolution * 2;
-				SnowdriftsSpeed = SnowdriftsSpeed * SnowdriftsResolution;
+				Snowdrifts1DSmooth = SnowdriftsSmooth;
+				Snowdrifts1DResolution = SnowdriftsResolution;
+				Snowdrifts1DSpeed = SnowdriftsSpeed * SnowdriftsResolution;
+				Snowdrifts1DDensity = SnowdriftsDensity / SnowdriftsResolution * 10;
+				Snowdrifts1DStart = SnowdriftsStart;
 				UpgradeSettings();
 				break;
 		}

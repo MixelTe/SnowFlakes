@@ -59,14 +59,15 @@ public partial class SettingsForm : Form
 		CBSnowdrifts.Checked = Program.Settings.Snowdrifts;
 		PanelSnowdrifts.Enabled = Program.Settings.Snowdrifts;
 		BtnAddSnow.Enabled = Program.Settings.Snowdrifts;
-		CBSmooth.Checked = Program.Settings.SnowdriftsSmooth;
 		BtnColorSD.BackColor = Program.Settings.SnowdriftsColor;
 		InpAlphaSD.Value = Program.Settings.SnowdriftsColor.A;
-		InpSDRes.Value = Program.Settings.SnowdriftsResolution;
-		InpSDSpeed.Value = (decimal)Program.Settings.SnowdriftsSpeed;
-		InpSDDensity.Value = (decimal)Program.Settings.SnowdriftsDensity;
-		InpSDStart.Value = Program.Settings.SnowdriftsStart;
-		InpSDDelay.Value = (decimal)Math.Clamp(1000f / Program.Settings.SnowdriftsUpdateDelay, 1, 20);
+
+		CBSnowdrifts1D.Checked = Program.Settings.Snowdrifts1D;
+		CBSD1Smooth.Checked = Program.Settings.Snowdrifts1DSmooth;
+		InpSD1Res.Value = Program.Settings.Snowdrifts1DResolution;
+		InpSD1Speed.Value = (decimal)Program.Settings.Snowdrifts1DSpeed;
+		InpSD1Density.Value = (decimal)Program.Settings.Snowdrifts1DDensity;
+		InpSD1Start.Value = Program.Settings.Snowdrifts1DStart;
 
 		CBSameColor.Checked = Program.Settings.SnowdriftsColor == Program.Settings.ParticleColor;
 		PanelColorSD.Enabled = !CBSameColor.Checked;
@@ -142,7 +143,8 @@ public partial class SettingsForm : Form
 		if (CBSameColor.Checked)
 		{
 			Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
-			Snowdrifts.UpdateColor();
+			Snowdrifts1D.UpdateColor();
+			Snowdrifts2D.UpdateColor();
 		}
 	}
 	private void Alpha_Change(object sender, EventArgs e)
@@ -153,7 +155,8 @@ public partial class SettingsForm : Form
 		if (CBSameColor.Checked)
 		{
 			Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
-			Snowdrifts.UpdateColor();
+			Snowdrifts1D.UpdateColor();
+			Snowdrifts2D.UpdateColor();
 		}
 	}
 	private void SpeedXMax_Change(object sender, EventArgs e)
@@ -301,6 +304,7 @@ public partial class SettingsForm : Form
 		ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
 		DialogOpenFile.Filter = "Images |" + string.Join(";", codecs.Select(el => el.FilenameExtension));
 	}
+
 	private void Snowdrifts_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
@@ -316,12 +320,8 @@ public partial class SettingsForm : Form
 			Program.Settings.SnowdriftsColor = Program.Settings.ParticleColor;
 		else
 			Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, BtnColorSD.BackColor);
-		Snowdrifts.UpdateColor();
-	}
-	private void SnowdriftsSmooth_Change(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.SnowdriftsSmooth = CBSmooth.Checked;
+		Snowdrifts1D.UpdateColor();
+		Snowdrifts2D.UpdateColor();
 	}
 	private void SnowdriftsColor_Click(object sender, EventArgs e)
 	{
@@ -330,71 +330,78 @@ public partial class SettingsForm : Form
 		{
 			Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, colorDialog.Color);
 			BtnColorSD.BackColor = colorDialog.Color;
-			Snowdrifts.UpdateColor();
+			Snowdrifts1D.UpdateColor();
+			Snowdrifts2D.UpdateColor();
 		}
 	}
 	private void SnowdriftsAlpha_Change(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.SnowdriftsColor = Color.FromArgb(InpAlphaSD.Value, Program.Settings.SnowdriftsColor);
-		Snowdrifts.UpdateColor();
-	}
-	private void SnowdriftsRes_Change(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.SnowdriftsResolution = (int)InpSDRes.Value;
-		Snowdrifts.ChangeResolution();
-	}
-	private void SnowdriftsSpeed_Change(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.SnowdriftsSpeed = (float)InpSDSpeed.Value;
-	}
-	private void SnowdriftsDensity_Change(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.SnowdriftsDensity = (float)InpSDDensity.Value;
-	}
-	private void SnowdriftsStart_Change(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.SnowdriftsStart = (int)InpSDStart.Value;
-	}
-	private void SnowdriftsDelay_Change(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.SnowdriftsUpdateDelay = (int)(1000 / InpSDDelay.Value);
+		Snowdrifts1D.UpdateColor();
+		Snowdrifts2D.UpdateColor();
 	}
 	private void SnowdriftsAdd_Click(object sender, EventArgs e)
 	{
-		Snowdrifts.AddSnow();
+		Snowdrifts1D.AddSnow();
+		Snowdrifts2D.AddSnow();
 	}
-	private void SnowdriftsSet1_Click(object sender, EventArgs e)
+
+
+	private void CBSnowdrifts1D_CheckedChanged(object sender, EventArgs e)
 	{
-		CBSmooth.Checked = true;
-		InpSDRes.Value = 80;
-		InpSDSpeed.Value = 5;
-		InpSDDensity.Value = 1;
-		InpSDDelay.Value = 2;
-		Snowdrifts.CreateSmooth();
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts1D = CBSnowdrifts1D.Checked;
 	}
-	private void SnowdriftsSet2_Click(object sender, EventArgs e)
+	private void CBSD1Smooth_CheckedChanged(object sender, EventArgs e)
 	{
-		CBSmooth.Checked = true;
-		InpSDRes.Value = 40;
-		InpSDSpeed.Value = 5;
-		InpSDDensity.Value = 1;
-		InpSDDelay.Value = 4;
-		Snowdrifts.CreateSmooth();
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts1DSmooth = CBSD1Smooth.Checked;
 	}
-	private void SnowdriftsSet3_Click(object sender, EventArgs e)
+	private void InpSD1Start_ValueChanged(object sender, EventArgs e)
 	{
-		CBSmooth.Checked = false;
-		InpSDRes.Value = 1;
-		InpSDSpeed.Value = 5;
-		InpSDDensity.Value = 1;
-		InpSDDelay.Value = 4;
-		Snowdrifts.CreateSmooth();
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts1DStart = (int)InpSD1Start.Value;
+	}
+	private void InpSD1Speed_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts1DSpeed = (float)InpSD1Speed.Value;
+	}
+	private void InpSD1Res_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts1DResolution = (int)InpSD1Res.Value;
+		Snowdrifts1D.ChangeResolution();
+	}
+	private void InpSD1Density_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts1DDensity = (float)InpSD1Density.Value;
+	}
+	private void BtnSD1Set1_Click(object sender, EventArgs e)
+	{
+		CBSD1Smooth.Checked = true;
+		InpSD1Res.Value = 80;
+		InpSD1Speed.Value = 5;
+		InpSD1Density.Value = 5;
+		Snowdrifts1D.CreateSmooth();
+	}
+	private void BtnSD1Set2_Click(object sender, EventArgs e)
+	{
+		CBSD1Smooth.Checked = true;
+		InpSD1Res.Value = 40;
+		InpSD1Speed.Value = 5;
+		InpSD1Density.Value = 5;
+		Snowdrifts1D.CreateSmooth();
+	}
+	private void BtnSD1Set3_Click(object sender, EventArgs e)
+	{
+		CBSD1Smooth.Checked = false;
+		InpSD1Res.Value = 1;
+		InpSD1Speed.Value = 5;
+		InpSD1Density.Value = 5;
+		Snowdrifts1D.CreateSmooth();
 	}
 
 	private void CBLights_CheckedChanged(object sender, EventArgs e)
@@ -457,5 +464,17 @@ public partial class SettingsForm : Form
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsAnimationSpeed = InpCLAnimSpeed.Value;
 		ChristmasLights.UpdateSpeed();
+	}
+
+	private void CBSnowdrifts2D_CheckedChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2D = CBSnowdrifts2D.Checked;
+
+	}
+	private void CBSD2Smooth_CheckedChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2DSmooth = CBSD2Smooth.Checked;
 	}
 }

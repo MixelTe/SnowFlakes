@@ -43,7 +43,15 @@ internal static class Utils
 	public static float Wrap(this float v, float min, float max)
 	{
 		var range = max - min;
-		float wrapped = (v - min) % range;
+		var wrapped = (v - min) % range;
+		if (wrapped < 0) wrapped += range;
+		return wrapped + min;
+	}
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static int Wrap(this int v, int min, int max)
+	{
+		var range = max - min;
+		var wrapped = (v - min) % range;
 		if (wrapped < 0) wrapped += range;
 		return wrapped + min;
 	}

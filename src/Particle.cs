@@ -73,7 +73,9 @@ class Particle
 		}
 		_x = _x.Wrap(0, Width);
 
-		if (_y > Height + Program.Settings.ParticleRad || Snowdrifts.AbsorbSnowflake(_x, _y))
+		if (_y > Height + Program.Settings.ParticleRad 
+			|| Snowdrifts1D.AbsorbSnowflake(_x, _y) 
+			|| Snowdrifts2D.AbsorbSnowflake(_x, _y))
 		{
 			_y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax - Program.Settings.ParticleRad;
 			_x = Random.Shared.NextSingle() * Width;
