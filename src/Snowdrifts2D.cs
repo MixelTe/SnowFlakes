@@ -3,6 +3,7 @@
 class Snowdrifts2D : ISprite
 {
 	private static Snowdrifts2D? _instance;
+	private readonly object _lock = new();
 	private readonly VirtualDesktopManager _vdm = new();
 	private readonly int _screenWidth;
 	private readonly int _screenHeight;
@@ -49,41 +50,45 @@ class Snowdrifts2D : ISprite
 	public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
 	{
 		if (!Program.Settings.Snowdrifts || !Program.Settings.Snowdrifts2D) return;
-		_timeElapsedFromGround += deltaTime;
-		if (_timeElapsedFromGround > 100)
+		lock (_lock)
 		{
-			_timeElapsedFromGround = 0;
-			UpdateGround();
-		}
 
-		_timeElapsedFromUpdate += deltaTime;
-		if (_timeElapsedFromUpdate > 50)
-		{
-			_timeElapsedFromUpdate = 0;
-			Update();
-		}
-
-		for (var y = 0; y < _height; y++)
-			for (var x = 0; x < _width; x++)
+			_timeElapsedFromGround += deltaTime;
+			if (_timeElapsedFromGround > 100)
 			{
-				if (!_grid[x, y]) continue;
-				var x0 = x;
-				do x++; while (x < _width && _grid[x, y]);
-				gfx.FillRectangle(_brush, x0 * _size, y * _size, x * _size, (y + 1) * _size);
+				_timeElapsedFromGround = 0;
+				UpdateGround();
 			}
 
-		var drawGroundBounds = true;
-		if (drawGroundBounds)
+			_timeElapsedFromUpdate += deltaTime;
+			if (_timeElapsedFromUpdate > 50)
+			{
+				_timeElapsedFromUpdate = 0;
+				Update();
+			}
+
 			for (var y = 0; y < _height; y++)
 				for (var x = 0; x < _width; x++)
 				{
-					if (!_ground[x, y]) continue;
-					if (x - 1 >= 0 && _ground[x - 1, y] &&
-						y - 1 >= 0 && _ground[x, y - 1] &&
-						x + 1 < _width && _ground[x + 1, y] &&
-						y + 1 < _height && _ground[x, y + 1]) continue;
-					gfx.FillRectangle(_brushRects, x * _size, y * _size, (x + 1) * _size, (y + 1) * _size);
+					if (!_grid[x, y]) continue;
+					var x0 = x;
+					do x++; while (x < _width && _grid[x, y]);
+					gfx.FillRectangle(_brush, x0 * _size, y * _size, x * _size, (y + 1) * _size);
 				}
+
+			var drawGroundBounds = true;
+			if (drawGroundBounds)
+				for (var y = 0; y < _height; y++)
+					for (var x = 0; x < _width; x++)
+					{
+						if (!_ground[x, y]) continue;
+						if (x - 1 >= 0 && _ground[x - 1, y] &&
+							y - 1 >= 0 && _ground[x, y - 1] &&
+							x + 1 < _width && _ground[x + 1, y] &&
+							y + 1 < _height && _ground[x, y + 1]) continue;
+						gfx.FillRectangle(_brushRects, x * _size, y * _size, (x + 1) * _size, (y + 1) * _size);
+					}
+		}
 	}
 
 	private void UpdateGround()
@@ -188,7 +193,7 @@ class Snowdrifts2D : ISprite
 							if (nx >= 0 && nx < _width && ny >= 0 && ny < _height &&
 								dx * dx + dy * dy <= rs)
 							{
-							 	_grid[nx, ny] = false;
+								_grid[nx, ny] = false;
 							}
 						}
 					Snowflakes.AddTo(x * _size, y * _size);
@@ -225,30 +230,33 @@ class Snowdrifts2D : ISprite
 	{
 		if (!Program.Settings.Snowdrifts || !Program.Settings.Snowdrifts2D) return false;
 		if (x < 0 || x >= _screenWidth || y < 0 || y >= _screenHeight) return false;
-		var ix = (int)(x / _size);
-		var iy = (int)(y / _size);
-		if (_grid[ix, iy]) return false;
-		if (!_ground[ix, iy] && !(iy + 1 < _height && _grid[ix, iy + 1])) return false;
-		if (isFullColumn(ix, iy + 1)) return false;
-		var r = Program.Settings.Snowdrifts2DSpeed / _size / 2;
-		var ir = (int)r;
-		var rs = r * r;
-		for (var dy = -ir; dy <= ir; dy++)
-			for (var dx = -ir; dx <= ir; dx++)
-			{
-				var nx = ix + dx;
-				var ny = iy + dy;
-				if (nx >= 0 && nx < _width && ny >= 0 && ny < _height &&
-					dx * dx + dy * dy < rs)
+		lock (_lock)
+		{
+			var ix = (int)(x / _size);
+			var iy = (int)(y / _size);
+			if (_grid[ix, iy]) return false;
+			if (!_ground[ix, iy] || isFullColumn(ix, iy + 1)) return false;
+			var r = Program.Settings.Snowdrifts2DSpeed / _size / 2;
+			var ir = (int)r;
+			var rs = r * r;
+			for (var dy = -ir; dy <= ir; dy++)
+				for (var dx = -ir; dx <= ir; dx++)
 				{
-					_grid[nx, ny] = true;
+					var nx = ix + dx;
+					var ny = iy + dy;
+					if (nx >= 0 && nx < _width && ny >= 0 && ny < _height &&
+						dx * dx + dy * dy < rs)
+					{
+						_grid[nx, ny] = true;
+					}
 				}
-			}
-		return true;
+			return true;
+		}
 
 		bool isFullColumn(int x, int y)
 		{
-			for (var i = 0; i < 32 / _size; i++)
+			var v = Program.Settings.Snowdrifts2DMaxHeight / _size;
+			for (var i = 0; i < v; i++)
 				if (y + i >= _height || !_grid[x, y + i]) return false;
 			return true;
 		}
@@ -257,11 +265,14 @@ class Snowdrifts2D : ISprite
 	public static void ChangeResolution() => _instance?.ChangeResolution_();
 	private void ChangeResolution_()
 	{
-		_size = Program.Settings.Snowdrifts2DResolution;
-		_width = _screenWidth / _size;
-		_height = _screenHeight / _size;
-		_grid = new(_width, _height, false);
-		_ground = new(_width, _height, false);
+		lock (_lock)
+		{
+			_size = Program.Settings.Snowdrifts2DResolution;
+			_width = _screenWidth / _size;
+			_height = _screenHeight / _size;
+			_grid = new(_width, _height, false);
+			_ground = new(_width, _height, false);
+		}
 	}
 
 	public static void AddSnow() => _instance?.AddSnow_();

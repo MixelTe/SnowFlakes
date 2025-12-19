@@ -5,6 +5,7 @@ namespace SnowFlakes;
 class Snowflakes : ISprite
 {
 	private static readonly List<Snowflakes> _instances = [];
+	private readonly object _lock = new();
 	private readonly int _width;
 	private readonly int _height;
 	private readonly int _windowCount;
@@ -125,19 +126,22 @@ class Snowflakes : ISprite
 	public static void UpdateParticles()
 	{
 		foreach (var it in _instances)
-			it._particles = it.CreateParticles();
+			lock (it._lock) 
+				it._particles = it.CreateParticles();
 	}
 
 	public static void Rerandomize()
 	{
 		foreach (var it in _instances)
-			for (int i = 0; i < it._particles.Length; i++)
-				it._particles[i].SetRandSpeed();
+			lock (it._lock)
+				for (int i = 0; i < it._particles.Length; i++)
+					it._particles[i].SetRandSpeed();
 	}
 
 	public static void AddTo(float x, float y)
 	{
 		if (_instances.Count == 0) return;
-		_instances.RandomItem()._particles.RandomItem().SetPos(x, y);
+		var it = _instances.RandomItem();
+		lock (it._lock) it._particles.RandomItem().SetPos(x, y);
 	}
 }

@@ -3,6 +3,7 @@
 internal class Snowdrifts1D : ISprite
 {
 	private static Snowdrifts1D? _instance;
+	private readonly object _lock = new();
 	private float[] _pieces;
 	private readonly int _width;
 	private readonly int _height;
@@ -36,8 +37,11 @@ internal class Snowdrifts1D : ISprite
 
 		if (!Program.Settings.Snowdrifts || !Program.Settings.Snowdrifts1D) return;
 
-		Update(deltaTime, cursorForce);
-		Draw(gfx);
+		lock (_lock)
+		{
+			Update(deltaTime, cursorForce);
+			Draw(gfx);
+		}
 	}
 
 	public void DestroyGraphics()
@@ -131,7 +135,6 @@ internal class Snowdrifts1D : ISprite
 		var k = 0.5f;
 		var density = Program.Settings.Snowdrifts1DDensity * Program.Settings.Snowdrifts1DResolution * 0.1f;
 		var r = 1 - (int)Math.Log2(Math.Min(Program.Settings.Snowdrifts1DResolution, 150) / 150f);
-		System.Diagnostics.Debug.WriteLine(r);
 		for (int _ = 0; _ < r; _++)
 		for (int i = 0; i < _pieces.Length; i++)
 		{
@@ -158,47 +161,59 @@ internal class Snowdrifts1D : ISprite
 	private bool AbsorbSnowflake_(float x, float y)
 	{
 		if (!Program.Settings.Snowdrifts || !Program.Settings.Snowdrifts1D) return false;
-		var i = (int)(x / Program.Settings.Snowdrifts1DResolution);
-		if (i < 0 || i >= _pieces.Length) return false;
-		if (_pieces[i] >= (_height - Program.Settings.Snowdrifts1DStart) / 2 ||
-			_pieces[i] + Program.Settings.Snowdrifts1DStart <= _height - y)
-			return false;
-		_pieces[i] += Program.Settings.Snowdrifts1DSpeed / Program.Settings.Snowdrifts1DResolution;
-		_pieces[i] = Math.Min(_pieces[i], _height - Program.Settings.Snowdrifts1DStart);
-		return true;
+		lock (_lock)
+		{
+			var i = (int)(x / Program.Settings.Snowdrifts1DResolution);
+			if (i < 0 || i >= _pieces.Length) return false;
+			if (_pieces[i] >= (_height - Program.Settings.Snowdrifts1DStart) / 2 ||
+				_pieces[i] + Program.Settings.Snowdrifts1DStart <= _height - y)
+				return false;
+			_pieces[i] += Program.Settings.Snowdrifts1DSpeed / Program.Settings.Snowdrifts1DResolution;
+			_pieces[i] = Math.Min(_pieces[i], _height - Program.Settings.Snowdrifts1DStart);
+			return true;
+		}
 	}
 
 	public static void ChangeResolution() => _instance?.ChangeResolution_();
 	private void ChangeResolution_()
 	{
-		var pieces = new float[_width / Program.Settings.Snowdrifts1DResolution + 1];
-		var pr = (int)(_width / (_pieces.Length - 1f));
-		for (int i = 0; i < pieces.Length; i++)
+		lock (_lock)
 		{
-			var x = i * Program.Settings.Snowdrifts1DResolution;
-			var pi = x / pr;
-			pieces[i] = _pieces[pi.Wrap(0, _pieces.Length)];
+			var pieces = new float[_width / Program.Settings.Snowdrifts1DResolution + 1];
+			var pr = (int)(_width / (_pieces.Length - 1f));
+			for (int i = 0; i < pieces.Length; i++)
+			{
+				var x = i * Program.Settings.Snowdrifts1DResolution;
+				var pi = x / pr;
+				pieces[i] = _pieces[pi.Wrap(0, _pieces.Length)];
+			}
+			_pieces = pieces;
 		}
-		_pieces = pieces;
 	}
 
 	public static void AddSnow() => _instance?.AddSnow_();
 	private void AddSnow_()
 	{
-		var m = _height / 50;
-		var t = Random.Shared.Next();
-		for (int i = 0; i < _pieces.Length; i++)
-			_pieces[i] += (float)((Utils.Noise((i + t) / 100d * Program.Settings.Snowdrifts1DResolution) + 2) * m);
+		lock (_lock)
+		{
+			var m = _height / 50;
+			var t = Random.Shared.Next();
+			for (int i = 0; i < _pieces.Length; i++)
+				_pieces[i] += (float)((Utils.Noise((i + t) / 100d * Program.Settings.Snowdrifts1DResolution) + 2) * m);
+		}
 	}
 
 	public static void CreateSmooth() => _instance?.CreateSmooth_();
 	private void CreateSmooth_()
 	{
-		var m = _height / 35;
-		for (int i = 0; i < _pieces.Length; i++)
+		lock (_lock)
 		{
-			_pieces[i] = (float)(Utils.Noise((i + 0.5) / 100d * Program.Settings.Snowdrifts1DResolution) * m + m * 4);
-			if (_pieces[i] < 0) _pieces[i] = 0;
+			var m = _height / 35;
+			for (int i = 0; i < _pieces.Length; i++)
+			{
+				_pieces[i] = (float)(Utils.Noise((i + 0.5) / 100d * Program.Settings.Snowdrifts1DResolution) * m + m * 4);
+				if (_pieces[i] < 0) _pieces[i] = 0;
+			}
 		}
 	}
 }

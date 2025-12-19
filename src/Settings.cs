@@ -34,6 +34,7 @@ public class Settings
 	public bool Snowdrifts2DSmooth = true;
 	public int Snowdrifts2DResolution = 3;
 	public float Snowdrifts2DSpeed = 5;
+	public int Snowdrifts2DMaxHeight = 32;
 
 	public bool ChristmasLights = true;
 	public int ChristmasLightsInterval = 60;

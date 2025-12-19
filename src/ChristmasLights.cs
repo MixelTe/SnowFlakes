@@ -3,6 +3,7 @@
 internal class ChristmasLights : ISprite
 {
 	private static ChristmasLights? _instance;
+	private readonly object _lock = new();
 	private readonly int _width;
 	private readonly int _height;
 	private int _interval = 0;
@@ -34,22 +35,25 @@ internal class ChristmasLights : ISprite
 	public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
 	{
 		if (!Program.Settings.ChristmasLights) return;
-		_mode.Update(_lights, (int)Math.Round(deltaTime * _speed));
-
-		if (_brush == null) return;
-		for (int i = 0; i < _lights.Length; i++)
+		lock (_lock)
 		{
-			var d = i * _interval;
-			var x = 0; var y = 0;
-			if (d < _height) y = _height - d;
-			else if (d < _height + _width) x = d - _height;
-			else { x = _width; y = d - _height - _width; }
+			_mode.Update(_lights, (int)Math.Round(deltaTime * _speed));
 
-			var radius = Program.Settings.ChristmasLightsRadius;
-			var step = radius > 20 ? 2 : 1;
-			_brush.Color = _lights[i].ToColor(radius / step);
-			for (int j = 0; j < radius; j += step)
-				gfx.FillCircle(_brush, x, y, j);
+			if (_brush == null) return;
+			for (int i = 0; i < _lights.Length; i++)
+			{
+				var d = i * _interval;
+				var x = 0; var y = 0;
+				if (d < _height) y = _height - d;
+				else if (d < _height + _width) x = d - _height;
+				else { x = _width; y = d - _height - _width; }
+
+				var radius = Program.Settings.ChristmasLightsRadius;
+				var step = radius > 20 ? 2 : 1;
+				_brush.Color = _lights[i].ToColor(radius / step);
+				for (int j = 0; j < radius; j += step)
+					gfx.FillCircle(_brush, x, y, j);
+			}
 		}
 	}
 
@@ -80,14 +84,17 @@ internal class ChristmasLights : ISprite
 	public static void UpdateInterval() => _instance?.UpdateInterval_();
 	private void UpdateInterval_()
 	{
-		_interval = Program.Settings.ChristmasLightsInterval;
-		var lights = new Light[(_width + _height * 2) / _interval];
-		for (int i = 0; i < lights.Length; i++)
-		{
-			lights[i] = new Light(Random.Shared.Next(255), Random.Shared.Next(255), Random.Shared.Next(255));
+		lock (_lock)
+		{ 
+			_interval = Program.Settings.ChristmasLightsInterval;
+			var lights = new Light[(_width + _height * 2) / _interval];
+			for (int i = 0; i < lights.Length; i++)
+			{
+				lights[i] = new Light(Random.Shared.Next(255), Random.Shared.Next(255), Random.Shared.Next(255));
+			}
+			_lights = lights;
+			_mode = GetCurLightsMode();
 		}
-		_lights = lights;
-		_mode = GetCurLightsMode();
 	}
 	public static void UpdateMode() => _instance?.UpdateMode_();
 	private void UpdateMode_()
