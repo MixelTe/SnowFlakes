@@ -44,9 +44,9 @@ class Particle
 		}
 	}
 
-	public void Move(int Width, int Height, Point? cursorForce, long deltaTime)
+	public bool Move(int Width, int Height, Point? cursorForce, long deltaTime)
 	{
-		if (deltaTime > 1000) return;
+		if (deltaTime > 1000) return false;
 		var dt = deltaTime / 40f;
 		var MaxSpeedX = Program.Settings.SpeedXMax;
 
@@ -79,11 +79,14 @@ class Particle
 		{
 			_y = Random.Shared.NextSingle() * Program.Settings.SpeedYMax - Program.Settings.ParticleRad;
 			_x = Random.Shared.NextSingle() * Width;
+			return true;
 		}
 		if (_y < -Program.Settings.ParticleRad)
 		{
 			_y = Height - 1 + Program.Settings.ParticleRad;
 			_x = Random.Shared.NextSingle() * Width;
+			return true;
 		}
+		return false;
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace SnowFlakes;
+﻿using System;
+
+namespace SnowFlakes;
 
 class Snowdrifts2D : ISprite
 {
@@ -17,6 +19,7 @@ class Snowdrifts2D : ISprite
 	private GameOverlay.Drawing.SolidBrush? _brushRects;
 	private long _timeElapsedFromGround = 0;
 	private long _timeElapsedFromUpdate = 0;
+	private int _lastMaxHeight = 0;
 
 	public Snowdrifts2D(int width, int height)
 	{
@@ -37,7 +40,7 @@ class Snowdrifts2D : ISprite
 		_brush?.Dispose();
 		_brush = gfx.CreateSolidBrush(Program.Settings.SnowdriftsColor.ToGameOverlayColor());
 		_brushRects?.Dispose();
-		_brushRects = gfx.CreateSolidBrush(Color.Lime.ToGameOverlayColor());
+		_brushRects = gfx.CreateSolidBrush(Color.FromArgb(150, Color.Lime).ToGameOverlayColor());
 	}
 
 	public void DestroyGraphics()
@@ -65,6 +68,7 @@ class Snowdrifts2D : ISprite
 			{
 				_timeElapsedFromUpdate = 0;
 				Update();
+				//SetTestForSmooth();
 			}
 
 			for (var y = 0; y < _height; y++)
@@ -73,11 +77,13 @@ class Snowdrifts2D : ISprite
 					if (!_grid[x, y]) continue;
 					var x0 = x;
 					do x++; while (x < _width && _grid[x, y]);
-					gfx.FillRectangle(_brush, x0 * _size, y * _size, x * _size, (y + 1) * _size);
+					if (Program.Settings.Snowdrifts2DSmooth)
+						DrawSmooth(gfx, x0, x, y);
+					else
+						gfx.FillRectangle(_brush, x0 * _size, y * _size, x * _size, (y + 1) * _size);
 				}
 
-			var drawGroundBounds = true;
-			if (drawGroundBounds)
+			if (Program.Settings.Snowdrifts2DBounds)
 				for (var y = 0; y < _height; y++)
 					for (var x = 0; x < _width; x++)
 					{
@@ -88,6 +94,224 @@ class Snowdrifts2D : ISprite
 							y + 1 < _height && _ground[x, y + 1]) continue;
 						gfx.FillRectangle(_brushRects, x * _size, y * _size, (x + 1) * _size, (y + 1) * _size);
 					}
+		}
+	}
+
+	private void SetTestForSmooth()
+	{
+		_grid.SetAll(false);
+		var x = 100;
+		var y = 40;
+		_grid[x, y] = true;
+
+		x += 2;
+		_grid[x, y + 1] = true;
+		_grid[x, y] = true;
+
+		x += 2;
+		_grid[x, y - 1] = true;
+		_grid[x, y] = true;
+
+		x += 2;
+		_grid[x, y + 1] = true;
+		_grid[x, y - 1] = true;
+		_grid[x, y] = true;
+
+		x += 3;
+		_grid[x, y + 1] = true;
+		_grid[x + 1, y] = true;
+		_grid[x, y] = true;
+
+		x += 3;
+		_grid[x, y - 1] = true;
+		_grid[x + 1, y] = true;
+		_grid[x, y] = true;
+
+		x += 3;
+		_grid[x, y + 1] = true;
+		_grid[x, y - 1] = true;
+		_grid[x + 1, y] = true;
+		_grid[x, y] = true;
+
+		x += 4;
+		_grid[x, y + 1] = true;
+		_grid[x - 1, y] = true;
+		_grid[x, y] = true;
+
+		x += 3;
+		_grid[x, y - 1] = true;
+		_grid[x - 1, y] = true;
+		_grid[x, y] = true;
+
+		x += 3;
+		_grid[x, y + 1] = true;
+		_grid[x, y - 1] = true;
+		_grid[x - 1, y] = true;
+		_grid[x, y] = true;
+
+		y += 4;
+		x -= 24;
+		_grid[x, y + 1] = true;
+		_grid[x - 1, y] = true;
+		_grid[x + 1, y] = true;
+		_grid[x, y] = true;
+
+		x += 4;
+		_grid[x, y - 1] = true;
+		_grid[x - 1, y] = true;
+		_grid[x + 1, y] = true;
+		_grid[x, y] = true;
+
+		x += 4;
+		_grid[x, y + 1] = true;
+		_grid[x, y - 1] = true;
+		_grid[x - 1, y] = true;
+		_grid[x + 1, y] = true;
+		_grid[x, y] = true;
+	}
+
+	private void DrawSmooth(GameOverlay.Drawing.Graphics gfx, int x0, int x, int y)
+	{
+		if (x - x0 <= 1)
+		{
+			var top = y - 1 >= 0 && _grid[x0, y - 1];
+			var bottom = y + 1 < _height && _grid[x0, y + 1];
+			if (top && bottom)
+			{
+				gfx.FillTriangle(_brush,
+					x0 * _size, y * _size,
+					x * _size, y * _size,
+					(x0 + 0.5f) * _size, (y + 0.5f) * _size
+					);
+				gfx.FillTriangle(_brush,
+					x0 * _size, (y + 1) * _size,
+					x * _size, (y + 1) * _size,
+					(x0 + 0.5f) * _size, (y + 0.5f) * _size
+					);
+				//gfx.FillRectangle(_brush, x0 * _size, y * _size, x * _size, (y + 1) * _size);
+			}
+			else if (top)
+			{
+				gfx.FillTriangle(_brush,
+					x0 * _size, y * _size,
+					x * _size, y * _size,
+					(x0 + 0.5f) * _size, (y + 0.5f) * _size
+					);
+			}
+			else if (bottom)
+			{
+				gfx.FillTriangle(_brush,
+					x0 * _size, (y + 1) * _size,
+					x * _size, (y + 1) * _size,
+					(x0 + 0.5f) * _size, (y + 0.5f) * _size
+					);
+			}
+			else
+			{
+				gfx.FillTriangle(_brush,
+					(x0 + 0.5f) * _size, (y) * _size,
+					(x0 + 0.5f) * _size, (y + 1) * _size,
+					x0 * _size, (y + 0.5f) * _size
+					);
+				gfx.FillTriangle(_brush,
+					(x - 0.5f) * _size, (y) * _size,
+					(x - 0.5f) * _size, (y + 1) * _size,
+					x * _size, (y + 0.5f) * _size
+					);
+			}
+			return;
+		}
+		gfx.FillRectangle(_brush, (x0 + 1) * _size, y * _size, (x - 1) * _size, (y + 1) * _size);
+
+		var ltop = y - 1 >= 0 && _grid[x0, y - 1];
+		var lbottom = y + 1 < _height && _grid[x0, y + 1];
+		if (ltop && lbottom)
+		{
+			gfx.FillTriangle(_brush,
+				x0 * _size, y * _size,
+				(x0 + 1) * _size, y * _size,
+				(x0 + 0.5f) * _size, (y + 0.5f) * _size
+				);
+			gfx.FillTriangle(_brush,
+				x0 * _size, (y + 1) * _size,
+				(x0 + 1) * _size, (y + 1) * _size,
+				(x0 + 0.5f) * _size, (y + 0.5f) * _size
+				);
+			gfx.FillTriangle(_brush,
+				(x0 + 1) * _size, (y) * _size,
+				(x0 + 1) * _size, (y + 1) * _size,
+				(x0 + 0.5f) * _size, (y + 0.5f) * _size
+				);
+			//gfx.FillRectangle(_brush, x0 * _size, y * _size, (x0 + 1) * _size, (y + 1) * _size);
+		}
+		else if (ltop)
+		{
+			gfx.FillTriangle(_brush,
+				x0 * _size, y * _size,
+				(x0 + 1) * _size, y * _size,
+				(x0 + 1) * _size, (y + 1) * _size
+				);
+		}
+		else if (lbottom)
+		{
+			gfx.FillTriangle(_brush,
+				x0 * _size, (y + 1) * _size,
+				(x0 + 1) * _size, (y + 1) * _size,
+				(x0 + 1) * _size, y * _size
+				);
+		}
+		else
+		{
+			gfx.FillTriangle(_brush,
+				(x0 + 1) * _size, (y) * _size,
+				(x0 + 1) * _size, (y + 1) * _size,
+				(x0 + 0.5f) * _size, (y + 0.5f) * _size
+				);
+		}
+		var rtop = y - 1 >= 0 && _grid[x - 1, y - 1];
+		var rbottom = y + 1 < _height && _grid[x - 1, y + 1];
+		if (rtop && rbottom)
+		{
+			gfx.FillTriangle(_brush,
+				x * _size, y * _size,
+				(x - 1) * _size, y * _size,
+				(x - 0.5f) * _size, (y + 0.5f) * _size
+				);
+			gfx.FillTriangle(_brush,
+				x * _size, (y + 1) * _size,
+				(x - 1) * _size, (y + 1) * _size,
+				(x - 0.5f) * _size, (y + 0.5f) * _size
+				);
+			gfx.FillTriangle(_brush,
+				(x - 1) * _size, (y) * _size,
+				(x - 1) * _size, (y + 1) * _size,
+				(x - 0.5f) * _size, (y + 0.5f) * _size
+				);
+			//gfx.FillRectangle(_brush, (x - 1) * _size, y * _size, x * _size, (y + 1) * _size);
+		}
+		else if (rtop)
+		{
+			gfx.FillTriangle(_brush,
+				x * _size, y * _size,
+				(x - 1) * _size, y * _size,
+				(x - 1) * _size, (y + 1) * _size
+				);
+		}
+		else if (rbottom)
+		{
+			gfx.FillTriangle(_brush,
+				x * _size, (y + 1) * _size,
+				(x - 1) * _size, (y + 1) * _size,
+				(x - 1) * _size, y * _size
+				);
+		}
+		else
+		{
+			gfx.FillTriangle(_brush,
+				(x - 1) * _size, (y) * _size,
+				(x - 1) * _size, (y + 1) * _size,
+				(x - 0.5f) * _size, (y + 0.5f) * _size
+				);
 		}
 	}
 
@@ -113,7 +337,7 @@ class Snowdrifts2D : ISprite
 			var right = Math.Min(rect.Right, _screenWidth);
 			for (var x = Math.Max(rect.Left, 0); x < right; x++)
 			{
-				var bottom = Math.Min(rect.Bottom + Utils.Noise(x / _size) * _size, _screenHeight);
+				var bottom = Math.Min(rect.Bottom + Utils.Noise(x / 5f) * Program.Settings.Snowdrifts2DHeight / 4f, _screenHeight);
 				for (var y = Math.Max(rect.Top, 0); y < bottom; y++)
 					_ground[x / _size, y / _size] = true;
 			}
@@ -121,7 +345,8 @@ class Snowdrifts2D : ISprite
 		void AddRect(Rectangle nrect)
 		{
 			var queue = new Queue<Rectangle>();
-			queue.Enqueue(new Rectangle(nrect.Left, nrect.Top, nrect.Width, 16));
+			var rectHeight = Math.Max(Program.Settings.Snowdrifts2DHeight, Program.Settings.Snowdrifts2DResolution);
+			queue.Enqueue(new Rectangle(nrect.Left, nrect.Top, nrect.Width, rectHeight));
 
 			while (queue.Count > 0)
 			{
@@ -160,30 +385,40 @@ class Snowdrifts2D : ISprite
 			yield break;
 		}
 
-		if (src.Top < y1)
-			yield return new Rectangle(src.Left, src.Top, src.Width, y1 - src.Top);
-
-		if (y2 < src.Bottom)
-			yield return new Rectangle(src.Left, y2, src.Width, src.Bottom - y2);
-
 		if (src.Left < x1)
-			yield return new Rectangle(src.Left, y1, x1 - src.Left, y2 - y1);
+			yield return new Rectangle(src.Left, src.Top, x1 - src.Left, src.Height);
 
 		if (x2 < src.Right)
-			yield return new Rectangle(x2, y1, src.Right - x2, y2 - y1);
+			yield return new Rectangle(x2, src.Top, src.Right - x2, src.Height);
+
+		if (src.Top < y1)
+			yield return new Rectangle(x1, src.Top, x2 - x1, y1 - src.Top);
+
+		if (y2 < src.Bottom)
+			yield return new Rectangle(x1, y2, x2 - x1, src.Bottom - y2);
 	}
 
 	private void Update()
 	{
+		var maxHeightChanged = _lastMaxHeight == Program.Settings.Snowdrifts2DMaxHeight;
+		_lastMaxHeight = Program.Settings.Snowdrifts2DMaxHeight;
+		var movedLeftToBottom = false;
 		for (var y = _height - 1; y >= 0; y--)
 			for (var x = 0; x < _width; x++)
 			{
+				var _movedLeftToBottom = movedLeftToBottom;
+				movedLeftToBottom = false;
 				if (!_grid[x, y]) continue;
 				if (_ground[x, y]) continue;
 				if (y + 1 >= _height) _grid[x, y] = false;
-				else if (!_grid[x, y + 1])
+				else if (y + 2 < _height && (!_grid[x, y + 1] || _movedLeftToBottom) && _grid[x, y + 2])
 				{
-					var r = Program.Settings.ParticleRad / _size;
+					_grid[x, y] = false;
+					_grid[x, y + 1] = true;
+				}
+				else if ((!_grid[x, y + 1] || _movedLeftToBottom) || (maxHeightChanged && IsFullColumn(x, y + 1)))
+				{
+					var r = (int)(Program.Settings.Snowdrifts2DSpeed / _size);
 					var rs = r * r;
 					for (var dy = -r; dy <= r; dy++)
 						for (var dx = -r; dx <= r; dx++)
@@ -207,7 +442,10 @@ class Snowdrifts2D : ISprite
 					if (hasRight || (!hasLeft && !hasRight && Random.Shared.Next(0, 2) == 0))
 						_grid[x - 1, y + 1] = true;
 					else
+					{
 						_grid[x + 1, y + 1] = true;
+						movedLeftToBottom = true;
+					}
 				}
 			}
 	}
@@ -234,32 +472,34 @@ class Snowdrifts2D : ISprite
 		{
 			var ix = (int)(x / _size);
 			var iy = (int)(y / _size);
+			if (ix >= _width || iy >= _height) return false;
 			if (_grid[ix, iy]) return false;
-			if (!_ground[ix, iy] || isFullColumn(ix, iy + 1)) return false;
+			if (!(_ground[ix, iy] || (iy + 1 < _height && _grid[ix, iy + 1] && !IsFullColumn(ix, iy + 1)))) return false;
 			var r = Program.Settings.Snowdrifts2DSpeed / _size / 2;
 			var ir = (int)r;
 			var rs = r * r;
-			for (var dy = -ir; dy <= ir; dy++)
+			for (var dy = ir; dy >= -ir; dy--)
 				for (var dx = -ir; dx <= ir; dx++)
 				{
 					var nx = ix + dx;
 					var ny = iy + dy;
 					if (nx >= 0 && nx < _width && ny >= 0 && ny < _height &&
-						dx * dx + dy * dy < rs)
+						dx * dx + dy * dy < rs && 
+						(_ground[nx, ny] || (ny + 1 < _height && _grid[nx, ny + 1] && !IsFullColumn(nx, ny + 1, 1))))
 					{
 						_grid[nx, ny] = true;
 					}
 				}
 			return true;
 		}
-
-		bool isFullColumn(int x, int y)
-		{
-			var v = Program.Settings.Snowdrifts2DMaxHeight / _size;
-			for (var i = 0; i < v; i++)
-				if (y + i >= _height || !_grid[x, y + i]) return false;
-			return true;
-		}
+	}
+	private bool IsFullColumn(int x, int y, int d = 0)
+	{
+		var noise = Utils.Noise(x / 5f) * Program.Settings.Snowdrifts2DMaxHeight / 4f;
+		var v = (Program.Settings.Snowdrifts2DMaxHeight + noise) / _size;
+		for (var i = 0; i < v - d; i++)
+			if (y + i >= _height || _ground[x, y + i] || !_grid[x, y + i]) return false;
+		return true;
 	}
 
 	public static void ChangeResolution() => _instance?.ChangeResolution_();
@@ -267,10 +507,24 @@ class Snowdrifts2D : ISprite
 	{
 		lock (_lock)
 		{
+			var oldSize = _size;
+			var oldWidth = _width;
+			var oldHeight = _height;
 			_size = Program.Settings.Snowdrifts2DResolution;
 			_width = _screenWidth / _size;
 			_height = _screenHeight / _size;
-			_grid = new(_width, _height, false);
+			var grid = new BitArray2D(_width, _height, false);
+			var k = (float)_size / oldSize;
+			if (oldSize > 0)
+			for (var y = 0; y < _height; y++)
+				for (var x = 0; x < _width; x++)
+				{
+					var ox = (int)((x + 0.5f) * k);
+					var oy = (int)((y + 0.5f) * k);
+					if (ox < oldWidth && oy < oldHeight)
+						grid[x, y] = _grid[ox, oy];
+				}
+			_grid = grid;
 			_ground = new(_width, _height, false);
 		}
 	}
@@ -278,10 +532,14 @@ class Snowdrifts2D : ISprite
 	public static void AddSnow() => _instance?.AddSnow_();
 	private void AddSnow_()
 	{
-	}
-
-	public static void CreateSmooth() => _instance?.CreateSmooth_();
-	private void CreateSmooth_()
-	{
+		lock (_lock)
+		for (var y = _height - 1; y >= 0; y--)
+				for (var x = 0; x < _width; x++)
+			{
+				if ((_ground[x, y] || (y + 1 < _height && _grid[x, y + 1] && !IsFullColumn(x, y + 1, 1))))
+				{
+					_grid[x, y] = true;
+				}
+			}
 	}
 }

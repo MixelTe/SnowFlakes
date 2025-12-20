@@ -88,6 +88,18 @@
 			PanelSnowdrifts = new Panel();
 			tabControl1 = new TabControl();
 			tabPage3 = new TabPage();
+			CBSD2Unlimited = new CheckBox();
+			InpSD2Height = new NumericUpDown();
+			label26 = new Label();
+			CBSD2Bounds = new CheckBox();
+			CBSnowdrifts2D = new CheckBox();
+			CBSD2Smooth = new CheckBox();
+			InpSD2Speed = new NumericUpDown();
+			label19 = new Label();
+			InpSD2Res = new NumericUpDown();
+			label24 = new Label();
+			InpSD2MaxHeight = new NumericUpDown();
+			label25 = new Label();
 			tabPage7 = new TabPage();
 			CBSnowdrifts1D = new CheckBox();
 			label20 = new Label();
@@ -128,14 +140,6 @@
 			CBLights = new CheckBox();
 			DialogOpenFile = new OpenFileDialog();
 			MyToolTip = new ToolTip(components);
-			CBSnowdrifts2D = new CheckBox();
-			CBSD2Smooth = new CheckBox();
-			numericUpDown1 = new NumericUpDown();
-			label19 = new Label();
-			numericUpDown2 = new NumericUpDown();
-			label24 = new Label();
-			numericUpDown3 = new NumericUpDown();
-			label25 = new Label();
 			((System.ComponentModel.ISupportInitialize)InpCount).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSize).BeginInit();
 			groupBox1.SuspendLayout();
@@ -164,6 +168,10 @@
 			PanelSnowdrifts.SuspendLayout();
 			tabControl1.SuspendLayout();
 			tabPage3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)InpSD2Height).BeginInit();
+			((System.ComponentModel.ISupportInitialize)InpSD2Speed).BeginInit();
+			((System.ComponentModel.ISupportInitialize)InpSD2Res).BeginInit();
+			((System.ComponentModel.ISupportInitialize)InpSD2MaxHeight).BeginInit();
 			tabPage7.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)InpSD1Start).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSD1Density).BeginInit();
@@ -178,9 +186,6 @@
 			flowLayoutPanel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)InpCLSize).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpCLInterval).BeginInit();
-			((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-			((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-			((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
@@ -882,13 +887,17 @@
 			// 
 			// tabPage3
 			// 
+			tabPage3.Controls.Add(CBSD2Unlimited);
+			tabPage3.Controls.Add(InpSD2Height);
+			tabPage3.Controls.Add(label26);
+			tabPage3.Controls.Add(CBSD2Bounds);
 			tabPage3.Controls.Add(CBSnowdrifts2D);
 			tabPage3.Controls.Add(CBSD2Smooth);
-			tabPage3.Controls.Add(numericUpDown1);
+			tabPage3.Controls.Add(InpSD2Speed);
 			tabPage3.Controls.Add(label19);
-			tabPage3.Controls.Add(numericUpDown2);
+			tabPage3.Controls.Add(InpSD2Res);
 			tabPage3.Controls.Add(label24);
-			tabPage3.Controls.Add(numericUpDown3);
+			tabPage3.Controls.Add(InpSD2MaxHeight);
 			tabPage3.Controls.Add(label25);
 			tabPage3.Location = new Point(4, 24);
 			tabPage3.Name = "tabPage3";
@@ -897,6 +906,153 @@
 			tabPage3.TabIndex = 0;
 			tabPage3.Text = "2D";
 			tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// CBSD2Unlimited
+			// 
+			CBSD2Unlimited.AutoSize = true;
+			CBSD2Unlimited.Font = new Font("Segoe UI", 9F);
+			CBSD2Unlimited.Location = new Point(6, 184);
+			CBSD2Unlimited.Name = "CBSD2Unlimited";
+			CBSD2Unlimited.Size = new Size(241, 19);
+			CBSD2Unlimited.TabIndex = 65;
+			CBSD2Unlimited.Text = "Игнорировать лимит кол-ва снежинок";
+			MyToolTip.SetToolTip(CBSD2Unlimited, "При распаде сугроба может появиться много снежинок (больше нарузка)");
+			CBSD2Unlimited.UseVisualStyleBackColor = true;
+			CBSD2Unlimited.CheckedChanged += CBSD2Unlimited_CheckedChanged;
+			// 
+			// InpSD2Height
+			// 
+			InpSD2Height.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD2Height.Font = new Font("Segoe UI", 12F);
+			InpSD2Height.Increment = new decimal(new int[] { 3, 0, 0, 0 });
+			InpSD2Height.Location = new Point(279, 107);
+			InpSD2Height.Maximum = new decimal(new int[] { 256, 0, 0, 0 });
+			InpSD2Height.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+			InpSD2Height.Name = "InpSD2Height";
+			InpSD2Height.Size = new Size(65, 29);
+			InpSD2Height.TabIndex = 63;
+			InpSD2Height.Value = new decimal(new int[] { 16, 0, 0, 0 });
+			InpSD2Height.ValueChanged += InpSD2Height_ValueChanged;
+			// 
+			// label26
+			// 
+			label26.AutoSize = true;
+			label26.Font = new Font("Segoe UI", 12F);
+			label26.Location = new Point(3, 109);
+			label26.Name = "label26";
+			label26.Size = new Size(158, 21);
+			label26.TabIndex = 64;
+			label26.Text = "Глубина шапки окна";
+			MyToolTip.SetToolTip(label26, "На сколько пикселей сугроб закроет заголовок окна");
+			// 
+			// CBSD2Bounds
+			// 
+			CBSD2Bounds.AutoSize = true;
+			CBSD2Bounds.Font = new Font("Segoe UI", 7F);
+			CBSD2Bounds.Location = new Point(261, 186);
+			CBSD2Bounds.Name = "CBSD2Bounds";
+			CBSD2Bounds.Size = new Size(83, 16);
+			CBSD2Bounds.TabIndex = 62;
+			CBSD2Bounds.Text = "(dev) bounds";
+			MyToolTip.SetToolTip(CBSD2Bounds, "Отображать границы сугробов");
+			CBSD2Bounds.UseVisualStyleBackColor = true;
+			CBSD2Bounds.CheckedChanged += CBSD2Bounds_CheckedChanged;
+			// 
+			// CBSnowdrifts2D
+			// 
+			CBSnowdrifts2D.AutoSize = true;
+			CBSnowdrifts2D.Font = new Font("Segoe UI", 12F);
+			CBSnowdrifts2D.Location = new Point(6, 6);
+			CBSnowdrifts2D.Name = "CBSnowdrifts2D";
+			CBSnowdrifts2D.Size = new Size(100, 25);
+			CBSnowdrifts2D.TabIndex = 61;
+			CBSnowdrifts2D.Text = "Включить";
+			CBSnowdrifts2D.UseVisualStyleBackColor = true;
+			CBSnowdrifts2D.CheckedChanged += CBSnowdrifts2D_CheckedChanged;
+			// 
+			// CBSD2Smooth
+			// 
+			CBSD2Smooth.AutoSize = true;
+			CBSD2Smooth.Font = new Font("Segoe UI", 12F);
+			CBSD2Smooth.Location = new Point(194, 6);
+			CBSD2Smooth.Name = "CBSD2Smooth";
+			CBSD2Smooth.Size = new Size(150, 25);
+			CBSD2Smooth.TabIndex = 60;
+			CBSD2Smooth.Text = "Сглаживать края";
+			CBSD2Smooth.UseVisualStyleBackColor = true;
+			CBSD2Smooth.CheckedChanged += CBSD2Smooth_CheckedChanged;
+			// 
+			// InpSD2Speed
+			// 
+			InpSD2Speed.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD2Speed.DecimalPlaces = 1;
+			InpSD2Speed.Font = new Font("Segoe UI", 12F);
+			InpSD2Speed.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+			InpSD2Speed.Location = new Point(279, 37);
+			InpSD2Speed.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+			InpSD2Speed.Name = "InpSD2Speed";
+			InpSD2Speed.Size = new Size(65, 29);
+			InpSD2Speed.TabIndex = 58;
+			InpSD2Speed.Value = new decimal(new int[] { 5, 0, 0, 0 });
+			InpSD2Speed.ValueChanged += InpSD2Speed_ValueChanged;
+			// 
+			// label19
+			// 
+			label19.AutoSize = true;
+			label19.Font = new Font("Segoe UI", 12F);
+			label19.Location = new Point(3, 39);
+			label19.Name = "label19";
+			label19.Size = new Size(121, 21);
+			label19.TabIndex = 59;
+			label19.Text = "Скорость роста";
+			MyToolTip.SetToolTip(label19, "На сколько увеличивает сугроб одна снежинка");
+			// 
+			// InpSD2Res
+			// 
+			InpSD2Res.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD2Res.Font = new Font("Segoe UI", 12F);
+			InpSD2Res.Location = new Point(279, 72);
+			InpSD2Res.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
+			InpSD2Res.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+			InpSD2Res.Name = "InpSD2Res";
+			InpSD2Res.Size = new Size(65, 29);
+			InpSD2Res.TabIndex = 56;
+			InpSD2Res.Value = new decimal(new int[] { 3, 0, 0, 0 });
+			InpSD2Res.ValueChanged += InpSD2Res_ValueChanged;
+			// 
+			// label24
+			// 
+			label24.AutoSize = true;
+			label24.Font = new Font("Segoe UI", 12F);
+			label24.Location = new Point(3, 74);
+			label24.Name = "label24";
+			label24.Size = new Size(105, 21);
+			label24.TabIndex = 57;
+			label24.Text = "Размер сетки";
+			// 
+			// InpSD2MaxHeight
+			// 
+			InpSD2MaxHeight.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSD2MaxHeight.Font = new Font("Segoe UI", 12F);
+			InpSD2MaxHeight.Increment = new decimal(new int[] { 3, 0, 0, 0 });
+			InpSD2MaxHeight.Location = new Point(279, 142);
+			InpSD2MaxHeight.Maximum = new decimal(new int[] { 256, 0, 0, 0 });
+			InpSD2MaxHeight.Name = "InpSD2MaxHeight";
+			InpSD2MaxHeight.Size = new Size(65, 29);
+			InpSD2MaxHeight.TabIndex = 54;
+			InpSD2MaxHeight.Value = new decimal(new int[] { 16, 0, 0, 0 });
+			InpSD2MaxHeight.ValueChanged += InpSD2MaxHeight_ValueChanged;
+			// 
+			// label25
+			// 
+			label25.AutoSize = true;
+			label25.Font = new Font("Segoe UI", 12F);
+			label25.Location = new Point(3, 144);
+			label25.Name = "label25";
+			label25.Size = new Size(193, 21);
+			label25.TabIndex = 55;
+			label25.Text = "Макс. высота шапки окна";
+			MyToolTip.SetToolTip(label25, "На сколько пикселей сугроб растёт сверху окна");
 			// 
 			// tabPage7
 			// 
@@ -1373,101 +1529,6 @@
 			CBLights.UseVisualStyleBackColor = true;
 			CBLights.CheckedChanged += CBLights_CheckedChanged;
 			// 
-			// CBSnowdrifts2D
-			// 
-			CBSnowdrifts2D.AutoSize = true;
-			CBSnowdrifts2D.Font = new Font("Segoe UI", 12F);
-			CBSnowdrifts2D.Location = new Point(6, 6);
-			CBSnowdrifts2D.Name = "CBSnowdrifts2D";
-			CBSnowdrifts2D.Size = new Size(100, 25);
-			CBSnowdrifts2D.TabIndex = 61;
-			CBSnowdrifts2D.Text = "Включить";
-			CBSnowdrifts2D.UseVisualStyleBackColor = true;
-			CBSnowdrifts2D.CheckedChanged += CBSnowdrifts2D_CheckedChanged;
-			// 
-			// CBSD2Smooth
-			// 
-			CBSD2Smooth.AutoSize = true;
-			CBSD2Smooth.Font = new Font("Segoe UI", 12F);
-			CBSD2Smooth.Location = new Point(194, 6);
-			CBSD2Smooth.Name = "CBSD2Smooth";
-			CBSD2Smooth.Size = new Size(150, 25);
-			CBSD2Smooth.TabIndex = 60;
-			CBSD2Smooth.Text = "Сглаживать края";
-			CBSD2Smooth.UseVisualStyleBackColor = true;
-			CBSD2Smooth.CheckedChanged += CBSD2Smooth_CheckedChanged;
-			// 
-			// numericUpDown1
-			// 
-			numericUpDown1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			numericUpDown1.Font = new Font("Segoe UI", 12F);
-			numericUpDown1.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-			numericUpDown1.Location = new Point(279, 37);
-			numericUpDown1.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
-			numericUpDown1.Name = "numericUpDown1";
-			numericUpDown1.Size = new Size(65, 29);
-			numericUpDown1.TabIndex = 58;
-			numericUpDown1.Value = new decimal(new int[] { 40, 0, 0, 0 });
-			// 
-			// label19
-			// 
-			label19.AutoSize = true;
-			label19.Font = new Font("Segoe UI", 12F);
-			label19.Location = new Point(3, 39);
-			label19.Name = "label19";
-			label19.Size = new Size(157, 21);
-			label19.TabIndex = 59;
-			label19.Text = "Отступ снизу экрана";
-			MyToolTip.SetToolTip(label19, "Сугробы будут находиться выше нижнего края экрана");
-			// 
-			// numericUpDown2
-			// 
-			numericUpDown2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			numericUpDown2.DecimalPlaces = 1;
-			numericUpDown2.Font = new Font("Segoe UI", 12F);
-			numericUpDown2.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
-			numericUpDown2.Location = new Point(279, 72);
-			numericUpDown2.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-			numericUpDown2.Name = "numericUpDown2";
-			numericUpDown2.Size = new Size(65, 29);
-			numericUpDown2.TabIndex = 56;
-			numericUpDown2.Value = new decimal(new int[] { 6, 0, 0, 0 });
-			// 
-			// label24
-			// 
-			label24.AutoSize = true;
-			label24.Font = new Font("Segoe UI", 12F);
-			label24.Location = new Point(3, 74);
-			label24.Name = "label24";
-			label24.Size = new Size(121, 21);
-			label24.TabIndex = 57;
-			label24.Text = "Скорость роста";
-			MyToolTip.SetToolTip(label24, "На сколько увеличивает сугроб одна снежинка");
-			// 
-			// numericUpDown3
-			// 
-			numericUpDown3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			numericUpDown3.Font = new Font("Segoe UI", 12F);
-			numericUpDown3.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-			numericUpDown3.Location = new Point(279, 107);
-			numericUpDown3.Maximum = new decimal(new int[] { 150, 0, 0, 0 });
-			numericUpDown3.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-			numericUpDown3.Name = "numericUpDown3";
-			numericUpDown3.Size = new Size(65, 29);
-			numericUpDown3.TabIndex = 54;
-			numericUpDown3.Value = new decimal(new int[] { 60, 0, 0, 0 });
-			// 
-			// label25
-			// 
-			label25.AutoSize = true;
-			label25.Font = new Font("Segoe UI", 12F);
-			label25.Location = new Point(3, 109);
-			label25.Name = "label25";
-			label25.Size = new Size(122, 21);
-			label25.TabIndex = 55;
-			label25.Text = "Размер сугроба";
-			MyToolTip.SetToolTip(label25, "Ширина одного кусочка сугроба. Чем меньше,\r\n тем плавнее сугробы\r\n");
-			// 
 			// SettingsForm
 			// 
 			AutoScaleDimensions = new SizeF(96F, 96F);
@@ -1524,6 +1585,10 @@
 			tabControl1.ResumeLayout(false);
 			tabPage3.ResumeLayout(false);
 			tabPage3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)InpSD2Height).EndInit();
+			((System.ComponentModel.ISupportInitialize)InpSD2Speed).EndInit();
+			((System.ComponentModel.ISupportInitialize)InpSD2Res).EndInit();
+			((System.ComponentModel.ISupportInitialize)InpSD2MaxHeight).EndInit();
 			tabPage7.ResumeLayout(false);
 			tabPage7.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)InpSD1Start).EndInit();
@@ -1543,9 +1608,6 @@
 			flowLayoutPanel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)InpCLSize).EndInit();
 			((System.ComponentModel.ISupportInitialize)InpCLInterval).EndInit();
-			((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-			((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-			((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
 			ResumeLayout(false);
 		}
 
@@ -1650,11 +1712,15 @@
 		private CheckBox CBSnowdrifts1D;
 		private CheckBox CBSnowdrifts2D;
 		private CheckBox CBSD2Smooth;
-		private NumericUpDown numericUpDown1;
+		private NumericUpDown InpSD2Speed;
 		private Label label19;
-		private NumericUpDown numericUpDown2;
+		private NumericUpDown InpSD2Res;
 		private Label label24;
-		private NumericUpDown numericUpDown3;
+		private NumericUpDown InpSD2MaxHeight;
 		private Label label25;
+		private CheckBox CBSD2Bounds;
+		private NumericUpDown InpSD2Height;
+		private Label label26;
+		private CheckBox CBSD2Unlimited;
 	}
 }

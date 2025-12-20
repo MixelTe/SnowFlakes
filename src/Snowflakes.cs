@@ -10,6 +10,7 @@ class Snowflakes : ISprite
 	private readonly int _height;
 	private readonly int _windowCount;
 	private Particle[] _particles;
+	private List<Particle> _particlesTemp = [];
 	private Point _pastCursorPos;
 	private bool _needToUpdateImg = false;
 	private GameOverlay.Drawing.SolidBrush? _brush;
@@ -92,6 +93,13 @@ class Snowflakes : ISprite
 			particle.Move(gfx.Width, gfx.Height, cursorForce, deltaTime);
 			particle.Draw(gfx, _brush, img);
 		}
+		for (int i = _particlesTemp.Count - 1; i >= 0; i--)
+		{
+			var particle = _particlesTemp[i];
+			var renewed = particle.Move(gfx.Width, gfx.Height, cursorForce, deltaTime);
+			if (renewed) _particlesTemp.RemoveAt(i);
+			else particle.Draw(gfx, _brush, img);
+		}
 	}
 
 	public void DestroyGraphics()
@@ -142,6 +150,23 @@ class Snowflakes : ISprite
 	{
 		if (_instances.Count == 0) return;
 		var it = _instances.RandomItem();
-		lock (it._lock) it._particles.RandomItem().SetPos(x, y);
+		lock (it._lock) {
+			if (Program.Settings.UnlimitedSnowflakes)
+			{
+				var p = new Particle(it._width, it._height);
+				p.SetPos(x, y);
+				it._particlesTemp.Add(p);
+			}
+			else
+				it._particles.RandomItem().SetPos(x, y);
+		}
+	}
+
+	public static int ParticlesCount()
+	{
+		var r = 0;
+		foreach (var it in _instances)
+			r += it._particles.Length + it._particlesTemp.Count;
+		return r;
 	}
 }

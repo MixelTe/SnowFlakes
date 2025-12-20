@@ -165,7 +165,8 @@ internal class Snowdrifts1D : ISprite
 		{
 			var i = (int)(x / Program.Settings.Snowdrifts1DResolution);
 			if (i < 0 || i >= _pieces.Length) return false;
-			if (_pieces[i] >= (_height - Program.Settings.Snowdrifts1DStart) / 2 ||
+			var noise = (float)Utils.Noise((i + 0.5) / 100d * Program.Settings.Snowdrifts1DResolution) * _height / 50;
+			if (_pieces[i] >= (_height - Program.Settings.Snowdrifts1DStart) / 2 + noise ||
 				_pieces[i] + Program.Settings.Snowdrifts1DStart <= _height - y)
 				return false;
 			_pieces[i] += Program.Settings.Snowdrifts1DSpeed / Program.Settings.Snowdrifts1DResolution;

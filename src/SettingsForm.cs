@@ -62,6 +62,17 @@ public partial class SettingsForm : Form
 		BtnColorSD.BackColor = Program.Settings.SnowdriftsColor;
 		InpAlphaSD.Value = Program.Settings.SnowdriftsColor.A;
 
+		CBSnowdrifts2D.Checked = Program.Settings.Snowdrifts2D;
+		CBSD2Smooth.Checked = Program.Settings.Snowdrifts2DSmooth;
+		InpSD2Speed.Value = (decimal)Program.Settings.Snowdrifts2DSpeed;
+		InpSD2Res.Value = Program.Settings.Snowdrifts2DResolution;
+		InpSD2Height.Value = Program.Settings.Snowdrifts2DHeight;
+		InpSD2Height.Increment = InpSD2Res.Value;
+		InpSD2MaxHeight.Value = Program.Settings.Snowdrifts2DMaxHeight;
+		InpSD2MaxHeight.Increment = InpSD2Res.Value;
+		CBSD2Bounds.Checked = Program.Settings.Snowdrifts2DBounds;
+		CBSD2Unlimited.Checked = Program.Settings.UnlimitedSnowflakes;
+
 		CBSnowdrifts1D.Checked = Program.Settings.Snowdrifts1D;
 		CBSD1Smooth.Checked = Program.Settings.Snowdrifts1DSmooth;
 		InpSD1Res.Value = Program.Settings.Snowdrifts1DResolution;
@@ -348,6 +359,53 @@ public partial class SettingsForm : Form
 	}
 
 
+	private void CBSnowdrifts2D_CheckedChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2D = CBSnowdrifts2D.Checked;
+	}
+	private void CBSD2Smooth_CheckedChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2DSmooth = CBSD2Smooth.Checked;
+	}
+	private void InpSD2Speed_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2DSpeed = (float)InpSD2Speed.Value;
+	}
+	private void InpSD2Res_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2DResolution = (int)InpSD2Res.Value;
+		InpSD2MaxHeight.Increment = InpSD2Res.Value;
+		InpSD2Height.Increment = InpSD2Res.Value;
+		if (InpSD2Res.Value < 3) CBSD2Smooth.Checked = false;
+		if (InpSD2Res.Value > 10) CBSD2Smooth.Checked = true;
+		Snowdrifts2D.ChangeResolution();
+	}
+	private void InpSD2Height_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2DHeight = (int)InpSD2Height.Value;
+	}
+	private void InpSD2MaxHeight_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2DMaxHeight = (int)InpSD2MaxHeight.Value;
+	}
+	private void CBSD2Bounds_CheckedChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts2DBounds = CBSD2Bounds.Checked;
+	}
+	private void CBSD2Unlimited_CheckedChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.UnlimitedSnowflakes = CBSD2Unlimited.Checked;
+	}
+
+
 	private void CBSnowdrifts1D_CheckedChanged(object sender, EventArgs e)
 	{
 		if (ignoreChangeEvent) return;
@@ -372,6 +430,7 @@ public partial class SettingsForm : Form
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.Snowdrifts1DResolution = (int)InpSD1Res.Value;
+		if (InpSD1Res.Value < 3) CBSD1Smooth.Checked = false;
 		Snowdrifts1D.ChangeResolution();
 	}
 	private void InpSD1Density_ValueChanged(object sender, EventArgs e)
@@ -464,17 +523,5 @@ public partial class SettingsForm : Form
 		if (ignoreChangeEvent) return;
 		Program.Settings.ChristmasLightsAnimationSpeed = InpCLAnimSpeed.Value;
 		ChristmasLights.UpdateSpeed();
-	}
-
-	private void CBSnowdrifts2D_CheckedChanged(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.Snowdrifts2D = CBSnowdrifts2D.Checked;
-
-	}
-	private void CBSD2Smooth_CheckedChanged(object sender, EventArgs e)
-	{
-		if (ignoreChangeEvent) return;
-		Program.Settings.Snowdrifts2DSmooth = CBSD2Smooth.Checked;
 	}
 }

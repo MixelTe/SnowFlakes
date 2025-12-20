@@ -27,14 +27,17 @@ public class Settings
 	public bool Snowdrifts1DSmooth = true;
 	public int Snowdrifts1DResolution = 40;
 	public float Snowdrifts1DSpeed = 5;
-	public float Snowdrifts1DDensity = 1;
+	public float Snowdrifts1DDensity = 5;
 	public int Snowdrifts1DStart = 40;
 
 	public bool Snowdrifts2D = true;
 	public bool Snowdrifts2DSmooth = true;
-	public int Snowdrifts2DResolution = 3;
-	public float Snowdrifts2DSpeed = 5;
-	public int Snowdrifts2DMaxHeight = 32;
+	public bool Snowdrifts2DBounds = false;
+	public int Snowdrifts2DResolution = 4;
+	public float Snowdrifts2DSpeed = 6.5f;
+	public int Snowdrifts2DHeight = 16;
+	public int Snowdrifts2DMaxHeight = 16;
+	public bool UnlimitedSnowflakes = true;
 
 	public bool ChristmasLights = true;
 	public int ChristmasLightsInterval = 60;
