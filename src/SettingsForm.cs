@@ -105,7 +105,11 @@ public partial class SettingsForm : Form
 
 	private void ResetBtn_Click(object sender, EventArgs e)
 	{
-		Program.Settings = new Settings();
+		var f = Program.Settings.Snowdrifts2DFilter;
+		Program.Settings = new Settings
+		{
+			Snowdrifts2DFilter = f
+		};
 		SetFields();
 		SnowWindow.ReloadAll();
 	}
@@ -405,6 +409,13 @@ public partial class SettingsForm : Form
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.UnlimitedSnowflakes = CBSD2Unlimited.Checked;
+	}
+	private void BtnSD2Filter_Click(object sender, EventArgs e)
+	{
+		using var f = new WindowsFilterForm();
+		Hide();
+		f.ShowDialog();
+		Show();
 	}
 
 

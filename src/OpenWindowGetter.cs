@@ -6,10 +6,16 @@ namespace SnowFlakes
 {
 	public static class OpenWindowGetter
 	{
-		public static IDictionary<HWND, Tuple<string, Rectangle>> GetOpenWindows()
+		public struct WindowProps(HWND hWnd, string title, Rectangle rect)
+		{
+			public HWND hWnd = hWnd;
+			public string Title = title;
+			public Rectangle Rect = rect;
+		}
+		public static List<WindowProps> GetOpenWindows()
 		{
 			var shellWindow = GetShellWindow();
-			var windows = new Dictionary<HWND, Tuple<string, Rectangle>>();
+			var windows = new List<WindowProps>();
 
 			EnumWindows(delegate (HWND hWnd, int lParam)
 			{
@@ -22,9 +28,22 @@ namespace SnowFlakes
 				var builder = new StringBuilder(length);
 				GetWindowText(hWnd, builder, length + 1);
 
+				//string fname = "";
+				//try
+				//{
+				//	GetWindowThreadProcessId(hWnd, out var pid);
+				//	var p = Process.GetProcessById((int)pid);
+				//	fname = p.MainModule?.FileName ?? "";
+				//}
+				//catch (Exception) { }
+
 				if (!GetWindowRectangle(hWnd, out RECT rct)) return true;
 
-				windows[hWnd] = new(builder.ToString(), Rectangle.FromLTRB(rct.Left, rct.Top, rct.Right, rct.Bottom));
+				windows.Add(new(
+					hWnd,
+					builder.ToString(), 
+					Rectangle.FromLTRB(rct.Left, rct.Top, rct.Right, rct.Bottom)
+				));
 				return true;
 
 			}, 0);
@@ -42,6 +61,9 @@ namespace SnowFlakes
 
 		[DllImport("USER32.DLL")]
 		private static extern int GetWindowTextLength(HWND hWnd);
+
+		[DllImport("user32.dll")]
+		public static extern IntPtr GetWindowThreadProcessId(IntPtr hWnd, out IntPtr ProcessId);
 
 		[DllImport("USER32.DLL")]
 		[return: MarshalAs(UnmanagedType.Bool)]

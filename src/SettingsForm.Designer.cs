@@ -88,6 +88,7 @@
 			PanelSnowdrifts = new Panel();
 			tabControl1 = new TabControl();
 			tabPage3 = new TabPage();
+			BtnSD2Filter = new Button();
 			CBSD2Unlimited = new CheckBox();
 			InpSD2Height = new NumericUpDown();
 			label26 = new Label();
@@ -101,6 +102,7 @@
 			InpSD2MaxHeight = new NumericUpDown();
 			label25 = new Label();
 			tabPage7 = new TabPage();
+			CBSD1AutoStart = new CheckBox();
 			CBSnowdrifts1D = new CheckBox();
 			label20 = new Label();
 			BtnSD1Set1 = new Button();
@@ -140,7 +142,6 @@
 			CBLights = new CheckBox();
 			DialogOpenFile = new OpenFileDialog();
 			MyToolTip = new ToolTip(components);
-			CBSD1AutoStart = new CheckBox();
 			((System.ComponentModel.ISupportInitialize)InpCount).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSize).BeginInit();
 			groupBox1.SuspendLayout();
@@ -242,7 +243,7 @@
 			label3.Location = new Point(3, 1);
 			label3.Name = "label3";
 			label3.Size = new Size(120, 21);
-			label3.TabIndex = 4;
+			label3.TabIndex = 0;
 			label3.Text = "Цвет снежинок";
 			// 
 			// colorDialog
@@ -258,7 +259,7 @@
 			BtnColor.Location = new Point(245, 3);
 			BtnColor.Name = "BtnColor";
 			BtnColor.Size = new Size(65, 27);
-			BtnColor.TabIndex = 2;
+			BtnColor.TabIndex = 1;
 			BtnColor.UseVisualStyleBackColor = false;
 			BtnColor.Click += Color_Change;
 			// 
@@ -460,7 +461,7 @@
 			BtnReset.Location = new Point(7, 427);
 			BtnReset.Name = "BtnReset";
 			BtnReset.Size = new Size(103, 32);
-			BtnReset.TabIndex = 3;
+			BtnReset.TabIndex = 1;
 			BtnReset.Text = "Сбросить";
 			BtnReset.UseVisualStyleBackColor = true;
 			BtnReset.Click += ResetBtn_Click;
@@ -472,7 +473,7 @@
 			BtnOk.Location = new Point(279, 427);
 			BtnOk.Name = "BtnOk";
 			BtnOk.Size = new Size(100, 32);
-			BtnOk.TabIndex = 2;
+			BtnOk.TabIndex = 3;
 			BtnOk.Text = "Сохранить";
 			BtnOk.UseVisualStyleBackColor = true;
 			BtnOk.Click += OkBtn_Click;
@@ -488,7 +489,7 @@
 			BtnGithub.Location = new Point(177, 429);
 			BtnGithub.Name = "BtnGithub";
 			BtnGithub.Size = new Size(32, 32);
-			BtnGithub.TabIndex = 4;
+			BtnGithub.TabIndex = 2;
 			BtnGithub.UseVisualStyleBackColor = false;
 			BtnGithub.Click += GitHub_Click;
 			// 
@@ -613,7 +614,7 @@
 			tabControl2.Name = "tabControl2";
 			tabControl2.SelectedIndex = 0;
 			tabControl2.Size = new Size(372, 415);
-			tabControl2.TabIndex = 1;
+			tabControl2.TabIndex = 0;
 			// 
 			// tabPage4
 			// 
@@ -668,7 +669,7 @@
 			PanelColor.Location = new Point(45, 58);
 			PanelColor.Name = "PanelColor";
 			PanelColor.Size = new Size(313, 71);
-			PanelColor.TabIndex = 7;
+			PanelColor.TabIndex = 2;
 			// 
 			// InpAlpha
 			// 
@@ -679,7 +680,7 @@
 			InpAlpha.Maximum = 255;
 			InpAlpha.Name = "InpAlpha";
 			InpAlpha.Size = new Size(137, 18);
-			InpAlpha.TabIndex = 6;
+			InpAlpha.TabIndex = 3;
 			InpAlpha.TickStyle = TickStyle.None;
 			InpAlpha.Value = 150;
 			InpAlpha.Scroll += Alpha_Change;
@@ -692,7 +693,7 @@
 			label12.Location = new Point(3, 31);
 			label12.Name = "label12";
 			label12.Size = new Size(112, 21);
-			label12.TabIndex = 5;
+			label12.TabIndex = 2;
 			label12.Text = "Прозрачность";
 			// 
 			// PanelImg
@@ -718,7 +719,7 @@
 			BtnImg.Location = new Point(230, 65);
 			BtnImg.Name = "BtnImg";
 			BtnImg.Size = new Size(28, 28);
-			BtnImg.TabIndex = 4;
+			BtnImg.TabIndex = 3;
 			BtnImg.UseVisualStyleBackColor = false;
 			BtnImg.Click += ChoseImg_Click;
 			// 
@@ -750,7 +751,7 @@
 			RBimg2.Location = new Point(3, 34);
 			RBimg2.Name = "RBimg2";
 			RBimg2.Size = new Size(100, 25);
-			RBimg2.TabIndex = 2;
+			RBimg2.TabIndex = 1;
 			RBimg2.Text = "Вариант 2";
 			RBimg2.UseVisualStyleBackColor = true;
 			RBimg2.CheckedChanged += Img2_Change;
@@ -773,7 +774,7 @@
 			RBimg0.Location = new Point(3, 65);
 			RBimg0.Name = "RBimg0";
 			RBimg0.Size = new Size(63, 25);
-			RBimg0.TabIndex = 3;
+			RBimg0.TabIndex = 2;
 			RBimg0.Text = "Своя";
 			RBimg0.UseVisualStyleBackColor = true;
 			RBimg0.CheckedChanged += Img0_Change;
@@ -786,7 +787,7 @@
 			RBimg1.Location = new Point(3, 3);
 			RBimg1.Name = "RBimg1";
 			RBimg1.Size = new Size(100, 25);
-			RBimg1.TabIndex = 1;
+			RBimg1.TabIndex = 0;
 			RBimg1.TabStop = true;
 			RBimg1.Text = "Вариант 1";
 			RBimg1.UseVisualStyleBackColor = true;
@@ -811,7 +812,7 @@
 			label11.Location = new Point(3, 3);
 			label11.Name = "label11";
 			label11.Size = new Size(182, 21);
-			label11.TabIndex = 6;
+			label11.TabIndex = 0;
 			label11.Text = "Как выглядят снежинки:";
 			// 
 			// RBimgCirc
@@ -859,7 +860,7 @@
 			BtnAddSnow.Location = new Point(281, 8);
 			BtnAddSnow.Name = "BtnAddSnow";
 			BtnAddSnow.Size = new Size(77, 23);
-			BtnAddSnow.TabIndex = 22;
+			BtnAddSnow.TabIndex = 1;
 			BtnAddSnow.Text = "Подсыпать";
 			BtnAddSnow.UseVisualStyleBackColor = true;
 			BtnAddSnow.Click += SnowdriftsAdd_Click;
@@ -873,7 +874,7 @@
 			PanelSnowdrifts.Location = new Point(3, 37);
 			PanelSnowdrifts.Name = "PanelSnowdrifts";
 			PanelSnowdrifts.Size = new Size(358, 347);
-			PanelSnowdrifts.TabIndex = 1;
+			PanelSnowdrifts.TabIndex = 2;
 			// 
 			// tabControl1
 			// 
@@ -884,10 +885,11 @@
 			tabControl1.Name = "tabControl1";
 			tabControl1.SelectedIndex = 0;
 			tabControl1.Size = new Size(358, 236);
-			tabControl1.TabIndex = 12;
+			tabControl1.TabIndex = 2;
 			// 
 			// tabPage3
 			// 
+			tabPage3.Controls.Add(BtnSD2Filter);
 			tabPage3.Controls.Add(CBSD2Unlimited);
 			tabPage3.Controls.Add(InpSD2Height);
 			tabPage3.Controls.Add(label26);
@@ -908,6 +910,16 @@
 			tabPage3.Text = "2D";
 			tabPage3.UseVisualStyleBackColor = true;
 			// 
+			// BtnSD2Filter
+			// 
+			BtnSD2Filter.Location = new Point(251, 181);
+			BtnSD2Filter.Name = "BtnSD2Filter";
+			BtnSD2Filter.Size = new Size(93, 23);
+			BtnSD2Filter.TabIndex = 12;
+			BtnSD2Filter.Text = "Фильтр окон";
+			BtnSD2Filter.UseVisualStyleBackColor = true;
+			BtnSD2Filter.Click += BtnSD2Filter_Click;
+			// 
 			// CBSD2Unlimited
 			// 
 			CBSD2Unlimited.AutoSize = true;
@@ -915,7 +927,7 @@
 			CBSD2Unlimited.Location = new Point(6, 184);
 			CBSD2Unlimited.Name = "CBSD2Unlimited";
 			CBSD2Unlimited.Size = new Size(241, 19);
-			CBSD2Unlimited.TabIndex = 65;
+			CBSD2Unlimited.TabIndex = 11;
 			CBSD2Unlimited.Text = "Игнорировать лимит кол-ва снежинок";
 			MyToolTip.SetToolTip(CBSD2Unlimited, "При распаде сугроба может появиться много снежинок (больше нарузка)");
 			CBSD2Unlimited.UseVisualStyleBackColor = true;
@@ -931,7 +943,7 @@
 			InpSD2Height.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSD2Height.Name = "InpSD2Height";
 			InpSD2Height.Size = new Size(65, 29);
-			InpSD2Height.TabIndex = 63;
+			InpSD2Height.TabIndex = 7;
 			InpSD2Height.Value = new decimal(new int[] { 16, 0, 0, 0 });
 			InpSD2Height.ValueChanged += InpSD2Height_ValueChanged;
 			// 
@@ -942,7 +954,7 @@
 			label26.Location = new Point(3, 109);
 			label26.Name = "label26";
 			label26.Size = new Size(158, 21);
-			label26.TabIndex = 64;
+			label26.TabIndex = 6;
 			label26.Text = "Глубина шапки окна";
 			MyToolTip.SetToolTip(label26, "На сколько пикселей сугроб закроет заголовок окна");
 			// 
@@ -950,10 +962,10 @@
 			// 
 			CBSD2Bounds.AutoSize = true;
 			CBSD2Bounds.Font = new Font("Segoe UI", 7F);
-			CBSD2Bounds.Location = new Point(261, 186);
+			CBSD2Bounds.Location = new Point(6, 168);
 			CBSD2Bounds.Name = "CBSD2Bounds";
 			CBSD2Bounds.Size = new Size(83, 16);
-			CBSD2Bounds.TabIndex = 62;
+			CBSD2Bounds.TabIndex = 10;
 			CBSD2Bounds.Text = "(dev) bounds";
 			MyToolTip.SetToolTip(CBSD2Bounds, "Отображать границы сугробов");
 			CBSD2Bounds.UseVisualStyleBackColor = true;
@@ -966,7 +978,7 @@
 			CBSnowdrifts2D.Location = new Point(6, 6);
 			CBSnowdrifts2D.Name = "CBSnowdrifts2D";
 			CBSnowdrifts2D.Size = new Size(100, 25);
-			CBSnowdrifts2D.TabIndex = 61;
+			CBSnowdrifts2D.TabIndex = 0;
 			CBSnowdrifts2D.Text = "Включить";
 			CBSnowdrifts2D.UseVisualStyleBackColor = true;
 			CBSnowdrifts2D.CheckedChanged += CBSnowdrifts2D_CheckedChanged;
@@ -979,7 +991,7 @@
 			CBSD2Smooth.Location = new Point(194, 6);
 			CBSD2Smooth.Name = "CBSD2Smooth";
 			CBSD2Smooth.Size = new Size(150, 25);
-			CBSD2Smooth.TabIndex = 60;
+			CBSD2Smooth.TabIndex = 1;
 			CBSD2Smooth.Text = "Сглаживать края";
 			CBSD2Smooth.UseVisualStyleBackColor = true;
 			CBSD2Smooth.CheckedChanged += CBSD2Smooth_CheckedChanged;
@@ -994,7 +1006,7 @@
 			InpSD2Speed.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpSD2Speed.Name = "InpSD2Speed";
 			InpSD2Speed.Size = new Size(65, 29);
-			InpSD2Speed.TabIndex = 58;
+			InpSD2Speed.TabIndex = 3;
 			InpSD2Speed.Value = new decimal(new int[] { 5, 0, 0, 0 });
 			InpSD2Speed.ValueChanged += InpSD2Speed_ValueChanged;
 			// 
@@ -1005,7 +1017,7 @@
 			label19.Location = new Point(3, 39);
 			label19.Name = "label19";
 			label19.Size = new Size(121, 21);
-			label19.TabIndex = 59;
+			label19.TabIndex = 2;
 			label19.Text = "Скорость роста";
 			MyToolTip.SetToolTip(label19, "На сколько увеличивает сугроб одна снежинка");
 			// 
@@ -1018,7 +1030,7 @@
 			InpSD2Res.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSD2Res.Name = "InpSD2Res";
 			InpSD2Res.Size = new Size(65, 29);
-			InpSD2Res.TabIndex = 56;
+			InpSD2Res.TabIndex = 5;
 			InpSD2Res.Value = new decimal(new int[] { 3, 0, 0, 0 });
 			InpSD2Res.ValueChanged += InpSD2Res_ValueChanged;
 			// 
@@ -1029,7 +1041,7 @@
 			label24.Location = new Point(3, 74);
 			label24.Name = "label24";
 			label24.Size = new Size(105, 21);
-			label24.TabIndex = 57;
+			label24.TabIndex = 4;
 			label24.Text = "Размер сетки";
 			// 
 			// InpSD2MaxHeight
@@ -1041,7 +1053,7 @@
 			InpSD2MaxHeight.Maximum = new decimal(new int[] { 256, 0, 0, 0 });
 			InpSD2MaxHeight.Name = "InpSD2MaxHeight";
 			InpSD2MaxHeight.Size = new Size(65, 29);
-			InpSD2MaxHeight.TabIndex = 54;
+			InpSD2MaxHeight.TabIndex = 9;
 			InpSD2MaxHeight.Value = new decimal(new int[] { 16, 0, 0, 0 });
 			InpSD2MaxHeight.ValueChanged += InpSD2MaxHeight_ValueChanged;
 			// 
@@ -1052,7 +1064,7 @@
 			label25.Location = new Point(3, 144);
 			label25.Name = "label25";
 			label25.Size = new Size(193, 21);
-			label25.TabIndex = 55;
+			label25.TabIndex = 8;
 			label25.Text = "Макс. высота шапки окна";
 			MyToolTip.SetToolTip(label25, "На сколько пикселей сугроб растёт сверху окна");
 			// 
@@ -1081,6 +1093,18 @@
 			tabPage7.Text = "1D";
 			tabPage7.UseVisualStyleBackColor = true;
 			// 
+			// CBSD1AutoStart
+			// 
+			CBSD1AutoStart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			CBSD1AutoStart.AutoSize = true;
+			CBSD1AutoStart.Location = new Point(221, 43);
+			CBSD1AutoStart.Name = "CBSD1AutoStart";
+			CBSD1AutoStart.Size = new Size(52, 19);
+			CBSD1AutoStart.TabIndex = 3;
+			CBSD1AutoStart.Text = "Авто";
+			CBSD1AutoStart.UseVisualStyleBackColor = true;
+			CBSD1AutoStart.CheckedChanged += CBSD1AutoStart_CheckedChanged;
+			// 
 			// CBSnowdrifts1D
 			// 
 			CBSnowdrifts1D.AutoSize = true;
@@ -1088,7 +1112,7 @@
 			CBSnowdrifts1D.Location = new Point(6, 6);
 			CBSnowdrifts1D.Name = "CBSnowdrifts1D";
 			CBSnowdrifts1D.Size = new Size(100, 25);
-			CBSnowdrifts1D.TabIndex = 53;
+			CBSnowdrifts1D.TabIndex = 0;
 			CBSnowdrifts1D.Text = "Включить";
 			CBSnowdrifts1D.UseVisualStyleBackColor = true;
 			CBSnowdrifts1D.CheckedChanged += CBSnowdrifts1D_CheckedChanged;
@@ -1100,7 +1124,7 @@
 			label20.Location = new Point(3, 179);
 			label20.Name = "label20";
 			label20.Size = new Size(123, 21);
-			label20.TabIndex = 52;
+			label20.TabIndex = 11;
 			label20.Text = "Предустановки:";
 			// 
 			// BtnSD1Set1
@@ -1109,7 +1133,7 @@
 			BtnSD1Set1.Location = new Point(140, 179);
 			BtnSD1Set1.Name = "BtnSD1Set1";
 			BtnSD1Set1.Size = new Size(65, 23);
-			BtnSD1Set1.TabIndex = 51;
+			BtnSD1Set1.TabIndex = 12;
 			BtnSD1Set1.Text = "Низкое";
 			BtnSD1Set1.UseVisualStyleBackColor = true;
 			BtnSD1Set1.Click += BtnSD1Set1_Click;
@@ -1120,7 +1144,7 @@
 			BtnSD1Set2.Location = new Point(211, 179);
 			BtnSD1Set2.Name = "BtnSD1Set2";
 			BtnSD1Set2.Size = new Size(65, 23);
-			BtnSD1Set2.TabIndex = 50;
+			BtnSD1Set2.TabIndex = 13;
 			BtnSD1Set2.Text = "Среднее";
 			BtnSD1Set2.UseVisualStyleBackColor = true;
 			BtnSD1Set2.Click += BtnSD1Set2_Click;
@@ -1131,7 +1155,7 @@
 			BtnSD1Set3.Location = new Point(282, 179);
 			BtnSD1Set3.Name = "BtnSD1Set3";
 			BtnSD1Set3.Size = new Size(65, 23);
-			BtnSD1Set3.TabIndex = 49;
+			BtnSD1Set3.TabIndex = 14;
 			BtnSD1Set3.Text = "Ультра";
 			BtnSD1Set3.UseVisualStyleBackColor = true;
 			BtnSD1Set3.Click += BtnSD1Set3_Click;
@@ -1144,7 +1168,7 @@
 			CBSD1Smooth.Location = new Point(194, 6);
 			CBSD1Smooth.Name = "CBSD1Smooth";
 			CBSD1Smooth.Size = new Size(150, 25);
-			CBSD1Smooth.TabIndex = 48;
+			CBSD1Smooth.TabIndex = 1;
 			CBSD1Smooth.Text = "Сглаживать края";
 			CBSD1Smooth.UseVisualStyleBackColor = true;
 			CBSD1Smooth.CheckedChanged += CBSD1Smooth_CheckedChanged;
@@ -1158,7 +1182,7 @@
 			InpSD1Start.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
 			InpSD1Start.Name = "InpSD1Start";
 			InpSD1Start.Size = new Size(65, 29);
-			InpSD1Start.TabIndex = 46;
+			InpSD1Start.TabIndex = 4;
 			InpSD1Start.Value = new decimal(new int[] { 40, 0, 0, 0 });
 			InpSD1Start.ValueChanged += InpSD1Start_ValueChanged;
 			// 
@@ -1169,7 +1193,7 @@
 			label18.Location = new Point(3, 39);
 			label18.Name = "label18";
 			label18.Size = new Size(157, 21);
-			label18.TabIndex = 47;
+			label18.TabIndex = 2;
 			label18.Text = "Отступ снизу экрана";
 			MyToolTip.SetToolTip(label18, "Сугробы будут находиться выше нижнего края экрана");
 			// 
@@ -1184,7 +1208,7 @@
 			InpSD1Density.Minimum = new decimal(new int[] { 1, 0, 0, 65536 });
 			InpSD1Density.Name = "InpSD1Density";
 			InpSD1Density.Size = new Size(65, 29);
-			InpSD1Density.TabIndex = 44;
+			InpSD1Density.TabIndex = 10;
 			InpSD1Density.Value = new decimal(new int[] { 5, 0, 0, 0 });
 			InpSD1Density.ValueChanged += InpSD1Density_ValueChanged;
 			// 
@@ -1195,7 +1219,7 @@
 			label17.Location = new Point(3, 144);
 			label17.Name = "label17";
 			label17.Size = new Size(115, 21);
-			label17.TabIndex = 45;
+			label17.TabIndex = 9;
 			label17.Text = "Вязкость снега";
 			MyToolTip.SetToolTip(label17, "При какой разнице высот соседних кусочков сугроба, \r\nснег начнёт осыпаться и выравнивать сугроб");
 			// 
@@ -1209,7 +1233,7 @@
 			InpSD1Speed.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
 			InpSD1Speed.Name = "InpSD1Speed";
 			InpSD1Speed.Size = new Size(65, 29);
-			InpSD1Speed.TabIndex = 42;
+			InpSD1Speed.TabIndex = 6;
 			InpSD1Speed.Value = new decimal(new int[] { 6, 0, 0, 0 });
 			InpSD1Speed.ValueChanged += InpSD1Speed_ValueChanged;
 			// 
@@ -1220,7 +1244,7 @@
 			label14.Location = new Point(3, 74);
 			label14.Name = "label14";
 			label14.Size = new Size(121, 21);
-			label14.TabIndex = 43;
+			label14.TabIndex = 5;
 			label14.Text = "Скорость роста";
 			MyToolTip.SetToolTip(label14, "На сколько увеличивает сугроб одна снежинка");
 			// 
@@ -1234,7 +1258,7 @@
 			InpSD1Res.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpSD1Res.Name = "InpSD1Res";
 			InpSD1Res.Size = new Size(65, 29);
-			InpSD1Res.TabIndex = 40;
+			InpSD1Res.TabIndex = 8;
 			InpSD1Res.Value = new decimal(new int[] { 60, 0, 0, 0 });
 			InpSD1Res.ValueChanged += InpSD1Res_ValueChanged;
 			// 
@@ -1245,7 +1269,7 @@
 			label13.Location = new Point(3, 109);
 			label13.Name = "label13";
 			label13.Size = new Size(122, 21);
-			label13.TabIndex = 41;
+			label13.TabIndex = 7;
 			label13.Text = "Размер сугроба";
 			MyToolTip.SetToolTip(label13, "Ширина одного кусочка сугроба. Чем меньше,\r\n тем плавнее сугробы\r\n");
 			// 
@@ -1258,7 +1282,7 @@
 			PanelColorSD.Location = new Point(19, 34);
 			PanelColorSD.Name = "PanelColorSD";
 			PanelColorSD.Size = new Size(339, 71);
-			PanelColorSD.TabIndex = 11;
+			PanelColorSD.TabIndex = 1;
 			// 
 			// InpAlphaSD
 			// 
@@ -1269,7 +1293,7 @@
 			InpAlphaSD.Maximum = 255;
 			InpAlphaSD.Name = "InpAlphaSD";
 			InpAlphaSD.Size = new Size(137, 18);
-			InpAlphaSD.TabIndex = 6;
+			InpAlphaSD.TabIndex = 3;
 			InpAlphaSD.TickStyle = TickStyle.None;
 			InpAlphaSD.Value = 150;
 			InpAlphaSD.Scroll += SnowdriftsAlpha_Change;
@@ -1282,7 +1306,7 @@
 			label15.Location = new Point(3, 31);
 			label15.Name = "label15";
 			label15.Size = new Size(112, 21);
-			label15.TabIndex = 5;
+			label15.TabIndex = 2;
 			label15.Text = "Прозрачность";
 			// 
 			// label16
@@ -1292,7 +1316,7 @@
 			label16.Location = new Point(3, 1);
 			label16.Name = "label16";
 			label16.Size = new Size(114, 21);
-			label16.TabIndex = 4;
+			label16.TabIndex = 0;
 			label16.Text = "Цвет сугробов";
 			// 
 			// BtnColorSD
@@ -1304,7 +1328,7 @@
 			BtnColorSD.Location = new Point(262, 3);
 			BtnColorSD.Name = "BtnColorSD";
 			BtnColorSD.Size = new Size(65, 27);
-			BtnColorSD.TabIndex = 2;
+			BtnColorSD.TabIndex = 1;
 			BtnColorSD.UseVisualStyleBackColor = false;
 			BtnColorSD.Click += SnowdriftsColor_Click;
 			// 
@@ -1315,7 +1339,7 @@
 			CBSameColor.Location = new Point(6, 3);
 			CBSameColor.Name = "CBSameColor";
 			CBSameColor.Size = new Size(179, 25);
-			CBSameColor.TabIndex = 2;
+			CBSameColor.TabIndex = 0;
 			CBSameColor.Text = "Цвет как у снежинок";
 			MyToolTip.SetToolTip(CBSameColor, "У сугробов будет тот же цвет, что и у снежинок");
 			CBSameColor.UseVisualStyleBackColor = true;
@@ -1358,7 +1382,7 @@
 			PanelLights.Location = new Point(3, 37);
 			PanelLights.Name = "PanelLights";
 			PanelLights.Size = new Size(355, 344);
-			PanelLights.TabIndex = 2;
+			PanelLights.TabIndex = 1;
 			// 
 			// InpCLAnimSpeed
 			// 
@@ -1371,7 +1395,7 @@
 			InpCLAnimSpeed.Name = "InpCLAnimSpeed";
 			InpCLAnimSpeed.Size = new Size(189, 18);
 			InpCLAnimSpeed.SmallChange = 5;
-			InpCLAnimSpeed.TabIndex = 27;
+			InpCLAnimSpeed.TabIndex = 5;
 			InpCLAnimSpeed.TickStyle = TickStyle.None;
 			InpCLAnimSpeed.Value = 100;
 			InpCLAnimSpeed.Scroll += InpCLAnimSpeed_Scroll;
@@ -1383,7 +1407,7 @@
 			label23.Location = new Point(3, 76);
 			label23.Name = "label23";
 			label23.Size = new Size(154, 21);
-			label23.TabIndex = 26;
+			label23.TabIndex = 4;
 			label23.Text = "Скорость анимации";
 			MyToolTip.SetToolTip(label23, "Сугробы будут находиться выше нижнего края экрана");
 			// 
@@ -1395,7 +1419,7 @@
 			groupBox5.Location = new Point(0, 103);
 			groupBox5.Name = "groupBox5";
 			groupBox5.Size = new Size(352, 100);
-			groupBox5.TabIndex = 24;
+			groupBox5.TabIndex = 6;
 			groupBox5.TabStop = false;
 			groupBox5.Text = "Режим мигания";
 			// 
@@ -1410,7 +1434,7 @@
 			flowLayoutPanel2.Location = new Point(6, 28);
 			flowLayoutPanel2.Name = "flowLayoutPanel2";
 			flowLayoutPanel2.Size = new Size(340, 66);
-			flowLayoutPanel2.TabIndex = 1;
+			flowLayoutPanel2.TabIndex = 0;
 			// 
 			// RBMode0
 			// 
@@ -1481,7 +1505,7 @@
 			InpCLSize.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
 			InpCLSize.Name = "InpCLSize";
 			InpCLSize.Size = new Size(65, 29);
-			InpCLSize.TabIndex = 22;
+			InpCLSize.TabIndex = 3;
 			InpCLSize.Value = new decimal(new int[] { 40, 0, 0, 0 });
 			InpCLSize.ValueChanged += InpCLSize_ValueChanged;
 			// 
@@ -1492,7 +1516,7 @@
 			label22.Location = new Point(3, 41);
 			label22.Name = "label22";
 			label22.Size = new Size(136, 21);
-			label22.TabIndex = 23;
+			label22.TabIndex = 2;
 			label22.Text = "Размер лампочек";
 			MyToolTip.SetToolTip(label22, "Сугробы будут находиться выше нижнего края экрана");
 			// 
@@ -1506,7 +1530,7 @@
 			InpCLInterval.Minimum = new decimal(new int[] { 5, 0, 0, 0 });
 			InpCLInterval.Name = "InpCLInterval";
 			InpCLInterval.Size = new Size(65, 29);
-			InpCLInterval.TabIndex = 20;
+			InpCLInterval.TabIndex = 1;
 			InpCLInterval.Value = new decimal(new int[] { 40, 0, 0, 0 });
 			InpCLInterval.ValueChanged += InpCLInterval_ValueChanged;
 			// 
@@ -1517,7 +1541,7 @@
 			label21.Location = new Point(3, 6);
 			label21.Name = "label21";
 			label21.Size = new Size(153, 21);
-			label21.TabIndex = 21;
+			label21.TabIndex = 0;
 			label21.Text = "Интервал лампочек";
 			MyToolTip.SetToolTip(label21, "Сугробы будут находиться выше нижнего края экрана");
 			// 
@@ -1528,22 +1552,10 @@
 			CBLights.Location = new Point(6, 6);
 			CBLights.Name = "CBLights";
 			CBLights.Size = new Size(170, 25);
-			CBLights.TabIndex = 1;
+			CBLights.TabIndex = 0;
 			CBLights.Text = "Включить гирлянду";
 			CBLights.UseVisualStyleBackColor = true;
 			CBLights.CheckedChanged += CBLights_CheckedChanged;
-			// 
-			// CBSD1AutoStart
-			// 
-			CBSD1AutoStart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-			CBSD1AutoStart.AutoSize = true;
-			CBSD1AutoStart.Location = new Point(221, 43);
-			CBSD1AutoStart.Name = "CBSD1AutoStart";
-			CBSD1AutoStart.Size = new Size(52, 19);
-			CBSD1AutoStart.TabIndex = 54;
-			CBSD1AutoStart.Text = "Авто";
-			CBSD1AutoStart.UseVisualStyleBackColor = true;
-			CBSD1AutoStart.CheckedChanged += CBSD1AutoStart_CheckedChanged;
 			// 
 			// SettingsForm
 			// 
@@ -1739,5 +1751,6 @@
 		private Label label26;
 		private CheckBox CBSD2Unlimited;
 		private CheckBox CBSD1AutoStart;
+		private Button BtnSD2Filter;
 	}
 }

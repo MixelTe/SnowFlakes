@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text.RegularExpressions;
 
 namespace SnowFlakes;
 
@@ -6,7 +6,6 @@ class Snowdrifts2D : ISprite
 {
 	private static Snowdrifts2D? _instance;
 	private readonly object _lock = new();
-	private readonly VirtualDesktopManager _vdm = new();
 	private readonly int _screenWidth;
 	private readonly int _screenHeight;
 	private int _size;
@@ -322,14 +321,8 @@ class Snowdrifts2D : ISprite
 
 		var wrects = new List<Rectangle>();
 		var rects = new List<Rectangle>();
-		foreach (var window in OpenWindowGetter.GetOpenWindows())
-		{
-			if (!_vdm.IsWindowOnCurrentVirtualDesktop(window.Key)) continue;
-			if (window.Value.Item1.Contains("ShareX")) continue;
-			if (window.Value.Item1.Contains("Переключение задач")) continue;
-			if (window.Value.Item1.Contains("Task Switcher")) continue;
-			AddRect(window.Value.Item2);
-		}
+		foreach (var window in Snowdrifts2DFilter.GetWindows())
+			AddRect(window.Rect);
 		_ground.SetAll(false);
 		foreach (var rect in rects)
 		{
@@ -541,5 +534,100 @@ class Snowdrifts2D : ISprite
 					_grid[x, y] = true;
 				}
 			}
+	}
+}
+
+class Snowdrifts2DFilter : ISprite
+{
+	private static readonly VirtualDesktopManager _vdm = new();
+	private static readonly List<nint> _hiddenWindows = [];
+	private static readonly Dictionary<string, Regex?> _regex = [];
+	private static bool _showOverlay = false;
+	private static nint _overlayHwnd = 0;
+	private static float _overlayOpacity = 0;
+	private static Rectangle? _overlayRect;
+	private GameOverlay.Drawing.SolidBrush? _brush;
+
+	public void SetupGraphics(GameOverlay.Drawing.Graphics gfx)
+	{
+		_brush?.Dispose();
+		_brush = gfx.CreateSolidBrush(Color.FromArgb(50, Color.DarkViolet).ToGameOverlayColor());
+	}
+
+	public void DestroyGraphics()
+	{
+		_brush?.Dispose(); _brush = null;
+	}
+
+	public void DrawGraphics(GameOverlay.Drawing.Graphics gfx, long deltaTime)
+	{
+		if (!_showOverlay || _brush == null || _overlayOpacity <= 0 || _overlayRect is not Rectangle rect) return;
+		var opacity = _overlayOpacity <= 80 ? _overlayOpacity : (20 - (_overlayOpacity - 80)) / 20 * 80;
+		_brush.Color = Color.FromArgb((int)opacity, Color.DarkViolet).ToGameOverlayColor();
+		_overlayOpacity -= deltaTime * 0.2f;
+		gfx.FillRectangle(_brush, rect.X, rect.Y, rect.Right, rect.Bottom);
+	}
+
+	public void Reload() {}
+
+	public static IEnumerable<OpenWindowGetter.WindowProps> GetAllWindows()
+	{
+		return OpenWindowGetter.GetOpenWindows().Where(w =>
+		{
+			if (!_vdm.IsWindowOnCurrentVirtualDesktop(w.hWnd)) return false;
+			if (w.Title.Contains("Переключение задач")) return false;
+			if (w.Title.Contains("Task Switcher")) return false;
+			return true;
+		});
+	}
+
+	public static IEnumerable<OpenWindowGetter.WindowProps> GetWindows()
+	{
+		return OpenWindowGetter.GetOpenWindows().Where(w =>
+		{
+			if (_showOverlay && _overlayHwnd == w.hWnd)
+				_overlayRect = w.Rect;
+			if (_hiddenWindows.Contains(w.hWnd)) return false;
+			if (!_vdm.IsWindowOnCurrentVirtualDesktop(w.hWnd)) return false;
+			if (w.Title.Contains("Переключение задач")) return false;
+			if (w.Title.Contains("Task Switcher")) return false;
+			foreach (var f in Program.Settings.Snowdrifts2DFilter)
+			{
+				if (!f.Regex) { if (w.Title.Contains(f.Value)) return false; }
+				else {
+					if (!_regex.TryGetValue(f.Value, out Regex? r))
+					{
+						try { r = new Regex(f.Value, RegexOptions.Compiled); }
+						catch (ArgumentException) { _regex[f.Value] = null; }
+					}
+					if (r != null && r.IsMatch(w.Title)) return false;
+				}
+			}
+			return true;
+		});
+	}
+
+	public static void HideWindow(nint hwnd)
+	{
+		_hiddenWindows.Add(hwnd);
+	}
+	public static void UnhideWindow(nint hwnd)
+	{
+		_hiddenWindows.Remove(hwnd);
+	}
+	public static bool IsHiddenWindow(nint hwnd)
+	{
+		return _hiddenWindows.Contains(hwnd);
+	}
+	public static void ShowOverlay(nint hwnd)
+	{
+		_overlayHwnd = hwnd;
+		_overlayRect = null;
+		_overlayOpacity = 100;
+		_showOverlay = true;
+	}
+	public static void HideOverlay()
+	{
+		_showOverlay = false;
 	}
 }

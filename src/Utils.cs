@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace SnowFlakes;
 
@@ -63,6 +64,22 @@ internal static class Utils
 		var wrapped = (v - min) % range;
 		if (wrapped < 0) wrapped += range;
 		return wrapped + min;
+	}
+
+	public static bool IsValidRegex(string pattern)
+	{
+		if (string.IsNullOrWhiteSpace(pattern)) return false;
+
+		try
+		{
+			Regex.Match("", pattern);
+		}
+		catch (ArgumentException)
+		{
+			return false;
+		}
+
+		return true;
 	}
 }
 

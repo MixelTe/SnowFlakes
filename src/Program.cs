@@ -34,6 +34,7 @@ internal static class Program
 		new SnowWindow()
 			.AddSprite(new Snowdrifts1D(SnowWindow.Width, SnowWindow.Height))
 			.AddSprite(new Snowdrifts2D(SnowWindow.Width, SnowWindow.Height))
+			.AddSprite(new Snowdrifts2DFilter())
 			.AddSprite(new ChristmasLights(SnowWindow.Width, SnowWindow.Height))
 			.AddSprite(new SnowflakesCount(160, 20))
 			.AddSprite(new SnowFps());

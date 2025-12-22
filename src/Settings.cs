@@ -39,6 +39,10 @@ public class Settings
 	public int Snowdrifts2DHeight = 16;
 	public int Snowdrifts2DMaxHeight = 16;
 	public bool UnlimitedSnowflakes = true;
+	public RegSerializer.SList<WindowFilter> Snowdrifts2DFilter = [
+		new(false, "Создание фрагмента экрана"),
+		new(false, "ShareX"),
+	];
 
 	public bool ChristmasLights = true;
 	public int ChristmasLightsInterval = 60;
@@ -129,5 +133,26 @@ public class Settings
 		Program.Settings.SpeedYMin = 5;
 		Program.Settings.SpeedYMax = 10;
 		Program.Settings.Preset = 4;
+	}
+
+	public class WindowFilter(bool regex, string value) : RegSerializer.ISerializable
+	{
+		public bool Regex = regex;
+		public string Value = value;
+
+		public WindowFilter() : this(false, "") { }
+
+		public void Deserialize(string value)
+		{
+			if (string.IsNullOrWhiteSpace(value)) return;
+			if (value.Length < 1) return;
+			Regex = value[0] == '1';
+			Value = value[1..];
+		}
+
+		public string Serialize()
+		{
+			return (Regex ? "1" : "0") + Value;
+		}
 	}
 }
