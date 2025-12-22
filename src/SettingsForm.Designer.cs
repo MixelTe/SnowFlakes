@@ -142,6 +142,8 @@
 			CBLights = new CheckBox();
 			DialogOpenFile = new OpenFileDialog();
 			MyToolTip = new ToolTip(components);
+			InpSizeRange = new NumericUpDown();
+			label27 = new Label();
 			((System.ComponentModel.ISupportInitialize)InpCount).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSize).BeginInit();
 			groupBox1.SuspendLayout();
@@ -188,6 +190,7 @@
 			flowLayoutPanel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)InpCLSize).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpCLInterval).BeginInit();
+			((System.ComponentModel.ISupportInitialize)InpSizeRange).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
@@ -399,7 +402,7 @@
 			groupBox3.Controls.Add(label8);
 			groupBox3.Controls.Add(label9);
 			groupBox3.Font = new Font("Segoe UI", 12F);
-			groupBox3.Location = new Point(6, 112);
+			groupBox3.Location = new Point(6, 146);
 			groupBox3.Name = "groupBox3";
 			groupBox3.Size = new Size(352, 108);
 			groupBox3.TabIndex = 4;
@@ -583,7 +586,7 @@
 			InpFPS.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			InpFPS.Font = new Font("Segoe UI", 12F);
 			InpFPS.Increment = new decimal(new int[] { 5, 0, 0, 0 });
-			InpFPS.Location = new Point(296, 77);
+			InpFPS.Location = new Point(296, 111);
 			InpFPS.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
 			InpFPS.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
 			InpFPS.Name = "InpFPS";
@@ -596,7 +599,7 @@
 			// 
 			label10.AutoSize = true;
 			label10.Font = new Font("Segoe UI", 12F);
-			label10.Location = new Point(6, 79);
+			label10.Location = new Point(6, 113);
 			label10.Name = "label10";
 			label10.Size = new Size(36, 21);
 			label10.TabIndex = 12;
@@ -618,6 +621,8 @@
 			// 
 			// tabPage4
 			// 
+			tabPage4.Controls.Add(InpSizeRange);
+			tabPage4.Controls.Add(label27);
 			tabPage4.Controls.Add(CBfps);
 			tabPage4.Controls.Add(label1);
 			tabPage4.Controls.Add(InpFPS);
@@ -1557,6 +1562,30 @@
 			CBLights.UseVisualStyleBackColor = true;
 			CBLights.CheckedChanged += CBLights_CheckedChanged;
 			// 
+			// InpSizeRange
+			// 
+			InpSizeRange.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			InpSizeRange.DecimalPlaces = 2;
+			InpSizeRange.Font = new Font("Segoe UI", 12F);
+			InpSizeRange.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+			InpSizeRange.Location = new Point(296, 76);
+			InpSizeRange.Maximum = new decimal(new int[] { 1, 0, 0, 0 });
+			InpSizeRange.Name = "InpSizeRange";
+			InpSizeRange.Size = new Size(65, 29);
+			InpSizeRange.TabIndex = 14;
+			InpSizeRange.Value = new decimal(new int[] { 2, 0, 0, 65536 });
+			InpSizeRange.ValueChanged += InpSizeRange_ValueChanged;
+			// 
+			// label27
+			// 
+			label27.AutoSize = true;
+			label27.Font = new Font("Segoe UI", 12F);
+			label27.Location = new Point(6, 78);
+			label27.Name = "label27";
+			label27.Size = new Size(207, 21);
+			label27.TabIndex = 15;
+			label27.Text = "Разброс размера снежинок";
+			// 
 			// SettingsForm
 			// 
 			AutoScaleDimensions = new SizeF(96F, 96F);
@@ -1636,6 +1665,7 @@
 			flowLayoutPanel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)InpCLSize).EndInit();
 			((System.ComponentModel.ISupportInitialize)InpCLInterval).EndInit();
+			((System.ComponentModel.ISupportInitialize)InpSizeRange).EndInit();
 			ResumeLayout(false);
 		}
 
@@ -1752,5 +1782,7 @@
 		private CheckBox CBSD2Unlimited;
 		private CheckBox CBSD1AutoStart;
 		private Button BtnSD2Filter;
+		private NumericUpDown InpSizeRange;
+		private Label label27;
 	}
 }

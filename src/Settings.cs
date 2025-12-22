@@ -6,6 +6,7 @@ public class Settings
 
 	public int Particles = 200;
 	public int ParticleRad = 4;
+	public float ParticleRadRange = 0.4f;
 	public Color ParticleColor = Color.FromArgb(150, Color.LightBlue);
 	public int FPS = 25;
 	public bool ShowFPS = false;

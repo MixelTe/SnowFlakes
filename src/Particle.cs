@@ -6,6 +6,7 @@ class Particle
 	private float _y;
 	private float _speedX;
 	private float _speedY;
+	private readonly float _rm = Random.Shared.NextSingle(-1, 1);
 
 	public Particle(int Width, int Height)
 	{
@@ -26,7 +27,7 @@ class Particle
 
 	public void Draw(GameOverlay.Drawing.Graphics gfx, GameOverlay.Drawing.SolidBrush? brush, GameOverlay.Drawing.Image? img)
 	{
-		var R = Program.Settings.ParticleRad;
+		var R = Program.Settings.ParticleRad * (1 + _rm * Program.Settings.ParticleRadRange);
 		var X = _x - R;
 		var Y = _y - R;
 		var Size = R * 2;

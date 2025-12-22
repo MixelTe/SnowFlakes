@@ -18,6 +18,7 @@ public partial class SettingsForm : Form
 
 		InpCount.Value = Program.Settings.Particles;
 		InpSize.Value = Program.Settings.ParticleRad;
+		InpSizeRange.Value = (decimal)Program.Settings.ParticleRadRange;
 		InpFPS.Value = Program.Settings.FPS;
 		CBfps.Checked = Program.Settings.ShowFPS;
 		BtnColor.BackColor = Program.Settings.ParticleColor;
@@ -148,6 +149,11 @@ public partial class SettingsForm : Form
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.ParticleRad = (int)InpSize.Value;
+	}
+	private void InpSizeRange_ValueChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.ParticleRadRange = (float)InpSizeRange.Value;
 	}
 	private void Color_Change(object sender, EventArgs e)
 	{
