@@ -37,6 +37,9 @@ internal class Snowdrifts1D : ISprite
 
 		if (!Program.Settings.Snowdrifts || !Program.Settings.Snowdrifts1D) return;
 
+		if (Program.Settings.Snowdrifts1DAutoStart)
+			Program.Settings.Snowdrifts1DStart = Utils.GetTaskBarBottomHeight();
+
 		lock (_lock)
 		{
 			Update(deltaTime, cursorForce);

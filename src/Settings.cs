@@ -29,6 +29,7 @@ public class Settings
 	public float Snowdrifts1DSpeed = 5;
 	public float Snowdrifts1DDensity = 5;
 	public int Snowdrifts1DStart = 40;
+	public bool Snowdrifts1DAutoStart = true;
 
 	public bool Snowdrifts2D = true;
 	public bool Snowdrifts2DSmooth = true;

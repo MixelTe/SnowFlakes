@@ -14,6 +14,15 @@ internal static class Utils
 		return rect.X + rect.Width >= x && x >= rect.X && 
 			   rect.Y + rect.Height >= y && y >= rect.Y;
 	}
+	public static int GetTaskBarBottomHeight()
+	{
+		if (Screen.PrimaryScreen == null) return 0;
+		var wa = Screen.PrimaryScreen.WorkingArea;
+		if (wa.Left > 0) return 0;
+		if (wa.Top > 0) return 0;
+		if (wa.Width < Screen.PrimaryScreen.Bounds.Width) return 0;
+		return Screen.PrimaryScreen.Bounds.Height - wa.Height;
+	}
 
 	public static double Noise(double x)
 	{

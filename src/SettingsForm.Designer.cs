@@ -140,6 +140,7 @@
 			CBLights = new CheckBox();
 			DialogOpenFile = new OpenFileDialog();
 			MyToolTip = new ToolTip(components);
+			CBSD1AutoStart = new CheckBox();
 			((System.ComponentModel.ISupportInitialize)InpCount).BeginInit();
 			((System.ComponentModel.ISupportInitialize)InpSize).BeginInit();
 			groupBox1.SuspendLayout();
@@ -972,6 +973,7 @@
 			// 
 			// CBSD2Smooth
 			// 
+			CBSD2Smooth.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			CBSD2Smooth.AutoSize = true;
 			CBSD2Smooth.Font = new Font("Segoe UI", 12F);
 			CBSD2Smooth.Location = new Point(194, 6);
@@ -1056,6 +1058,7 @@
 			// 
 			// tabPage7
 			// 
+			tabPage7.Controls.Add(CBSD1AutoStart);
 			tabPage7.Controls.Add(CBSnowdrifts1D);
 			tabPage7.Controls.Add(label20);
 			tabPage7.Controls.Add(BtnSD1Set1);
@@ -1135,6 +1138,7 @@
 			// 
 			// CBSD1Smooth
 			// 
+			CBSD1Smooth.Anchor = AnchorStyles.Top | AnchorStyles.Right;
 			CBSD1Smooth.AutoSize = true;
 			CBSD1Smooth.Font = new Font("Segoe UI", 12F);
 			CBSD1Smooth.Location = new Point(194, 6);
@@ -1529,6 +1533,18 @@
 			CBLights.UseVisualStyleBackColor = true;
 			CBLights.CheckedChanged += CBLights_CheckedChanged;
 			// 
+			// CBSD1AutoStart
+			// 
+			CBSD1AutoStart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			CBSD1AutoStart.AutoSize = true;
+			CBSD1AutoStart.Location = new Point(221, 43);
+			CBSD1AutoStart.Name = "CBSD1AutoStart";
+			CBSD1AutoStart.Size = new Size(52, 19);
+			CBSD1AutoStart.TabIndex = 54;
+			CBSD1AutoStart.Text = "Авто";
+			CBSD1AutoStart.UseVisualStyleBackColor = true;
+			CBSD1AutoStart.CheckedChanged += CBSD1AutoStart_CheckedChanged;
+			// 
 			// SettingsForm
 			// 
 			AutoScaleDimensions = new SizeF(96F, 96F);
@@ -1722,5 +1738,6 @@
 		private NumericUpDown InpSD2Height;
 		private Label label26;
 		private CheckBox CBSD2Unlimited;
+		private CheckBox CBSD1AutoStart;
 	}
 }

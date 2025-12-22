@@ -79,6 +79,8 @@ public partial class SettingsForm : Form
 		InpSD1Speed.Value = (decimal)Program.Settings.Snowdrifts1DSpeed;
 		InpSD1Density.Value = (decimal)Program.Settings.Snowdrifts1DDensity;
 		InpSD1Start.Value = Program.Settings.Snowdrifts1DStart;
+		InpSD1Start.Enabled = !Program.Settings.Snowdrifts1DAutoStart;
+		CBSD1AutoStart.Checked = Program.Settings.Snowdrifts1DAutoStart;
 
 		CBSameColor.Checked = Program.Settings.SnowdriftsColor == Program.Settings.ParticleColor;
 		PanelColorSD.Enabled = !CBSameColor.Checked;
@@ -420,6 +422,13 @@ public partial class SettingsForm : Form
 	{
 		if (ignoreChangeEvent) return;
 		Program.Settings.Snowdrifts1DStart = (int)InpSD1Start.Value;
+	}
+	private void CBSD1AutoStart_CheckedChanged(object sender, EventArgs e)
+	{
+		if (ignoreChangeEvent) return;
+		Program.Settings.Snowdrifts1DAutoStart = CBSD1AutoStart.Checked;
+		InpSD1Start.Value = Utils.GetTaskBarBottomHeight();
+		InpSD1Start.Enabled = !Program.Settings.Snowdrifts1DAutoStart;
 	}
 	private void InpSD1Speed_ValueChanged(object sender, EventArgs e)
 	{
