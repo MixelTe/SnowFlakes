@@ -67,7 +67,7 @@ class Particle
 			var mds = Program.Settings.ForceD * Program.Settings.ForceD;
 			if (d < mds)
 			{
-				var p = Program.Settings.ForcePower * (mds - d) / mds / 100;
+				var p = Program.Settings.ForcePower * (mds - d) / mds / 100 * dt;
 				_x += dx * p;
 				_y += dy * p;
 			}

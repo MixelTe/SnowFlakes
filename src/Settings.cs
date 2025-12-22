@@ -42,6 +42,7 @@ public class Settings
 	public bool UnlimitedSnowflakes = true;
 	public RegSerializer.SList<WindowFilter> Snowdrifts2DFilter = [
 		new(false, "Создание фрагмента экрана"),
+		new(false, "Snipping Tool"),
 		new(false, "ShareX"),
 	];
 
