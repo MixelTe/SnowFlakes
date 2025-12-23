@@ -33,13 +33,16 @@ public partial class WindowsFilterForm : Form
 		for (int i = 0; i < _windows.Count; i++)
 		{
 			var w = _windows[i];
+			var chk =
+				!Snowdrifts2DFilter.IsWindowVisible(w.Title) ? CheckState.Indeterminate :
+				Snowdrifts2DFilter.IsHiddenWindow(w.hWnd) ? CheckState.Unchecked : CheckState.Checked;
 			if (CBListWindows.Items.Count > i)
 			{
 				CBListWindows.Items[i] = w.Title;
-				CBListWindows.SetItemChecked(i, !Snowdrifts2DFilter.IsHiddenWindow(w.hWnd));
+				CBListWindows.SetItemCheckState(i, chk);
 			}
 			else
-				CBListWindows.Items.Add(w.Title, !Snowdrifts2DFilter.IsHiddenWindow(w.hWnd));
+				CBListWindows.Items.Add(w.Title, chk);
 		}
 		while (CBListWindows.Items.Count > _windows.Count)
 			CBListWindows.Items.RemoveAt(CBListWindows.Items.Count - 1);
@@ -65,7 +68,9 @@ public partial class WindowsFilterForm : Form
 	private void CBListWindows_ItemCheck(object sender, ItemCheckEventArgs e)
 	{
 		if (ignoreChangeEvent) return;
-		if (e.NewValue == CheckState.Checked)
+		if (e.CurrentValue == CheckState.Indeterminate) 
+			e.NewValue = CheckState.Indeterminate;
+		else if (e.NewValue == CheckState.Checked)
 			Snowdrifts2DFilter.UnhideWindow(_windows[e.Index].hWnd);
 		else
 			Snowdrifts2DFilter.HideWindow(_windows[e.Index].hWnd);

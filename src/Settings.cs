@@ -56,7 +56,7 @@ public class Settings
 
 
 	public bool SnowdriftsSmooth;  // OLD
-	public int SnowdriftsResolution;  // OLD
+	public int SnowdriftsResolution = -1;  // OLD
 	public float SnowdriftsSpeed;  // OLD
 	public float SnowdriftsDensity;  // OLD
 	public int SnowdriftsStart;  // OLD
@@ -84,11 +84,14 @@ public class Settings
 		{
 			case 0:
 				SettingsVersion = 1;
-				Snowdrifts1DSmooth = SnowdriftsSmooth;
-				Snowdrifts1DResolution = SnowdriftsResolution;
-				Snowdrifts1DSpeed = SnowdriftsSpeed * SnowdriftsResolution;
-				Snowdrifts1DDensity = SnowdriftsDensity / SnowdriftsResolution * 10;
-				Snowdrifts1DStart = SnowdriftsStart;
+				if (SnowdriftsResolution > 0)
+				{
+					Snowdrifts1DSmooth = SnowdriftsSmooth;
+					Snowdrifts1DResolution = SnowdriftsResolution;
+					Snowdrifts1DSpeed = SnowdriftsSpeed * SnowdriftsResolution;
+					Snowdrifts1DDensity = SnowdriftsDensity / SnowdriftsResolution * 10;
+					Snowdrifts1DStart = SnowdriftsStart;
+				}
 				UpgradeSettings();
 				break;
 		}

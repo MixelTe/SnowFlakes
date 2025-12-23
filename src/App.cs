@@ -92,6 +92,8 @@ public partial class App : ApplicationContext
 	}
 	private void Restart(object? sender, EventArgs e)
 	{
+		if (_settingsForm != null && !_settingsForm.IsDisposed)
+			_settingsForm.Close();
 		SnowWindow.DisposeAll();
 		Program.Settings = new Settings();
 		Program.Settings.Load();

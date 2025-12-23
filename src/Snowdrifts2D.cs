@@ -467,7 +467,7 @@ class Snowdrifts2D : ISprite
 			var iy = (int)(y / _size);
 			if (ix >= _width || iy >= _height) return false;
 			if (_grid[ix, iy]) return false;
-			if (!(_ground[ix, iy] || (iy + 1 < _height && _grid[ix, iy + 1] && !IsFullColumn(ix, iy + 1)))) return false;
+			if (!(_ground[ix, iy] || (iy + 1 < _height && _grid[ix, iy + 1] && !IsFullColumn(ix, iy + 1, 1)))) return false;
 			var r = Program.Settings.Snowdrifts2DSpeed / _size / 2;
 			var ir = (int)r;
 			var rs = r * r;
@@ -591,20 +591,26 @@ class Snowdrifts2DFilter : ISprite
 			if (!_vdm.IsWindowOnCurrentVirtualDesktop(w.hWnd)) return false;
 			if (w.Title.Contains("Переключение задач")) return false;
 			if (w.Title.Contains("Task Switcher")) return false;
-			foreach (var f in Program.Settings.Snowdrifts2DFilter)
-			{
-				if (!f.Regex) { if (w.Title.Contains(f.Value)) return false; }
-				else {
-					if (!_regex.TryGetValue(f.Value, out Regex? r))
-					{
-						try { r = new Regex(f.Value, RegexOptions.Compiled); }
-						catch (ArgumentException) { _regex[f.Value] = null; }
-					}
-					if (r != null && r.IsMatch(w.Title)) return false;
-				}
-			}
-			return true;
+			return IsWindowVisible(w.Title);
 		});
+	}
+
+	public static bool IsWindowVisible(string title)
+	{
+		foreach (var f in Program.Settings.Snowdrifts2DFilter)
+		{
+			if (!f.Regex) { if (title.Contains(f.Value)) return false; }
+			else
+			{
+				if (!_regex.TryGetValue(f.Value, out Regex? r))
+				{
+					try { r = new Regex(f.Value, RegexOptions.Compiled); }
+					catch (ArgumentException) { _regex[f.Value] = null; }
+				}
+				if (r != null && r.IsMatch(title)) return false;
+			}
+		}
+		return true;
 	}
 
 	public static void HideWindow(nint hwnd)
