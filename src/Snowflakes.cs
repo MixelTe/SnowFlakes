@@ -157,7 +157,7 @@ class Snowflakes : ISprite
 				p.SetPos(x, y);
 				it._particlesTemp.Add(p);
 			}
-			else
+			else if (it._particles.Length > 0)
 				it._particles.RandomItem().SetPos(x, y);
 		}
 	}
