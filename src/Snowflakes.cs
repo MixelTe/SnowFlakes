@@ -66,7 +66,8 @@ class Snowflakes : ISprite
 		}
 		catch
 		{
-			MessageBox.Show("Не получилось загрузить картинку снежинок:\n" + Program.Settings.ParticleImgPath, "Снежинки", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			if (_instances.Count > 0 && _instances[0] != this) return;
+			App.ShowNotify("Картинка снежинок", "Не получилось загрузить картинку снежинок:\n" + Program.Settings.ParticleImgPath, ToolTipIcon.Error);
 			Program.Settings.ParticleImgPath = "";
 			Program.Settings.ParticleImg = -1;
 		}

@@ -4,6 +4,7 @@ namespace SnowFlakes;
 
 public partial class App : ApplicationContext
 {
+	private static App? _instance;
 	private readonly NotifyIcon _trayIcon;
 	private SettingsForm? _settingsForm;
 	private SelectZoneForm? _selectZoneForm;
@@ -11,6 +12,7 @@ public partial class App : ApplicationContext
 
 	public App()
 	{
+		_instance = this;
 		_trayIcon = new NotifyIcon()
 		{
 			Icon = Resources.icon,
@@ -105,5 +107,10 @@ public partial class App : ApplicationContext
 		Program.Settings = new Settings();
 		Program.Settings.Load();
 		SnowWindow.ReloadAll();
+	}
+
+	public static void ShowNotify(string title, string text, ToolTipIcon icon = ToolTipIcon.Info)
+	{
+		_instance?._trayIcon.ShowBalloonTip(0, title, text, icon);
 	}
 }

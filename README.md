@@ -1,6 +1,6 @@
 # ❄ Снежинки
 
-### [Скачать ❄ (Для Windows) v2.3.2](https://github.com/MixelTe/SnowFlakes/releases/download/v2.3.2/SnowFlakes.exe)
+### [Скачать ❄ (Для Windows) v2.3.3](https://github.com/MixelTe/SnowFlakes/releases/download/v2.3.3/SnowFlakes.exe)
 
 
 Декоративная программа, которая рисует анимированные снежинки поверх всего экрана без помех для работы и игр.

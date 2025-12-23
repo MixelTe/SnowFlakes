@@ -150,8 +150,13 @@ namespace SnowFlakes
 	}
 	public class VirtualDesktopManager
 	{
+		private bool old_win;
+		private CVirtualDesktopManager? cmanager = null;
+		private IVirtualDesktopManager? manager;
 		public VirtualDesktopManager()
 		{
+			old_win = Environment.OSVersion.Version.Major < 10;
+			if (old_win) return;
 			cmanager = new CVirtualDesktopManager();
 			manager = (IVirtualDesktopManager)cmanager;
 		}
@@ -160,11 +165,10 @@ namespace SnowFlakes
 			manager = null;
 			cmanager = null;
 		}
-		private CVirtualDesktopManager? cmanager = null;
-		private IVirtualDesktopManager? manager;
 
 		public bool IsWindowOnCurrentVirtualDesktop(IntPtr TopLevelWindow)
 		{
+			if (old_win) return true;
 			int hr;
 			if ((hr = manager!.IsWindowOnCurrentVirtualDesktop(TopLevelWindow, out int result)) != 0)
 			{
@@ -175,6 +179,7 @@ namespace SnowFlakes
 
 		public Guid GetWindowDesktopId(IntPtr TopLevelWindow)
 		{
+			if (old_win) return new Guid();
 			int hr;
 			if ((hr = manager!.GetWindowDesktopId(TopLevelWindow, out Guid result)) != 0)
 			{
@@ -185,6 +190,7 @@ namespace SnowFlakes
 
 		public void MoveWindowToDesktop(IntPtr TopLevelWindow, Guid CurrentDesktop)
 		{
+			if (old_win) return;
 			int hr;
 			if ((hr = manager!.MoveWindowToDesktop(TopLevelWindow, CurrentDesktop)) != 0)
 			{

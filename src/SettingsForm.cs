@@ -52,6 +52,8 @@ public partial class SettingsForm : Form
 		{
 			if (Program.Settings.ParticleImgPath != "")
 				PBImg.BackgroundImage = Image.FromFile(Program.Settings.ParticleImgPath);
+			else
+				PBImg.BackgroundImage = null;
 		}
 		catch { }
 

@@ -11,7 +11,7 @@
     <PackageIcon>snowflake.png</PackageIcon>
     <RepositoryUrl>https://github.com/MixelTe/SnowFlakes</RepositoryUrl>
     <Authors>Mixel Te</Authors>
-    <Version>2.3.2</Version>
+    <Version>2.3.3</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 	<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
